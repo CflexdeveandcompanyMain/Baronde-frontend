@@ -4,3 +4,11 @@
 @theme {
   --font-all: "IBM Plex Sans";
 }
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
