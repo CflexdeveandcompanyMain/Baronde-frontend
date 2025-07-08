@@ -1,7 +1,8 @@
 //========= IMAGE ===========
 import bdm from "./assets/bdm.png";
 import headlogo from "./assets/headlogo.png";
-export { bdm, headlogo };
+import Hero from "./assets/Hero.png";
+export { bdm, headlogo, Hero as desktopHero };
 
 // ============= Authentication Components ==========
 import UserCreateAccount from "./authentication/create";

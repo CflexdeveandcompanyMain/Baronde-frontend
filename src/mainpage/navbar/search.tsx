@@ -15,14 +15,22 @@ const appliances: string[] = [
 
 export default function MainPageSearchBar() {
   let [drop, setdrop] = useState<boolean>(false);
+
+  const focusRef = (element: HTMLButtonElement) => {
+    if (element) {
+      element.focus();
+    }
+  };
+
   return (
-    <div className="flex flex-row items-center w-full">
+    <div className="hidden sm:flex flex-row items-center w-full">
       <input
+        autoFocus={true}
         type={"text"}
         placeholder="Search"
-        className="font-all text-sm font-normal self-stretch outline-none p-2 bg-white border border-black"
+        className="font-all text-sm w-3/5 font-normal self-stretch outline-none p-2 bg-white border border-black"
       />
-      <div className="flex flex-col items-center p-2 border border-black border-l-0 bg-white self-stretch relative">
+      <div className="flex flex-col w-2/5 items-center p-2 border border-black border-l-0 bg-white self-stretch relative">
         <div
           onClick={() => setdrop(!drop)}
           className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
@@ -48,11 +56,12 @@ export default function MainPageSearchBar() {
           </svg>
         </div>
         <button
-          autoFocus={drop}
+          ref={focusRef}
           onBlur={() => setdrop(false)}
+          type={"button"}
           className={`${
             drop ? "flex" : "hidden"
-          } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40`}
+          } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
         >
           {appliances.map((item, index) => {
             return (
