@@ -18,5 +18,6 @@ export { UserCreateAccount };
 import MainPageNavbar from "./mainpage/navbar/navbar";
 import MainPageSearchBar from "./mainpage/navbar/search";
 import MainPageHero from "./mainpage/Hero/Hero";
+import MobileDropDown from "./mainpage/navbar/mobiledrop";
 
-export { MainPageNavbar, MainPageSearchBar, MainPageHero };
+export { MainPageNavbar, MainPageSearchBar, MainPageHero, MobileDropDown };

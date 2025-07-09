@@ -1,0 +1,20 @@
+export const products: string[] = [
+  "Accessories",
+  "Amplifier",
+  "Compressor",
+  "Double sub",
+  "Drums",
+  "DJ controller",
+  "Equalizer",
+  "Flat Mixers",
+  "Floor Monitor",
+  "Full Range Speakers",
+  "Microphone",
+  "Middle Range Speakers",
+  "Mixers",
+  "Naked Speakers",
+  "Public Address Systems",
+  "Single Sub",
+  "Line Arrays",
+];
+export const brand: string[] = ["Sound Prince", "Rave", "Others"];

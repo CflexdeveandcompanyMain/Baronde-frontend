@@ -1,19 +1,7 @@
 import { useState } from "react";
 import { desktopHero } from "../..";
 import ProductCard from "../../product/productcard";
-
-const appliances: string[] = [
-  "Refrigerator",
-  "Washing Machine",
-  "Microwave Oven",
-  "Air Conditioner",
-  "Vacuum Cleaner",
-  "Dishwasher",
-  "Water Heater",
-  "Television",
-  "Blender",
-  "1Electric Kettle",
-];
+import { brand, products } from "../../raw-datas/rd1";
 
 export default function MainPageHero() {
   let [drop, setdrop] = useState(false);
@@ -65,10 +53,10 @@ export default function MainPageHero() {
                 drop ? "flex" : "hidden"
               } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
             >
-              {appliances.map((item, index) => {
+              {brand.map((item, index) => {
                 return (
                   <p
-                    className="p-2 w-full hover:bg-gray-200 text-start font-all text-sm"
+                    className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
                     key={index}
                   >
                     {item}
@@ -108,12 +96,12 @@ export default function MainPageHero() {
               type={"button"}
               className={`${
                 down ? "flex" : "hidden"
-              } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
+              } sm:min-w-[200px] bg-white duration-200 flex-col absolute top-10 items-start border border-black/40 outline-none`}
             >
-              {appliances.map((item, index) => {
+              {products.map((item, index) => {
                 return (
                   <p
-                    className="p-2 w-full hover:bg-gray-200 text-start font-all text-sm"
+                    className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
                     key={index}
                   >
                     {item}
