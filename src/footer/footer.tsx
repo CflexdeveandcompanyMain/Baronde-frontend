@@ -1,4 +1,4 @@
-import { fb } from "..";
+import { fb, ig, whatsapp, x } from "..";
 
 export default function Footer() {
   return (
@@ -63,22 +63,31 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="w-full flex sm:flex-row items-center flex-col">
-          <p className="font-all text-sm text-start font-medium text-[#677279]">
-            © 2025 BARONDEMUSICAL
+      </section>
+      <div className="w-full flex sm:flex-row items-start sm:items-center flex-col justify-start sm:justify-between mt-4">
+        <p className="font-all text-sm text-start font-medium text-[#677279] self-center sm:w-auto w-full">
+          © 2025 BARONDEMUSICAL
+        </p>
+        <div className="flex flex-col items-start gap-2 self-center sm:w-auto w-full">
+          <p className="font-all text-xs text-[#677279] font-medium text-start">
+            Follow us
           </p>
-          <div className="flex flex-col items-start gap-2">
-            <p className="font-all text-xs text-[#677279] font-medium text-start">
-              Follow us
-            </p>
-            <div className="flex flex-row items-center gap-3">
-              <div className="w-20 max-h-20 rounded-full bg-green-950 p-2 flex justify-center">
-                <img src={fb} className="object-cover w-10 h-10" />
-              </div>
+          <div className="flex flex-row items-center gap-3">
+            <div className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center">
+              <img src={fb} className="object-contain" />
+            </div>
+            <div className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center">
+              <img src={ig} className="object-contain" />
+            </div>
+            <div className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center">
+              <img src={x} className="object-contain" />
+            </div>
+            <div className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center">
+              <img src={whatsapp} className="object-contain" />
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </footer>
   );
 }

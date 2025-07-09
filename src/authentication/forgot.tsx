@@ -4,7 +4,7 @@ import { bdm } from "..";
 export default function ForgotPassword() {
   return (
     <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
-      <section className="w-full bg-white self-start mt-[10%] sm:self-center sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
+      <section className="w-full bg-white self-start mt-[10%] sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
         <div className="flex flex-row items-center justify-center gap-1 -ml-2">
           <img src={bdm} className="w-10 h-10 sm:w-3/5 rounded object-cover" />
           <div className="flex flex-col items-start">
