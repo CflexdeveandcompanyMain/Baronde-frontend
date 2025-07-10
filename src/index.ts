@@ -12,7 +12,18 @@ import frs2 from "./assets/fullRangeSpeakers/frs2.png";
 import frs3 from "./assets/fullRangeSpeakers/frs3.png";
 import frs4 from "./assets/fullRangeSpeakers/frs4.png";
 import frs5 from "./assets/fullRangeSpeakers/frs5.png";
+import whatsap from "./assets/fullRangeSpeakers/whatsap.png";
+import nsa1 from "./assets/newSpeakerArrival/nsa1.png";
+import nsa2 from "./assets/newSpeakerArrival/nsa2.png";
+import nsa3 from "./assets/newSpeakerArrival/nsa3.png";
+import nsa4 from "./assets/newSpeakerArrival/nsa4.png";
+import nsa5 from "./assets/newSpeakerArrival/nsa5.png";
 export {
+  nsa1,
+  nsa2,
+  nsa3,
+  nsa4,
+  nsa5,
   bdm,
   headlogo,
   Hero as desktopHero,
@@ -21,6 +32,7 @@ export {
   ig,
   x,
   whatsapp,
+  whatsap as whatsappII,
   frs1,
   frs2,
   frs3,

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { desktopHero, p1 } from "../..";
+import { desktopHero, p1, whatsappII } from "../..";
 import { brand, products } from "../../raw-datas/rd1";
 import FullRangeSpeaker from "./fullrangespeaker";
+import HeroProductCard from "./herocard";
 
 export default function MainPageHero() {
   let [drop, setdrop] = useState(false);
@@ -188,6 +189,14 @@ export default function MainPageHero() {
               })}
           </div>
         </section>
+        <section className="w-full flex justify-end p-3">
+          <div className="flex flex-row items-center gap-3">
+            <img src={whatsappII} className="sm:w-10 sm:h-10 object-cover" />
+            <p className="text-sm text-center text-red-600 font-all self-center bg-white p-1 rounded shadow">
+              contact us
+            </p>
+          </div>
+        </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
@@ -198,7 +207,7 @@ export default function MainPageHero() {
             </p>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <FullRangeSpeaker />
+            <HeroProductCard category="FRS" />
           </div>
         </section>
       </section>
