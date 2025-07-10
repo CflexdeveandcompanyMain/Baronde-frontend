@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { headlogo, MainPageSearchBar, MobileDropDown } from "../..";
 import { useState } from "react";
+import CartDisplay from "./cartdisplay";
 
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
+  let [cart, setcart] = useState(false);
   return (
     <nav className="flex flex-col items-center w-full">
       <div className="bg-[#E5A000] py-2 px-7 flex flex-row items-center w-full justify-between">
@@ -89,6 +91,7 @@ export default function MainPageNavbar() {
           </svg>
           <div className="relative">
             <svg
+              onClick={() => setcart(!cart)}
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -109,6 +112,7 @@ export default function MainPageNavbar() {
                 2
               </p>
             </div>
+            <CartDisplay on={cart} />
           </div>
           <svg
             onClick={() => setmenu(!menu)}
