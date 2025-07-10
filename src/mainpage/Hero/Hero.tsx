@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { desktopHero, p1, whatsappII } from "../..";
 import { brand, products } from "../../raw-datas/rd1";
-import FullRangeSpeaker from "./fullrangespeaker";
 import HeroProductCard from "./herocard";
 
 export default function MainPageHero() {
@@ -15,7 +14,7 @@ export default function MainPageHero() {
   };
 
   return (
-    <section className="flex flex-col items-center w-full">
+    <section className="flex flex-col items-center w-full bg-slate-100/50">
       <section className="bg-white p-3 hidden sm:flex justify-center w-4/5">
         <ul className="flex flex-row items-center justify-between w-full">
           <div className="font-all text-sm text-center font-medium list-none">
@@ -125,7 +124,7 @@ export default function MainPageHero() {
       <div className="w-full h-[180px] sm:h-auto max-h-[500px]">
         <img src={desktopHero} className="object-cover w-full h-full" />
       </div>
-      <section className="flex flex-col items-start w-full bg-slate-100 py-7">
+      <section className="flex flex-col items-start w-full bg-slate-50 py-7">
         <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
             <p className="font-all font-semibold text-2xl text-center w-full">
@@ -208,6 +207,45 @@ export default function MainPageHero() {
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="FRS" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              New Speaker Arrival
+            </p>
+            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+              view all
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="NSA" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Single sub
+            </p>
+            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+              view all
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="SS" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Single sub
+            </p>
+            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+              view all
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="DS" />
           </div>
         </section>
       </section>

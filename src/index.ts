@@ -18,7 +18,27 @@ import nsa2 from "./assets/newSpeakerArrival/nsa2.png";
 import nsa3 from "./assets/newSpeakerArrival/nsa3.png";
 import nsa4 from "./assets/newSpeakerArrival/nsa4.png";
 import nsa5 from "./assets/newSpeakerArrival/nsa5.png";
+import ss1 from "./assets/singlesub/ss1.png";
+import ss2 from "./assets/singlesub/ss2.png";
+import ss3 from "./assets/singlesub/ss3.png";
+import ss4 from "./assets/singlesub/ss4.png";
+import ss5 from "./assets/singlesub/ss5.png";
+import ds1 from "./assets/doublesub/ds1.png";
+import ds2 from "./assets/doublesub/ds2.png";
+import ds3 from "./assets/doublesub/ds3.png";
+import ds4 from "./assets/doublesub/ds4.png";
+import ds5 from "./assets/doublesub/ds5.png";
 export {
+  ds1,
+  ds2,
+  ds3,
+  ds4,
+  ds5,
+  ss1,
+  ss2,
+  ss3,
+  ss4,
+  ss5,
   nsa1,
   nsa2,
   nsa3,
