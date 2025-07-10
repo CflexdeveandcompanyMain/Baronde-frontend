@@ -28,7 +28,17 @@ import ds2 from "./assets/doublesub/ds2.png";
 import ds3 from "./assets/doublesub/ds3.png";
 import ds4 from "./assets/doublesub/ds4.png";
 import ds5 from "./assets/doublesub/ds5.png";
+import am1 from "./assets/amplifier/am1.png";
+import am2 from "./assets/amplifier/am2.png";
+import am3 from "./assets/amplifier/am3.png";
+import am4 from "./assets/amplifier/am4.png";
+import am5 from "./assets/amplifier/am5.png";
 export {
+  am1,
+  am2,
+  am3,
+  am4,
+  am5,
   ds1,
   ds2,
   ds3,

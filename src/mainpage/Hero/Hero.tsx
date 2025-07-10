@@ -154,7 +154,7 @@ export default function MainPageHero() {
                         <p
                           className={`text-white font-all text-center text-xs`}
                         >
-                          "Save N34,000.00"
+                          Save N34,000.00
                         </p>
                       </div>
                     </div>
@@ -190,8 +190,11 @@ export default function MainPageHero() {
         </section>
         <section className="w-full flex justify-end p-3">
           <div className="flex flex-row items-center gap-3">
-            <img src={whatsappII} className="sm:w-10 sm:h-10 object-cover" />
-            <p className="text-sm text-center text-red-600 font-all self-center bg-white p-1 rounded shadow">
+            <img
+              src={whatsappII}
+              className="sm:w-10 sm:h-10 w-8 h-8 object-cover"
+            />
+            <p className="text-xs sm:text-sm text-center text-red-600 font-all self-center bg-white p-1 rounded shadow">
               contact us
             </p>
           </div>
@@ -238,7 +241,7 @@ export default function MainPageHero() {
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
-              Single sub
+              Double sub
             </p>
             <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
               view all

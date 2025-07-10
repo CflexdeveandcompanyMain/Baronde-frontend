@@ -8,7 +8,7 @@ interface productCardType {
 }
 export default function ProductCard(data: productCardType) {
   return (
-    <div className="flex flex-col items-center shadow justify-center min-w-[200px]">
+    <div className="flex flex-col items-center shadow self-stretch h-full justify-center min-w-[200px]">
       <div className="relative flex flex-col items-center">
         <img
           src={data.image}
