@@ -124,7 +124,7 @@ export default function MainPageHero() {
       <div className="w-full h-[180px] sm:h-auto max-h-[500px]">
         <img src={desktopHero} className="object-cover w-full h-full" />
       </div>
-      <section className="flex flex-col items-start w-full bg-slate-50 py-7">
+      <section className="flex flex-col items-start sm:w-[95%] mx-auto w-full bg-slate-50 py-7">
         <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
             <p className="font-all font-semibold text-2xl text-center w-full">
@@ -136,14 +136,14 @@ export default function MainPageHero() {
               unmatched performance for musicians.
             </p>
           </div>
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3 p-3">
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-5 p-3">
             {Array(5)
               .fill("")
               .map((_, index: number) => {
                 return (
                   <div
                     key={index}
-                    className="flex flex-col items-center shadow justify-center min-w-[200px]"
+                    className="flex flex-col items-center shadow justify-center w-auto"
                   >
                     <div className="relative flex flex-col items-center">
                       <img
@@ -262,6 +262,91 @@ export default function MainPageHero() {
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="AM" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Flat Mixers
+            </p>
+            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+              view all
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="FM" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Floor Mixers
+            </p>
+            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+              view all
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="FRM" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Equalizers
+            </p>
+            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+              view all
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="EQ" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Line Arrays
+            </p>
+            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+              view all
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="LA" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Microphones
+            </p>
+            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+              view all
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="MIC" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Drums
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="DRUM" />
+          </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Compressors
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="COM" />
           </div>
         </section>
       </section>

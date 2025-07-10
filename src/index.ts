@@ -33,7 +33,62 @@ import am2 from "./assets/amplifier/am2.png";
 import am3 from "./assets/amplifier/am3.png";
 import am4 from "./assets/amplifier/am4.png";
 import am5 from "./assets/amplifier/am5.png";
+import fm1 from "./assets/flatmixer/fm1.png";
+import fm2 from "./assets/flatmixer/fm2.png";
+import fm3 from "./assets/flatmixer/fm3.png";
+import fm4 from "./assets/flatmixer/fm4.png";
+import fm5 from "./assets/flatmixer/fm5.png";
+import frm1 from "./assets/floormixer/frm1.png";
+import frm2 from "./assets/floormixer/frm2.png";
+import frm3 from "./assets/floormixer/frm3.png";
+import frm4 from "./assets/floormixer/frm4.png";
+import frm5 from "./assets/floormixer/frm5.png";
+import e1 from "./assets/equalizer/e1.png";
+import e2 from "./assets/equalizer/e2.png";
+import e3 from "./assets/equalizer/e3.png";
+import e4 from "./assets/equalizer/e4.png";
+import e5 from "./assets/equalizer/e5.png";
+import la1 from "./assets/linearray/la1.png";
+import la2 from "./assets/linearray/la2.png";
+import la3 from "./assets/linearray/la3.png";
+import la4 from "./assets/linearray/la4.png";
+import la5 from "./assets/linearray/la5.png";
+import m1 from "./assets/microphone/m1.png";
+import m2 from "./assets/microphone/m2.png";
+import m3 from "./assets/microphone/m3.png";
+import d1 from "./assets/drums/d1.png";
+import d2 from "./assets/drums/d2.png";
+import d3 from "./assets/drums/d3.png";
+import c1 from "./assets/compressor/c1.png";
+
 export {
+  c1,
+  d1,
+  d2,
+  d3,
+  m1,
+  m2,
+  m3,
+  la1,
+  la2,
+  la3,
+  la4,
+  la5,
+  e1,
+  e2,
+  e3,
+  e4,
+  e5,
+  frm1,
+  frm2,
+  frm3,
+  frm4,
+  frm5,
+  fm1,
+  fm2,
+  fm3,
+  fm4,
+  fm5,
   am1,
   am2,
   am3,
