@@ -8,7 +8,7 @@ interface productCardType {
 }
 export default function ProductCard(data: productCardType) {
   return (
-    <div className="flex flex-col items-center shadow self-stretch h-full justify-center min-w-[200px]">
+    <div className="flex flex-col items-center shadow self-stretch min-h-full justify-between min-w-[200px]">
       <div className="relative flex flex-col items-center">
         <img
           src={data.image}
@@ -19,7 +19,7 @@ export default function ProductCard(data: productCardType) {
         <p className={`text-start font-medium font-all text-sm w-full`}>
           {data.name}
         </p>
-        <p className="font-normal text-start font-all text-xs text-gray-600">
+        <p className="font-normal text-start font-all text-xs text-gray-600 w-full">
           {data.description}
         </p>
         <div className="flex items-center w-full justify-start">

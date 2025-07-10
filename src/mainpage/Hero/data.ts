@@ -171,7 +171,7 @@ export let HeroData: any = {
       price: "N1,500,000",
     },
   ],
-  Am: [
+  AM: [
     {
       image: am1,
       name: "SPX7-5000",

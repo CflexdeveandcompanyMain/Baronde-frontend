@@ -251,6 +251,19 @@ export default function MainPageHero() {
             <HeroProductCard category="DS" />
           </div>
         </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+              Amplifier
+            </p>
+            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+              view all
+            </p>
+          </div>
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+            <HeroProductCard category="AM" />
+          </div>
+        </section>
       </section>
       <section className="py-7 flex flex-col items-center gap-4 overflow-hidden w-full px-3"></section>
     </section>

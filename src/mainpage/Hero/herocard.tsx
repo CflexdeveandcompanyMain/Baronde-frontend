@@ -7,7 +7,7 @@ export default function HeroProductCard({ category }: { category: string }) {
     <div className="overflow-x-scroll w-full grid grid-cols-5 items-center gap-3">
       {HeroData[category].map((item: any, index: number) => {
         return (
-          <div key={index}>
+          <div key={index} className="w-full h-full">
             <ProductCard
               image={item.image}
               name={item.name}
