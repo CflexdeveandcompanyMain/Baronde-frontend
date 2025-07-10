@@ -101,13 +101,16 @@ export default function MainPageNavbar() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-shopping-cart-icon lucide-shopping-cart text-white"
+              className="lucide lucide-shopping-cart-icon cursor-pointer lucide-shopping-cart text-white"
             >
               <circle cx="8" cy="21" r="1" />
               <circle cx="19" cy="21" r="1" />
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
             </svg>
-            <div className="h-2 w-2 bg-[#BB2331] p-2 flex justify-center rounded-full absolute -top-1 right-0">
+            <div
+              onClick={() => setcart(!cart)}
+              className="h-2 w-2 bg-[#BB2331] p-2 cursor-pointer flex justify-center rounded-full absolute -top-1 right-0"
+            >
               <p className="text-white text-[10px] font-medium text-center self-center">
                 2
               </p>

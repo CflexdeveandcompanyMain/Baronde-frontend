@@ -3,20 +3,32 @@ import { cartStore } from "../../store/cart";
 
 export default function CartDisplay({ on }: { on: boolean }) {
   let { cartProducts } = cartStore();
+
+  let [close, setclose] = useState(false);
+
+  const focusRef = (element: HTMLButtonElement) => {
+    if (element) {
+      element.focus();
+    }
+  };
   return (
-    <section
+    <button
+      ref={focusRef}
+      onBlur={() => setclose(true)}
       className={`${
         on ? "sm:flex" : "sm:hidden"
       } flex-col items-center gap-3 hidden min-w-[500px] absolute top-10 bg-white z-40 right-0 p-3`}
     >
-      {cartProducts.map((item, index: number) => {
-        return (
-          <div key={index}>
-            <CartProduct data={item} />
-          </div>
-        );
-      })}
-      <div className="flex flex-col items-center w-full">
+      <div className="w-full flex flex-col items-center overflow-y-scroll h-3/5">
+        {cartProducts.map((item, index: number) => {
+          return (
+            <div key={index}>
+              <CartProduct data={item} />
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex flex-col items-center w-full gap-2">
         <div className="flex flex-row items-center w-full justify-between">
           <p className="font-all text-base font-medium text-start w-full">
             Total
@@ -26,21 +38,15 @@ export default function CartDisplay({ on }: { on: boolean }) {
           </p>
         </div>
         <div className="flex flex-row items-center w-full justify-between gap-4">
-          <button
-            type="button"
-            className="w-full p-2 bg-amber-600 text-center font-all font-medium text-sm text-white"
-          >
+          <div className="w-full p-2 bg-amber-600 text-center font-all font-medium text-sm text-white">
             View Cart
-          </button>
-          <button
-            type="button"
-            className="w-full p-2 bg-green-600 text-center font-all font-medium text-sm text-white"
-          >
+          </div>
+          <div className="w-full p-2 bg-green-600 text-center font-all font-medium text-sm text-white">
             Checkout
-          </button>
+          </div>
         </div>
       </div>
-    </section>
+    </button>
   );
 }
 
