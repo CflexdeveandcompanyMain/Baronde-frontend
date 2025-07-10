@@ -2,6 +2,7 @@ import { useState } from "react";
 import { desktopHero, p1, whatsappII } from "../..";
 import { brand, products } from "../../raw-datas/rd1";
 import HeroProductCard from "./herocard";
+import { Link } from "react-router-dom";
 
 export default function MainPageHero() {
   let [drop, setdrop] = useState(false);
@@ -204,9 +205,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Full Range Speakers
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="FRS" />
@@ -217,9 +220,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               New Speaker Arrival
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="NSA" />
@@ -230,9 +235,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Single sub
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="SS" />
@@ -243,9 +250,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Double sub
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="DS" />
@@ -256,9 +265,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Amplifier
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="AM" />
@@ -269,9 +280,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Flat Mixers
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="FM" />
@@ -282,9 +295,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Floor Mixers
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="FRM" />
@@ -295,9 +310,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Equalizers
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="EQ" />
@@ -308,9 +325,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Line Arrays
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="LA" />
@@ -321,9 +340,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Microphones
             </p>
-            <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-              view all
-            </p>
+            <Link to={"/"} className="w-full">
+              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+                view all
+              </p>
+            </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="MIC" />
