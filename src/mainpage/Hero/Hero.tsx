@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { desktopHero, p1 } from "../..";
-import ProductCard from "../../product/productcard";
 import { brand, products } from "../../raw-datas/rd1";
 import FullRangeSpeaker from "./fullrangespeaker";
 
