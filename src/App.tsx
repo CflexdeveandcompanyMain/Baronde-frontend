@@ -4,6 +4,7 @@ import UserCreateAccount from "./authentication/create";
 import UserSignInInterface from "./authentication/login";
 import ForgotPassword from "./authentication/forgot";
 import VerifyCode from "./authentication/code";
+import { UserProfile } from ".";
 export default function App() {
   return (
     <Routes>
@@ -12,6 +13,7 @@ export default function App() {
       <Route path="/signin" element={<UserSignInInterface />} />
       <Route path={"/forgot"} element={<ForgotPassword />} />
       <Route path={"/code"} element={<VerifyCode />} />
+      <Route path={"/profile"} element={<UserProfile />} />
     </Routes>
   );
 }

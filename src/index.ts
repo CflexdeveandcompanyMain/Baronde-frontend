@@ -136,4 +136,9 @@ import MainPageSearchBar from "./mainpage/navbar/search";
 import MainPageHero from "./mainpage/Hero/Hero";
 import MobileDropDown from "./mainpage/navbar/mobiledrop";
 
+//============= User components ===============
+import UserProfile from "./user/profile";
+
+export { UserProfile };
+
 export { MainPageNavbar, MainPageSearchBar, MainPageHero, MobileDropDown };
