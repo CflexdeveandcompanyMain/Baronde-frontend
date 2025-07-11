@@ -1,12 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { headlogo, MainPageSearchBar, MobileDropDown } from "../..";
 import { useState } from "react";
 import CartDisplay from "./cartdisplay";
 import { useGlobalState } from "../../store/globalstate";
+import { brand, products } from "../../raw-datas/rd1";
 
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
   let { setShowCartDesktop } = useGlobalState();
+  let navigate = useNavigate();
+
+  const handleCartClick = () => {
+    document.body.clientWidth > 640 ? setShowCartDesktop() : navigate("/cart");
+  };
+
+  let [drop, setdrop] = useState(false);
+  let [down, setdown] = useState(false);
+
+  const focusRef = (element: HTMLButtonElement) => {
+    if (element) {
+      element.focus();
+    }
+  };
+
   return (
     <nav className="flex flex-col items-center w-full">
       <div className="bg-[#E5A000] py-2 px-7 flex flex-row items-center w-full justify-between">
@@ -92,7 +108,7 @@ export default function MainPageNavbar() {
           </svg>
           <div className="relative">
             <svg
-              onClick={setShowCartDesktop}
+              onClick={handleCartClick}
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -109,7 +125,7 @@ export default function MainPageNavbar() {
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
             </svg>
             <div
-              onClick={setShowCartDesktop}
+              onClick={handleCartClick}
               className="h-2 w-2 bg-[#BB2331] p-2 cursor-pointer flex justify-center rounded-full absolute -top-1 right-0"
             >
               <p className="text-white text-[10px] font-medium text-center self-center">
@@ -139,6 +155,114 @@ export default function MainPageNavbar() {
       </div>
       <div className="relative w-full sm:hidden flex bg-white">
         <MobileDropDown menu={menu} />
+      </div>
+      <div className="w-full bg-white">
+        <section className="bg-white p-3 hidden sm:flex justify-center w-4/5 mx-auto">
+          <ul className="flex flex-row items-center justify-between w-full">
+            <div className="font-all text-sm text-center font-medium list-none">
+              All Deals
+            </div>
+            <div className="flex flex-col items-center relative">
+              <div
+                onClick={() => setdrop(!drop)}
+                className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
+              >
+                <p className="font-all text-sm font-medium text-center">
+                  Shop by Brand
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className={`${
+                    drop ? "rotate-180" : "rotate-360"
+                  } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </div>
+              <button
+                ref={focusRef}
+                onBlur={() => setdrop(false)}
+                type={"button"}
+                className={`${
+                  drop ? "flex" : "hidden"
+                } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
+              >
+                {brand.map((item, index) => {
+                  return (
+                    <p
+                      className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
+                      key={index}
+                    >
+                      {item}
+                    </p>
+                  );
+                })}
+              </button>
+            </div>
+            <div className="flex flex-col items-center relative">
+              <div
+                onClick={() => setdown(!down)}
+                className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
+              >
+                <p className="font-all text-sm font-medium text-center">
+                  Product
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className={`${
+                    down ? "rotate-180" : "rotate-360"
+                  } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </div>
+              <button
+                ref={focusRef}
+                onBlur={() => setdown(false)}
+                type={"button"}
+                className={`${
+                  down ? "flex" : "hidden"
+                } sm:min-w-[200px] bg-white duration-200 flex-col absolute top-10 items-start border border-black/40 outline-none`}
+              >
+                {products.map((item, index) => {
+                  return (
+                    <p
+                      className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
+                      key={index}
+                    >
+                      {item}
+                    </p>
+                  );
+                })}
+              </button>
+            </div>
+            <div className="font-all text-sm text-center font-medium list-none">
+              Service Center
+            </div>
+            <div className="font-all text-sm text-center font-medium list-none">
+              About
+            </div>
+            <div className="font-all text-sm text-center font-medium list-none">
+              Testimonies
+            </div>
+          </ul>
+        </section>
       </div>
     </nav>
   );
