@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { fb, ig, whatsapp, x } from "..";
 
 export default function Footer() {
@@ -24,9 +25,12 @@ export default function Footer() {
             <p className="font-all text-xs font-normal text-[#677279]">
               Search
             </p>
-            <p className="font-all text-xs font-normal text-[#677279]">
+            <Link
+              to={"/term"}
+              className="font-all text-xs font-normal text-[#677279]"
+            >
               Terms of Services
-            </p>
+            </Link>
             <p className="font-all text-xs font-normal text-[#677279]">
               Refund policy
             </p>

@@ -7,6 +7,9 @@ import VerifyCode from "./authentication/code";
 import { UserProfile } from ".";
 import UserSetting from "./user/setting";
 import About from "./mainpage/navbar/about";
+import TermsOfService from "./misc/terms";
+import PrivatePolicy from "./misc/policy";
+import ShippingPolicy from "./misc/shipping";
 export default function App() {
   return (
     <Routes>
@@ -18,6 +21,9 @@ export default function App() {
       <Route path={"/profile"} element={<UserProfile />} />
       <Route path={"/settings"} element={<UserSetting />} />
       <Route path={"/about"} element={<About />} />
+      <Route path={"/term"} element={<TermsOfService />} />
+      <Route path={"/policy"} element={<PrivatePolicy />} />
+      <Route path={"/shipping"} element={<ShippingPolicy />} />
     </Routes>
   );
 }

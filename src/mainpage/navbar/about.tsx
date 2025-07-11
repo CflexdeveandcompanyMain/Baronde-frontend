@@ -33,8 +33,11 @@ export default function About() {
             </p>
           </div>
           <div className="relative flex flex-col w-full">
-            <img src={map} className="w-full object-cover" />
-            <div className="flex flex-col items-start gap-4 absolute w-auto max-w-[40%] top-12 p-2 left-3 bg-white rounded-sm">
+            <img
+              src={map}
+              className="w-full object-cover sm:h-auto h-[330px]"
+            />
+            <div className="flex flex-col items-start gap-4 absolute w-3/4 sm:max-w-[40%] top-12 p-2 left-3 bg-white rounded-sm">
               <p className="font-semibold text-xs text-start w-full">
                 Sound Prince Musical World
               </p>
