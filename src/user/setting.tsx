@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MainPageNavbar from "../mainpage/navbar/navbar";
-import { Bell, Fingerprint, ShoppingBag } from "lucide-react";
+import { Bell, Fingerprint, LogOut, ShoppingBag } from "lucide-react";
 
 export default function UserSetting() {
   const [settings, setSettings] = useState<any>({
@@ -44,10 +44,10 @@ export default function UserSetting() {
     <>
       <MainPageNavbar />
       <section className="w-full h-screen bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
-        <div className="flex flex-col items-start w-full gap-2">
+        <div className="flex flex-col items-start w-[95%] gap-2 sm:h-auto sm:w-3/5 mx-auto mt-4 sm:mt-6">
           <p className="font-semibold text-lg text-start w-full">Settings</p>
-          <section className="w-[95%] bg-white self-center sm:h-auto sm:w-3/5 mx-auto mt-4 sm:mt-12 flex flex-col items-center gap-5 p-3">
-            <p className="font-all text-sm font-semibold w-full">
+          <section className="bg-white self-center w-full flex flex-col items-center gap-5 p-3">
+            <p className="font-all text-sm w-full">
               We may send you important information regarding new products
               outside this website
             </p>
@@ -57,7 +57,7 @@ export default function UserSetting() {
                 return (
                   <div
                     key={setting.key}
-                    className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex w-full items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       <div>{IconComponent}</div>
@@ -88,6 +88,12 @@ export default function UserSetting() {
               })}
             </div>
           </section>
+          <div className="flex flex-row items-center gap-2">
+            <p className="font-medium text-lg text-start w-full text-red-600">
+              Log out
+            </p>
+            <LogOut className="text-red-600" />
+          </div>
         </div>
       </section>
     </>

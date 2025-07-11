@@ -60,6 +60,7 @@ import d1 from "./assets/drums/d1.png";
 import d2 from "./assets/drums/d2.png";
 import d3 from "./assets/drums/d3.png";
 import c1 from "./assets/compressor/c1.png";
+import map from "./assets/map.png";
 
 export {
   c1,
@@ -123,6 +124,7 @@ export {
   frs3,
   frs4,
   frs5,
+  map,
 };
 
 // ============= Authentication Components ==========

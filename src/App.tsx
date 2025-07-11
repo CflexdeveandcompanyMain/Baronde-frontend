@@ -6,6 +6,7 @@ import ForgotPassword from "./authentication/forgot";
 import VerifyCode from "./authentication/code";
 import { UserProfile } from ".";
 import UserSetting from "./user/setting";
+import About from "./mainpage/navbar/about";
 export default function App() {
   return (
     <Routes>
@@ -16,6 +17,7 @@ export default function App() {
       <Route path={"/code"} element={<VerifyCode />} />
       <Route path={"/profile"} element={<UserProfile />} />
       <Route path={"/settings"} element={<UserSetting />} />
+      <Route path={"/about"} element={<About />} />
     </Routes>
   );
 }
