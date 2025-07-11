@@ -9,6 +9,10 @@
   width: 0;
 }
 
+datalist {
+  scrollbar-width: 0;
+}
+
 html {
   scroll-behavior: smooth;
 }
