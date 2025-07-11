@@ -1,8 +1,10 @@
+import { formatPrice } from "../utils/priceconverter";
+
 interface productCardType {
   name: string;
   image: string;
   description: string;
-  price: string;
+  price: number;
   discount?: string;
   cutoff?: string;
 }
@@ -24,7 +26,7 @@ export default function ProductCard(data: productCardType) {
         </p>
         <div className="flex items-center w-full justify-start">
           <p className="text-[#F0B100] text-sm text-start font-medium font-all">
-            {data.price}
+            {formatPrice(data.price, "NGN")}
           </p>
         </div>
         <button

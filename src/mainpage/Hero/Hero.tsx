@@ -3,6 +3,7 @@ import { desktopHero, p1, whatsappII } from "../..";
 import { brand, products } from "../../raw-datas/rd1";
 import HeroProductCard from "./herocard";
 import { Link } from "react-router-dom";
+import { formatPrice } from "../../utils/priceconverter";
 
 export default function MainPageHero() {
   let [drop, setdrop] = useState(false);
@@ -16,112 +17,114 @@ export default function MainPageHero() {
 
   return (
     <section className="flex flex-col items-center w-full bg-slate-100/50">
-      <section className="bg-white p-3 hidden sm:flex justify-center w-4/5">
-        <ul className="flex flex-row items-center justify-between w-full">
-          <div className="font-all text-sm text-center font-medium list-none">
-            All Deals
-          </div>
-          <div className="flex flex-col items-center relative">
-            <div
-              onClick={() => setdrop(!drop)}
-              className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
-            >
-              <p className="font-all text-sm font-medium text-center">
-                Shop by Brand
-              </p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className={`${
-                  drop ? "rotate-180" : "rotate-360"
-                } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
+      <div className="w-full bg-white">
+        <section className="bg-white p-3 hidden sm:flex justify-center w-4/5 mx-auto">
+          <ul className="flex flex-row items-center justify-between w-full">
+            <div className="font-all text-sm text-center font-medium list-none">
+              All Deals
             </div>
-            <button
-              ref={focusRef}
-              onBlur={() => setdrop(false)}
-              type={"button"}
-              className={`${
-                drop ? "flex" : "hidden"
-              } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
-            >
-              {brand.map((item, index) => {
-                return (
-                  <p
-                    className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
-                    key={index}
-                  >
-                    {item}
-                  </p>
-                );
-              })}
-            </button>
-          </div>
-          <div className="flex flex-col items-center relative">
-            <div
-              onClick={() => setdown(!down)}
-              className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
-            >
-              <p className="font-all text-sm font-medium text-center">
-                Product
-              </p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className={`${
-                  down ? "rotate-180" : "rotate-360"
-                } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
+            <div className="flex flex-col items-center relative">
+              <div
+                onClick={() => setdrop(!drop)}
+                className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
               >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
+                <p className="font-all text-sm font-medium text-center">
+                  Shop by Brand
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className={`${
+                    drop ? "rotate-180" : "rotate-360"
+                  } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </div>
+              <button
+                ref={focusRef}
+                onBlur={() => setdrop(false)}
+                type={"button"}
+                className={`${
+                  drop ? "flex" : "hidden"
+                } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
+              >
+                {brand.map((item, index) => {
+                  return (
+                    <p
+                      className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
+                      key={index}
+                    >
+                      {item}
+                    </p>
+                  );
+                })}
+              </button>
             </div>
-            <button
-              ref={focusRef}
-              onBlur={() => setdown(false)}
-              type={"button"}
-              className={`${
-                down ? "flex" : "hidden"
-              } sm:min-w-[200px] bg-white duration-200 flex-col absolute top-10 items-start border border-black/40 outline-none`}
-            >
-              {products.map((item, index) => {
-                return (
-                  <p
-                    className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
-                    key={index}
-                  >
-                    {item}
-                  </p>
-                );
-              })}
-            </button>
-          </div>
-          <div className="font-all text-sm text-center font-medium list-none">
-            Service Center
-          </div>
-          <div className="font-all text-sm text-center font-medium list-none">
-            About
-          </div>
-          <div className="font-all text-sm text-center font-medium list-none">
-            Testimonies
-          </div>
-        </ul>
-      </section>
+            <div className="flex flex-col items-center relative">
+              <div
+                onClick={() => setdown(!down)}
+                className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
+              >
+                <p className="font-all text-sm font-medium text-center">
+                  Product
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className={`${
+                    down ? "rotate-180" : "rotate-360"
+                  } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </div>
+              <button
+                ref={focusRef}
+                onBlur={() => setdown(false)}
+                type={"button"}
+                className={`${
+                  down ? "flex" : "hidden"
+                } sm:min-w-[200px] bg-white duration-200 flex-col absolute top-10 items-start border border-black/40 outline-none`}
+              >
+                {products.map((item, index) => {
+                  return (
+                    <p
+                      className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
+                      key={index}
+                    >
+                      {item}
+                    </p>
+                  );
+                })}
+              </button>
+            </div>
+            <div className="font-all text-sm text-center font-medium list-none">
+              Service Center
+            </div>
+            <div className="font-all text-sm text-center font-medium list-none">
+              About
+            </div>
+            <div className="font-all text-sm text-center font-medium list-none">
+              Testimonies
+            </div>
+          </ul>
+        </section>
+      </div>
       <div className="w-full h-[180px] sm:h-auto max-h-[500px]">
         <img src={desktopHero} className="object-cover w-full h-full" />
       </div>
@@ -155,7 +158,7 @@ export default function MainPageHero() {
                         <p
                           className={`text-white font-all text-center text-xs`}
                         >
-                          Save N34,000.00
+                          {formatPrice(34000, "NGN")}
                         </p>
                       </div>
                     </div>
@@ -169,12 +172,12 @@ export default function MainPageHero() {
                       </p>
                       <div className="flex flex-row items-center w-full justify-between">
                         <p className="text-[#E5A000] text-sm text-start font-all">
-                          N2,500,000.00
+                          {formatPrice(2500000, "NGN")}
                         </p>
                         <p
                           className={`text-black text-xs text-start font-all line-through`}
                         >
-                          N17,000.00
+                          {formatPrice(17000, "NGN")}
                         </p>
                       </div>
                       <button
@@ -212,7 +215,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="FRS" />
+            <HeroProductCard category="fullrangespeaker" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -227,7 +230,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="NSA" />
+            <HeroProductCard category="newspeakerarrival" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -242,7 +245,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="SS" />
+            <HeroProductCard category="singlesub" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -257,7 +260,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="DS" />
+            <HeroProductCard category="doublesub" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -272,7 +275,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="AM" />
+            <HeroProductCard category="amplifier" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -287,7 +290,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="FM" />
+            <HeroProductCard category="flatmixer" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -302,7 +305,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="FRM" />
+            <HeroProductCard category="floormixer" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -317,7 +320,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="EQ" />
+            <HeroProductCard category="equalizer" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -332,7 +335,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="LA" />
+            <HeroProductCard category="linearray" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -347,7 +350,7 @@ export default function MainPageHero() {
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="MIC" />
+            <HeroProductCard category="microphone" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -357,7 +360,7 @@ export default function MainPageHero() {
             </p>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="DRUM" />
+            <HeroProductCard category="drum" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -367,7 +370,7 @@ export default function MainPageHero() {
             </p>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="COM" />
+            <HeroProductCard category="compressor" />
           </div>
         </section>
       </section>

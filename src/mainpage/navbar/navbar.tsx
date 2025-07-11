@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { headlogo, MainPageSearchBar, MobileDropDown } from "../..";
 import { useState } from "react";
 import CartDisplay from "./cartdisplay";
+import { useGlobalState } from "../../store/globalstate";
 
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
-  let [cart, setcart] = useState(false);
+  let { setShowCartDesktop } = useGlobalState();
   return (
     <nav className="flex flex-col items-center w-full">
       <div className="bg-[#E5A000] py-2 px-7 flex flex-row items-center w-full justify-between">
@@ -91,7 +92,7 @@ export default function MainPageNavbar() {
           </svg>
           <div className="relative">
             <svg
-              onClick={() => setcart(!cart)}
+              onClick={setShowCartDesktop}
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -108,14 +109,14 @@ export default function MainPageNavbar() {
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
             </svg>
             <div
-              onClick={() => setcart(!cart)}
+              onClick={setShowCartDesktop}
               className="h-2 w-2 bg-[#BB2331] p-2 cursor-pointer flex justify-center rounded-full absolute -top-1 right-0"
             >
               <p className="text-white text-[10px] font-medium text-center self-center">
                 2
               </p>
             </div>
-            <CartDisplay on={cart} />
+            <CartDisplay />
           </div>
           <svg
             onClick={() => setmenu(!menu)}

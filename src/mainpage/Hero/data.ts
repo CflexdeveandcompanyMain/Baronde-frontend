@@ -53,367 +53,395 @@ import {
   ss5,
 } from "../..";
 
-export let HeroData: any = {
-  FRS: [
-    {
-      image: frs1,
-      name: "SP-137",
-      description:
-        "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
-      price: "N1,300,000",
-    },
-    {
-      image: frs2,
-      name: "SP-215GF",
-      description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
-      price: "N1,500,000",
-    },
-    {
-      image: frs3,
-      name: "SP-515",
-      description:
-        "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
-      price: "N2,500,000",
-    },
-    {
-      image: frs4,
-      name: "SP-215GF",
-      description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
-      price: "N1,500,000",
-    },
-    {
-      image: frs5,
-      name: "SP-215GF",
-      description:
-        "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
-      price: "N1,500,000",
-    },
-  ],
-  NSA: [
-    {
-      image: nsa1,
-      name: "SP-227",
-      description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Big magnet",
-      price: "N1,500,000",
-    },
-    {
-      image: nsa2,
-      name: "SP-228",
-      description:
-        "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
-      price: "N2,200,000",
-    },
-    {
-      image: nsa3,
-      name: "SP-229",
-      description:
-        "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
-      price: "N2,400,000",
-    },
-    {
-      image: nsa4,
-      name: "SP-25",
-      description: "15 Inch / 2000watt / Pure Acostic / 75.5 coil /Big magnet",
-      price: "N1,100,000",
-    },
-    {
-      image: nsa5,
-      name: "SP-20",
-      description:
-        "5 Inch / 2000watt / Pure Acostic body / 99.9 coil / passive speaker",
-      price: "N1,500,000",
-    },
-  ],
-  SS: [
-    {
-      image: ss1,
-      name: "SP-18",
-      description:
-        "18 Inch / 2000watt / ply wood / 99.9 coil /8 Ohms/ Passive sub",
-      price: "N1,200,000",
-    },
-    {
-      image: ss2,
-      name: "SP-18GF",
-      description:
-        "18 Inch / 2000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
-      price: "N1,300,000",
-    },
-    {
-      image: ss3,
-      name: "SP-18AX",
-      description:
-        "18 Inch / 2000watt / Ply wood / 120 coil /8 Ohms/ Passive sub",
-      price: "N1,500,000",
-    },
-    {
-      image: ss4,
-      name: "SP-318",
-      description:
-        "18 Inch / 2000watt / Pure Acostic / 95.5 coil /8 Ohms/ Passive sub",
-      price: "N1,100,000",
-    },
-    {
-      image: ss5,
-      name: "SP-18 FX",
-      description:
-        "18 Inch / 2000watt / Ply wood / 140 coil /8 Ohms/ Passive sub",
-      price: "N1,400,000",
-    },
-  ],
-  DS: [
-    {
-      image: ds1,
-      name: "POW-221B",
-      description:
-        "21 Inch / 5000watt / ply wood / 150 coil /8 Ohms/ Passive sub",
-      price: "N4,000,000",
-    },
-    {
-      image: ds2,
-      name: "SP-218 DR",
-      description:
-        "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
-      price: "N2,200,000",
-    },
-    {
-      image: ds3,
-      name: "SP-218",
-      description:
-        "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
-      price: "N1,600,000",
-    },
-    {
-      image: ds4,
-      name: "SP-218 CRV",
-      description:
-        "Doublesub / 18 Inch / 4600watt / plywood / 120 coil /8 Ohms/ Passive sub",
-      price: "N3,500,000",
-    },
-    {
-      image: ds5,
-      name: "SP-218 GF",
-      description:
-        "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
-      price: "N1,500,000",
-    },
-  ],
-  AM: [
-    {
-      image: am1,
-      name: "SPX7-5000",
-      description: "4 channel / 1250watt per channel",
-      price: "N1,500,000",
-    },
-    {
-      image: am2,
-      name: "SP4500X",
-      description: "2 channel / 4500watt",
-      price: "N850,000",
-    },
-    {
-      image: am3,
-      name: "SP4000",
-      description: "2 channel / 3500watt",
-      price: "N450,000",
-    },
-    {
-      image: am4,
-      name: "SPX2800S",
-      description: "2 channel / 3500watt",
-      price: "N650,000",
-    },
-    {
-      image: am5,
-      name: "SPX4000S",
-      description: "2 channel / 500watt",
-      price: "N900,000",
-    },
-  ],
-  FM: [
-    {
-      image: fm1,
-      name: "CM-16",
-      description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
-      price: "N1,365,000",
-    },
-    {
-      image: fm2,
-      name: "CMX-1642",
-      description:
-        "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
-      price: "N1,500,000",
-    },
-    {
-      image: fm3,
-      name: "SP4000",
-      description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
-      price: "N2,500,000",
-    },
-    {
-      image: fm4,
-      name: "SPX2800S",
-      description: "15 Inch / 4000watt / Ply wood / 100 coil /Big magnet",
-      price: "N365,000",
-    },
-    {
-      image: fm5,
-      name: "SPX4000S",
-      description:
-        "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
-      price: "N1,500,000",
-    },
-  ],
-  FRM: [
-    {
-      image: frm1,
-      name: "SP-12FX",
-      description: "12 Inch / 2000watt / Ply wood / 100 coil /Big magnet",
-      price: "N1,500,000",
-    },
-    {
-      image: frm2,
-      name: "SP-12M",
-      description: "12 Inch / 700watt / Pure Acostic / 100 coil /Double magnet",
-      price: "N800,000",
-    },
-    {
-      image: frm3,
-      name: "SP-12MTX",
-      description: "12 Inch / 1000watt / Pure Acostic / 100 coil /Big magnet",
-      price: "N1,000,000",
-    },
-    {
-      image: frm4,
-      name: "SP-15/15A",
-      description: "12 Inch / 2000watt / Plastic body / 100 coil /Big magnet",
-      price: "N1,000,000",
-    },
-    {
-      image: frm5,
-      name: "SP-15FX",
-      description:
-        "15 Inch / 2000watt / Pure Acostic / 100 coil /Double magnet",
-      price: "N1,800,000",
-    },
-  ],
-  EQ: [
-    {
-      image: e1,
-      name: "DBX-224XL",
-      description:
-        "18 Inch / 2000watt / Pure Acostic / 99.9 coil /8 Ohms/ Passive sub",
-      price: "N1,000,000",
-    },
-    {
-      image: e2,
-      name: "DBX-EQX 231",
-      description:
-        "18 Inch / 2000watt / Pure Acostic / 100 coil /8 Ohms/ Passive sub",
-      price: "N1,300,000",
-    },
-    {
-      image: e3,
-      name: "Driver Rack Venu 360",
-      description:
-        "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
-      price: "N2,200,000",
-    },
-    {
-      image: e4,
-      name: "DBX-PA2",
-      description:
-        "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
-      price: "N2,000,000",
-    },
-    {
-      image: e5,
-      name: "DBX-266XL",
-      description:
-        "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
-      price: "N2,200,000",
-    },
-  ],
-  LA: [
-    {
-      image: la1,
-      name: "SP-4",
-      description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
-      price: "N365,000",
-    },
-    {
-      image: la2,
-      name: "SP-415",
-      description:
-        "15 Inch / 4000watt / Pure Acostic / 100 coil /Double magnet",
-      price: "N1,500,000",
-    },
-    {
-      image: la3,
-      name: "SP-515",
-      description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Big magnet",
-      price: "N2,000,000",
-    },
-    {
-      image: la4,
-      name: "SP215SD",
-      description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
-      price: "N365,000",
-    },
-    {
-      image: la5,
-      name: "SP28",
-      description:
-        "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
-      price: "N1,500,000",
-    },
-  ],
-  MIC: [
-    {
-      image: m1,
-      name: "SP4",
-      description: "sound breaker mic / 100% wave /Big coverage",
-      price: "N68,000",
-    },
-    {
-      image: m2,
-      name: "SP4",
-      description: "sound breaker mic / 100% wave /Big coverage",
-      price: "N68,000",
-    },
-    {
-      image: m3,
-      name: "MIC",
-      description: "sound breaker mic / 100% wave /Big coverage",
-      price: "N78,000",
-    },
-  ],
-  DRUM: [
-    {
-      image: d1,
-      name: "White Drum",
-      description: "4 full set of Drums (complete set)",
-      price: "N300,000",
-    },
-    {
-      image: d2,
-      name: "Purple Drum",
-      description: "4 full set of Drums (complete set)",
-      price: "N400,000",
-    },
-    {
-      image: d3,
-      name: "Gold Drum",
-      description: "4 full set of Drums (complete set)",
-      price: "N500,000",
-    },
-  ],
-  COM: [
-    {
-      image: c1,
-      name: "SP-266X",
-      description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
-      price: "N365,000",
-    },
-  ],
-};
+interface HeroDataType {
+  category: string;
+  image: string;
+  name: string;
+  description: string;
+  price: number;
+  discount?: number;
+}
+export let HeroData: HeroDataType[] = [
+  {
+    category: "fullrangespeaker",
+    image: frs1,
+    name: "SP-137",
+    description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
+    price: 1300000,
+  },
+  {
+    category: "fullrangespeaker",
+    image: frs2,
+    name: "SP-215GF",
+    description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
+    price: 1500000,
+  },
+  {
+    category: "fullrangespeaker",
+    image: frs3,
+    name: "SP-515",
+    description:
+      "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
+    price: 2500000,
+  },
+  {
+    category: "fullrangespeaker",
+    image: frs4,
+    name: "SP-215GF",
+    description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
+    price: 1500000,
+  },
+  {
+    category: "fullrangespeaker",
+    image: frs5,
+    name: "SP-215GF",
+    description:
+      "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
+    price: 1500000,
+  },
+  {
+    category: "newspeakerarrival",
+    image: nsa1,
+    name: "SP-227",
+    description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Big magnet",
+    price: 1500000,
+  },
+  {
+    category: "newspeakerarrival",
+    image: nsa2,
+    name: "SP-228",
+    description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
+    price: 2200000,
+  },
+  {
+    category: "newspeakerarrival",
+    image: nsa3,
+    name: "SP-229",
+    description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
+    price: 2400000,
+  },
+  {
+    category: "newspeakerarrival",
+    image: nsa4,
+    name: "SP-25",
+    description: "15 Inch / 2000watt / Pure Acostic / 75.5 coil /Big magnet",
+    price: 1100000,
+  },
+  {
+    category: "newspeakerarrival",
+    image: nsa5,
+    name: "SP-20",
+    description:
+      "5 Inch / 2000watt / Pure Acostic body / 99.9 coil / passive speaker",
+    price: 1500000,
+  },
+  {
+    category: "singlesub",
+    image: ss1,
+    name: "SP-18",
+    description:
+      "18 Inch / 2000watt / ply wood / 99.9 coil /8 Ohms/ Passive sub",
+    price: 1200000,
+  },
+  {
+    category: "singlesub",
+    image: ss2,
+    name: "SP-18GF",
+    description:
+      "18 Inch / 2000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
+    price: 1300000,
+  },
+  {
+    category: "singlesub",
+    image: ss3,
+    name: "SP-18AX",
+    description:
+      "18 Inch / 2000watt / Ply wood / 120 coil /8 Ohms/ Passive sub",
+    price: 1500000,
+  },
+  {
+    category: "singlesub",
+    image: ss4,
+    name: "SP-318",
+    description:
+      "18 Inch / 2000watt / Pure Acostic / 95.5 coil /8 Ohms/ Passive sub",
+    price: 1100000,
+  },
+  {
+    category: "singlesub",
+    image: ss5,
+    name: "SP-18 FX",
+    description:
+      "18 Inch / 2000watt / Ply wood / 140 coil /8 Ohms/ Passive sub",
+    price: 1400000,
+  },
+  {
+    category: "doublesub",
+    image: ds1,
+    name: "POW-221B",
+    description:
+      "21 Inch / 5000watt / ply wood / 150 coil /8 Ohms/ Passive sub",
+    price: 4000000,
+  },
+  {
+    category: "doublesub",
+    image: ds2,
+    name: "SP-218 DR",
+    description:
+      "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
+    price: 2200000,
+  },
+  {
+    category: "doublesub",
+    image: ds3,
+    name: "SP-218",
+    description:
+      "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
+    price: 1600000,
+  },
+  {
+    category: "doublesub",
+    image: ds4,
+    name: "SP-218 CRV",
+    description:
+      "Doublesub / 18 Inch / 4600watt / plywood / 120 coil /8 Ohms/ Passive sub",
+    price: 3500000,
+  },
+  {
+    category: "doublesub",
+    image: ds5,
+    name: "SP-218 GF",
+    description:
+      "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
+    price: 1500000,
+  },
+  {
+    category: "amplifier",
+    image: am1,
+    name: "SPX7-5000",
+    description: "4 channel / 1250watt per channel",
+    price: 1500000,
+  },
+  {
+    category: "amplifier",
+    image: am2,
+    name: "SP4500X",
+    description: "2 channel / 4500watt",
+    price: 850000,
+  },
+  {
+    category: "amplifier",
+    image: am3,
+    name: "SP4000",
+    description: "2 channel / 3500watt",
+    price: 450000,
+  },
+  {
+    category: "amplifier",
+    image: am4,
+    name: "SPX2800S",
+    description: "2 channel / 3500watt",
+    price: 650000,
+  },
+  {
+    category: "amplifier",
+    image: am5,
+    name: "SPX4000S",
+    description: "2 channel / 500watt",
+    price: 900000,
+  },
+  {
+    category: "flatmixer",
+    image: fm1,
+    name: "CM-16",
+    description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
+    price: 1365000,
+  },
+  {
+    category: "flatmixer",
+    image: fm2,
+    name: "CMX-1642",
+    description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
+    price: 1500000,
+  },
+  {
+    category: "flatmixer",
+    image: fm3,
+    name: "SP4000",
+    description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
+    price: 2500000,
+  },
+  {
+    category: "flatmixer",
+    image: fm4,
+    name: "SPX2800S",
+    description: "15 Inch / 4000watt / Ply wood / 100 coil /Big magnet",
+    price: 365000,
+  },
+  {
+    category: "flatmixer",
+    image: fm5,
+    name: "SPX4000S",
+    description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
+    price: 1500000,
+  },
+  {
+    category: "floormixer",
+    image: frm1,
+    name: "SP-12FX",
+    description: "12 Inch / 2000watt / Ply wood / 100 coil /Big magnet",
+    price: 1500000,
+  },
+  {
+    category: "floormixer",
+    image: frm2,
+    name: "SP-12M",
+    description: "12 Inch / 700watt / Pure Acostic / 100 coil /Double magnet",
+    price: 800000,
+  },
+  {
+    category: "floormixer",
+    image: frm3,
+    name: "SP-12MTX",
+    description: "12 Inch / 1000watt / Pure Acostic / 100 coil /Big magnet",
+    price: 1000000,
+  },
+  {
+    category: "floormixer",
+    image: frm4,
+    name: "SP-15/15A",
+    description: "12 Inch / 2000watt / Plastic body / 100 coil /Big magnet",
+    price: 1000000,
+  },
+  {
+    category: "floormixer",
+    image: frm5,
+    name: "SP-15FX",
+    description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Double magnet",
+    price: 1800000,
+  },
+  {
+    category: "equalizer",
+    image: e1,
+    name: "DBX-224XL",
+    description:
+      "18 Inch / 2000watt / Pure Acostic / 99.9 coil /8 Ohms/ Passive sub",
+    price: 1000000,
+  },
+  {
+    category: "equalizer",
+    image: e2,
+    name: "DBX-EQX 231",
+    description:
+      "18 Inch / 2000watt / Pure Acostic / 100 coil /8 Ohms/ Passive sub",
+    price: 1300000,
+  },
+  {
+    category: "equalizer",
+    image: e3,
+    name: "Driver Rack Venu 360",
+    description:
+      "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
+    price: 2200000,
+  },
+  {
+    category: "equalizer",
+    image: e4,
+    name: "DBX-PA2",
+    description:
+      "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
+    price: 2000000,
+  },
+  {
+    category: "equalizer",
+    image: e5,
+    name: "DBX-266XL",
+    description:
+      "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
+    price: 2200000,
+  },
+  {
+    category: "linearray",
+    image: la1,
+    name: "SP-4",
+    description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
+    price: 365000,
+  },
+  {
+    category: "linearray",
+    image: la2,
+    name: "SP-415",
+    description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double magnet",
+    price: 1500000,
+  },
+  {
+    category: "linearray",
+    image: la3,
+    name: "SP-515",
+    description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Big magnet",
+    price: 2000000,
+  },
+  {
+    category: "linearray",
+    image: la4,
+    name: "SP215SD",
+    description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
+    price: 365000,
+  },
+  {
+    category: "linearray",
+    image: la5,
+    name: "SP28",
+    description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
+    price: 1500000,
+  },
+  {
+    category: "microphone",
+    image: m1,
+    name: "SP4",
+    description: "sound breaker mic / 100% wave /Big coverage",
+    price: 68000,
+  },
+  {
+    category: "microphone",
+    image: m2,
+    name: "SP4",
+    description: "sound breaker mic / 100% wave /Big coverage",
+    price: 68000,
+  },
+  {
+    category: "microphone",
+    image: m3,
+    name: "MIC",
+    description: "sound breaker mic / 100% wave /Big coverage",
+    price: 78000,
+  },
+  {
+    category: "drum",
+    image: d1,
+    name: "White Drum",
+    description: "4 full set of Drums (complete set)",
+    price: 300000,
+  },
+  {
+    category: "drum",
+    image: d2,
+    name: "Purple Drum",
+    description: "4 full set of Drums (complete set)",
+    price: 400000,
+  },
+  {
+    category: "drum",
+    image: d3,
+    name: "Gold Drum",
+    description: "4 full set of Drums (complete set)",
+    price: 500000,
+  },
+  {
+    category: "compressor",
+    image: c1,
+    name: "SP-266X",
+    description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
+    price: 365000,
+  },
+];
