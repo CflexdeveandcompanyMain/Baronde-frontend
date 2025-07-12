@@ -34,15 +34,24 @@ export default function Footer() {
             <p className="font-all text-xs font-normal text-[#677279]">
               Refund policy
             </p>
-            <p className="font-all text-xs font-normal text-[#677279]">
+            <Link
+              to={"/shipping"}
+              className="font-all text-xs font-normal text-[#677279]"
+            >
               Shipping policy
-            </p>
-            <p className="font-all text-xs font-normal text-[#677279]">
-              privacy policy
-            </p>
-            <p className="font-all text-xs font-normal text-[#677279]">
+            </Link>
+            <Link
+              to={"/policy"}
+              className="font-all text-xs font-normal text-[#677279]"
+            >
+              Privacy policy
+            </Link>
+            <Link
+              to={"/order"}
+              className="font-all text-xs font-normal text-[#677279]"
+            >
               Contact information
-            </p>
+            </Link>
           </div>
           <div className="flex flex-col items-center gap-3 justify-start self-start">
             <p className="font-all text-sm text-start w-full font-medium text-[#677279]">
