@@ -5,25 +5,6 @@ export default function VerifyCode() {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const inputsRef: any = useRef<HTMLInputElement[] | null[]>([]);
 
-  // const handlePaste = (e: any) => {
-  //   e.preventDefault();
-  //   const pasted = e.clipboardData.getData("text").slice(0, 6);
-  //   if (!/^\d{6}$/.test(pasted)) return;
-
-  //   const newOtp = pasted.split("");
-  //   setOtp(newOtp);
-
-  //   newOtp.forEach((digit: number, i: number) => {
-  //     if (inputsRef.current[i]) {
-  //       inputsRef.current[i].value = digit;
-  //     }
-  //   });
-
-  //   if (inputsRef.current[5]) {
-  //     inputsRef.current[5].focus();
-  //   }
-  // };
-
   const handleChange = (value: string, index: number) => {
     if (!/^[0-9]?$/.test(`${value}`)) return;
     const newOtp = [...otp];

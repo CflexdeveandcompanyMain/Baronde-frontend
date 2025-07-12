@@ -1,10 +1,46 @@
 import { useState } from "react";
 import { bdm } from "../index";
 import { GoogleLogin } from "@react-oauth/google";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getOTP } from "../utils/getFetch";
 
 export default function UserCreateAccount() {
   let [viewPassword, setViewPassword] = useState<boolean>(false);
+  let [userInfo, setUserInfo] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  let navigate = useNavigate();
+  let [trigger, setTrigger] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const { status, data, error } = useQuery({
+    queryKey: ["getOTP"],
+    queryFn: () => getOTP(userInfo.name, userInfo.email),
+    enabled: trigger,
+  });
+
+  const handleSubmit = () => {
+    let { name, email, password } = userInfo;
+    if (name && email && password) {
+      setTrigger(true);
+      if (status == "pending") console.log("loading");
+      if (status == "success") {
+        console.log(data, userInfo);
+        navigate("/code");
+      }
+      if (status == "error") console.log(error);
+    }
+  };
+
   return (
     <section className="w-full bg-white h-screen sm:bg-gray-200 flex justify-center">
       <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
@@ -23,6 +59,8 @@ export default function UserCreateAccount() {
             <p className="font-medium text-sm text-start font-all">Name</p>
             <input
               type="text"
+              name="name"
+              onChange={handleChange}
               className="rounded-sm shadow outline-0 font-all border text-sm border-stone-700 p-2"
               placeholder="e.g John Doe..."
             />
@@ -31,6 +69,8 @@ export default function UserCreateAccount() {
             <p className="font-medium text-sm text-start font-all">Email</p>
             <input
               type="text"
+              name="email"
+              onChange={handleChange}
               className="rounded-sm shadow outline-0 border font-all text-sm border-stone-700 p-2"
               placeholder="e.g johndoe@xyz.com"
             />
@@ -39,6 +79,8 @@ export default function UserCreateAccount() {
             <p className="font-medium text-sm text-start font-all">Password</p>
             <div className="flex flex-row items-center w-full border text-sm border-stone-700 rounded-sm shadow">
               <input
+                onChange={handleChange}
+                name="password"
                 type={viewPassword ? "text" : "password"}
                 className="w-full outline-0 p-2 font-all"
                 placeholder="* * * * * * *"
@@ -87,6 +129,7 @@ export default function UserCreateAccount() {
             </div>
           </div>
           <button
+            onClick={handleSubmit}
             type="button"
             className="p-3 bg-green-700 rounded-sm shadow w-full font-all font-normal text-white"
           >
