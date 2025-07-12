@@ -5,6 +5,7 @@ import { nigerianStates } from "./data";
 export default function UserProfile() {
   let [state, setstate] = useState("Abia");
   let [drop, setdrop] = useState(false);
+  console.log(state);
   return (
     <>
       <MainPageNavbar />

@@ -1,22 +1,48 @@
+import { useQuery } from "@tanstack/react-query";
+import { getFetch } from "../utils/getFetch";
+
 export default function UserOrderHistory() {
-  return <></>;
+  let { status, data } = useQuery({
+    queryKey: ["order"],
+    queryFn: () => getFetch("http://localhost:3000/drum"),
+  });
+
+  return (
+    <section className="w-full h-screen bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
+      <div className="flex flex-col items-start w-[95%] gap-2 sm:h-auto sm:w-3/5 mx-auto mt-4 sm:mt-6">
+        <p className="font-all text-lg text-start w-full">My Orders</p>
+        <div className="flex flex-col items-start w-full">
+          <div className="flex flex-col w-full items-center gap-10">
+            {status == "success" &&
+              data.map((item: any) => {
+                return <OrderCard product={item} />;
+              })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
-function OrderCard() {
+function OrderCard({ product }: { product: any }) {
   return (
     <div className="flex flex-row items-center w-full justify-between border-[3px] border-stone-400">
       <div className="flex flex-row items-center gap-3">
-        <img src={""} className="w-4/5 object-cover h-full" />
+        <img src={product.image} className="w-4/5 object-cover h-full" />
         <div className="flex flex-col items-start gap-2">
-          <p className="w-full text-sm font-semibold text-start">{}</p>
-          <p className="w-full text-xs font-semibold text-start">{}</p>
+          <p className="w-full text-sm font-semibold text-start">
+            {product.name}
+          </p>
+          <p className="w-full text-xs font-semibold text-start">
+            {product.description}
+          </p>
         </div>
       </div>
       <p className="w-full self-center font-all text-center text-gray-400">
-        Quantity {}
+        Quantity {product.quantity}
       </p>
       <p className="w-full self-center font-all text-center text-orange-600/80">
-        {}
+        {product.price}
       </p>
       <div className="flex flex-row items-center w-full">
         <svg
@@ -38,7 +64,7 @@ function OrderCard() {
           <circle cx="7" cy="18" r="2" />
         </svg>
         <p className="font-all text-xs font-semibold self-center">
-          Estimated Delivery: {}
+          Estimated Delivery: {new Date().getUTCDay()}
         </p>
         <div className="bg-green-300 p-2 rounded shadow flex justify-center self-center">
           <p className="font-all text-xs text-center self-center">En Route</p>

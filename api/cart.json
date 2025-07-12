@@ -1,0 +1,31 @@
+{
+  "drum": [
+    {
+      "id": "item1",
+      "category": "drum",
+      "image": "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d1_lo30ux.png",
+      "name": "White drum",
+      "description": "4 full set of Drums (complete set)",
+      "price": 300000,
+      "quantity": 1
+    },
+    {
+      "id": "item2",
+      "category": "drum",
+      "image": "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+      "name": "Purple drum",
+      "description": "4 full set of Drums (complete set)",
+      "price": 300000,
+      "quantity": 1
+    },
+    {
+      "id": "item3",
+      "category": "drum",
+      "image": "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301050/d2_dkqdvo.png",
+      "name": "Gold drum",
+      "description": "4 full set of Drums (complete set)",
+      "price": 300000,
+      "quantity": 1
+    }
+  ]
+}
