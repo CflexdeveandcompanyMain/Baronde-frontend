@@ -51,7 +51,10 @@ export default function MainPageNavbar() {
         </div>
       </div>
       <div className="flex flex-row items-center py-3 px-3 sm:px-7 bg-[#14AE5C] w-full">
-        <div className="flex flex-row items-center justify-start sm:justify-center gap-0.5 sm:-ml-2 self-center w-1/2">
+        <Link
+          to={"/"}
+          className="flex flex-row items-center justify-start sm:justify-center gap-0.5 sm:-ml-2 self-center w-1/2"
+        >
           <img
             src={headlogo}
             className="w-10 h-10 sm:w-10 sm:h-10 rounded object-cover"
@@ -62,7 +65,7 @@ export default function MainPageNavbar() {
               Demusical
             </p>
           </div>
-        </div>
+        </Link>
         <MainPageSearchBar />
         <div className="flex flex-row items-center gap-6 w-1/2 justify-end">
           <Link
@@ -238,7 +241,7 @@ export default function MainPageNavbar() {
                 type={"button"}
                 className={`${
                   down ? "flex" : "hidden"
-                } sm:min-w-[200px] bg-white duration-200 flex-col absolute top-10 items-start border border-black/40 outline-none`}
+                } sm:min-w-[200px] bg-white duration-200 flex-col absolute top-10 items-start border border-black/40 outline-none z-30`}
               >
                 {products.map((item, index) => {
                   return (
@@ -255,9 +258,12 @@ export default function MainPageNavbar() {
             <div className="font-all text-sm text-center font-medium list-none">
               Service Center
             </div>
-            <div className="font-all text-sm text-center font-medium list-none">
+            <Link
+              to={"/about"}
+              className="font-all text-sm text-center font-medium list-none"
+            >
               About
-            </div>
+            </Link>
             <div className="font-all text-sm text-center font-medium list-none">
               Testimonies
             </div>

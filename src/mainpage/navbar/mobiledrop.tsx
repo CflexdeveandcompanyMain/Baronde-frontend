@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { brand, products } from "../../raw-datas/rd1";
+import { Link } from "react-router-dom";
 
 export default function MobileDropDown({ menu }: { menu: boolean }) {
   let [drop, setdrops] = useState({
@@ -146,9 +147,12 @@ export default function MobileDropDown({ menu }: { menu: boolean }) {
       <p className="font-all text-sm text-start w-full font-medium">
         Service Centers
       </p>
-      <p className="font-all text-sm text-start w-full font-medium">
+      <Link
+        to={"/about"}
+        className="font-all text-sm text-start w-full font-medium"
+      >
         Contact us
-      </p>
+      </Link>
       <div className="flex flex-row items-center gap-2 w-full">
         <svg
           xmlns="http://www.w3.org/2000/svg"

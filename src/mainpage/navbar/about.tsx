@@ -38,11 +38,11 @@ export default function About() {
               className="w-full object-cover sm:h-auto h-[330px]"
             />
             <div className="flex flex-col items-start gap-4 absolute w-3/4 sm:max-w-[40%] top-12 p-2 left-3 bg-white rounded-sm">
-              <p className="font-semibold text-xs text-start w-full">
+              <p className="font-semibold text-xs text-start w-full font-all">
                 Sound Prince Musical World
               </p>
               <div className="flex flex-col items-start gap-4 justify-start">
-                <p className="font-medium text-xs text-start w-full">
+                <p className="font-medium text-xs text-start w-full font-all">
                   Alaba Int'l Market, Sp Sampling Plaza, Opp Zenith Bank, off
                   Dobbil close, Ojo, Lagos 102115, Lagos
                 </p>
