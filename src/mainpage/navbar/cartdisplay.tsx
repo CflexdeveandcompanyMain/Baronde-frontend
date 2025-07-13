@@ -19,7 +19,7 @@ export default function CartDisplay() {
       onBlur={setShowCartDesktop}
       className={`${
         showCartDesktop ? "sm:flex" : "sm:hidden"
-      } flex-col items-center gap-3 hidden min-w-[500px] outline-none absolute top-10 bg-white z-40 right-0 p-3`}
+      } flex-col items-center gap-3 hidden min-w-[500px] border-stone-100 border outline-none absolute top-10 bg-white z-40 right-0 p-3`}
     >
       <div className="w-full flex flex-col items-center overflow-y-scroll h-3/5">
         {cartProducts.map((item, index: number) => {
@@ -30,7 +30,7 @@ export default function CartDisplay() {
           );
         })}
       </div>
-      <div className="flex flex-col items-center w-full gap-2">
+      <div className="flex flex-col items-center w-[95%] mx-auto gap-2">
         <div className="flex flex-row items-center w-full justify-between">
           <p className="font-all text-base font-medium text-start w-full">
             Total
@@ -60,8 +60,8 @@ function CartProduct({ data }: { data: any }) {
   let [count, setcount] = useState(0);
   return (
     <>
-      <div className="flex flex-row items-center justify-between gap-3">
-        <img src={data.image} className="object-cover h-full w-[35%]" />
+      <div className="flex flex-row items-center justify-between gap-3 w-full">
+        <img src={data.image} className="object-cover h-24 w-24" />
         <div className="flex flex-row items-center w-full gap-2 self-stretch ">
           <div className="flex flex-col items-start w-full h-full justify-evenly ">
             <div className="flex flex-col items-center gap-2 w-full">
@@ -85,7 +85,7 @@ function CartProduct({ data }: { data: any }) {
                 {count < 0 ? 0 : count}
               </p>
               <div className="flex justify-center w-full py-2">
-                <PlusIcon onClick={() => setcount(count + 1)} />
+                <PlusIcon onClick={() => setcount(count + 1)} size={16} />
               </div>
             </div>
           </div>

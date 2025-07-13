@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { bdm } from "..";
 import { useAuthStore } from "../store/user";
 import { createUser } from "../utils/getFetch";
+import { useNavigate } from "react-router-dom";
 
 export default function VerifyCode() {
   const [otp, setOtp] = useState(Array(5).fill(""));
@@ -9,7 +10,9 @@ export default function VerifyCode() {
 
   let [trigger, setTrigger] = useState(false);
 
-  let { name, email, password, otpid } = useAuthStore();
+  let navigate = useNavigate();
+
+  let { name, email, password, otpid, setCredentials } = useAuthStore();
 
   const handleChange = (value: string, index: number) => {
     if (!/^[0-9]?$/.test(`${value}`)) return;
@@ -37,6 +40,11 @@ export default function VerifyCode() {
         otp.join(""),
         otpid
       );
+      if (result.user) {
+        let { name, email, id } = result;
+        setCredentials(name, email, "", id);
+        navigate("/");
+      }
       console.log(result);
     }
   };
