@@ -4,6 +4,14 @@ import { useState } from "react";
 import CartDisplay from "./cartdisplay";
 import { useGlobalState } from "../../store/globalstate";
 import { brand, products } from "../../raw-datas/rd1";
+import {
+  AlignJustify,
+  AlignJustifyIcon,
+  ChevronDownIcon,
+  SearchIcon,
+  ShoppingCartIcon,
+  UserIcon,
+} from "lucide-react";
 
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
@@ -79,54 +87,13 @@ export default function MainPageNavbar() {
               My account
             </p>
           </Link>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-search-icon lucide-search text-white sm:hidden flex"
-          >
-            <path d="m21 21-4.34-4.34" />
-            <circle cx="11" cy="11" r="8" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-user-icon lucide-user text-white sm:hidden flex"
-          >
-            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
-          </svg>
+          <SearchIcon className="text-white sm:hidden flex" />
+          <UserIcon className="text-white sm:hidden flex" />
           <div className="relative">
-            <svg
+            <ShoppingCartIcon
               onClick={handleCartClick}
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-shopping-cart-icon cursor-pointer lucide-shopping-cart text-white"
-            >
-              <circle cx="8" cy="21" r="1" />
-              <circle cx="19" cy="21" r="1" />
-              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-            </svg>
+              className="text-white cursor-pointer"
+            />
             <div
               onClick={handleCartClick}
               className="h-2 w-2 bg-[#BB2331] p-2 cursor-pointer flex justify-center rounded-full absolute -top-1 right-0"
@@ -137,23 +104,10 @@ export default function MainPageNavbar() {
             </div>
             <CartDisplay />
           </div>
-          <svg
+          <AlignJustifyIcon
             onClick={() => setmenu(!menu)}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-align-justify-icon lucide-align-justify sm:hidden flex text-white"
-          >
-            <path d="M3 12h18" />
-            <path d="M3 18h18" />
-            <path d="M3 6h18" />
-          </svg>
+            className="sm:hidden flex text-white"
+          />
         </div>
       </div>
       <div className="relative w-full sm:hidden flex bg-white">
@@ -173,22 +127,11 @@ export default function MainPageNavbar() {
                 <p className="font-all text-sm font-medium text-center">
                   Shop by Brand
                 </p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                <ChevronDownIcon
                   className={`${
                     drop ? "rotate-180" : "rotate-360"
-                  } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
-                >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
+                  } duration-300`}
+                />
               </div>
               <button
                 ref={focusRef}
@@ -218,22 +161,12 @@ export default function MainPageNavbar() {
                 <p className="font-all text-sm font-medium text-center">
                   Product
                 </p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                <ChevronDownIcon
                   className={`${
-                    down ? "rotate-180" : "rotate-360"
-                  } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
-                >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
+                    drop ? "rotate-180" : "rotate-360"
+                  } duration-300`}
+                  size={12}
+                />
               </div>
               <button
                 ref={focusRef}

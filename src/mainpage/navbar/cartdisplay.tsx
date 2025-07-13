@@ -2,6 +2,7 @@ import { useState } from "react";
 import { cartStore } from "../../store/cart";
 import { useGlobalState } from "../../store/globalstate";
 import { Link } from "react-router-dom";
+import { MinusIcon, PlusIcon } from "lucide-react";
 
 export default function CartDisplay() {
   let { cartProducts } = cartStore();
@@ -77,41 +78,14 @@ function CartProduct({ data }: { data: any }) {
           </div>
           <div className="w-full flex justify-center self-center">
             <div className="w-3/5 mx-auto flex flex-row items-center border rounded border-stone-500 justify-between">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-minus-icon lucide-minus w-full py-2"
-                onClick={() => setcount(count - 1)}
-              >
-                <path d="M5 12h14" />
-              </svg>
+              <div className="flex justify-center w-full py-2">
+                <MinusIcon onClick={() => setcount(count - 1)} size={16} />
+              </div>
               <p className="font-all font-medium text-sm text-center w-full py-2 border-x border-stone-500">
                 {count < 0 ? 0 : count}
               </p>
               <div className="flex justify-center w-full py-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-plus-icon lucide-plus w-full"
-                  onClick={() => setcount(count + 1)}
-                >
-                  {/* <path d="M5 12h14" /> */}
-                  <path d="M12 5v14" />
-                </svg>
+                <PlusIcon onClick={() => setcount(count + 1)} />
               </div>
             </div>
           </div>

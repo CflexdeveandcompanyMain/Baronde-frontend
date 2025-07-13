@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { brand, products } from "../../raw-datas/rd1";
 import { Link } from "react-router-dom";
+import { ChevronDown, InboxIcon, PhoneCallIcon } from "lucide-react";
 
 export default function MobileDropDown({ menu }: { menu: boolean }) {
   let [drop, setdrops] = useState({
@@ -18,25 +19,13 @@ export default function MobileDropDown({ menu }: { menu: boolean }) {
       <div className="flex flex-col items-center w-full gap-2">
         <div className="flex flex-row items-center justify-between w-full">
           <p className="font-all text-sm text-start font-medium">All Deals</p>
-          <svg
+          <ChevronDown
             onClick={() =>
               setdrops((prev) => ({ ...prev, deals: !drop.deals }))
             }
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={`${
-              drop.deals ? "rotate-180" : "rotate-360"
-            } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+            size={16}
+            className={`${drop.deals ? "rotate-180" : "rotate-360"}`}
+          />
         </div>
         <datalist
           className={`${
@@ -60,25 +49,13 @@ export default function MobileDropDown({ menu }: { menu: boolean }) {
       <div className="flex flex-col items-center w-full gap-2">
         <div className="flex flex-row items-center justify-between w-full">
           <p className="font-all text-sm text-start font-medium">Products</p>
-          <svg
+          <ChevronDown
             onClick={() =>
               setdrops((prev) => ({ ...prev, products: !drop.products }))
             }
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={`${
-              drop.products ? "rotate-180" : "rotate-360"
-            } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+            size={16}
+            className={`${drop.products ? "rotate-180" : "rotate-360"}`}
+          />
         </div>
         <datalist
           className={`${
@@ -103,25 +80,13 @@ export default function MobileDropDown({ menu }: { menu: boolean }) {
           <p className="font-all text-sm text-start font-medium">
             Shop by Brands
           </p>
-          <svg
+          <ChevronDown
             onClick={() =>
               setdrops((prev) => ({ ...prev, brands: !drop.brands }))
             }
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={`${
-              drop.brands ? "rotate-180" : "rotate-360"
-            } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+            size={16}
+            className={`${drop.brands ? "rotate-180" : "rotate-360"}`}
+          />
         </div>
         <datalist
           className={`${
@@ -154,42 +119,13 @@ export default function MobileDropDown({ menu }: { menu: boolean }) {
         Contact us
       </Link>
       <div className="flex flex-row items-center gap-2 w-full">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="lucide lucide-phone-call-icon lucide-phone-call"
-        >
-          <path d="M13 2a9 9 0 0 1 9 9" />
-          <path d="M13 6a5 5 0 0 1 5 5" />
-          <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
-        </svg>
+        <PhoneCallIcon />
         <p className="font-all text-sm text-start font-medium">
           Call us 09138254838
         </p>
       </div>
       <div className="flex flex-row items-center gap-2 w-full">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="lucide lucide-inbox-icon lucide-inbox"
-        >
-          <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
-          <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
-        </svg>
+        <InboxIcon />
         <p className="font-all text-sm text-start font-medium">
           Info@Barondemusical.com
         </p>

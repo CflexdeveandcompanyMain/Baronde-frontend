@@ -1,3 +1,4 @@
 1. Ask timothy to finish the api for authentication
 2. tell him to use the google token I send to him to authenticate some user
 3. Implement add to cart;
+4. use cloudinary url to store every image
