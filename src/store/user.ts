@@ -2,13 +2,19 @@
 import { create } from "zustand";
 
 interface AuthState {
+  id: string;
   name: string;
   email: string;
   password: string;
   otp: string;
   otpid: string;
   isVerified: boolean;
-  setCredentials: (name: string, email: string, password: string) => void;
+  setCredentials: (
+    name: string,
+    email: string,
+    password: string,
+    id: string
+  ) => void;
   setOtp: (otp: string) => void;
   setOtpId: (otp: string) => void;
   verifyOtp: (inputOtp: string) => boolean;
@@ -16,6 +22,7 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
+  id: "",
   name: "",
   email: "",
   password: "",
@@ -23,8 +30,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   isVerified: false,
   otpid: "",
 
-  setCredentials: (name, email, password) => {
-    set({ name, email, password });
+  setCredentials: (name, email, password, id) => {
+    set({ name, email, password, id });
   },
 
   setOtp: (otp) => {

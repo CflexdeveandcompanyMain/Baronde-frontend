@@ -5,7 +5,6 @@ import CartDisplay from "./cartdisplay";
 import { useGlobalState } from "../../store/globalstate";
 import { brand, products } from "../../raw-datas/rd1";
 import {
-  AlignJustify,
   AlignJustifyIcon,
   ChevronDownIcon,
   SearchIcon,
@@ -197,9 +196,12 @@ export default function MainPageNavbar() {
             >
               About
             </Link>
-            <div className="font-all text-sm text-center font-medium list-none">
+            <Link
+              to={"/testimonial"}
+              className="font-all text-sm text-center font-medium list-none"
+            >
               Testimonies
-            </div>
+            </Link>
           </ul>
         </section>
       </div>

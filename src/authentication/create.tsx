@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { bdm } from "../index";
 import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ export default function UserCreateAccount() {
 
   let navigate = useNavigate();
   let [trigger, setTrigger] = useState(false);
-  let { setOtpId } = useAuthStore();
+  let { setOtpId, setCredentials } = useAuthStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,15 +35,21 @@ export default function UserCreateAccount() {
 
   let { name, email, password } = userInfo;
 
-  const handleSubmit = () => {
-    if (name && email && password) {
-      setTrigger(true);
-      if (status == "success") {
-        setOtpId(data.otpid);
-        setTimeout(() => navigate("/code"), 1000);
-      }
-      if (status == "error") console.log(error);
+  useEffect(() => {
+    let timeOut: number;
+    if (status === "success" && data && data.otpId) {
+      console.log(data);
+      setOtpId(data.otpId);
+      setCredentials(name, email, password, "");
+      timeOut = setTimeout(() => navigate("/code"), 1000);
     }
+    if (status == "error") console.log(error);
+    return () => clearTimeout(timeOut);
+  }, [status]);
+
+  const handleSubmit = () => {
+    console.log(name, email, password);
+    if (name && email && password) setTrigger(true);
   };
 
   const sendUserToken = (token: CredentialResponse) => {

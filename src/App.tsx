@@ -12,6 +12,7 @@ import PrivatePolicy from "./misc/policy";
 import ShippingPolicy from "./misc/shipping";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserOrderHistory from "./user/order";
+import Testimonial from "./mainpage/navbar/testimonial";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ export default function App() {
         <Route path={"/policy"} element={<PrivatePolicy />} />
         <Route path={"/shipping"} element={<ShippingPolicy />} />
         <Route path={"/order"} element={<UserOrderHistory />} />
+        <Route path={"/testimonial"} element={<Testimonial />} />
       </Routes>
     </QueryClientProvider>
   );

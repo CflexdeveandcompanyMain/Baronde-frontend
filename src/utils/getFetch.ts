@@ -23,6 +23,24 @@ export async function getOTP(name: string, email: string) {
   return response;
 }
 
+export async function createUser(
+  name: string,
+  email: string,
+  password: string,
+  otp: string,
+  otpId: string
+) {
+  const request = await fetch("https://baronde.onrender.com/user/v1/SignUp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, email, password, otp, otpId }),
+  });
+  const response = await request.json();
+  return response;
+}
+
 export async function getGoogleUserInfo(token: CredentialResponse) {
   const request = await fetch(`backendurl`, {
     method: "POST",

@@ -1,22 +1,16 @@
 import { useRef, useState } from "react";
 import { bdm } from "..";
-import { useAuthStore } from "../store/user";
-import { createUser } from "../utils/getFetch";
 
 export default function VerifyCode() {
-  const [otp, setOtp] = useState(Array(5).fill(""));
+  const [otp, setOtp] = useState(Array(6).fill(""));
   const inputsRef: any = useRef<HTMLInputElement[] | null[]>([]);
-
-  let [trigger, setTrigger] = useState(false);
-
-  let { name, email, password, otpid } = useAuthStore();
 
   const handleChange = (value: string, index: number) => {
     if (!/^[0-9]?$/.test(`${value}`)) return;
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-    if (value && index < 4) {
+    if (value && index < 5) {
       inputsRef.current[index + 1].focus();
     }
   };
@@ -27,20 +21,9 @@ export default function VerifyCode() {
     }
   };
 
-  const handleSubmit = async () => {
-    if (otpid && otp.join("")) {
-      setTrigger(true);
-      const result = await createUser(
-        name,
-        email,
-        password,
-        otp.join(""),
-        otpid
-      );
-      console.log(result);
-    }
-  };
-
+  const isCorrect = otp.join("") === "100100";
+  console.log(otp.every((item) => item !== ""));
+  const isCorrectI = otp.every((item) => item !== "") && isCorrect;
   return (
     <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
       <section className="w-full bg-white self-start mt-[10%] sm:mt-[10%] sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
@@ -56,7 +39,8 @@ export default function VerifyCode() {
             Enter verification code
           </p>
           <small className="font-all font-medium text-stone-600 text-xs text-start w-full">
-            Check your mail we send you a verification code to verify your email
+            Enter your email and we'll send you a verification code to reset
+            your password
           </small>
         </div>
         <div className="flex flex-col items-start w-full gap-3 p-2">
@@ -74,7 +58,9 @@ export default function VerifyCode() {
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   ref={(el: any) => (inputsRef.current[index] = el)}
                   type="text"
-                  className={`w-10 h-10 border rounded p-2 text-center font-all`}
+                  className={`w-10 h-10 border ${
+                    !isCorrectI ? "border-red-500" : "border-stone-500"
+                  } rounded p-2 text-center font-all`}
                 />
               );
             })}
@@ -85,12 +71,10 @@ export default function VerifyCode() {
           </p>
         </div>
         <button
-          disabled={trigger}
-          onClick={handleSubmit}
           type="button"
           className={`p-3 ${
-            trigger ? "bg-green-800/30" : "bg-green-800"
-          } rounded-sm shadow justify-center w-full font-all font-normal text-white`}
+            isCorrect ? `bg-green-700` : "bg-gray-300"
+          } rounded-sm shadow w-full font-all font-normal text-white`}
         >
           Send code
         </button>

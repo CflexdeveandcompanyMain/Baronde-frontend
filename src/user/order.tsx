@@ -65,7 +65,7 @@ function OrderCard({ product }: { product: any }) {
     <div className="flex flex-col sm:flex-row items-center w-full justify-between p-3 bg-white/80 border-t border-stone-400 pt-3">
       <div className="flex flex-row items-center gap-3 w-full self-start">
         <img
-          src={product.image}
+          src={product.image[0]}
           alt={product.name}
           className="w-20 h-20 self-start object-cover rounded-sm"
         />

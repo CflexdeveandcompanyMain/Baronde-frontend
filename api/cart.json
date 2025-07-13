@@ -3,7 +3,9 @@
     {
       "id": "item2",
       "category": "drum",
-      "image": "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+      "image": [
+        "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png"
+      ],
       "name": "Purple drum",
       "description": "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
       "price": 300000,
@@ -12,7 +14,9 @@
     {
       "id": "item3",
       "category": "drum",
-      "image": "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301050/d2_dkqdvo.png",
+      "image": [
+        "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301050/d2_dkqdvo.png"
+      ],
       "name": "Gold drum",
       "description": "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
       "price": 300000,
