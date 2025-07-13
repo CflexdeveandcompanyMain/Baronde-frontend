@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { bdm } from "../index";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getGoogleUserInfo, getOTP } from "../utils/getFetch";
@@ -28,7 +28,7 @@ export default function UserCreateAccount() {
   };
 
   const { status, data, error } = useQuery({
-    queryKey: ["getOTP"],
+    queryKey: ["getOTP", "create temp user"],
     queryFn: () => getOTP(userInfo.name, userInfo.email),
     enabled: trigger,
   });
@@ -38,12 +38,19 @@ export default function UserCreateAccount() {
   const handleSubmit = () => {
     if (name && email && password) {
       setTrigger(true);
-      if (status == "pending") console.log("loading");
       if (status == "success") {
         setOtpId(data.otpid);
         setTimeout(() => navigate("/code"), 1000);
       }
       if (status == "error") console.log(error);
+    }
+  };
+
+  const sendUserToken = (token: CredentialResponse) => {
+    if (token) {
+      getGoogleUserInfo(token)
+        .then((result) => console.log(result))
+        .catch((err) => console.error(err));
     }
   };
 
@@ -162,12 +169,7 @@ export default function UserCreateAccount() {
         </div>
         <GoogleLogin
           width={"100%"}
-          onSuccess={(token) => {
-            console.log(token);
-            getGoogleUserInfo(token.credential ?? "")
-              .then((result) => console.log(result))
-              .catch((err) => console.error(err));
-          }}
+          onSuccess={(token) => sendUserToken(token)}
           onError={() => console.log("error")}
         />
         <div className="flex flex-row items-center self-start my-2 gap-2 justify-between sm:w-1/3 mx-0 w-1/2">

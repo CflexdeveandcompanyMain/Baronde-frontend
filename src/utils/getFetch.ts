@@ -1,3 +1,5 @@
+import type { CredentialResponse } from "@react-oauth/google";
+
 export async function getFetch(url: string) {
   const request = await fetch(url, {
     method: "GET",
@@ -21,16 +23,14 @@ export async function getOTP(name: string, email: string) {
   return response;
 }
 
-export async function getGoogleUserInfo(token: string) {
-  const request = await fetch(
-    `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+export async function getGoogleUserInfo(token: CredentialResponse) {
+  const request = await fetch(`backendurl`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token }),
+  });
   const response = await request.json();
   return response;
 }
