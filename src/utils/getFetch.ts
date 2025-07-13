@@ -20,3 +20,17 @@ export async function getOTP(name: string, email: string) {
   const response = await request.json();
   return response;
 }
+
+export async function getGoogleUserInfo(token: string) {
+  const request = await fetch(
+    `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const response = await request.json();
+  return response;
+}

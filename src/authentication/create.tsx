@@ -3,7 +3,9 @@ import { bdm } from "../index";
 import { GoogleLogin } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getOTP } from "../utils/getFetch";
+import { getGoogleUserInfo, getOTP } from "../utils/getFetch";
+import { useAuthStore } from "../store/user";
+import { LoaderCircleIcon } from "lucide-react";
 
 export default function UserCreateAccount() {
   let [viewPassword, setViewPassword] = useState<boolean>(false);
@@ -12,8 +14,10 @@ export default function UserCreateAccount() {
     email: "",
     password: "",
   });
+
   let navigate = useNavigate();
   let [trigger, setTrigger] = useState(false);
+  let { setOtpId } = useAuthStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,20 +26,22 @@ export default function UserCreateAccount() {
       [name]: value,
     }));
   };
+
   const { status, data, error } = useQuery({
     queryKey: ["getOTP"],
     queryFn: () => getOTP(userInfo.name, userInfo.email),
     enabled: trigger,
   });
 
+  let { name, email, password } = userInfo;
+
   const handleSubmit = () => {
-    let { name, email, password } = userInfo;
     if (name && email && password) {
       setTrigger(true);
       if (status == "pending") console.log("loading");
       if (status == "success") {
-        console.log(data, userInfo);
-        navigate("/code");
+        setOtpId(data.otpid);
+        setTimeout(() => navigate("/code"), 1000);
       }
       if (status == "error") console.log(error);
     }
@@ -131,9 +137,14 @@ export default function UserCreateAccount() {
           <button
             onClick={handleSubmit}
             type="button"
-            className="p-3 bg-green-700 rounded-sm shadow w-full font-all font-normal text-white"
+            disabled={trigger && status === "pending"}
+            className="p-3 bg-green-700 rounded-sm shadow w-full font-all font-normal flex justify-center text-white"
           >
-            Create account
+            {trigger && status === "pending" ? (
+              <LoaderCircleIcon className="animate-spin" size={16} />
+            ) : (
+              "Create account"
+            )}
           </button>
           <div className="w-full flex justify-end">
             <p className="font-all text-xs text-end font-normal">
@@ -151,12 +162,21 @@ export default function UserCreateAccount() {
         </div>
         <GoogleLogin
           width={"100%"}
-          onSuccess={() => console.log("success")}
+          onSuccess={(token) => {
+            console.log(token);
+            getGoogleUserInfo(token.credential ?? "")
+              .then((result) => console.log(result))
+              .catch((err) => console.error(err));
+          }}
           onError={() => console.log("error")}
         />
         <div className="flex flex-row items-center self-start my-2 gap-2 justify-between sm:w-1/3 mx-0 w-1/2">
-          <p className="font-all text-xs">Privacy policy</p>
-          <p className="font-all text-xs">Terms of use</p>
+          <Link to={"/policy"} className="font-all text-xs">
+            Privacy policy
+          </Link>
+          <Link to={"/term"} className="font-all text-xs">
+            Terms of use
+          </Link>
         </div>
       </section>
     </section>
