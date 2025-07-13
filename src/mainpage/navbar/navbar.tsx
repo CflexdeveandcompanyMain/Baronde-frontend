@@ -11,11 +11,13 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from "lucide-react";
+import { useAuthStore } from "../../store/user";
 
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
   let { setShowCartDesktop } = useGlobalState();
   let navigate = useNavigate();
+  let { isVerified } = useAuthStore();
 
   const handleCartClick = () => {
     document.body.clientWidth > 640 ? setShowCartDesktop() : navigate("/cart");
@@ -23,6 +25,7 @@ export default function MainPageNavbar() {
 
   let [drop, setdrop] = useState(false);
   let [down, setdown] = useState(false);
+  let [acctdrop, setAcctDrop] = useState(false);
 
   const focusRef = (element: HTMLButtonElement) => {
     if (element) {
@@ -75,17 +78,71 @@ export default function MainPageNavbar() {
         </Link>
         <MainPageSearchBar />
         <div className="flex flex-row items-center gap-6 w-1/2 justify-end">
-          <Link
-            to={"/signup"}
-            className="hidden sm:flex flex-col items-center gap-1.5"
-          >
-            <p className="font-all font-medium text-xs text-center text-white">
-              Login/SignUp
-            </p>
-            <p className="font-all font-medium text-xs text-center text-white">
-              My account
-            </p>
-          </Link>
+          {isVerified ? (
+            <div className="flex flex-col items-center relative cursor-pointer">
+              <div
+                className="hidden sm:flex flex-col items-center gap-1.5"
+                onClick={() => setAcctDrop(!acctdrop)}
+              >
+                <p className="font-all font-medium text-xs text-center text-white">
+                  Login/SignUp
+                </p>
+                <p className="font-all font-medium text-xs text-center text-white">
+                  My account
+                </p>
+              </div>
+              <button
+                ref={focusRef}
+                onBlur={() => setAcctDrop(false)}
+                type={"button"}
+                className={`${
+                  acctdrop ? "flex" : "hidden"
+                } sm:min-w-[120px] bg-white p-2 rounded-sm gap-2 flex-col absolute top-10 items-start border border-black/40 outline-none`}
+              >
+                <Link
+                  to={"/profile"}
+                  className="text-sm text-start cursor-pointer"
+                >
+                  My profile
+                </Link>
+                <Link
+                  to={"/order"}
+                  className="text-sm text-start cursor-pointer"
+                >
+                  My orders
+                </Link>
+                <Link
+                  to={"/setting"}
+                  className="text-sm text-start cursor-pointer"
+                >
+                  settings
+                </Link>
+                <div
+                  className="text-sm text-start cursor-pointer"
+                  onClick={() => {
+                    navigate("/");
+                    window.location.reload();
+                  }}
+                >
+                  Logout
+                </div>
+              </button>
+            </div>
+          ) : (
+            <Link
+              to={"/signup"}
+              className={`${
+                isVerified ? "hidden" : "flex"
+              } hidden sm:flex flex-col items-center gap-1.5`}
+            >
+              <p className="font-all font-medium text-xs text-center text-white">
+                Login/SignUp
+              </p>
+              <p className="font-all font-medium text-xs text-center text-white">
+                My account
+              </p>
+            </Link>
+          )}
           <SearchIcon className="text-white sm:hidden flex" />
           <UserIcon className="text-white sm:hidden flex" />
           <div className="relative">

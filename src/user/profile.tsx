@@ -1,10 +1,14 @@
 import { useState } from "react";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import { nigerianStates } from "./data";
+import { useAuthStore } from "../store/user";
 
 export default function UserProfile() {
   let [state, setstate] = useState("Abia");
   let [drop, setdrop] = useState(false);
+
+  let { name, email } = useAuthStore();
+
   console.log(state);
   return (
     <>
@@ -33,13 +37,11 @@ export default function UserProfile() {
           </div>
           <div className="flex flex-col items-start w-full justify-start gap-4">
             <p className="font-all font-medium text-sm">Name</p>
-            <p className="ml-5 font-all font-medium text-xs">Martins Olumide</p>
+            <p className="ml-5 font-all font-medium text-xs">{name}</p>
           </div>
           <div className="flex flex-col items-start w-full justify-start gap-4">
             <p className="font-all font-medium text-sm">Enter Email</p>
-            <p className="ml-5 font-all font-medium text-xs">
-              johndoe@gmail.com
-            </p>
+            <p className="ml-5 font-all font-medium text-xs">{email}</p>
           </div>
           <div className="flex flex-col items-start w-full justify-start gap-4">
             <p className="font-all font-medium text-sm">Update password</p>

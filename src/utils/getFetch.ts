@@ -52,3 +52,14 @@ export async function getGoogleUserInfo(token: CredentialResponse) {
   const response = await request.json();
   return response;
 }
+
+export async function userLogIn(email: string, password: string) {
+  const request = await fetch("https://baronde.onrender.com/user/v1/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+  return await request.json();
+}

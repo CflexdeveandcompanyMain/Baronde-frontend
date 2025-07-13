@@ -17,11 +17,11 @@ interface AuthState {
   ) => void;
   setOtp: (otp: string) => void;
   setOtpId: (otp: string) => void;
-  verifyOtp: (inputOtp: string) => boolean;
+  verifyOtp: () => void;
   reset: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set, get) => ({
+export const useAuthStore = create<AuthState>((set) => ({
   id: "",
   name: "",
   email: "",
@@ -41,13 +41,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ otpid });
   },
 
-  verifyOtp: (inputOtp) => {
-    const { otp } = get();
-    const isVerified = otp === inputOtp;
-    if (isVerified) {
-      set({ isVerified: true });
-    }
-    return isVerified;
+  verifyOtp: () => {
+    set({ isVerified: true });
   },
 
   reset: () => {

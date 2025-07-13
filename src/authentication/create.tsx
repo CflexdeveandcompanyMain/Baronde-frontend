@@ -17,7 +17,7 @@ export default function UserCreateAccount() {
 
   let navigate = useNavigate();
   let [trigger, setTrigger] = useState(false);
-  let { setOtpId, setCredentials } = useAuthStore();
+  let { setOtpId, setCredentials, verifyOtp } = useAuthStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -37,10 +37,14 @@ export default function UserCreateAccount() {
 
   useEffect(() => {
     let timeOut: number;
+
     if (status === "success" && data && data.otpId) {
-      console.log(data);
       setOtpId(data.otpId);
+
       setCredentials(name, email, password, "");
+
+      verifyOtp();
+
       timeOut = setTimeout(() => navigate("/code"), 1000);
     }
     if (status == "error") console.log(error);
@@ -48,7 +52,6 @@ export default function UserCreateAccount() {
   }, [status]);
 
   const handleSubmit = () => {
-    console.log(name, email, password);
     if (name && email && password) setTrigger(true);
   };
 

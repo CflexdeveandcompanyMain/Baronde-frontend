@@ -1,11 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { bdm } from "../index";
 import { GoogleLogin } from "@react-oauth/google";
-import { Link } from "react-router-dom";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { EyeIcon, EyeOffIcon, LoaderCircleIcon } from "lucide-react";
+import { userLogIn } from "../utils/getFetch";
+import { useQuery } from "@tanstack/react-query";
+import { useAuthStore } from "../store/user";
 
 export default function UserSignInInterface() {
   let [viewPassword, setViewPassword] = useState<boolean>(false);
+  let [userInfo, setUserInfo] = useState({
+    email: "",
+    password: "",
+  });
+  let [trigger, setTrigger] = useState(false);
+
+  let navigate = useNavigate();
+
+  let { setCredentials, verifyOtp } = useAuthStore();
+
+  const { status, data, error } = useQuery({
+    queryKey: ["getOTP", "create temp user"],
+    queryFn: () => userLogIn(userInfo.email, userInfo.password),
+    enabled: trigger,
+  });
+
+  useEffect(() => {
+    if (status === "success" && data && data.user) {
+      let { name, email, id } = data.user;
+      setCredentials(name, email, "", id);
+      verifyOtp();
+      navigate("/");
+    }
+
+    if (status === "error") console.log(error);
+  }, [status]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setUserInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
       <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
@@ -29,6 +68,8 @@ export default function UserSignInInterface() {
             <p className="font-medium text-sm text-start font-all">Email</p>
             <input
               type="text"
+              onChange={handleChange}
+              name="email"
               className="rounded-sm shadow outline-0 border font-all text-sm border-stone-700 p-2"
               placeholder="e.g johndoe@xyz.com"
             />
@@ -37,7 +78,9 @@ export default function UserSignInInterface() {
             <p className="font-medium text-sm text-start font-all">Password</p>
             <div className="flex flex-row items-center w-full border text-sm border-stone-700 rounded-sm shadow">
               <input
+                name="password"
                 type={viewPassword ? "text" : "password"}
+                onChange={handleChange}
                 className="w-full outline-0 p-2 font-all"
                 placeholder="* * * * * * *"
               />
@@ -66,16 +109,21 @@ export default function UserSignInInterface() {
             </Link>
           </div>
           <button
+            onClick={() => setTrigger(true)}
             type="button"
-            className="p-3 bg-green-700 rounded-sm shadow w-full font-all font-normal text-white"
+            className="p-3 bg-green-700 rounded-sm shadow w-full justify-center font-all font-normal text-white"
           >
-            Sign In
+            {trigger && status === "pending" ? (
+              <LoaderCircleIcon className="animate-spin" size={16} />
+            ) : (
+              "Sign in"
+            )}
           </button>
           <div className="w-full flex justify-end">
             <p className="font-all text-xs text-end font-normal">
               Don't have an account?
               <Link to={"/signup"}>
-                <span className="text-orange-400">sign up</span>
+                <span className="text-orange-400"> sign up</span>
               </Link>
             </p>
           </div>
