@@ -1,3 +1,4 @@
+import Footer from "../../footer/footer";
 import MainPageNavbar from "./navbar";
 
 export default function Testimonial() {
@@ -80,6 +81,7 @@ export default function Testimonial() {
           </section>
         </div>
       </section>
+      <Footer />
     </>
   );
 }
