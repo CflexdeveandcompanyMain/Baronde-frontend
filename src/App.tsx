@@ -15,6 +15,8 @@ import UserOrderHistory from "./user/order";
 import Testimonial from "./mainpage/navbar/testimonial";
 import ShoppingCartSystem from "./cart/cartpage";
 import { ToastContainer } from "react-toastify";
+import ForgetCode from "./authentication/codeforget";
+import NewPassword from "./authentication/newpassword";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +39,8 @@ export default function App() {
         <Route path={"/order"} element={<UserOrderHistory />} />
         <Route path={"/testimonial"} element={<Testimonial />} />
         <Route path={"/cart"} element={<ShoppingCartSystem />} />
+        <Route path={"/forgetcode"} element={<ForgetCode />} />
+        <Route path={"/newpassword"} element={<NewPassword />} />
       </Routes>
     </QueryClientProvider>
   );

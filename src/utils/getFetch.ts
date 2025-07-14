@@ -82,3 +82,23 @@ export async function requestOtp(email: string) {
   console.log(request.status);
   return await request.json();
 }
+
+export async function resetPassword(
+  email: string,
+  otp: string,
+  otpId: string,
+  password: string
+) {
+  const request = await fetch(
+    "https://baronde.onrender.com/user/v1/new-password",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, otp, otpId, password }),
+    }
+  );
+  console.log(request.status);
+  return await request.json();
+}

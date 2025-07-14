@@ -1,44 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
 import { bdm } from "..";
-import { requestOtp } from "../utils/getFetch";
+import { resetPassword } from "../utils/getFetch";
 import { useState } from "react";
 import { useAuthStore } from "../store/user";
 import ErrorMessage from "../utils/errorMessage";
 import { LoaderCircleIcon } from "lucide-react";
 
-export default function ForgotPassword() {
-  let [Email, setEmail] = useState("");
+export default function NewPassword() {
+  let [newpassword, setNewPassword] = useState("");
   let [message, setMessage] = useState("");
   let [error, setError] = useState("");
   let [loading, setLoading] = useState(true);
-  let { setOtpId, email, name, password, otpid, setCredentials } =
-    useAuthStore();
+  let { email, otp, otpid } = useAuthStore();
   let [trigger, setTrigger] = useState(false);
 
   let navigate = useNavigate();
 
   const fetchData = async () => {
     try {
-      const result = await requestOtp(Email);
+      const result = await resetPassword(email, otp, otpid, newpassword);
       console.log(result);
 
-      if (!result.otpId && result.message) {
+      if (result.message === "Password updated successfully") {
         setMessage(result.message);
-
-        setTimeout(() => setMessage(""), 7000);
+        setTimeout(() => navigate("/signin"), 1000);
       } else {
-        if (result.otpId && result.message) {
-          let { otpId, message } = result;
-
-          setMessage(message);
-
-          setOtpId(otpId);
-
-          setCredentials(name, email, password, "");
-
-          console.log(email, otpid);
-          navigate("/forgetcode");
-        }
+        setMessage(message);
+        setTimeout(() => navigate("/signup"), 2000);
       }
     } catch (err: any) {
       if (err.name !== "AbortError") {
@@ -63,20 +51,21 @@ export default function ForgotPassword() {
         </div>
         <div className="flex flex-col items-start w-full justify-start p-2 my-1.5">
           <p className="font-all font-semibold text-lg text-start w-full">
-            Forgot Password
+            Reset password
           </p>
           <small className="font-all font-medium text-stone-600 text-xs text-start w-full">
-            Enter your email and we'll send you a verification code to reset
-            your password
+            Enter your new password.
           </small>
         </div>
         <div className="flex flex-col items-center w-full gap-2.5 p-2">
           <div className="flex flex-col w-full gap-2">
-            <p className="font-medium text-sm text-start font-all">Email</p>
+            <p className="font-medium text-sm text-start font-all">
+              New password
+            </p>
             <input
               type="text"
               onChange={(e) => {
-                setEmail(e.target.value);
+                setNewPassword(e.target.value);
                 setTrigger(false);
               }}
               className="rounded-sm shadow outline-0 border font-all text-sm border-stone-700 p-2"
@@ -97,7 +86,7 @@ export default function ForgotPassword() {
                 size={16}
               />
             ) : (
-              "Send code"
+              "Reset password"
             )}
           </button>
           <div className="w-full flex flex-row items-center justify-between">

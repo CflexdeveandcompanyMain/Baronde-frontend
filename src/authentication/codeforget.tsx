@@ -1,25 +1,23 @@
 import { useRef, useState } from "react";
 import { bdm } from "..";
 import { useAuthStore } from "../store/user";
-import { createUser } from "../utils/getFetch";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function VerifyCode() {
-  const [otp, setOtp] = useState(Array(5).fill(""));
+export default function ForgetCode() {
+  const [otp, setOTP] = useState(Array(5).fill(""));
   const inputsRef: any = useRef<HTMLInputElement[] | null[]>([]);
-  const [newPassword, setNewPassword] = useState("");
 
   let [trigger, setTrigger] = useState(false);
 
   let navigate = useNavigate();
 
-  let { name, email, password, otpid, setCredentials } = useAuthStore();
+  let { name, email, password, otpid, setOtp } = useAuthStore();
 
   const handleChange = (value: string, index: number) => {
     if (!/^[0-9]?$/.test(`${value}`)) return;
     const newOtp = [...otp];
     newOtp[index] = value;
-    setOtp(newOtp);
+    setOTP(newOtp);
     if (value && index < 4) {
       inputsRef.current[index + 1].focus();
     }
@@ -35,23 +33,21 @@ export default function VerifyCode() {
     console.log(name, email, password, otpid, otp.join(""));
     if (otpid && otp.join("")) {
       setTrigger(true);
-      const result = await createUser(
-        name,
-        email,
-        password,
-        otp.join(""),
-        otpid
-      );
-      if (result.user) {
-        let { name, email, id } = result;
-        localStorage.setItem(
-          "baron:user",
-          JSON.stringify({ name, email, isVerified: true })
-        );
-        setCredentials(name, email, password, id);
-        navigate("/");
-      }
-      console.log(result);
+
+      setOtp(otp.join(""));
+
+      navigate("/newpassword");
+
+      //   if (result.user) {
+      //     let { name, email, id } = result;
+      //     localStorage.setItem(
+      //       "baron:user",
+      //       JSON.stringify({ name, email, isVerified: true })
+      //     );
+      //     setCredentials(name, email, password, id);
+      //     navigate("/");
+      //   }
+      //   console.log(result);
     }
   };
 
