@@ -1,9 +1,27 @@
 import { useParams } from "react-router-dom";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
+import { getFetch } from "../utils/getFetch";
+import { useEffect, useState } from "react";
+import ProductAuthCard from "./product";
 
 export default function ProductPage() {
   let parameter = useParams();
+  let [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await getFetch("http://localhost:3000/drum");
+        console.log(result);
+        if (result.drum) setData(result.drum);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -29,6 +47,16 @@ export default function ProductPage() {
               <p className="font-all text-xs text-start w-full">
                 showing 1 - 24 of 35 products
               </p>
+            </div>
+            <div className="w-full p-3 grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1">
+              {data.map((item: any, index: number) => {
+                return (
+                  <div key={index} className="w-full">
+                    <p>Martins</p>
+                    <ProductAuthCard data={item} />
+                  </div>
+                );
+              })}
             </div>
           </section>
         </div>

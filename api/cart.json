@@ -1,26 +1,30 @@
 {
   "drum": [
     {
-      "id": "item2",
+      "id": 1,
       "category": "drum",
       "image": [
+        "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+        "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
         "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png"
       ],
       "name": "Purple drum",
       "description": "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
       "price": 300000,
-      "quantity": 1
+      "quantity": 3
     },
     {
-      "id": "item3",
+      "id": 2,
       "category": "drum",
       "image": [
-        "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301050/d2_dkqdvo.png"
+        "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+        "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+        "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png"
       ],
       "name": "Gold drum",
       "description": "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
       "price": 300000,
-      "quantity": 1
+      "quantity": 3
     }
   ]
 }
