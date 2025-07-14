@@ -11,7 +11,7 @@ export default function ForgetCode() {
 
   let navigate = useNavigate();
 
-  let { name, email, password, otpid, setOtp } = useAuthStore();
+  let { otpid, setOtp } = useAuthStore();
 
   const handleChange = (value: string, index: number) => {
     if (!/^[0-9]?$/.test(`${value}`)) return;
@@ -30,24 +30,12 @@ export default function ForgetCode() {
   };
 
   const handleSubmit = async () => {
-    console.log(name, email, password, otpid, otp.join(""));
     if (otpid && otp.join("")) {
       setTrigger(true);
 
       setOtp(otp.join(""));
 
       navigate("/newpassword");
-
-      //   if (result.user) {
-      //     let { name, email, id } = result;
-      //     localStorage.setItem(
-      //       "baron:user",
-      //       JSON.stringify({ name, email, isVerified: true })
-      //     );
-      //     setCredentials(name, email, password, id);
-      //     navigate("/");
-      //   }
-      //   console.log(result);
     }
   };
 

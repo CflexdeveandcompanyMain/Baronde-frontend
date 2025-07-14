@@ -17,6 +17,7 @@ import ShoppingCartSystem from "./cart/cartpage";
 import { ToastContainer } from "react-toastify";
 import ForgetCode from "./authentication/codeforget";
 import NewPassword from "./authentication/newpassword";
+import ProductPage from "./dynamic/productpage";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ export default function App() {
         <Route path={"/cart"} element={<ShoppingCartSystem />} />
         <Route path={"/forgetcode"} element={<ForgetCode />} />
         <Route path={"/newpassword"} element={<NewPassword />} />
+        <Route path={"/product/:category"} element={<ProductPage />} />
       </Routes>
     </QueryClientProvider>
   );

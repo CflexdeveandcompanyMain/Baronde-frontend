@@ -188,6 +188,7 @@ export default function MainPageNavbar() {
                   className={`${
                     drop ? "rotate-180" : "rotate-360"
                   } duration-300`}
+                  size={12}
                 />
               </div>
               <button
@@ -220,7 +221,7 @@ export default function MainPageNavbar() {
                 </p>
                 <ChevronDownIcon
                   className={`${
-                    drop ? "rotate-180" : "rotate-360"
+                    down ? "rotate-180" : "rotate-360"
                   } duration-300`}
                   size={12}
                 />

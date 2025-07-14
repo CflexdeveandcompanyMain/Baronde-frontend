@@ -24,6 +24,8 @@ export default function VerifyCode() {
     }
   };
 
+  const inputComplete = otp.every((item) => item !== "");
+
   const handleKeyDown = (e: any, index: number) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputsRef.current[index - 1].focus();
@@ -42,7 +44,7 @@ export default function VerifyCode() {
         otpid
       );
       if (result.user) {
-        let { name, email, id } = result;
+        let { name, email, id } = result.user;
         localStorage.setItem(
           "baron:user",
           JSON.stringify({ name, email, isVerified: true })
@@ -98,11 +100,11 @@ export default function VerifyCode() {
           </p>
         </div>
         <button
-          disabled={trigger}
+          disabled={trigger && inputComplete}
           onClick={handleSubmit}
           type="button"
           className={`p-3 ${
-            trigger ? "bg-green-800/30" : "bg-green-800"
+            trigger ? "bg-[#D4D4D4]" : "bg-green-800"
           } rounded-sm shadow justify-center w-full font-all font-normal text-white`}
         >
           Send code

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/priceconverter";
 
 export default function MainPageHero() {
+  let { isVerified } = JSON.parse(localStorage.getItem("baron:user") || "");
   return (
     <section className="flex flex-col items-center w-full bg-slate-100/50">
       <div className="w-full h-[180px] sm:h-auto max-h-[500px]">
@@ -104,7 +105,11 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               New Speaker Arrival
             </p>
-            <Link to={"/"} className="w-full">
+            <Link
+              onClick={(e) => (!isVerified ? e.preventDefault() : {})}
+              to={"/product/new-speaker"}
+              className="w-full"
+            >
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>
@@ -119,7 +124,7 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Single sub
             </p>
-            <Link to={"/"} className="w-full">
+            <Link to={"/product/single-sub"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>
@@ -134,7 +139,7 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Double sub
             </p>
-            <Link to={"/"} className="w-full">
+            <Link to={"/product/double-sub"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>
@@ -149,7 +154,7 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Amplifier
             </p>
-            <Link to={"/"} className="w-full">
+            <Link to={"/product/amplifier"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>
@@ -164,14 +169,14 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Flat Mixers
             </p>
-            <Link to={"/"} className="w-full">
+            <Link to={"/product/flatmixer"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="flatmixer" />
+            <HeroProductCard category="flat-mixer" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
@@ -179,7 +184,7 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Floor Mixers
             </p>
-            <Link to={"/"} className="w-full">
+            <Link to={"/product/floor-mixer"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>
@@ -194,7 +199,7 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Equalizers
             </p>
-            <Link to={"/"} className="w-full">
+            <Link to={"/product/equalizer"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>
@@ -209,7 +214,7 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Line Arrays
             </p>
-            <Link to={"/"} className="w-full">
+            <Link to={"/product/line-array"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>
@@ -224,7 +229,7 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Microphones
             </p>
-            <Link to={"/"} className="w-full">
+            <Link to={"/product/microphone"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>

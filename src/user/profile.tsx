@@ -1,13 +1,12 @@
 import { useState } from "react";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import { nigerianStates } from "./data";
-import { useAuthStore } from "../store/user";
 
 export default function UserProfile() {
   let [state, setstate] = useState("Abia");
   let [drop, setdrop] = useState(false);
 
-  let { name, email } = useAuthStore();
+  let { name, email } = JSON.parse(localStorage.getItem("baron:user") || "");
 
   console.log(state);
   return (
