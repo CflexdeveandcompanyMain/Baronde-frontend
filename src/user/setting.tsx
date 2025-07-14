@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import { Bell, Fingerprint, LogOut, ShoppingBag } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function UserSetting() {
   const [settings, setSettings] = useState<any>({
@@ -8,6 +9,8 @@ export default function UserSetting() {
     product: false,
     login: true,
   });
+
+  let navigate = useNavigate();
 
   const settingsConfig = [
     {
@@ -88,7 +91,16 @@ export default function UserSetting() {
               })}
             </div>
           </section>
-          <div className="flex flex-row items-center gap-2">
+          <div
+            onClick={() => {
+              localStorage.setItem(
+                "baron:user",
+                JSON.stringify({ name: "", email: "", isVerified: false })
+              );
+              navigate("/");
+            }}
+            className="flex flex-row items-center gap-2 cursor-pointer"
+          >
             <p className="font-medium text-lg text-start w-full text-red-600">
               Log out
             </p>

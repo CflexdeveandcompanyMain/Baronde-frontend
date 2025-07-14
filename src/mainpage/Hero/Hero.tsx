@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/priceconverter";
 
 export default function MainPageHero() {
-  let { isVerified } = JSON.parse(localStorage.getItem("baron:user") || "");
+  let { isVerified } = JSON.parse(localStorage.getItem("baron:user") || "{}");
   return (
     <section className="flex flex-col items-center w-full bg-slate-100/50">
       <div className="w-full h-[180px] sm:h-auto max-h-[500px]">

@@ -83,7 +83,7 @@ export default function MainPageNavbar() {
             <div className="flex flex-col items-center relative cursor-pointer">
               <div
                 className="hidden sm:flex flex-col items-center gap-1.5"
-                onClick={() => setAcctDrop(!acctdrop)}
+                onClick={() => setAcctDrop(!drop)}
               >
                 <p className="font-all font-medium text-xs text-center text-white">
                   {name ?? "Anonymous"}
@@ -94,7 +94,7 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onBlur={() => setAcctDrop(false)}
+                onBlur={() => setAcctDrop(!drop)}
                 type={"button"}
                 className={`${
                   acctdrop ? "flex" : "hidden"
@@ -113,7 +113,7 @@ export default function MainPageNavbar() {
                   My orders
                 </Link>
                 <Link
-                  to={"/setting"}
+                  to={"/settings"}
                   className="text-sm text-start cursor-pointer"
                 >
                   settings

@@ -1,20 +1,49 @@
 import { useParams } from "react-router-dom";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
-import { getFetch } from "../utils/getFetch";
+// import { getFetch } from "../utils/getFetch";
 import { useEffect, useState } from "react";
 import ProductAuthCard from "./product";
 
+const drum = [
+  {
+    id: 1,
+    category: "drum",
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+    ],
+    name: "Purple drum",
+    description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
+    price: 300000,
+    quantity: 3,
+  },
+  {
+    id: 2,
+    category: "drum",
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+    ],
+    name: "Gold drum",
+    description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
+    price: 300000,
+    quantity: 3,
+  },
+];
+
 export default function ProductPage() {
   let parameter = useParams();
-  let [data, setData] = useState([]);
+  let [data, setData] = useState(drum);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await getFetch("http://localhost:3000/drum");
+        const result = await Promise.resolve(drum); //getFetch("http://localhost:3000/drum");
         console.log(result);
-        if (result.drum) setData(result.drum);
+        if (result) setData(result);
       } catch (error) {
         console.log(error);
       }
@@ -52,7 +81,7 @@ export default function ProductPage() {
               {data.map((item: any, index: number) => {
                 return (
                   <div key={index} className="w-full">
-                    <p>Martins</p>
+                    <p>{item.name}</p>
                     <ProductAuthCard data={item} />
                   </div>
                 );
