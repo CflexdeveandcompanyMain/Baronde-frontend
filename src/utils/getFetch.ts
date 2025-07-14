@@ -20,6 +20,7 @@ export async function getOTP(name: string, email: string) {
     }
   );
   const response = await request.json();
+  console.log(response);
   return response;
 }
 
@@ -38,6 +39,7 @@ export async function createUser(
     body: JSON.stringify({ name, email, password, otp, otpId }),
   });
   const response = await request.json();
+  console.log(response);
   return response;
 }
 
@@ -50,6 +52,7 @@ export async function getGoogleUserInfo(token: CredentialResponse) {
     body: JSON.stringify({ token }),
   });
   const response = await request.json();
+  console.log(response);
   return response;
 }
 
@@ -61,5 +64,21 @@ export async function userLogIn(email: string, password: string) {
     },
     body: JSON.stringify({ email, password }),
   });
+  console.log(request.status);
+  return await request.json();
+}
+
+export async function requestOtp(email: string) {
+  const request = await fetch(
+    "https://baronde.onrender.com/user/v1/request-resetpassword-otp",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    }
+  );
+  console.log(request.status);
   return await request.json();
 }

@@ -1,7 +1,55 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { bdm } from "..";
+import { requestOtp } from "../utils/getFetch";
+import { useState } from "react";
+import { useAuthStore } from "../store/user";
+import ErrorMessage from "../utils/errorMessage";
+import { LoaderCircleIcon } from "lucide-react";
 
 export default function ForgotPassword() {
+  let [Email, setEmail] = useState("");
+  let [message, setMessage] = useState("");
+  let [error, setError] = useState("");
+  let [loading, setLoading] = useState(true);
+  let { setOtpId, email, otpid, setCredentials } = useAuthStore();
+  let [trigger, setTrigger] = useState(false);
+
+  let navigate = useNavigate();
+
+  const fetchData = async () => {
+    try {
+      const result = await requestOtp(Email);
+      console.log(result);
+
+      if (!result.otpId && result.message) {
+        setMessage(result.message);
+
+        setTimeout(() => setMessage(""), 7000);
+      } else {
+        if (result.otpId && result.message) {
+          let { otpId, message } = result;
+
+          setMessage(message);
+
+          setOtpId(otpId);
+
+          setCredentials("", email, "", "");
+
+          console.log(email, otpid);
+          navigate("/code");
+        }
+      }
+    } catch (err: any) {
+      if (err.name !== "AbortError") {
+        setError(err.message || "Unknown error");
+
+        console.log(error);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
       <section className="w-full bg-white self-start mt-[10%] sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
@@ -26,17 +74,33 @@ export default function ForgotPassword() {
             <p className="font-medium text-sm text-start font-all">Email</p>
             <input
               type="text"
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setTrigger(false);
+              }}
               className="rounded-sm shadow outline-0 border font-all text-sm border-stone-700 p-2"
               placeholder="e.g johndoe@xyz.com"
             />
           </div>
           <button
+            onClick={async () => {
+              setTrigger(true);
+              await fetchData();
+            }}
             type="button"
-            className="p-3 bg-green-700 rounded-sm shadow w-full font-all font-normal text-white"
+            className={`p-3 bg-[#008236] rounded-sm shadow w-full justify-center flex font-all font-normal text-white`}
           >
-            Send code
+            {trigger && loading ? (
+              <LoaderCircleIcon
+                className="animate-spin text-center"
+                size={16}
+              />
+            ) : (
+              "Send code"
+            )}
           </button>
-          <div className="w-full flex justify-end">
+          <div className="w-full flex flex-row items-center justify-between">
+            <ErrorMessage message={message} />
             <p className="font-all text-xs text-end font-normal">
               Already have an account?
               <Link to={"/signin"}>

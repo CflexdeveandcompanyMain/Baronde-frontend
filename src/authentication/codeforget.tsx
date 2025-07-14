@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function VerifyCode() {
   const [otp, setOtp] = useState(Array(5).fill(""));
   const inputsRef: any = useRef<HTMLInputElement[] | null[]>([]);
+  const [newPassword, setNewPassword] = useState("");
 
   let [trigger, setTrigger] = useState(false);
 

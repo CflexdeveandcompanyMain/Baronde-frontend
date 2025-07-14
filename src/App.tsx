@@ -13,12 +13,15 @@ import ShippingPolicy from "./misc/shipping";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserOrderHistory from "./user/order";
 import Testimonial from "./mainpage/navbar/testimonial";
+import ShoppingCartSystem from "./cart/cartpage";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/signup" element={<UserCreateAccount />} />
@@ -33,6 +36,7 @@ export default function App() {
         <Route path={"/shipping"} element={<ShippingPolicy />} />
         <Route path={"/order"} element={<UserOrderHistory />} />
         <Route path={"/testimonial"} element={<Testimonial />} />
+        <Route path={"/cart"} element={<ShoppingCartSystem />} />
       </Routes>
     </QueryClientProvider>
   );

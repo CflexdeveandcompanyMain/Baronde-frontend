@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { bdm } from "../index";
 import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { getGoogleUserInfo, getOTP } from "../utils/getFetch";
 import { useAuthStore } from "../store/user";
 import { EyeIcon, EyeOffIcon, LoaderCircleIcon } from "lucide-react";
+import ErrorMessage from "../utils/errorMessage";
 
 export default function UserCreateAccount() {
   let [viewPassword, setViewPassword] = useState<boolean>(false);
@@ -17,6 +17,9 @@ export default function UserCreateAccount() {
 
   let navigate = useNavigate();
   let [trigger, setTrigger] = useState(false);
+  let [message, setMessage] = useState("");
+  let [error, setError] = useState("");
+  let [loading, setLoading] = useState(true);
   let { setOtpId, setCredentials, verifyOtp } = useAuthStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,32 +30,47 @@ export default function UserCreateAccount() {
     }));
   };
 
-  const { status, data, error } = useQuery({
-    queryKey: ["getOTP", "create temp user"],
-    queryFn: () => getOTP(userInfo.name, userInfo.email),
-    enabled: trigger,
-  });
-
   let { name, email, password } = userInfo;
 
-  useEffect(() => {
-    let timeOut: number;
+  const fetchData = async () => {
+    try {
+      const result = await getOTP(userInfo.name, userInfo.email);
 
-    if (status === "success" && data && data.otpId) {
-      setOtpId(data.otpId);
+      if (!result.otpId && result.message) {
+        setMessage(result.message);
 
-      setCredentials(name, email, password, "");
+        setTimeout(() => setMessage(""), 5000);
+      } else {
+        if (result.message.startsWith("OTP has been")) {
+          setOtpId(result.otpId);
 
-      verifyOtp();
+          if (name && email && password)
+            setCredentials(name, email, password, "");
 
-      timeOut = setTimeout(() => navigate("/code"), 1000);
+          verifyOtp();
+
+          setTimeout(() => navigate("/code"), 1000);
+
+          return;
+        }
+        setMessage("");
+      }
+    } catch (err: any) {
+      if (err.name !== "AbortError") {
+        setError(err.message || "Unknown error");
+
+        console.log(error);
+      }
+    } finally {
+      setLoading(false);
     }
-    if (status == "error") console.log(error);
-    return () => clearTimeout(timeOut);
-  }, [status]);
+  };
 
-  const handleSubmit = () => {
-    if (name && email && password) setTrigger(true);
+  const handleSubmit = async () => {
+    if (name && email && password) {
+      setTrigger(true);
+      await fetchData();
+    }
   };
 
   const sendUserToken = (token: CredentialResponse) => {
@@ -124,13 +142,16 @@ export default function UserCreateAccount() {
               </div>
             </div>
           </div>
+          <div className="flex justify-start w-full">
+            <ErrorMessage message={message} />
+          </div>
           <button
             onClick={handleSubmit}
             type="button"
-            disabled={trigger && status === "pending"}
+            disabled={trigger && loading}
             className="p-3 bg-green-700 rounded-sm shadow w-full font-all font-normal flex justify-center text-white"
           >
-            {trigger && status === "pending" ? (
+            {trigger && loading ? (
               <LoaderCircleIcon className="animate-spin" size={16} />
             ) : (
               "Create account"
@@ -150,11 +171,13 @@ export default function UserCreateAccount() {
             <div className="h-[1px] bg-black/30 w-1/2 self-center"></div>
           </div>
         </div>
-        <GoogleLogin
-          width={"100%"}
-          onSuccess={(token) => sendUserToken(token)}
-          onError={() => console.log("error")}
-        />
+        <div className="w-full justify-center">
+          <GoogleLogin
+            width={"100%"}
+            onSuccess={(token) => sendUserToken(token)}
+            onError={() => console.log("error")}
+          />
+        </div>
         <div className="flex flex-row items-center self-start my-2 gap-2 justify-between sm:w-1/3 mx-0 w-1/2">
           <Link to={"/policy"} className="font-all text-xs">
             Privacy policy

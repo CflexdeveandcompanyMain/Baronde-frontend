@@ -1,43 +1,65 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { bdm } from "../index";
 import { GoogleLogin } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeOffIcon, LoaderCircleIcon } from "lucide-react";
 import { userLogIn } from "../utils/getFetch";
-import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "../store/user";
+import ErrorMessage from "../utils/errorMessage";
 
 export default function UserSignInInterface() {
   let [viewPassword, setViewPassword] = useState<boolean>(false);
+  let [loading, setLoading] = useState<boolean>(true);
+  let [error, setError] = useState<string>("");
+  let [message, setMessage] = useState<string>("");
   let [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
+  let [lock, setLock] = useState(false);
   let [trigger, setTrigger] = useState(false);
 
   let navigate = useNavigate();
 
   let { setCredentials, verifyOtp } = useAuthStore();
 
-  const { status, data, error } = useQuery({
-    queryKey: ["getOTP", "create temp user"],
-    queryFn: () => userLogIn(userInfo.email, userInfo.password),
-    enabled: trigger,
-  });
+  const fetchData = async () => {
+    try {
+      const result = await userLogIn(userInfo.email, userInfo.password);
 
-  useEffect(() => {
-    if (status === "success" && data && data.user) {
-      let { name, email, id } = data.user;
-      setCredentials(name, email, "", id);
-      verifyOtp();
-      navigate("/");
+      if (!result.user && result.message) {
+        setMessage(result.message);
+        if (result.message.startsWith("Account locked")) setLock(true);
+        setTimeout(() => setMessage(""), 5000);
+      } else {
+        let { name, email, id } = result.user;
+        setMessage("");
+        localStorage.setItem(
+          "baron:user",
+          JSON.stringify({ name, email, isVerified: true })
+        );
+        setCredentials(name, email, "", id);
+
+        verifyOtp();
+
+        navigate("/");
+      }
+    } catch (err: any) {
+      if (err.name !== "AbortError") {
+        setError(err.message || "Unknown error");
+
+        console.log(error);
+      }
+    } finally {
+      setLoading(false);
     }
-
-    if (status === "error") console.log(error);
-  }, [status]);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    setTrigger(false);
+    setLoading(true);
 
     setUserInfo((prev) => ({
       ...prev,
@@ -57,7 +79,7 @@ export default function UserSignInInterface() {
         </div>
         <div className="flex flex-col items-start w-full justify-start p-2 my-3">
           <p className="font-all font-semibold text-xl text-start w-full">
-            Welcome Back
+            Welcome back
           </p>
           <small className="font-all font-medium text-stone-600 text-base text-start w-full">
             Hey!, good to see you again
@@ -101,7 +123,8 @@ export default function UserSignInInterface() {
               </div>
             </div>
           </div>
-          <div className="w-full flex justify-end">
+          <div className="w-full flex justify-between">
+            <ErrorMessage message={message} />
             <Link to={"/forgot"}>
               <span className="font-all text-xs text-end font-normal text-orange-400">
                 Forgot Password?
@@ -109,12 +132,21 @@ export default function UserSignInInterface() {
             </Link>
           </div>
           <button
-            onClick={() => setTrigger(true)}
+            onClick={async () => {
+              setTrigger(true);
+              await fetchData();
+            }}
+            disabled={lock}
             type="button"
-            className="p-3 bg-green-700 rounded-sm shadow w-full justify-center font-all font-normal text-white"
+            className={`p-3 ${
+              lock ? "bg-[#D4D4D4]" : "bg-[#008236]"
+            } rounded-sm shadow w-full justify-center flex font-all font-normal text-white`}
           >
-            {trigger && status === "pending" ? (
-              <LoaderCircleIcon className="animate-spin" size={16} />
+            {trigger && loading ? (
+              <LoaderCircleIcon
+                className="animate-spin text-center"
+                size={16}
+              />
             ) : (
               "Sign in"
             )}

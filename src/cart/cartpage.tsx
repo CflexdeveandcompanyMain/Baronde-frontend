@@ -1,3 +1,3 @@
-export default function CartPage() {
+export default function ShoppingCartSystem() {
   return <></>;
 }

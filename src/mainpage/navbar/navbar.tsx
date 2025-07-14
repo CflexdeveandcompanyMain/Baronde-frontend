@@ -11,13 +11,14 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from "lucide-react";
-import { useAuthStore } from "../../store/user";
 
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
   let { setShowCartDesktop } = useGlobalState();
   let navigate = useNavigate();
-  let { isVerified } = useAuthStore();
+  let { name, isVerified } = JSON.parse(
+    localStorage.getItem("baron:user") || "{}"
+  );
 
   const handleCartClick = () => {
     document.body.clientWidth > 640 ? setShowCartDesktop() : navigate("/cart");
@@ -85,7 +86,7 @@ export default function MainPageNavbar() {
                 onClick={() => setAcctDrop(!acctdrop)}
               >
                 <p className="font-all font-medium text-xs text-center text-white">
-                  Login/SignUp
+                  {name ?? "Anonymous"}
                 </p>
                 <p className="font-all font-medium text-xs text-center text-white">
                   My account
