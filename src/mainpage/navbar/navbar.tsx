@@ -145,7 +145,11 @@ export default function MainPageNavbar() {
             </Link>
           )}
           <SearchIcon className="text-white sm:hidden flex" />
-          <UserIcon className="text-white sm:hidden flex" />
+          <UserIcon
+            className={`${
+              isVerified ? "hidden" : "flex"
+            } text-white sm:hidden flex`}
+          />
           <div className="relative">
             <ShoppingCartIcon
               onClick={handleCartClick}
@@ -193,27 +197,29 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onBlur={() => setdrop(false)}
+                onBlur={() => setdrop(!drop)}
                 type={"button"}
                 className={`${
                   drop ? "flex" : "hidden"
                 } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
               >
                 {brand.map((item, index) => {
+                  console.log(item.replaceAll(" ", "-"));
                   return (
-                    <p
+                    <Link
+                      to={"/product/"}
                       className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
                       key={index}
                     >
                       {item}
-                    </p>
+                    </Link>
                   );
                 })}
               </button>
             </div>
             <div className="flex flex-col items-center relative">
               <div
-                onClick={() => setdown(!down)}
+                onClick={() => setdown(!drop)}
                 className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
               >
                 <p className="font-all text-sm font-medium text-center">
@@ -228,7 +234,7 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onBlur={() => setdown(false)}
+                onBlur={() => setdown(!down)}
                 type={"button"}
                 className={`${
                   down ? "flex" : "hidden"
@@ -236,12 +242,13 @@ export default function MainPageNavbar() {
               >
                 {products.map((item, index) => {
                   return (
-                    <p
+                    <Link
+                      to={"/product/" + item.replaceAll(" ", "-").toLowerCase()}
                       className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
                       key={index}
                     >
                       {item}
-                    </p>
+                    </Link>
                   );
                 })}
               </button>

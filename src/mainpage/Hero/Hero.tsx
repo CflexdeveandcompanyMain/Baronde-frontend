@@ -169,14 +169,14 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
               Flat Mixers
             </p>
-            <Link to={"/product/flatmixer"} className="w-full">
+            <Link to={"/product/flat-mixer"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>
             </Link>
           </div>
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="flat-mixer" />
+            <HeroProductCard category="flatmixer" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
