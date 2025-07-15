@@ -1,61 +1,6 @@
-import {
-  am1,
-  am2,
-  am3,
-  am4,
-  am5,
-  c1,
-  d1,
-  d2,
-  d3,
-  ds1,
-  ds2,
-  ds3,
-  ds4,
-  ds5,
-  e1,
-  e2,
-  e3,
-  e4,
-  e5,
-  fm1,
-  fm2,
-  fm3,
-  fm4,
-  fm5,
-  frm1,
-  frm2,
-  frm3,
-  frm4,
-  frm5,
-  frs1,
-  frs2,
-  frs3,
-  frs4,
-  frs5,
-  la1,
-  la2,
-  la3,
-  la4,
-  la5,
-  m1,
-  m2,
-  m3,
-  nsa1,
-  nsa2,
-  nsa3,
-  nsa4,
-  nsa5,
-  ss1,
-  ss2,
-  ss3,
-  ss4,
-  ss5,
-} from "../..";
-
 interface HeroDataType {
   category: string;
-  image: string;
+  image: string[];
   name: string;
   description: string;
   price: number;
@@ -64,21 +9,27 @@ interface HeroDataType {
 export let HeroData: HeroDataType[] = [
   {
     category: "fullrangespeaker",
-    image: frs1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576523/Amplifier/frs1_cjtnzn.png",
+    ],
     name: "SP-137",
     description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
     price: 1300000,
   },
   {
     category: "fullrangespeaker",
-    image: frs2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576523/Amplifier/frs2_ytcvtf.png",
+    ],
     name: "SP-215GF",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
     price: 1500000,
   },
   {
     category: "fullrangespeaker",
-    image: frs3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576524/Amplifier/frs3_vlhhve.png",
+    ],
     name: "SP-515",
     description:
       "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
@@ -86,14 +37,18 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "fullrangespeaker",
-    image: frs4,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576530/Amplifier/frs4_jdoid2.png",
+    ],
     name: "SP-215GF",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
     price: 1500000,
   },
   {
     category: "fullrangespeaker",
-    image: frs5,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576532/Amplifier/frs5_lm7p54.png",
+    ],
     name: "SP-215GF",
     description:
       "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
@@ -101,35 +56,45 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "newspeakerarrival",
-    image: nsa1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576369/Amplifier/nsa1_bk2obg.png",
+    ],
     name: "SP-227",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Big magnet",
     price: 1500000,
   },
   {
     category: "newspeakerarrival",
-    image: nsa2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576371/Amplifier/nsa2_foup8a.png",
+    ],
     name: "SP-228",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
     price: 2200000,
   },
   {
     category: "newspeakerarrival",
-    image: nsa3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576371/Amplifier/nsa3_w7vehh.png",
+    ],
     name: "SP-229",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
     price: 2400000,
   },
   {
     category: "newspeakerarrival",
-    image: nsa4,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576373/Amplifier/nsa4_fzqvcy.png",
+    ],
     name: "SP-25",
     description: "15 Inch / 2000watt / Pure Acostic / 75.5 coil /Big magnet",
     price: 1100000,
   },
   {
     category: "newspeakerarrival",
-    image: nsa5,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576382/Amplifier/nsa5_lguhka.png",
+    ],
     name: "SP-20",
     description:
       "5 Inch / 2000watt / Pure Acostic body / 99.9 coil / passive speaker",
@@ -137,7 +102,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "singlesub",
-    image: ss1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576056/Amplifier/ss1_vyszzf.png",
+    ],
     name: "SP-18",
     description:
       "18 Inch / 2000watt / ply wood / 99.9 coil /8 Ohms/ Passive sub",
@@ -145,7 +112,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "singlesub",
-    image: ss2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576048/Amplifier/ss2_nglgtx.png",
+    ],
     name: "SP-18GF",
     description:
       "18 Inch / 2000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
@@ -153,7 +122,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "singlesub",
-    image: ss3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576047/Amplifier/ss3_jfomaf.png",
+    ],
     name: "SP-18AX",
     description:
       "18 Inch / 2000watt / Ply wood / 120 coil /8 Ohms/ Passive sub",
@@ -161,7 +132,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "singlesub",
-    image: ss4,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576047/Amplifier/ss4_p4iffy.png",
+    ],
     name: "SP-318",
     description:
       "18 Inch / 2000watt / Pure Acostic / 95.5 coil /8 Ohms/ Passive sub",
@@ -169,7 +142,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "singlesub",
-    image: ss5,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576045/Amplifier/ss5_wdnvxu.png",
+    ],
     name: "SP-18 FX",
     description:
       "18 Inch / 2000watt / Ply wood / 140 coil /8 Ohms/ Passive sub",
@@ -177,7 +152,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "doublesub",
-    image: ds1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573328/Amplifier/ds1_nnw69a.png",
+    ],
     name: "POW-221B",
     description:
       "21 Inch / 5000watt / ply wood / 150 coil /8 Ohms/ Passive sub",
@@ -185,7 +162,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "doublesub",
-    image: ds2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573332/Amplifier/ds2_uevo0u.png",
+    ],
     name: "SP-218 DR",
     description:
       "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
@@ -193,7 +172,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "doublesub",
-    image: ds3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573333/Amplifier/ds3_sgrc7g.png",
+    ],
     name: "SP-218",
     description:
       "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
@@ -201,7 +182,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "doublesub",
-    image: ds4,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573333/Amplifier/ds5_mrotnt.png",
+    ],
     name: "SP-218 CRV",
     description:
       "Doublesub / 18 Inch / 4600watt / plywood / 120 coil /8 Ohms/ Passive sub",
@@ -209,7 +192,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "doublesub",
-    image: ds5,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573338/Amplifier/ds4_wy2diu.png",
+    ],
     name: "SP-218 GF",
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
@@ -217,112 +202,144 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "amplifier",
-    image: am1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572811/Amplifier/am1_q15mxy.png",
+    ],
     name: "SPX7-5000",
     description: "4 channel / 1250watt per channel",
     price: 1500000,
   },
   {
     category: "amplifier",
-    image: am2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572815/Amplifier/am2_vkq9zu.png",
+    ],
     name: "SP4500X",
     description: "2 channel / 4500watt",
     price: 850000,
   },
   {
     category: "amplifier",
-    image: am3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572825/Amplifier/am3_qc4ham.png",
+    ],
     name: "SP4000",
     description: "2 channel / 3500watt",
     price: 450000,
   },
   {
     category: "amplifier",
-    image: am4,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572830/Amplifier/am4_sfsklc.png",
+    ],
     name: "SPX2800S",
     description: "2 channel / 3500watt",
     price: 650000,
   },
   {
     category: "amplifier",
-    image: am5,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572832/Amplifier/am5_z2k3tb.png",
+    ],
     name: "SPX4000S",
     description: "2 channel / 500watt",
     price: 900000,
   },
   {
     category: "flatmixer",
-    image: fm1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575006/Amplifier/fm1_zz5m2e.png",
+    ],
     name: "CM-16",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 1365000,
   },
   {
     category: "flatmixer",
-    image: fm2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575011/Amplifier/fm2_qscpwq.png",
+    ],
     name: "CMX-1642",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
   },
   {
     category: "flatmixer",
-    image: fm3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575013/Amplifier/fm3_tyfgif.png",
+    ],
     name: "SP4000",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 2500000,
   },
   {
     category: "flatmixer",
-    image: fm4,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575004/Amplifier/fm4_lredjo.png",
+    ],
     name: "SPX2800S",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big magnet",
     price: 365000,
   },
   {
     category: "flatmixer",
-    image: fm5,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575000/Amplifier/fm5_gzjevu.png",
+    ],
     name: "SPX4000S",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
   },
   {
     category: "floormixer",
-    image: frm1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574538/Amplifier/frm1_up8cgr.png",
+    ],
     name: "SP-12FX",
     description: "12 Inch / 2000watt / Ply wood / 100 coil /Big magnet",
     price: 1500000,
   },
   {
     category: "floormixer",
-    image: frm2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574539/Amplifier/frm2_pfrrjt.png",
+    ],
     name: "SP-12M",
     description: "12 Inch / 700watt / Pure Acostic / 100 coil /Double magnet",
     price: 800000,
   },
   {
     category: "floormixer",
-    image: frm3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574544/Amplifier/frm3_ool2yx.png",
+    ],
     name: "SP-12MTX",
     description: "12 Inch / 1000watt / Pure Acostic / 100 coil /Big magnet",
     price: 1000000,
   },
   {
     category: "floormixer",
-    image: frm4,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574542/Amplifier/frm4_npjci7.png",
+    ],
     name: "SP-15/15A",
     description: "12 Inch / 2000watt / Plastic body / 100 coil /Big magnet",
     price: 1000000,
   },
   {
     category: "floormixer",
-    image: frm5,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574540/Amplifier/frm5_unvtrg.png",
+    ],
     name: "SP-15FX",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Double magnet",
     price: 1800000,
   },
   {
     category: "equalizer",
-    image: e1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573497/Amplifier/e1_vdmuqe.png",
+    ],
     name: "DBX-224XL",
     description:
       "18 Inch / 2000watt / Pure Acostic / 99.9 coil /8 Ohms/ Passive sub",
@@ -330,7 +347,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "equalizer",
-    image: e2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573501/Amplifier/e2_zintvd.png",
+    ],
     name: "DBX-EQX 231",
     description:
       "18 Inch / 2000watt / Pure Acostic / 100 coil /8 Ohms/ Passive sub",
@@ -338,7 +357,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "equalizer",
-    image: e3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573502/Amplifier/e3_l9apam.png",
+    ],
     name: "Driver Rack Venu 360",
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
@@ -346,7 +367,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "equalizer",
-    image: e4,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573506/Amplifier/e4_cdx3tv.png",
+    ],
     name: "DBX-PA2",
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
@@ -354,7 +377,9 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "equalizer",
-    image: e5,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573509/Amplifier/e5_a7glt6.png",
+    ],
     name: "DBX-266XL",
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
@@ -362,84 +387,108 @@ export let HeroData: HeroDataType[] = [
   },
   {
     category: "linearray",
-    image: la1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573767/Amplifier/la1_a7ewku.png",
+    ],
     name: "SP-4",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 365000,
   },
   {
     category: "linearray",
-    image: la2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573770/Amplifier/la2_pequun.png",
+    ],
     name: "SP-415",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
   },
   {
     category: "linearray",
-    image: la3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573770/Amplifier/la3_aff5ge.png",
+    ],
     name: "SP-515",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Big magnet",
     price: 2000000,
   },
   {
     category: "linearray",
-    image: la4,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573772/Amplifier/la4_f82rjd.png",
+    ],
     name: "SP215SD",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 365000,
   },
   {
     category: "linearray",
-    image: la5,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573774/Amplifier/la5_zs3wew.png",
+    ],
     name: "SP28",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
   },
   {
     category: "microphone",
-    image: m1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574403/Amplifier/zebra-wall-bracket-1537_pk3dtt.png",
+    ],
     name: "SP4",
     description: "sound breaker mic / 100% wave /Big coverage",
     price: 68000,
   },
   {
     category: "microphone",
-    image: m2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574405/Amplifier/1537_svoccu.png",
+    ],
     name: "SP4",
     description: "sound breaker mic / 100% wave /Big coverage",
     price: 68000,
   },
   {
     category: "microphone",
-    image: m3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574397/Amplifier/3_kvvdwk.png",
+    ],
     name: "MIC",
     description: "sound breaker mic / 100% wave /Big coverage",
     price: 78000,
   },
   {
     category: "drum",
-    image: d1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574052/Amplifier/d1_am11i7.png",
+    ],
     name: "White Drum",
     description: "4 full set of Drums (complete set)",
     price: 300000,
   },
   {
     category: "drum",
-    image: d2,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573914/Amplifier/purple_bnj69q.png",
+    ],
     name: "Purple Drum",
     description: "4 full set of Drums (complete set)",
     price: 400000,
   },
   {
     category: "drum",
-    image: d3,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573914/Amplifier/zebra-wall-bracket-1537_sunpc7.png",
+    ],
     name: "Gold Drum",
     description: "4 full set of Drums (complete set)",
     price: 500000,
   },
   {
     category: "compressor",
-    image: c1,
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574102/Amplifier/c1_vncaxf.png",
+    ],
     name: "SP-266X",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 365000,

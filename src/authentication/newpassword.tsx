@@ -18,6 +18,7 @@ export default function NewPassword() {
 
   const fetchData = async () => {
     try {
+      console.log(email, otp, otpid, newpassword);
       const result = await resetPassword(email, otp, otpid, newpassword);
       console.log(result);
 

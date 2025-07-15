@@ -1,75 +1,20 @@
 import { useParams } from "react-router-dom";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
-// import { getFetch } from "../utils/getFetch";
-import { useEffect, useState } from "react";
 import ProductAuthCard from "./product";
-
-const drum = [
-  {
-    id: 1,
-    category: "drum",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
-    ],
-    name: "Purple drum",
-    description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
-    price: 300000,
-    quantity: 3,
-  },
-  {
-    id: 2,
-    category: "drum",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
-    ],
-    name: "Gold drum",
-    description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
-    price: 300000,
-    quantity: 3,
-  },
-  {
-    id: 3,
-    category: "drum",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
-    ],
-    name: "Black drum",
-    description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
-    price: 300000,
-    quantity: 3,
-  },
-];
+import { HeroData } from "../mainpage/Hero/data";
 
 export default function ProductPage() {
   let parameter = useParams();
-  let [data, setData] = useState(drum);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const result = await Promise.resolve(drum);
-        console.log(result);
-        if (result) setData(result);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchData();
-  }, []);
+  let cat = parameter.category?.split("-")[0].toLowerCase();
+  const result = HeroData.filter((item) => item.category.includes(cat ?? ""));
+  console.log(result);
 
   return (
     <>
       <MainPageNavbar />
       <section className="w-full h-full py-3 bg-gray-200 flex flex-col relative items-center sm:gap-5 justify-start gap-4">
-        <div className="flex flex-col items-start w-full sm:gap-10 sm:h-auto sm:w-3/4 mx-auto mt-4 sm:mt-6">
+        <div className="flex flex-col items-start w-full sm:gap-10 sm:h-auto sm:w-4/5 mx-auto mt-4 sm:mt-6">
           <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
             <p className="font-all font-semibold text-2xl text-center w-full text-green-600">
               Shop From
@@ -91,7 +36,7 @@ export default function ProductPage() {
               </p>
             </div>
             <div className="w-full p-3 grid md:grid-cols-3 grid-cols-2 items-center gap-2">
-              {data.map((item: any, index: number) => {
+              {result?.map((item: any, index: number) => {
                 return (
                   <div key={index} className="w-full">
                     <ProductAuthCard data={item} />

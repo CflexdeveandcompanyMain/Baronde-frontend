@@ -64,13 +64,14 @@ export default function MobileDropDown({ menu }: { menu: boolean }) {
         >
           {products.map((item: string, index: number) => {
             return (
-              <option
+              <Link
+                onClick={() => window.location.reload()}
+                to={"/product/" + item.replaceAll(" ", "-").toLowerCase()}
                 key={index}
-                value="A deals"
                 className="font-all text-xs text-start"
               >
                 {item}
-              </option>
+              </Link>
             );
           })}
         </datalist>

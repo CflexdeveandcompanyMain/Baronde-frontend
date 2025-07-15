@@ -175,7 +175,7 @@ export default function MainPageNavbar() {
                 type={"button"}
                 className={`${
                   acctdrop ? "flex" : "hidden"
-                } min-w-[120px] bg-white p-2 sm:hidden rounded-sm gap-2 flex-col absolute top-8 -right-1 items-start border-x border-b border-black/40 outline-none`}
+                } min-w-[120px] bg-white p-2 sm:hidden rounded-sm gap-2 z-50 flex-col absolute top-8 -right-1 items-start border-x border-b border-black/40 outline-none`}
               >
                 <Link
                   to={"/profile"}

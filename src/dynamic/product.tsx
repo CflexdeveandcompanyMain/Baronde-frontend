@@ -64,11 +64,11 @@ export default function ProductAuthCard({ data }: { data: productCardType }) {
           view ? "flex" : "hidden"
         } justify-center w-full h-screen fixed bg-black/30 z-50 inset-0`}
       >
-        <div className="flex sm:flex-row flex-col items-center gap-3 p-3 justify-between min-h-[300px] sm:w-3/4 w-[90%] mx-auto self-center bg-white">
+        <div className="flex sm:flex-row flex-col items-center gap-3 p-3 justify-between min-h-[350px] sm:w-3/4 w-[90%] mx-auto self-center bg-white">
           <div className="w-full justify-end sm:hidden flex">
             <X
               onClick={() => setView(!view)}
-              className="self-end text-end justify-self-end"
+              className="self-end text-end justify-self-end cursor-pointer"
               size={12}
             />
           </div>
@@ -99,7 +99,7 @@ export default function ProductAuthCard({ data }: { data: productCardType }) {
               <X
                 onClick={() => setView(!view)}
                 size={18}
-                className="self-end text-end justify-self-end"
+                className="self-end text-end justify-self-end cursor-pointer"
               />
             </div>
             <div className="flex flex-col items-start w-full gap-2 border-b border-stone-400 pb-4">
