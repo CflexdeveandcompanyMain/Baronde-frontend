@@ -93,7 +93,7 @@ export default function UserSetting() {
           </section>
           <div
             onClick={() => {
-              localStorage.setItem(
+              sessionStorage.setItem(
                 "baron:user",
                 JSON.stringify({ name: "", email: "", isVerified: false })
               );

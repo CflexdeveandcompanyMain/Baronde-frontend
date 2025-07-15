@@ -17,7 +17,7 @@ export default function MainPageNavbar() {
   let { setShowCartDesktop } = useGlobalState();
   let navigate = useNavigate();
   let { name, isVerified } = JSON.parse(
-    localStorage.getItem("baron:user") || "{}"
+    sessionStorage.getItem("baron:user") || "{}"
   );
 
   const handleCartClick = () => {

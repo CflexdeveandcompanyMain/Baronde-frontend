@@ -6,7 +6,7 @@ export default function UserProfile() {
   let [state, setstate] = useState("Abia");
   let [drop, setdrop] = useState(false);
 
-  let { name, email } = JSON.parse(localStorage.getItem("baron:user") || "");
+  let { name, email } = JSON.parse(sessionStorage.getItem("baron:user") || "");
 
   console.log(state);
   return (

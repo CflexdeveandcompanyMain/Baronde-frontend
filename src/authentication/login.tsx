@@ -34,7 +34,7 @@ export default function UserSignInInterface() {
       } else {
         let { name, email, id } = result.user;
         setMessage("");
-        localStorage.setItem(
+        sessionStorage.setItem(
           "baron:user",
           JSON.stringify({ name, email, isVerified: true })
         );

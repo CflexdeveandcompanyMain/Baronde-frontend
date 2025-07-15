@@ -41,7 +41,7 @@ export default function ProductPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await Promise.resolve(drum); //getFetch("http://localhost:3000/drum");
+        const result = await Promise.resolve(drum);
         console.log(result);
         if (result) setData(result);
       } catch (error) {
