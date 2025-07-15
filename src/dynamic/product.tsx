@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { formatPrice } from "../utils/priceconverter";
 import { Minus, Plus, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart, type HeroDataType } from "../utils/storage";
+import { usePageData } from "../store/singlepage";
 
 export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let [image, setImage] = useState(data.image[0]);
@@ -31,9 +32,18 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
     incrementQuantity(data.id);
   };
 
+  let navigate = useNavigate();
+  let { setData } = usePageData();
+
   return (
     <div className="relative flex flex-col">
-      <div className="flex flex-col items-center shadow justify-between w-auto sm:min-w-[200px] bg-white">
+      <div
+        onClick={() => {
+          setData(data);
+          navigate(`/singleproduct/${data.name}-${data.id}`);
+        }}
+        className="flex flex-col items-center shadow justify-between w-auto sm:min-w-[200px] bg-white"
+      >
         <div className="relative flex flex-col items-center">
           <img
             src={data.image[0]}
@@ -53,14 +63,21 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             </p>
           </div>
           <button
-            onClick={() => addToCart(data)}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              addToCart(data);
+            }}
             type="button"
             className={`bg-green-700 shadow text-sm p-2 w-full font-all font-normal text-white`}
           >
             Add to Cart
           </button>
           <button
-            onClick={() => setView(!view)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setView(!view);
+            }}
             type="button"
             className={`border border-green-700 shadow text-sm p-2 w-full font-all font-normal text-green-700`}
           >
@@ -78,7 +95,8 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             <X
               onClick={() => setView(!view)}
               className="self-end text-end justify-self-end cursor-pointer"
-              size={12}
+              size={24}
+              stroke="4"
             />
           </div>
           <div className="flex flex-row items-center border border-stone-200 w-full rounded self-stretch gap-2">
@@ -107,7 +125,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             <div className="w-full sm:flex hidden justify-end pb-2">
               <X
                 onClick={() => setView(!view)}
-                size={18}
+                size={24}
                 className="self-end text-end justify-self-end cursor-pointer"
               />
             </div>
@@ -166,15 +184,16 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               </div>
               <div className="flex flex-row items-center w-full justify-between gap-4">
                 <Link className="w-full" to={"/cart"}>
-                  <div className="w-full p-2 bg-amber-600 text-center font-all font-medium text-sm text-white">
-                    View Cart
+                  <div className="w-full p-3 bg-amber-600 text-center font-all font-medium text-sm text-white">
+                    Add Cart
                   </div>
                 </Link>
-                <Link className="w-full" to={"/checkout"}>
-                  <div className="w-full p-2 bg-green-600 text-center font-all font-medium text-sm text-white">
-                    Checkout
-                  </div>
-                </Link>
+                <div
+                  onClick={() => setView(!view)}
+                  className="w-full p-3 bg-green-600 text-center font-all font-medium text-sm text-white"
+                >
+                  Continue shopping
+                </div>
               </div>
             </div>
           </div>

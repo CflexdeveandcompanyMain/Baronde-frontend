@@ -9,7 +9,6 @@ import { empty } from "..";
 export default function CartPage() {
   const cartData = useCart();
   const [data, setData] = useState<HeroDataType[]>(cartData.cart);
-  // const [isLoading, setIsLoading] = useState(false);
 
   const [isAnimating, setIsAnimating] = useState(false);
 

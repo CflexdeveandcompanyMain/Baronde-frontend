@@ -18,6 +18,7 @@ import ForgetCode from "./authentication/codeforget";
 import NewPassword from "./authentication/newpassword";
 import ProductPage from "./dynamic/productpage";
 import CartPage from "./cart/cartpage";
+import SingleProductPage from "./dynamic/singlepage";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,10 @@ export default function App() {
         <Route path={"/forgetcode"} element={<ForgetCode />} />
         <Route path={"/newpassword"} element={<NewPassword />} />
         <Route path={"/product/:category"} element={<ProductPage />} />
+        <Route
+          path={"/singleproduct/:category"}
+          element={<SingleProductPage />}
+        />
       </Routes>
     </QueryClientProvider>
   );
