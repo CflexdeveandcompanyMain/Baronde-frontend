@@ -5,7 +5,7 @@ interface HeroDataType {
   description: string;
   price: number;
   discount?: number;
-  stockQuantity?: number;
+  stockQuantity: number;
 }
 export let HeroData: HeroDataType[] = [
   {
@@ -16,6 +16,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-137",
     description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
     price: 1300000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "fullrangespeaker",
@@ -25,6 +27,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-215GF",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "fullrangespeaker",
@@ -35,6 +39,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
     price: 2500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "fullrangespeaker",
@@ -44,6 +50,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-215GF",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "fullrangespeaker",
@@ -54,6 +62,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "newspeakerarrival",
@@ -63,6 +73,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-227",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Big magnet",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "newspeakerarrival",
@@ -72,6 +84,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-228",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
     price: 2200000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "newspeakerarrival",
@@ -81,6 +95,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-229",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
     price: 2400000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "newspeakerarrival",
@@ -90,6 +106,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-25",
     description: "15 Inch / 2000watt / Pure Acostic / 75.5 coil /Big magnet",
     price: 1100000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "newspeakerarrival",
@@ -100,6 +118,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "5 Inch / 2000watt / Pure Acostic body / 99.9 coil / passive speaker",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "singlesub",
@@ -110,6 +130,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / ply wood / 99.9 coil /8 Ohms/ Passive sub",
     price: 1200000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "singlesub",
@@ -120,6 +142,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
     price: 1300000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "singlesub",
@@ -130,6 +154,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Ply wood / 120 coil /8 Ohms/ Passive sub",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "singlesub",
@@ -140,6 +166,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Pure Acostic / 95.5 coil /8 Ohms/ Passive sub",
     price: 1100000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "singlesub",
@@ -150,6 +178,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Ply wood / 140 coil /8 Ohms/ Passive sub",
     price: 1400000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "doublesub",
@@ -160,6 +190,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "21 Inch / 5000watt / ply wood / 150 coil /8 Ohms/ Passive sub",
     price: 4000000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "doublesub",
@@ -170,6 +202,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
     price: 2200000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "doublesub",
@@ -180,6 +214,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
     price: 1600000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "doublesub",
@@ -190,6 +226,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4600watt / plywood / 120 coil /8 Ohms/ Passive sub",
     price: 3500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "doublesub",
@@ -200,6 +238,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "amplifier",
@@ -209,6 +249,8 @@ export let HeroData: HeroDataType[] = [
     name: "SPX7-5000",
     description: "4 channel / 1250watt per channel",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "amplifier",
@@ -218,6 +260,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP4500X",
     description: "2 channel / 4500watt",
     price: 850000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "amplifier",
@@ -227,6 +271,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP4000",
     description: "2 channel / 3500watt",
     price: 450000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "amplifier",
@@ -236,6 +282,8 @@ export let HeroData: HeroDataType[] = [
     name: "SPX2800S",
     description: "2 channel / 3500watt",
     price: 650000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "amplifier",
@@ -245,6 +293,8 @@ export let HeroData: HeroDataType[] = [
     name: "SPX4000S",
     description: "2 channel / 500watt",
     price: 900000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "flatmixer",
@@ -254,6 +304,8 @@ export let HeroData: HeroDataType[] = [
     name: "CM-16",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 1365000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "flatmixer",
@@ -263,6 +315,8 @@ export let HeroData: HeroDataType[] = [
     name: "CMX-1642",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "flatmixer",
@@ -272,6 +326,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP4000",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 2500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "flatmixer",
@@ -281,6 +337,8 @@ export let HeroData: HeroDataType[] = [
     name: "SPX2800S",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big magnet",
     price: 365000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "flatmixer",
@@ -290,6 +348,8 @@ export let HeroData: HeroDataType[] = [
     name: "SPX4000S",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "floormixer",
@@ -299,6 +359,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-12FX",
     description: "12 Inch / 2000watt / Ply wood / 100 coil /Big magnet",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "floormixer",
@@ -308,6 +370,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-12M",
     description: "12 Inch / 700watt / Pure Acostic / 100 coil /Double magnet",
     price: 800000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "floormixer",
@@ -317,6 +381,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-12MTX",
     description: "12 Inch / 1000watt / Pure Acostic / 100 coil /Big magnet",
     price: 1000000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "floormixer",
@@ -326,6 +392,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-15/15A",
     description: "12 Inch / 2000watt / Plastic body / 100 coil /Big magnet",
     price: 1000000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "floormixer",
@@ -335,6 +403,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-15FX",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Double magnet",
     price: 1800000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "equalizer",
@@ -345,6 +415,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Pure Acostic / 99.9 coil /8 Ohms/ Passive sub",
     price: 1000000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "equalizer",
@@ -355,6 +427,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Pure Acostic / 100 coil /8 Ohms/ Passive sub",
     price: 1300000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "equalizer",
@@ -365,6 +439,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
     price: 2200000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "equalizer",
@@ -375,6 +451,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
     price: 2000000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "equalizer",
@@ -385,6 +463,8 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
     price: 2200000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "linearray",
@@ -394,6 +474,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-4",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 365000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "linearray",
@@ -403,6 +485,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-415",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "linearray",
@@ -412,6 +496,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP-515",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Big magnet",
     price: 2000000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "linearray",
@@ -421,6 +507,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP215SD",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 365000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "linearray",
@@ -430,6 +518,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP28",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "microphone",
@@ -439,6 +529,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP4",
     description: "sound breaker mic / 100% wave /Big coverage",
     price: 68000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "microphone",
@@ -448,6 +540,8 @@ export let HeroData: HeroDataType[] = [
     name: "SP4",
     description: "sound breaker mic / 100% wave /Big coverage",
     price: 68000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "microphone",
@@ -457,6 +551,8 @@ export let HeroData: HeroDataType[] = [
     name: "MIC",
     description: "sound breaker mic / 100% wave /Big coverage",
     price: 78000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "drum",
@@ -466,6 +562,8 @@ export let HeroData: HeroDataType[] = [
     name: "White Drum",
     description: "4 full set of Drums (complete set)",
     price: 300000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "drum",
@@ -475,6 +573,8 @@ export let HeroData: HeroDataType[] = [
     name: "Purple Drum",
     description: "4 full set of Drums (complete set)",
     price: 400000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "drum",
@@ -484,6 +584,8 @@ export let HeroData: HeroDataType[] = [
     name: "Gold Drum",
     description: "4 full set of Drums (complete set)",
     price: 500000,
+    stockQuantity: 1,
+    discount: 2000,
   },
   {
     category: "compressor",
@@ -493,5 +595,7 @@ export let HeroData: HeroDataType[] = [
     name: "SP-266X",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 365000,
+    stockQuantity: 1,
+    discount: 2000,
   },
 ];
