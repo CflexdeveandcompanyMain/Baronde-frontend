@@ -32,6 +32,19 @@ const drum = [
     price: 300000,
     quantity: 3,
   },
+  {
+    id: 3,
+    category: "drum",
+    image: [
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752301053/d3_rvdkfa.png",
+    ],
+    name: "Black drum",
+    description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
+    price: 300000,
+    quantity: 3,
+  },
 ];
 
 export default function ProductPage() {
@@ -77,11 +90,10 @@ export default function ProductPage() {
                 showing 1 - 24 of 35 products
               </p>
             </div>
-            <div className="w-full p-3 grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1">
+            <div className="w-full p-3 flex flex-row items-center gap-1">
               {data.map((item: any, index: number) => {
                 return (
                   <div key={index} className="w-full">
-                    <p>{item.name}</p>
                     <ProductAuthCard data={item} />
                   </div>
                 );

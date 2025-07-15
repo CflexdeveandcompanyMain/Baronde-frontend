@@ -83,7 +83,7 @@ export default function MainPageNavbar() {
             <div className="flex flex-col items-center relative cursor-pointer">
               <div
                 className="hidden sm:flex flex-col items-center gap-1.5"
-                onClick={() => setAcctDrop(!drop)}
+                onClick={() => setAcctDrop(!acctdrop)}
               >
                 <p className="font-all font-medium text-xs text-center text-white">
                   {name ?? "Anonymous"}
@@ -94,7 +94,9 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onBlur={() => setAcctDrop(!drop)}
+                onMouseDown={(e) => {
+                  if (e.target === e.currentTarget) setAcctDrop(!acctdrop);
+                }}
                 type={"button"}
                 className={`${
                   acctdrop ? "flex" : "hidden"
@@ -175,7 +177,7 @@ export default function MainPageNavbar() {
         <MobileDropDown menu={menu} />
       </div>
       <div className="w-full bg-white">
-        <section className="bg-white p-3 hidden sm:flex justify-center w-3/4 mx-auto">
+        <section className="bg-white p-3 hidden sm:flex justify-center w-[70%] mx-auto">
           <ul className="flex flex-row items-center justify-between w-full">
             <div className="font-all text-sm text-center font-medium list-none">
               All Deals
@@ -197,14 +199,15 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onBlur={() => setdrop(!drop)}
+                onMouseDown={(e) => {
+                  if (e.target === e.currentTarget) setdrop(!drop);
+                }}
                 type={"button"}
                 className={`${
                   drop ? "flex" : "hidden"
                 } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
               >
                 {brand.map((item, index) => {
-                  console.log(item.replaceAll(" ", "-"));
                   return (
                     <Link
                       to={"/product/"}
@@ -219,7 +222,7 @@ export default function MainPageNavbar() {
             </div>
             <div className="flex flex-col items-center relative">
               <div
-                onClick={() => setdown(!drop)}
+                onClick={() => setdown(!down)}
                 className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
               >
                 <p className="font-all text-sm font-medium text-center">
@@ -234,7 +237,10 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onBlur={() => setdown(!down)}
+                onMouseDown={(e) => {
+                  if (e.target === e.currentTarget) setdown(!down);
+                }}
+                onClick={() => console.log("BTN")}
                 type={"button"}
                 className={`${
                   down ? "flex" : "hidden"

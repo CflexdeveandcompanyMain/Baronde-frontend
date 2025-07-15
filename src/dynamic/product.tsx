@@ -18,7 +18,7 @@ export default function ProductAuthCard({ data }: { data: productCardType }) {
   let isSingleImage = data.image.length === 1;
   return (
     <>
-      <div className="flex flex-col items-center shadow justify-between min-w-[200px]">
+      <div className="flex flex-col items-center shadow justify-between min-w-[200px] bg-white">
         <div className="relative flex flex-col items-center">
           <img
             src={data.image[0]}
