@@ -35,7 +35,7 @@ export default function CartDisplay() {
           <p className="font-all text-base font-medium text-start w-full">
             Total
           </p>
-          <p className="font-all text-base font-semibold text-end w-full">
+          <p className="font-all text-sm font-semibold text-end w-full">
             N2,600,000.00
           </p>
         </div>

@@ -9,6 +9,7 @@ export default function MobileDropDown({ menu }: { menu: boolean }) {
     products: false,
     brands: false,
   });
+  let { isVerified } = JSON.parse(localStorage.getItem("baron:user") || "");
   return (
     <div
       className={`${
@@ -66,7 +67,11 @@ export default function MobileDropDown({ menu }: { menu: boolean }) {
             return (
               <Link
                 onClick={() => window.location.reload()}
-                to={"/product/" + item.replaceAll(" ", "-").toLowerCase()}
+                to={
+                  isVerified
+                    ? "/product/" + item.replaceAll(" ", "-").toLowerCase()
+                    : "/"
+                }
                 key={index}
                 className="font-all text-xs text-start"
               >

@@ -1,4 +1,4 @@
-import { desktopHero, p1, whatsappII } from "../..";
+import { desktopHero, p1 } from "../..";
 import HeroProductCard from "./herocard";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/priceconverter";
@@ -29,14 +29,14 @@ export default function MainPageHero() {
                 return (
                   <div
                     key={index}
-                    className="flex flex-col items-center shadow justify-center w-auto"
+                    className="flex flex-col items-center shadow justify-center w-auto bg-white"
                   >
                     <div className="relative flex flex-col items-center">
                       <img
                         src={p1}
                         className="object-cover max-h-[200px] w-full bg-white"
                       />
-                      <div className="flex justify-center bg-[#E5A000] p-1 shadow absolute top-0 left-2">
+                      <div className="flex justify-center bg-[#fdb204f3] p-1 shadow absolute top-0 left-2">
                         <p
                           className={`text-white font-all text-center text-xs`}
                         >
@@ -77,7 +77,9 @@ export default function MainPageHero() {
         <section className="w-full flex justify-end p-3">
           <div className="flex flex-row items-center gap-3">
             <img
-              src={whatsappII}
+              src={
+                "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576538/Amplifier/whatsap_rpuamp.png"
+              }
               className="sm:w-10 sm:h-10 w-8 h-8 object-cover"
             />
             <p className="text-xs sm:text-sm text-center text-red-600 font-all self-center bg-white p-1 rounded shadow">

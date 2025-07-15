@@ -10,12 +10,9 @@ interface productCardType {
 }
 export default function ProductCard(data: productCardType) {
   return (
-    <div className="flex flex-col items-center self-stretch h-full justify-between min-w-[200px] bg-white p-2">
-      <div className="relative flex flex-col items-center">
-        <img
-          src={data.image}
-          className="object-cover max-h-[200px] w-full bg-white"
-        />
+    <div className="flex flex-col items-center self-stretch h-full justify-between w-[200px] bg-white p-2">
+      <div className="relative flex flex-col items-center h-[50%]">
+        <img src={data.image} className="object-cover h-full w-full bg-white" />
       </div>
       <div className="flex flex-col items-center w-full gap-1.5 bg-slate-100/20 p-1.5">
         <p className={`text-start font-medium font-all text-sm w-full`}>

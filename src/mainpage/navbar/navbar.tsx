@@ -78,7 +78,7 @@ export default function MainPageNavbar() {
           </div>
         </Link>
         <MainPageSearchBar />
-        <div className="flex flex-row items-center gap-6 w-1/2 justify-end">
+        <div className="flex flex-row items-center gap-6 w-3/5 sm:w-1/2 justify-end">
           {isVerified ? (
             <div className="flex flex-col items-center relative cursor-pointer">
               <div
@@ -307,6 +307,7 @@ export default function MainPageNavbar() {
                 {products.map((item, index) => {
                   return (
                     <Link
+                      onClick={() => setTimeout(() => setdown(!down), 0)}
                       to={"/product/" + item.replaceAll(" ", "-").toLowerCase()}
                       className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
                       key={index}

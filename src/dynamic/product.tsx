@@ -17,7 +17,6 @@ export default function ProductAuthCard({ data }: { data: productCardType }) {
   let [count, setcount] = useState(0);
   let isSingleImage = data.image.length === 1;
   const [isAnimating, setIsAnimating] = useState(false);
-
   const triggerAnimation = () => {
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 200);
