@@ -68,8 +68,8 @@ export default function ProductPage() {
   return (
     <>
       <MainPageNavbar />
-      <section className="w-full h-full py-3 bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
-        <div className="flex flex-col items-start w-[95%] sm:gap-10 sm:h-auto sm:w-3/4 mx-auto mt-4 sm:mt-6">
+      <section className="w-full h-full py-3 bg-gray-200 flex flex-col relative items-center sm:gap-5 justify-start gap-4">
+        <div className="flex flex-col items-start w-full sm:gap-10 sm:h-auto sm:w-3/4 mx-auto mt-4 sm:mt-6">
           <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
             <p className="font-all font-semibold text-2xl text-center w-full text-green-600">
               Shop From
@@ -81,8 +81,8 @@ export default function ProductPage() {
               unmatched performance for musicians.
             </p>
           </div>
-          <section className="flex flex-col items-start w-full gap-3">
-            <div className="flex flex-col items-start gap-2">
+          <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
+            <div className="flex flex-col items-start gap-2 w-full px-3">
               <p className="font-all sm:text-xl font-semibold text-start w-full text-lg">
                 {formatString(parameter.category ?? "Random")}
               </p>
@@ -90,7 +90,7 @@ export default function ProductPage() {
                 showing 1 - 24 of 35 products
               </p>
             </div>
-            <div className="w-full p-3 flex flex-row items-center gap-1">
+            <div className="w-full p-3 grid md:grid-cols-3 grid-cols-2 items-center gap-2">
               {data.map((item: any, index: number) => {
                 return (
                   <div key={index} className="w-full">

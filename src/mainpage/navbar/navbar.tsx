@@ -99,8 +99,8 @@ export default function MainPageNavbar() {
                 }}
                 type={"button"}
                 className={`${
-                  acctdrop ? "flex" : "hidden"
-                } sm:min-w-[120px] bg-white p-2 rounded-sm gap-2 flex-col absolute top-10 items-start border border-black/40 outline-none`}
+                  acctdrop ? "sm:flex" : "hidden"
+                } sm:min-w-[120px] bg-white p-2 hidden rounded-sm gap-2 flex-col absolute top-10 items-start border border-black/40 outline-none`}
               >
                 <Link
                   to={"/profile"}
@@ -123,8 +123,11 @@ export default function MainPageNavbar() {
                 <div
                   className="text-sm text-start cursor-pointer"
                   onClick={() => {
+                    sessionStorage.setItem(
+                      "baron:user",
+                      JSON.stringify({ name: "", email: "", isVerified: false })
+                    );
                     navigate("/");
-                    window.location.reload();
                   }}
                 >
                   Logout
@@ -132,26 +135,81 @@ export default function MainPageNavbar() {
               </button>
             </div>
           ) : (
-            <Link
-              to={"/signup"}
-              className={`${
-                isVerified ? "hidden" : "flex"
-              } hidden sm:flex flex-col items-center gap-1.5`}
-            >
-              <p className="font-all font-medium text-xs text-center text-white">
-                Login/SignUp
-              </p>
-              <p className="font-all font-medium text-xs text-center text-white">
-                My account
-              </p>
-            </Link>
+            <>
+              <Link
+                to={"/signup"}
+                className={`${
+                  isVerified ? "hidden" : "flex"
+                } hidden sm:flex flex-col items-center gap-1.5`}
+              >
+                <p className="font-all font-medium text-xs text-center text-white">
+                  Login/SignUp
+                </p>
+                <p className="font-all font-medium text-xs text-center text-white">
+                  My account
+                </p>
+              </Link>
+            </>
           )}
-          <SearchIcon className="text-white sm:hidden flex" />
-          <UserIcon
-            className={`${
-              isVerified ? "hidden" : "flex"
-            } text-white sm:hidden flex`}
-          />
+          <SearchIcon className={`text-white sm:hidden flex`} />
+          <div className="flex flex-col items-center relative cursor-pointer">
+            <UserIcon
+              onClick={() => {
+                if (isVerified) {
+                  setAcctDrop(!acctdrop);
+                } else navigate("/signup");
+              }}
+              className={`text-white sm:hidden flex`}
+            />
+            <>
+              <div
+                className={`${
+                  acctdrop ? "flex" : "hidden"
+                } mr-0 justify-end self-end sm:hidden flex w-0 h-0 -mb-[0.5rem] border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-white`}
+              ></div>
+              <button
+                ref={focusRef}
+                onMouseDown={(e) => {
+                  if (e.target === e.currentTarget) setAcctDrop(!acctdrop);
+                }}
+                type={"button"}
+                className={`${
+                  acctdrop ? "flex" : "hidden"
+                } min-w-[120px] bg-white p-2 sm:hidden rounded-sm gap-2 flex-col absolute top-8 -right-1 items-start border-x border-b border-black/40 outline-none`}
+              >
+                <Link
+                  to={"/profile"}
+                  className="text-sm text-start cursor-pointer"
+                >
+                  My profile
+                </Link>
+                <Link
+                  to={"/order"}
+                  className="text-sm text-start cursor-pointer"
+                >
+                  My orders
+                </Link>
+                <Link
+                  to={"/settings"}
+                  className="text-sm text-start cursor-pointer"
+                >
+                  settings
+                </Link>
+                <div
+                  className="text-sm text-start cursor-pointer"
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "baron:user",
+                      JSON.stringify({ name: "", email: "", isVerified: false })
+                    );
+                    navigate("/");
+                  }}
+                >
+                  Logout
+                </div>
+              </button>
+            </>
+          </div>
           <div className="relative">
             <ShoppingCartIcon
               onClick={handleCartClick}
@@ -177,7 +235,7 @@ export default function MainPageNavbar() {
         <MobileDropDown menu={menu} />
       </div>
       <div className="w-full bg-white">
-        <section className="bg-white p-3 hidden sm:flex justify-center w-[70%] mx-auto">
+        <section className="bg-white p-3 hidden sm:flex justify-center w-3/4 md:w-[70%] mx-auto">
           <ul className="flex flex-row items-center justify-between w-full">
             <div className="font-all text-sm text-center font-medium list-none">
               All Deals
