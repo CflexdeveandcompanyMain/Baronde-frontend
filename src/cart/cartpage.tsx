@@ -22,7 +22,7 @@ export default function UserOrderHistory() {
             </p>
           </div>
           <div className="flex md:flex-row flex-col items-center w-full md:gap-5">
-            <div className="flex flex-col items-start md:w-[65%] w-full bg-white sm:p-4 rounded">
+            <div className="flex flex-col items-start md:w-[65%] w-full bg-white sm:p-4 rounded md:rounded-b rounded-t rounded-x">
               <div className="flex flex-row items-start w-full justify-start gap-2 pb-1">
                 <p className="font-all text-sm text-start w-full font-semibold">
                   Product
@@ -46,7 +46,7 @@ export default function UserOrderHistory() {
               </div>
             </div>
             <div className="md:w-[35%] w-full gap-5 justify-between self-stretch">
-              <div className="flex flex-col bg-white sm:p-5 md:rounded items-start w-full gap-1">
+              <div className="flex flex-col bg-white sm:p-5 md:rounded-t rounded-b rounded-x items-start w-full gap-1">
                 <div className="flex flex-row items-center w-full justify-between border-b border-stone-400 py-3">
                   <p className="font-all text-sm font-medium text-start text-stone-500">
                     Total

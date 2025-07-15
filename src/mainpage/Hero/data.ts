@@ -5,6 +5,7 @@ interface HeroDataType {
   description: string;
   price: number;
   discount?: number;
+  stockQuantity?: number;
 }
 export let HeroData: HeroDataType[] = [
   {
