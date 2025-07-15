@@ -1,4 +1,5 @@
-interface HeroDataType {
+export interface HeroDataType {
+  id: number;
   category: string;
   image: string[];
   name: string;
@@ -9,6 +10,7 @@ interface HeroDataType {
 }
 export let HeroData: HeroDataType[] = [
   {
+    id: 1,
     category: "fullrangespeaker",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576523/Amplifier/frs1_cjtnzn.png",
@@ -16,10 +18,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-137",
     description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
     price: 1300000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 2,
     category: "fullrangespeaker",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576523/Amplifier/frs2_ytcvtf.png",
@@ -27,10 +30,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-215GF",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 3,
     category: "fullrangespeaker",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576524/Amplifier/frs3_vlhhve.png",
@@ -39,10 +43,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
     price: 2500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 4,
     category: "fullrangespeaker",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576530/Amplifier/frs4_jdoid2.png",
@@ -50,10 +55,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-215GF",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 5,
     category: "fullrangespeaker",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576532/Amplifier/frs5_lm7p54.png",
@@ -62,10 +68,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 6000watt / Pure Acostic / 100 coil /passive speaker",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 6,
     category: "newspeakerarrival",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576369/Amplifier/nsa1_bk2obg.png",
@@ -73,10 +80,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-227",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Big magnet",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 7,
     category: "newspeakerarrival",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576371/Amplifier/nsa2_foup8a.png",
@@ -84,10 +92,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-228",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
     price: 2200000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 8,
     category: "newspeakerarrival",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576371/Amplifier/nsa3_w7vehh.png",
@@ -95,10 +104,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-229",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
     price: 2400000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 9,
     category: "newspeakerarrival",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576373/Amplifier/nsa4_fzqvcy.png",
@@ -106,10 +116,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-25",
     description: "15 Inch / 2000watt / Pure Acostic / 75.5 coil /Big magnet",
     price: 1100000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 10,
     category: "newspeakerarrival",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576382/Amplifier/nsa5_lguhka.png",
@@ -118,10 +129,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "5 Inch / 2000watt / Pure Acostic body / 99.9 coil / passive speaker",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 11,
     category: "singlesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576056/Amplifier/ss1_vyszzf.png",
@@ -130,10 +142,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / ply wood / 99.9 coil /8 Ohms/ Passive sub",
     price: 1200000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 12,
     category: "singlesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576048/Amplifier/ss2_nglgtx.png",
@@ -142,10 +155,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
     price: 1300000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 13,
     category: "singlesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576047/Amplifier/ss3_jfomaf.png",
@@ -154,10 +168,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Ply wood / 120 coil /8 Ohms/ Passive sub",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 14,
     category: "singlesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576047/Amplifier/ss4_p4iffy.png",
@@ -166,10 +181,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Pure Acostic / 95.5 coil /8 Ohms/ Passive sub",
     price: 1100000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 15,
     category: "singlesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576045/Amplifier/ss5_wdnvxu.png",
@@ -178,10 +194,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Ply wood / 140 coil /8 Ohms/ Passive sub",
     price: 1400000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 16,
     category: "doublesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573328/Amplifier/ds1_nnw69a.png",
@@ -190,10 +207,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "21 Inch / 5000watt / ply wood / 150 coil /8 Ohms/ Passive sub",
     price: 4000000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 17,
     category: "doublesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573332/Amplifier/ds2_uevo0u.png",
@@ -202,10 +220,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
     price: 2200000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 18,
     category: "doublesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573333/Amplifier/ds3_sgrc7g.png",
@@ -214,10 +233,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 4000watt / Ply wood / 100 coil /8 Ohms/ Passive sub",
     price: 1600000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 19,
     category: "doublesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573333/Amplifier/ds5_mrotnt.png",
@@ -226,10 +246,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4600watt / plywood / 120 coil /8 Ohms/ Passive sub",
     price: 3500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 20,
     category: "doublesub",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573338/Amplifier/ds4_wy2diu.png",
@@ -238,10 +259,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 21,
     category: "amplifier",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572811/Amplifier/am1_q15mxy.png",
@@ -249,10 +271,11 @@ export let HeroData: HeroDataType[] = [
     name: "SPX7-5000",
     description: "4 channel / 1250watt per channel",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 22,
     category: "amplifier",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572815/Amplifier/am2_vkq9zu.png",
@@ -260,10 +283,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP4500X",
     description: "2 channel / 4500watt",
     price: 850000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 23,
     category: "amplifier",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572825/Amplifier/am3_qc4ham.png",
@@ -271,10 +295,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP4000",
     description: "2 channel / 3500watt",
     price: 450000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 24,
     category: "amplifier",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572830/Amplifier/am4_sfsklc.png",
@@ -282,10 +307,11 @@ export let HeroData: HeroDataType[] = [
     name: "SPX2800S",
     description: "2 channel / 3500watt",
     price: 650000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 25,
     category: "amplifier",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572832/Amplifier/am5_z2k3tb.png",
@@ -293,10 +319,11 @@ export let HeroData: HeroDataType[] = [
     name: "SPX4000S",
     description: "2 channel / 500watt",
     price: 900000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 26,
     category: "flatmixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575006/Amplifier/fm1_zz5m2e.png",
@@ -304,10 +331,11 @@ export let HeroData: HeroDataType[] = [
     name: "CM-16",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 1365000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 27,
     category: "flatmixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575011/Amplifier/fm2_qscpwq.png",
@@ -315,10 +343,11 @@ export let HeroData: HeroDataType[] = [
     name: "CMX-1642",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 28,
     category: "flatmixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575013/Amplifier/fm3_tyfgif.png",
@@ -326,10 +355,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP4000",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 2500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 29,
     category: "flatmixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575004/Amplifier/fm4_lredjo.png",
@@ -337,10 +367,11 @@ export let HeroData: HeroDataType[] = [
     name: "SPX2800S",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big magnet",
     price: 365000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 30,
     category: "flatmixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575000/Amplifier/fm5_gzjevu.png",
@@ -348,10 +379,11 @@ export let HeroData: HeroDataType[] = [
     name: "SPX4000S",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 31,
     category: "floormixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574538/Amplifier/frm1_up8cgr.png",
@@ -359,10 +391,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-12FX",
     description: "12 Inch / 2000watt / Ply wood / 100 coil /Big magnet",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 32,
     category: "floormixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574539/Amplifier/frm2_pfrrjt.png",
@@ -370,10 +403,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-12M",
     description: "12 Inch / 700watt / Pure Acostic / 100 coil /Double magnet",
     price: 800000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 33,
     category: "floormixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574544/Amplifier/frm3_ool2yx.png",
@@ -381,10 +415,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-12MTX",
     description: "12 Inch / 1000watt / Pure Acostic / 100 coil /Big magnet",
     price: 1000000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 34,
     category: "floormixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574542/Amplifier/frm4_npjci7.png",
@@ -392,10 +427,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-15/15A",
     description: "12 Inch / 2000watt / Plastic body / 100 coil /Big magnet",
     price: 1000000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 35,
     category: "floormixer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574540/Amplifier/frm5_unvtrg.png",
@@ -403,10 +439,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-15FX",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Double magnet",
     price: 1800000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 36,
     category: "equalizer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573497/Amplifier/e1_vdmuqe.png",
@@ -415,10 +452,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Pure Acostic / 99.9 coil /8 Ohms/ Passive sub",
     price: 1000000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 37,
     category: "equalizer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573501/Amplifier/e2_zintvd.png",
@@ -427,10 +465,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "18 Inch / 2000watt / Pure Acostic / 100 coil /8 Ohms/ Passive sub",
     price: 1300000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 38,
     category: "equalizer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573502/Amplifier/e3_l9apam.png",
@@ -439,10 +478,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
     price: 2200000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 39,
     category: "equalizer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573506/Amplifier/e4_cdx3tv.png",
@@ -451,10 +491,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
     price: 2000000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 40,
     category: "equalizer",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573509/Amplifier/e5_a7glt6.png",
@@ -463,10 +504,11 @@ export let HeroData: HeroDataType[] = [
     description:
       "Doublesub / 18 Inch / 4000watt / plywood / 100 coil /8 Ohms/ Passive sub",
     price: 2200000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 41,
     category: "linearray",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573767/Amplifier/la1_a7ewku.png",
@@ -474,10 +516,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-4",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 365000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 42,
     category: "linearray",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573770/Amplifier/la2_pequun.png",
@@ -485,10 +528,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-415",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 43,
     category: "linearray",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573770/Amplifier/la3_aff5ge.png",
@@ -496,10 +540,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP-515",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Big magnet",
     price: 2000000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 44,
     category: "linearray",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573772/Amplifier/la4_f82rjd.png",
@@ -507,10 +552,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP215SD",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 365000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 45,
     category: "linearray",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573774/Amplifier/la5_zs3wew.png",
@@ -518,10 +564,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP28",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
     price: 1500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 46,
     category: "microphone",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574403/Amplifier/zebra-wall-bracket-1537_pk3dtt.png",
@@ -529,10 +576,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP4",
     description: "sound breaker mic / 100% wave /Big coverage",
     price: 68000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 47,
     category: "microphone",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574405/Amplifier/1537_svoccu.png",
@@ -540,10 +588,11 @@ export let HeroData: HeroDataType[] = [
     name: "SP4",
     description: "sound breaker mic / 100% wave /Big coverage",
     price: 68000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 48,
     category: "microphone",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574397/Amplifier/3_kvvdwk.png",
@@ -551,10 +600,11 @@ export let HeroData: HeroDataType[] = [
     name: "MIC",
     description: "sound breaker mic / 100% wave /Big coverage",
     price: 78000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 49,
     category: "drum",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574052/Amplifier/d1_am11i7.png",
@@ -562,10 +612,11 @@ export let HeroData: HeroDataType[] = [
     name: "White Drum",
     description: "4 full set of Drums (complete set)",
     price: 300000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 50,
     category: "drum",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573914/Amplifier/purple_bnj69q.png",
@@ -573,10 +624,11 @@ export let HeroData: HeroDataType[] = [
     name: "Purple Drum",
     description: "4 full set of Drums (complete set)",
     price: 400000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 51,
     category: "drum",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573914/Amplifier/zebra-wall-bracket-1537_sunpc7.png",
@@ -584,10 +636,11 @@ export let HeroData: HeroDataType[] = [
     name: "Gold Drum",
     description: "4 full set of Drums (complete set)",
     price: 500000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
   {
+    id: 52,
     category: "compressor",
     image: [
       "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574102/Amplifier/c1_vncaxf.png",
@@ -595,7 +648,7 @@ export let HeroData: HeroDataType[] = [
     name: "SP-266X",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
     price: 365000,
-    stockQuantity: 1,
+    stockQuantity: 3,
     discount: 2000,
   },
 ];

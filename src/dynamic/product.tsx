@@ -2,24 +2,33 @@ import { useState } from "react";
 import { formatPrice } from "../utils/priceconverter";
 import { Minus, Plus, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart, type HeroDataType } from "../utils/storage";
 
-interface productCardType {
-  name: string;
-  image: string[];
-  description: string;
-  price: number;
-  discount?: string;
-  cutoff?: string;
-}
-export default function ProductAuthCard({ data }: { data: productCardType }) {
+export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let [image, setImage] = useState(data.image[0]);
   let [view, setView] = useState(false);
   let [count, setcount] = useState(0);
   let isSingleImage = data.image.length === 1;
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const { incrementQuantity, decrementQuantity, addToCart, isInCart } =
+    useCart();
+
   const triggerAnimation = () => {
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 200);
+  };
+
+  const handleDecrement = () => {
+    setcount(count < 0 ? 0 : count - 1);
+    triggerAnimation();
+    decrementQuantity(data.id);
+  };
+
+  const handleIncrement = () => {
+    setcount(count + 1);
+    triggerAnimation();
+    incrementQuantity(data.id);
   };
 
   return (
@@ -44,6 +53,7 @@ export default function ProductAuthCard({ data }: { data: productCardType }) {
             </p>
           </div>
           <button
+            onClick={() => addToCart(data)}
             type="button"
             className={`bg-green-700 shadow text-sm p-2 w-full font-all font-normal text-white`}
           >
@@ -124,10 +134,7 @@ export default function ProductAuthCard({ data }: { data: productCardType }) {
                 </p>
                 <div className="flex items-center bg-white rounded border border-stone-200">
                   <button
-                    onClick={() => {
-                      setcount(count < 0 ? 0 : count - 1);
-                      triggerAnimation();
-                    }}
+                    onClick={handleDecrement}
                     disabled={count === 0}
                     className={
                       "w-10 h-8 flex items-center border-r border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
@@ -147,10 +154,8 @@ export default function ProductAuthCard({ data }: { data: productCardType }) {
                   </div>
 
                   <button
-                    onClick={() => {
-                      setcount(count + 1);
-                      triggerAnimation();
-                    }}
+                    disabled={!isInCart(data.id)}
+                    onClick={handleIncrement}
                     className={
                       "w-10 h-8 flex items-center border-l border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
                     }

@@ -235,7 +235,7 @@ export default function MainPageNavbar() {
         <MobileDropDown menu={menu} />
       </div>
       <div className="w-full bg-white">
-        <section className="bg-white p-3 hidden sm:flex justify-center w-3/4 md:w-[70%] mx-auto">
+        <section className="bg-white p-3 hidden sm:flex justify-center w-3/4 sm:w-[90%] md:w-[70%] mx-auto">
           <ul className="flex flex-row items-center justify-between w-full">
             <div className="font-all text-sm text-center font-medium list-none">
               All Deals

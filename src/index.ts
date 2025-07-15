@@ -8,8 +8,20 @@ import x from "./assets/x.png";
 import ig from "./assets/ig.png";
 import whatsapp from "./assets/whatsapp.png";
 import map from "./assets/map.png";
+import empty from "./assets/empty.png";
 
-export { bdm, headlogo, Hero as desktopHero, p1, fb, ig, x, whatsapp, map };
+export {
+  bdm,
+  headlogo,
+  Hero as desktopHero,
+  p1,
+  fb,
+  ig,
+  x,
+  whatsapp,
+  map,
+  empty,
+};
 
 // ============= Authentication Components ==========
 import UserCreateAccount from "./authentication/create";
