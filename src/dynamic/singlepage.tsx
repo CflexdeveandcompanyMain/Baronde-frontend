@@ -3,12 +3,11 @@ import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import { usePageData } from "../store/singlepage";
 import { Link } from "react-router-dom";
-import { Minus, Plus, X } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { formatPrice } from "../utils/priceconverter";
 import { useCart } from "../utils/storage";
 
 export default function SingleProductPage() {
-  let [view, setView] = useState(false);
   let [count, setcount] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -63,14 +62,7 @@ export default function SingleProductPage() {
               </div>
               <img src={Image} className="object-cover w-3/4 bg-white" />
             </div>
-            <div className="w-full flex flex-col items-start justify-between self-stretch gap-1 bg-white p-3">
-              <div className="w-full sm:flex hidden justify-end pb-2">
-                <X
-                  onClick={() => setView(!view)}
-                  size={24}
-                  className="self-end text-end justify-self-end cursor-pointer"
-                />
-              </div>
+            <div className="w-full flex flex-col items-start justify-start self-stretch gap-1 bg-white p-3">
               <div className="flex flex-col items-start w-full gap-2 border-b border-stone-400 pb-4">
                 <p className="font-all sm:text-lg text-sm font-semibold text-start w-full">
                   {data.name}
@@ -124,7 +116,7 @@ export default function SingleProductPage() {
                     </button>
                   </div>
                 </div>
-                <div className="flex flex-row items-center w-full justify-between gap-4">
+                <div className="flex flex-row items-center w-full justify-between gap-4 self-end">
                   <Link className="w-full" to={"/cart"}>
                     <div className="w-full p-3 bg-amber-600 text-center font-all font-medium text-sm text-white">
                       View cart

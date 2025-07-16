@@ -1,5 +1,7 @@
 import type { CredentialResponse } from "@react-oauth/google";
 
+const token = sessionStorage.getItem("baron:token") ?? "";
+
 export async function getFetch(url: string) {
   const request = await fetch(url, {
     method: "GET",
@@ -38,8 +40,14 @@ export async function createUser(
     },
     body: JSON.stringify({ name, email, password, otp, otpId }),
   });
+  if (
+    request.ok &&
+    request.headers.get("Authorization")?.startsWith("Bearer")
+  ) {
+    const token = request.headers.get("Authorization")?.split(" ")[1] ?? "";
+    sessionStorage.setItem("baron:token", token);
+  }
   const response = await request.json();
-  console.log(response);
   return response;
 }
 
@@ -64,7 +72,13 @@ export async function userLogIn(email: string, password: string) {
     },
     body: JSON.stringify({ email, password }),
   });
-  console.log(request.status);
+  if (
+    request.ok &&
+    request.headers.get("Authorization")?.startsWith("Bearer")
+  ) {
+    const token = request.headers.get("Authorization")?.split(" ")[1] ?? "";
+    sessionStorage.setItem("baron:token", token);
+  }
   return await request.json();
 }
 
@@ -102,3 +116,38 @@ export async function resetPassword(
   console.log(request.status);
   return await request.json();
 }
+
+export async function getImagesByCategory(category: string) {
+  console.log(token);
+  const request = await fetch(
+    "https://baronde.onrender.com/image/v1/categories/:" + category,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const response = await request.json();
+  console.log(response);
+}
+
+export async function getImagesByName(name: string) {
+  console.log(token);
+  const request = await fetch(
+    "https://baronde.onrender.com/image/v1/name/:" + name,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const response = await request.json();
+  console.log(response);
+}
+
+getImagesByCategory("equalizer");
+getImagesByName("SP-218");

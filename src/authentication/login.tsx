@@ -29,15 +29,20 @@ export default function UserSignInInterface() {
 
       if (!result.user && result.message) {
         setMessage(result.message);
+
         if (result.message.startsWith("Account locked")) setLock(true);
+
         setTimeout(() => setMessage(""), 5000);
       } else {
         let { name, email, id } = result.user;
+
         setMessage("");
+
         sessionStorage.setItem(
           "baron:user",
           JSON.stringify({ name, email, isVerified: true })
         );
+
         setCredentials(name, email, "", id);
 
         verifyOtp();
@@ -47,8 +52,6 @@ export default function UserSignInInterface() {
     } catch (err: any) {
       if (err.name !== "AbortError") {
         setError(err.message || "Unknown error");
-
-        console.log(error);
       }
     } finally {
       setLoading(false);

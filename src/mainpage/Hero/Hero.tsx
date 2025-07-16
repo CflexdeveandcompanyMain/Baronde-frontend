@@ -22,7 +22,7 @@ export default function MainPageHero() {
               unmatched performance for musicians.
             </p>
           </div>
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-5 p-3">
+          <div className="overflow-x-scroll w-full flex flex-row items-center gap-2 p-3">
             {Array(5)
               .fill("")
               .map((_, index: number) => {
@@ -45,19 +45,21 @@ export default function MainPageHero() {
                       </div>
                     </div>
                     <div className="flex flex-col items-center w-full gap-1.5 bg-slate-100/20 p-1.5">
-                      <p className={`text-start font-medium font-all text-sm`}>
+                      <p
+                        className={`text-start w-full font-medium font-all text-sm`}
+                      >
                         Speaker model: SP515
                       </p>
-                      <p className="font-normal text-start font-all text-xs text-gray-600">
+                      <p className="font-normal text-start font-all text-[10px] text-gray-600">
                         15INCH BIG MAGNET /// 4800watt /// Pure Acostic / 100
                         coil /Double Magnet
                       </p>
                       <div className="flex flex-row items-center w-full justify-between">
-                        <p className="text-[#E5A000] text-sm text-start font-all">
+                        <p className="text-[#fdb100] text-[12px] text-start font-medium font-all">
                           {formatPrice(2500000, "NGN")}
                         </p>
                         <p
-                          className={`text-black text-xs text-start font-all line-through`}
+                          className={`text-black text-[10px] text-start font-all line-through`}
                         >
                           {formatPrice(17000, "NGN")}
                         </p>
@@ -74,18 +76,20 @@ export default function MainPageHero() {
               })}
           </div>
         </section>
-        <section className="w-full flex justify-end p-3">
-          <div className="flex flex-row items-center gap-3">
+        <section className="w-full flex justify-end p-3 fixed sm:bottom-6 right-5 z-50">
+          <Link
+            to={
+              "https://wa.me/2347042300162?text=`Hello!, I'm interested in your servce`"
+            }
+            className="flex flex-row items-center gap-3 cursor-pointer"
+          >
             <img
               src={
                 "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576538/Amplifier/whatsap_rpuamp.png"
               }
-              className="sm:w-10 sm:h-10 w-8 h-8 object-cover"
+              className="sm:w-16 sm:h-16 w-10 h-10 object-cover"
             />
-            <p className="text-xs sm:text-sm text-center text-red-600 font-all self-center bg-white p-1 rounded shadow">
-              contact us
-            </p>
-          </div>
+          </Link>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
