@@ -9,6 +9,7 @@ import ig from "./assets/ig.png";
 import whatsapp from "./assets/whatsapp.png";
 import map from "./assets/map.png";
 import empty from "./assets/empty.png";
+import frame3 from "./assets/frame3.png";
 
 export {
   bdm,
@@ -21,6 +22,7 @@ export {
   whatsapp,
   map,
   empty,
+  frame3,
 };
 
 // ============= Authentication Components ==========
