@@ -13,7 +13,7 @@ export default function ProductPage() {
     <>
       <MainPageNavbar />
       <section className="w-full h-full py-3 bg-gray-200 flex flex-col z-10 items-center sm:gap-5 justify-start gap-4">
-        <div className="flex flex-col items-start w-full sm:gap-10 sm:h-auto sm:w-4/5 mx-auto mt-4 sm:mt-6">
+        <div className="flex flex-col items-start w-full sm:gap-10 sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
           <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
             <p className="font-all font-semibold text-2xl text-center w-full text-green-600">
               Shop From
@@ -34,10 +34,13 @@ export default function ProductPage() {
                 showing 1 - 24 of 35 products
               </p>
             </div>
-            <div className="w-full p-3 grid md:grid-cols-3 grid-cols-2 items-center gap-2">
+            <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 flex-wrap">
               {result?.map((item: any, index: number) => {
                 return (
-                  <div key={index} className="min-w-auto flex-shrink-0">
+                  <div
+                    key={index}
+                    className="min-w-auto flex-shrink-0 self-stretch"
+                  >
                     <ProductAuthCard data={item} />
                   </div>
                 );

@@ -103,15 +103,6 @@ export default function UserProfile() {
                   className="outline-0 border font-all text-xs border-black/50 p-2"
                 />
               </div>
-              <div className="flex flex-col w-full gap-1">
-                <p className="font-medium text-[12px] text-start font-all">
-                  Edit Password
-                </p>
-                <input
-                  type="text"
-                  className="outline-0 border font-all text-xs border-black/50 p-2"
-                />
-              </div>
             </div>
             <div className="flex flex-col items-start w-full gap-3">
               <p className="font-all font-semibold text-base text-black/80 sm:text-lg text-start">

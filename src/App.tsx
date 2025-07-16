@@ -19,6 +19,7 @@ import NewPassword from "./authentication/newpassword";
 import ProductPage from "./dynamic/productpage";
 import CartPage from "./cart/cartpage";
 import SingleProductPage from "./dynamic/singlepage";
+import AdminDashboard from "./admin/admin";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ export default function App() {
           path={"/singleproduct/:category"}
           element={<SingleProductPage />}
         />
+        <Route path={"/admin"} element={<AdminDashboard />} />
       </Routes>
     </QueryClientProvider>
   );

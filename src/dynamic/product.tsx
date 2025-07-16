@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { formatPrice } from "../utils/priceconverter";
+import { formatPrice, uniqueByName } from "../utils/priceconverter";
 import { Minus, Plus, X } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCart, type HeroDataType } from "../utils/storage";
 import { usePageData } from "../store/singlepage";
+import { useGlobalState } from "../store/globalstate";
 
 export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let [image, setImage] = useState(data.image[0]);
@@ -12,7 +13,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let isSingleImage = data.image.length === 1;
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const { incrementQuantity, decrementQuantity, addToCart, isInCart } =
+  const { incrementQuantity, decrementQuantity, addToCart, isInCart, cart } =
     useCart();
 
   const triggerAnimation = () => {
@@ -35,14 +36,16 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let navigate = useNavigate();
   let { setData } = usePageData();
 
+  let { setCartlen } = useGlobalState();
+
   return (
-    <div className="relative flex flex-col">
+    <div className="relative flex flex-col self-stretch">
       <div
         onClick={() => {
           setData(data);
           navigate(`/singleproduct/${data.name}-${data.id}`);
         }}
-        className="flex flex-col items-center shadow justify-between w-auto sm:min-w-[200px] bg-white"
+        className="flex flex-col items-center shadow justify-between w-auto min-h-full sm:min-w-[200px] p-2 border border-green-300/40 bg-white"
       >
         <div className="relative flex flex-col items-center">
           <img
@@ -57,7 +60,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           <p className="font-normal text-start font-all text-xs text-gray-600 w-full">
             {data.description}
           </p>
-          <div className="flex items-center w-full justify-start">
+          <div className="flex items-center w-full justify-start pb-3">
             <p className="text-[#F0B100] text-sm text-start font-medium font-all">
               {formatPrice(data.price, "NGN")}
             </p>
@@ -67,9 +70,10 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               e.stopPropagation();
               e.preventDefault();
               addToCart(data);
+              setCartlen(uniqueByName(cart).length);
             }}
             type="button"
-            className={`bg-green-700 shadow text-sm p-2 w-full font-all font-normal text-white`}
+            className={`bg-green-700 shadow text-xs p-2.5 w-full font-all font-medium text-white`}
           >
             Add to Cart
           </button>
@@ -79,7 +83,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               setView(!view);
             }}
             type="button"
-            className={`border border-green-700 shadow text-sm p-2 w-full font-all font-normal text-green-700`}
+            className={`border border-green-700/40 text-xs mt-2 p-2.5 w-full font-all font-medium text-green-700`}
           >
             Quick view
           </button>
@@ -90,7 +94,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           view ? "flex" : "hidden"
         } justify-center w-full h-screen fixed bg-black/30 z-50 inset-0`}
       >
-        <div className="flex sm:flex-row flex-col items-center gap-3 p-3 justify-between min-h-[350px] sm:w-3/4 w-[90%] mx-auto self-center bg-white">
+        <div className="flex sm:flex-row flex-col items-center gap-3 p-3 justify-between min-h-[400px] sm:w-3/4 w-[90%] mx-auto self-center bg-white">
           <div className="w-full justify-end sm:hidden flex">
             <X
               onClick={() => setView(!view)}
@@ -99,7 +103,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               stroke="4"
             />
           </div>
-          <div className="flex flex-row items-center border border-stone-200 w-full rounded self-stretch gap-2">
+          <div className="flex flex-row items-center border-r border-stone-200 w-full self-stretch gap-2">
             <div
               className={`${
                 isSingleImage ? "hidden" : "flex"
@@ -121,7 +125,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             </div>
             <img src={image} className="object-cover w-3/4 bg-white" />
           </div>
-          <div className="w-full flex flex-col items-start justify-between self-stretch gap-1">
+          <div className="w-full flex flex-col items-start justify-start self-stretch gap-3">
             <div className="w-full sm:flex hidden justify-end pb-2">
               <X
                 onClick={() => setView(!view)}
@@ -130,10 +134,10 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               />
             </div>
             <div className="flex flex-col items-start w-full gap-2 border-b border-stone-400 pb-4">
-              <p className="font-all sm:text-lg text-sm font-semibold text-start w-full">
+              <p className="font-all sm:text-xl text-sm font-semibold text-start w-full">
                 {data.name}
               </p>
-              <p className="font-all sm:text-sm text-xs font-medium text-start w-full">
+              <p className="font-all sm:text-base text-xs font-medium text-start w-full">
                 {data.description}
               </p>
             </div>
@@ -153,7 +157,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 <div className="flex items-center bg-white rounded border border-stone-200">
                   <button
                     onClick={handleDecrement}
-                    disabled={count === 0}
+                    disabled={cart.length === 0}
                     className={
                       "w-10 h-8 flex items-center border-r border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
                     }
@@ -167,7 +171,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                         isAnimating ? "scale-125 text-gray-600" : "scale-100"
                       }`}
                     >
-                      {count}
+                      {cart.length}
                     </span>
                   </div>
 
@@ -183,11 +187,11 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 </div>
               </div>
               <div className="flex flex-row items-center w-full justify-between gap-4">
-                <Link className="w-full" to={"/cart"}>
+                <div onClick={() => addToCart(data)} className="w-full">
                   <div className="w-full p-3 bg-amber-600 text-center font-all font-medium text-sm text-white">
                     Add Cart
                   </div>
-                </Link>
+                </div>
                 <div
                   onClick={() => setView(!view)}
                   className="w-full p-3 bg-green-600 text-center font-all font-medium text-sm text-white"

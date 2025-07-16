@@ -1,10 +1,11 @@
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import Footer from "../footer/footer";
-import { formatPrice } from "../utils/priceconverter";
+import { formatPrice, uniqueByName } from "../utils/priceconverter";
 import { ChevronDown, Minus, Plus, ShieldCheck } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart, type HeroDataType } from "../utils/storage";
 import { empty } from "..";
+import { useGlobalState } from "../store/globalstate";
 
 export default function CartPage() {
   const cartData = useCart();
@@ -22,10 +23,17 @@ export default function CartPage() {
     triggerAnimation();
   };
 
+  let { setCartlen } = useGlobalState();
+
   const handleDecrement = (id: number) => {
     cartData.decrementQuantity(id);
     triggerAnimation();
   };
+
+  useEffect(() => {
+    setData(uniqueByName(data));
+    setCartlen(uniqueByName(data).length);
+  }, []);
 
   const handleRemove = (id: number) => {
     const res: any[] = cartData.removeAllInstances(id);

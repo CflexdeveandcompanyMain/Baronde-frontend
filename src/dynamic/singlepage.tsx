@@ -4,14 +4,15 @@ import MainPageNavbar from "../mainpage/navbar/navbar";
 import { usePageData } from "../store/singlepage";
 import { Link } from "react-router-dom";
 import { Minus, Plus } from "lucide-react";
-import { formatPrice } from "../utils/priceconverter";
+import { formatPrice, uniqueByName } from "../utils/priceconverter";
 import { useCart } from "../utils/storage";
+import { useGlobalState } from "../store/globalstate";
 
 export default function SingleProductPage() {
   let [count, setcount] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const { incrementQuantity, decrementQuantity, addToCart, isInCart } =
+  const { incrementQuantity, decrementQuantity, addToCart, isInCart, cart } =
     useCart();
   let { data } = usePageData();
 
@@ -34,10 +35,13 @@ export default function SingleProductPage() {
 
   let [Image, setImage] = useState(data.image[0]);
   let isSingleImage = data.image.length === 1;
+
+  let { setCartlen } = useGlobalState();
+
   return (
     <>
       <MainPageNavbar />
-      <section className="w-full h-screen bg-white sm:bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
+      <section className="w-full bg-white sm:bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4 py-5">
         <div className="flex flex-col items-start w-[95%] gap-2 sm:h-auto md:w-3/4 mx-auto mt-4 sm:mt-6">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
             <div className="flex flex-row items-center border border-stone-200 bg-white w-full rounded self-stretch gap-2">
@@ -123,13 +127,44 @@ export default function SingleProductPage() {
                     </div>
                   </Link>
                   <div
-                    onClick={() => addToCart(data)}
-                    className="w-full p-3 bg-green-600 text-center font-all font-medium text-sm text-white"
+                    onClick={() => {
+                      addToCart(data);
+
+                      setCartlen(uniqueByName(cart).length);
+                    }}
+                    className="w-full p-3 bg-green-600 cursor-pointer text-center font-all font-medium text-sm text-white"
                   >
-                    Continue shopping
+                    Add to cart
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="flex flex-col items-center p-2 sm:p-6 shadow bg-white justify-start">
+              <p className="font-all text-base text-stone-400 w-full text-start sm:text-xl font-semibold">
+                Description
+              </p>
+              <ul className="flex flex-col items-start w-full pl-5 gap-2">
+                <li className="font-all text-xs text-start list-disc">
+                  High-quality, affordable products designed to meet your
+                  everyday needs. Crafted for reliability, style, and
+                  performance.
+                </li>
+                <li className="font-all text-xs text-start list-disc">
+                  High-quality, affordable products designed to meet your
+                  everyday needs. Crafted for reliability, style, and
+                  performance.
+                </li>
+                <li className="font-all text-xs text-start list-disc">
+                  High-quality, affordable products designed to meet your
+                  everyday needs. Crafted for reliability, style, and
+                  performance.
+                </li>
+                <li className="font-all text-xs text-start list-disc">
+                  High-quality, affordable products designed to meet your
+                  everyday needs. Crafted for reliability, style, and
+                  performance.
+                </li>
+              </ul>
             </div>
           </div>
         </div>

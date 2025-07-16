@@ -10,7 +10,6 @@ import ErrorMessage from "../utils/errorMessage";
 export default function UserSignInInterface() {
   let [viewPassword, setViewPassword] = useState<boolean>(false);
   let [loading, setLoading] = useState<boolean>(true);
-  let [error, setError] = useState<string>("");
   let [message, setMessage] = useState<string>("");
   let [userInfo, setUserInfo] = useState({
     email: "",
@@ -51,7 +50,7 @@ export default function UserSignInInterface() {
       }
     } catch (err: any) {
       if (err.name !== "AbortError") {
-        setError(err.message || "Unknown error");
+        setMessage(err.message || "Unknown error");
       }
     } finally {
       setLoading(false);
@@ -62,6 +61,7 @@ export default function UserSignInInterface() {
     const { name, value } = e.target;
 
     setTrigger(false);
+
     setLoading(true);
 
     setUserInfo((prev) => ({

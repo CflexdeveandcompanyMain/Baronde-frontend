@@ -1,8 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { headlogo, MainPageSearchBar, MobileDropDown } from "../..";
 import { useState } from "react";
-import CartDisplay from "./cartdisplay";
-import { useGlobalState } from "../../store/globalstate";
 import { brand, products } from "../../raw-datas/rd1";
 import {
   AlignJustifyIcon,
@@ -12,18 +10,16 @@ import {
   UserIcon,
 } from "lucide-react";
 
+import { useGlobalState } from "../../store/globalstate";
+
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
-  let { setShowCartDesktop } = useGlobalState();
   let navigate = useNavigate();
   let { name, isVerified } = JSON.parse(
     sessionStorage.getItem("baron:user") || "{}"
   );
 
-  const handleCartClick = () => {
-    document.body.clientWidth > 640 ? setShowCartDesktop() : navigate("/cart");
-  };
-
+  let { cartlen } = useGlobalState();
   let [drop, setdrop] = useState(false);
   let [down, setdown] = useState(false);
   let [acctdrop, setAcctDrop] = useState(false);
@@ -210,21 +206,14 @@ export default function MainPageNavbar() {
               </button>
             </>
           </div>
-          <div className="relative">
-            <ShoppingCartIcon
-              onClick={handleCartClick}
-              className="text-white cursor-pointer"
-            />
-            <div
-              onClick={handleCartClick}
-              className="h-2 w-2 bg-[#BB2331] p-2 cursor-pointer flex justify-center rounded-full absolute -top-1 right-0"
-            >
+          <Link to={"/cart"} className="relative">
+            <ShoppingCartIcon className="text-white cursor-pointer" />
+            <div className="h-2 w-2 bg-[#BB2331] p-2 cursor-pointer flex justify-center rounded-full absolute -top-1 right-0">
               <p className="text-white text-[10px] font-medium text-center self-center">
-                2
+                {cartlen}
               </p>
             </div>
-            <CartDisplay />
-          </div>
+          </Link>
           <AlignJustifyIcon
             onClick={() => setmenu(!menu)}
             className="sm:hidden flex text-white"

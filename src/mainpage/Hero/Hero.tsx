@@ -29,7 +29,7 @@ export default function MainPageHero() {
                 return (
                   <div
                     key={index}
-                    className="flex flex-col items-center shadow justify-center w-auto bg-white"
+                    className="flex flex-col items-center shadow justify-center min-w-[200px] w-auto bg-white"
                   >
                     <div className="relative flex flex-col items-center">
                       <img
@@ -76,7 +76,7 @@ export default function MainPageHero() {
               })}
           </div>
         </section>
-        <section className="w-full flex justify-end p-3 fixed sm:bottom-6 right-5 z-50">
+        <section className="w-full flex justify-end p-3 fixed bottom-5 sm:bottom-6 right-5 z-50">
           <Link
             to={
               "https://wa.me/2347042300162?text=`Hello!, I'm interested in your servce`"
@@ -87,7 +87,7 @@ export default function MainPageHero() {
               src={
                 "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576538/Amplifier/whatsap_rpuamp.png"
               }
-              className="sm:w-16 sm:h-16 w-10 h-10 object-cover"
+              className="sm:w-16 sm:h-16 w-13 h-13 object-cover"
             />
           </Link>
         </section>

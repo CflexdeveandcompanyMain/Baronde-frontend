@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useGlobalState } from "../store/globalstate";
 
 export interface HeroDataType {
   id: number;
@@ -66,7 +67,6 @@ export const CartUtils = {
       cart.push(cartItem);
       CartUtils.saveCart(cart);
     }
-
     return cart;
   },
 
@@ -172,10 +172,12 @@ export const CartUtils = {
 
 export const useCart = () => {
   const [cart, setCart] = useState<CartItem[]>(CartUtils.getCart());
+  let { setCartlen } = useGlobalState();
 
   const addToCart = (product: HeroDataType) => {
     const updatedCart = CartUtils.addToCart(product);
     setCart(updatedCart);
+    setCartlen(cart.length);
   };
 
   const incrementQuantity = (productId: number) => {
@@ -191,6 +193,7 @@ export const useCart = () => {
   const removeAllInstances = (productId: number) => {
     const updatedCart = CartUtils.removeAllInstances(productId);
     setCart(updatedCart);
+    setCartlen(cart.length);
     return removeDuplicatesByKey(updatedCart);
   };
 
