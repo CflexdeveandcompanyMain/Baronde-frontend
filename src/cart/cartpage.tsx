@@ -3,9 +3,10 @@ import Footer from "../footer/footer";
 import { formatPrice, uniqueByName } from "../utils/priceconverter";
 import { ChevronDown, Minus, Plus, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useCart, type HeroDataType } from "../utils/storage";
+import { useCart } from "../utils/storage";
 import { empty } from "..";
 import { useGlobalState } from "../store/globalstate";
+import type { HeroDataType } from "../mainpage/Hero/data";
 
 export default function CartPage() {
   const cartData = useCart();

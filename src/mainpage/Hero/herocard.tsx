@@ -1,24 +1,15 @@
-import ProductCard from "../../product/productcard";
+import ProductAuthCard from "../../dynamic/product";
 import { HeroData, type HeroDataType } from "./data";
 
 export default function HeroProductCard({ category }: { category: string }) {
   let products = HeroData.filter((item) => item.category === category);
   if (products.length === 0) return <></>;
   return (
-    <div className="overflow-x-scroll w-full flex flex-row items-stretch gap-1">
+    <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
       {products.map((item: HeroDataType, index: number) => {
         return (
-          <div key={index} className="min-w-auto flex-shrink-0">
-            <ProductCard
-              stockQuantity={item.stockQuantity}
-              id={item.id}
-              discount={item.discount}
-              category={item.category}
-              image={item.image}
-              name={item.name}
-              description={item.description}
-              price={item.price}
-            />
+          <div key={index} className="min-w-auto flex-shrink-0 self-stretch">
+            <ProductAuthCard data={item} />
           </div>
         );
       })}

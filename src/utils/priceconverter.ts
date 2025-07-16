@@ -1,4 +1,4 @@
-import type { HeroDataType } from "./storage";
+import type { HeroDataType } from "../mainpage/Hero/data";
 
 export function formatPrice(price: number, currency = "N", locale = "en-NG") {
   return price.toLocaleString(locale, {

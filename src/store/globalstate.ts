@@ -2,6 +2,8 @@ import { create } from "zustand";
 
 interface GlobalState {
   c: any[];
+  ser: boolean;
+  setSer: () => void;
   cartlen: number;
   setCartlen: (len: number) => void;
   setC: (item: any) => void;
@@ -10,6 +12,10 @@ interface GlobalState {
 }
 
 export const useGlobalState = create<GlobalState>()((set) => ({
+  ser: false,
+  setSer() {
+    set((state) => ({ ...state, ser: !state.ser }));
+  },
   cartlen: 0,
   setCartlen(len) {
     set({ cartlen: len });

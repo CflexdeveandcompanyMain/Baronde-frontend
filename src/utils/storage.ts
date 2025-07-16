@@ -1,16 +1,6 @@
 import { useState } from "react";
 import { useGlobalState } from "../store/globalstate";
-
-export interface HeroDataType {
-  id: number;
-  category: string;
-  image: string[];
-  name: string;
-  description: string;
-  price: number;
-  discount?: number;
-  stockQuantity: number;
-}
+import type { HeroDataType } from "../mainpage/Hero/data";
 
 export interface CartItem extends HeroDataType {
   cartItemId: string;
@@ -60,6 +50,7 @@ export const CartUtils = {
     if (existingCount < product.stockQuantity) {
       const cartItem: CartItem = {
         ...product,
+        price: product.price - product.discount,
         cartItemId: CartUtils.generateCartItemId(),
         addedAt: Date.now(),
       };

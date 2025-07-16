@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { useGlobalState } from "../../store/globalstate";
+import Mob from "./mob";
 
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
@@ -23,11 +24,19 @@ export default function MainPageNavbar() {
   let [drop, setdrop] = useState(false);
   let [down, setdown] = useState(false);
   let [acctdrop, setAcctDrop] = useState(false);
+  let [search, setSearch] = useState(false);
 
   const focusRef = (element: HTMLButtonElement) => {
     if (element) {
       element.focus();
     }
+  };
+
+  const { ser, setSer } = useGlobalState();
+
+  const setSearchBtn = () => {
+    setSer();
+    setSearch(!search);
   };
 
   return (
@@ -147,7 +156,18 @@ export default function MainPageNavbar() {
               </Link>
             </>
           )}
-          <SearchIcon className={`text-white sm:hidden flex`} />
+          <div className="sm:hidden flex">
+            <SearchIcon onClick={setSearchBtn} className={`text-white`} />
+            <div
+              className={`${
+                ser ? "flex" : "hidden"
+              } justify-start fixed inset-0 z-50 bg-black/40 w-full h-screen`}
+            >
+              <div className="p-3 shadow rounded h-aut w-full">
+                <Mob />
+              </div>
+            </div>
+          </div>
           <div className="flex flex-col items-center relative cursor-pointer">
             <UserIcon
               onClick={() => {
@@ -256,13 +276,17 @@ export default function MainPageNavbar() {
               >
                 {brand.map((item, index) => {
                   return (
-                    <Link
-                      to={"/product/"}
+                    <div
+                      onClick={() => {
+                        let brnd = item.replaceAll(" ", "");
+                        sessionStorage.setItem("baron:brand", brnd);
+                        setTimeout(() => setdrop(!drop), 10);
+                      }}
                       className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
                       key={index}
                     >
                       {item}
-                    </Link>
+                    </div>
                   );
                 })}
               </button>

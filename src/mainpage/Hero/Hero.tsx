@@ -91,9 +91,9 @@ export default function MainPageHero() {
             />
           </Link>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Full Range Speakers
             </p>
             <Link to={"/"} className="w-full">
@@ -106,9 +106,9 @@ export default function MainPageHero() {
             <HeroProductCard category="fullrangespeaker" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               New Speaker Arrival
             </p>
             <Link
@@ -125,9 +125,9 @@ export default function MainPageHero() {
             <HeroProductCard category="newspeakerarrival" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Single sub
             </p>
             <Link to={"/product/single-sub"} className="w-full">
@@ -140,9 +140,9 @@ export default function MainPageHero() {
             <HeroProductCard category="singlesub" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Double sub
             </p>
             <Link to={"/product/double-sub"} className="w-full">
@@ -155,9 +155,9 @@ export default function MainPageHero() {
             <HeroProductCard category="doublesub" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Amplifier
             </p>
             <Link to={"/product/amplifier"} className="w-full">
@@ -170,9 +170,9 @@ export default function MainPageHero() {
             <HeroProductCard category="amplifier" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Flat Mixers
             </p>
             <Link to={"/product/flat-mixer"} className="w-full">
@@ -185,9 +185,9 @@ export default function MainPageHero() {
             <HeroProductCard category="flatmixer" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Floor Mixers
             </p>
             <Link to={"/product/floor-mixer"} className="w-full">
@@ -200,9 +200,9 @@ export default function MainPageHero() {
             <HeroProductCard category="floormixer" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Equalizers
             </p>
             <Link to={"/product/equalizer"} className="w-full">
@@ -215,9 +215,9 @@ export default function MainPageHero() {
             <HeroProductCard category="equalizer" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Line Arrays
             </p>
             <Link to={"/product/line-array"} className="w-full">
@@ -230,9 +230,9 @@ export default function MainPageHero() {
             <HeroProductCard category="linearray" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Microphones
             </p>
             <Link to={"/product/microphone"} className="w-full">
@@ -245,9 +245,9 @@ export default function MainPageHero() {
             <HeroProductCard category="microphone" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Drums
             </p>
           </div>
@@ -255,9 +255,9 @@ export default function MainPageHero() {
             <HeroProductCard category="drum" />
           </div>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3 p-3">
+        <section className="w-full flex flex-col items-center justify-center gap-3">
           <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Compressors
             </p>
           </div>

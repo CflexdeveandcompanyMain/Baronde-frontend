@@ -20,10 +20,13 @@ import ProductPage from "./dynamic/productpage";
 import CartPage from "./cart/cartpage";
 import SingleProductPage from "./dynamic/singlepage";
 import AdminDashboard from "./admin/admin";
+import SearchPage from "./dynamic/searchpage";
 
 const queryClient = new QueryClient();
 
 export default function App() {
+  //const getBrand = sessionStorage.getItem("baron:brand");
+  //if (!getBrand) sessionStorage.setItem("baron:brand", "soundprince");
   return (
     <QueryClientProvider client={queryClient}>
       <ToastContainer />
@@ -50,6 +53,7 @@ export default function App() {
           element={<SingleProductPage />}
         />
         <Route path={"/admin"} element={<AdminDashboard />} />
+        <Route path={"/search/:keyword"} element={<SearchPage />} />
       </Routes>
     </QueryClientProvider>
   );

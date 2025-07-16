@@ -16,4 +16,4 @@ export const products: string[] = [
   "Single Sub",
   "Line Array",
 ];
-export const brand: string[] = ["Sound Prince", "Rave", "Others"];
+export const brand: string[] = ["Sound Prince", "Rave"];

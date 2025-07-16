@@ -110,9 +110,13 @@ export default function ForgotPassword() {
             </p>
           </div>
         </div>
-        <div className="flex flex-row items-center self-start my-2 gap-2 justify-between sm:w-1/3 mx-0 w-1/2">
-          <p className="font-all text-xs">Privacy policy</p>
-          <p className="font-all text-xs">Terms of use</p>
+        <div className="flex flex-row items-center self-start my-2 gap-5 justify-between">
+          <Link to={"/policy"} className="font-all text-xs">
+            Privacy policy
+          </Link>
+          <Link to={"/term"} className="font-all text-xs">
+            Terms of use
+          </Link>
         </div>
       </section>
     </section>

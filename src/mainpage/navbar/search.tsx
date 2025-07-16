@@ -1,4 +1,6 @@
+import { ChevronDown, Search } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const appliances: string[] = [
   "Refrigerator",
@@ -15,6 +17,9 @@ const appliances: string[] = [
 
 export default function MainPageSearchBar() {
   let [drop, setdrop] = useState<boolean>(false);
+  let [keyword, setKeyword] = useState("");
+
+  let navigate = useNavigate();
 
   const focusRef = (element: HTMLButtonElement) => {
     if (element) {
@@ -23,9 +28,10 @@ export default function MainPageSearchBar() {
   };
 
   return (
-    <div className="hidden sm:flex flex-row items-center w-full">
+    <div className={`hidden sm:flex-row items-center w-full`}>
       <input
         autoFocus={true}
+        onChange={(e) => setKeyword(e.target.value)}
         type={"text"}
         placeholder="Search"
         className="font-all text-sm w-3/5 font-normal self-stretch outline-none p-2 bg-white border border-black"
@@ -38,26 +44,11 @@ export default function MainPageSearchBar() {
           <p className="font-all text-xs font-medium text-center">
             All categories
           </p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={`${
-              drop ? "rotate-180" : "rotate-360"
-            } lucide lucide-chevron-down-icon lucide-chevron-down duration-300`}
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+          <ChevronDown className="duration-300" size={12} />
         </div>
         <button
           ref={focusRef}
-          onBlur={() => setdrop(false)}
+          onBlur={() => setdrop(!drop)}
           type={"button"}
           className={`${
             drop ? "flex" : "hidden"
@@ -75,22 +66,15 @@ export default function MainPageSearchBar() {
           })}
         </button>
       </div>
-      <div className="self-stretch flex justify-center bg-[#BB2331] rounded-r-sm p-2.5">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="lucide lucide-search-icon lucide-search text-white"
-        >
-          <path d="m21 21-4.34-4.34" />
-          <circle cx="11" cy="11" r="8" />
-        </svg>
+      <div
+        onClick={() => {
+          if (keyword) {
+            navigate("/search/" + keyword);
+          }
+        }}
+        className="self-stretch flex justify-center bg-[#BB2331] rounded-r-sm p-2.5"
+      >
+        <Search size={20} className="text-white" />
       </div>
     </div>
   );

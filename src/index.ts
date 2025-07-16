@@ -1,7 +1,7 @@
 //========= IMAGE ===========
 import bdm from "./assets/bdm.png";
 import headlogo from "./assets/headlogo.png";
-import Hero from "./assets/Hero.png";
+import Hero from "./assets/Hero.webp";
 import p1 from "./assets/p1.png";
 import fb from "./assets/fb.png";
 import x from "./assets/x.png";

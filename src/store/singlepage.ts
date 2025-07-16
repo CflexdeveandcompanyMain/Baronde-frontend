@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { HeroDataType } from "../utils/storage";
+import type { HeroDataType } from "../mainpage/Hero/data";
 
 interface pageDataT {
   data: HeroDataType;
@@ -12,6 +12,8 @@ export const usePageData = create<pageDataT>()((set) => ({
     description: "",
     price: 0,
     discount: 0,
+    keyword: [""],
+    brand: "",
     category: "",
     id: 0,
     image: [""],

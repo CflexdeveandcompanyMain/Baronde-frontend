@@ -34,7 +34,7 @@ export default function ProductPage() {
                 showing 1 - 24 of 35 products
               </p>
             </div>
-            <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 flex-wrap">
+            <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
               {result?.map((item: any, index: number) => {
                 return (
                   <div

@@ -2,9 +2,10 @@ import { useState } from "react";
 import { formatPrice, uniqueByName } from "../utils/priceconverter";
 import { Minus, Plus, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useCart, type HeroDataType } from "../utils/storage";
+import { useCart } from "../utils/storage";
 import { usePageData } from "../store/singlepage";
 import { useGlobalState } from "../store/globalstate";
+import type { HeroDataType } from "../mainpage/Hero/data";
 
 export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let [image, setImage] = useState(data.image[0]);
@@ -45,32 +46,48 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           setData(data);
           navigate(`/singleproduct/${data.name}-${data.id}`);
         }}
-        className="flex flex-col items-center shadow justify-between w-auto min-h-full sm:min-w-[200px] p-2 border border-green-300/40 bg-white"
+        className="flex flex-col items-center sm:shadow justify-between w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2  bg-white"
       >
-        <div className="relative flex flex-col items-center">
+        <div className="flex flex-col items-center h-[50%]">
           <img
             src={data.image[0]}
-            className="object-cover max-h-[200px] w-full bg-white"
+            className="object-cover h-full w-full bg-white"
           />
+          <div className="flex justify-center bg-[#fdb204f3] p-1 shadow absolute top-1.5 left-1.5 ">
+            <p
+              className={`text-white font-all text-center text-xs font-semibold`}
+            >
+              {formatPrice(34000, "NGN")}
+            </p>
+          </div>
         </div>
         <div className="flex flex-col items-center w-full gap-1.5 bg-slate-100/20 p-1.5">
           <p className={`text-start font-medium font-all text-sm w-full`}>
             {data.name}
           </p>
-          <p className="font-normal text-start font-all text-xs text-gray-600 w-full">
+          <p className="font-normal text-start font-all text-[13px] text-gray-600 w-full">
             {data.description}
           </p>
-          <div className="flex items-center w-full justify-start pb-3">
-            <p className="text-[#F0B100] text-sm text-start font-medium font-all">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center w-full justify-between">
+            <p className="text-[#fdb100] text-sm text-start font-medium font-all">
+              {formatPrice(data.price - 34000, "NGN")}
+            </p>
+            <p
+              className={`text-black text-[11px] text-start font-medium font-all line-through`}
+            >
               {formatPrice(data.price, "NGN")}
             </p>
           </div>
+
           <button
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              addToCart(data);
-              setCartlen(uniqueByName(cart).length);
+              if (isInCart(data.id)) navigate("/cart");
+              else {
+                addToCart(data);
+                setCartlen(uniqueByName(cart).length);
+              }
             }}
             type="button"
             className={`bg-green-700 shadow text-xs p-2.5 w-full font-all font-medium text-white`}

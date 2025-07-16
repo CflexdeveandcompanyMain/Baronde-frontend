@@ -1,6 +1,7 @@
+import type { HeroDataType } from "../mainpage/Hero/data";
 import { useGlobalState } from "../store/globalstate";
 import { formatPrice, uniqueByName } from "../utils/priceconverter";
-import { useCart, type HeroDataType } from "../utils/storage";
+import { useCart } from "../utils/storage";
 
 export default function ProductCard(data: HeroDataType) {
   let { addToCart, cart } = useCart();
