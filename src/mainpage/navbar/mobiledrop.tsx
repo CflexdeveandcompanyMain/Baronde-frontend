@@ -9,7 +9,7 @@ export default function MobileDropDown({ menu }: { menu: boolean }) {
     products: false,
     brands: false,
   });
-  let { isVerified } = JSON.parse(localStorage.getItem("baron:user") || "");
+  let { isVerified } = JSON.parse(localStorage.getItem("baron:user") || "{}");
   return (
     <div
       className={`${

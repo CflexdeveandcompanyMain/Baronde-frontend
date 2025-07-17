@@ -32,7 +32,9 @@ export default function UserOrderHistory() {
               <div className="flex flex-row items-center w-full sm:gap-7 gap-2 py-1">
                 <p className="font-all text-xs text-start text-gray-500">
                   Order date:
-                  <span className="text-black/90"> Feb 16, 2022</span>
+                  <span className="text-black/90">
+                    {new Date().getUTCDay()}
+                  </span>
                 </p>
                 <div className="flex flex-row items-center gap-1">
                   <Truck className="text-green-700 self-center" size={16} />

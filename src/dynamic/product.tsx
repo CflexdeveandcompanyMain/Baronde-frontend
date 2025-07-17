@@ -48,7 +48,12 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
         }}
         className="flex flex-col items-center sm:shadow justify-between w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2  bg-white"
       >
-        <div className="flex flex-col items-center h-[50%]">
+        <div className="flex flex-col items-center h-[50%] relative">
+          <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">
+            <p className="font-all font-bold text-lg text-green-700/50 self-center text-center rotate-45">
+              barondemusical
+            </p>
+          </div>
           <img
             src={data.image[0]}
             className="object-cover h-full w-full bg-white"

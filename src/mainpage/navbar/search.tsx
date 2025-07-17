@@ -28,7 +28,7 @@ export default function MainPageSearchBar() {
   };
 
   return (
-    <div className={`hidden sm:flex-row items-center w-full`}>
+    <div className={`hidden sm:flex flex-row items-center w-full`}>
       <input
         autoFocus={true}
         onChange={(e) => setKeyword(e.target.value)}
