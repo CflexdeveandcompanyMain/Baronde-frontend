@@ -40,7 +40,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let { setCartlen } = useGlobalState();
 
   return (
-    <div className="relative flex flex-col self-stretch">
+    <div className="relative flex flex-col self-stretch h-full flex-grow">
       <div
         onClick={() => {
           setData(data);
@@ -50,7 +50,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
       >
         <div className="flex flex-col items-center h-[50%] relative">
           <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">
-            <p className="font-all font-bold text-lg text-green-700/50 self-center text-center rotate-45">
+            <p className="font-all font-bold text-lg text-[#E7FFC078] self-center text-center rotate-45">
               barondemusical
             </p>
           </div>
@@ -70,8 +70,8 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           <p className={`text-start font-medium font-all text-sm w-full`}>
             {data.name}
           </p>
-          <p className="font-normal text-start font-all text-[13px] text-gray-600 w-full">
-            {data.description}
+          <p className="font-normal text-justify font-all text-[13px] text-gray-600 w-full">
+            {data.description.replaceAll("/", "||")}
           </p>
           <div className="flex flex-col sm:flex-row items-start sm:items-center w-full justify-between">
             <p className="text-[#fdb100] text-sm text-start font-medium font-all">
@@ -83,7 +83,6 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               {formatPrice(data.price, "NGN")}
             </p>
           </div>
-
           <button
             onClick={(e) => {
               e.stopPropagation();

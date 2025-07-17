@@ -149,5 +149,23 @@ export async function getImagesByName(name: string) {
   console.log(response);
 }
 
-getImagesByCategory("equalizer");
-getImagesByName("SP-218");
+export async function getCountryAndState() {
+  const request = await fetch(
+    "https://countriesnow.space/api/v0.1/countries/states",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country: "Nigeria",
+      }),
+    }
+  );
+  console.log(await request.json());
+}
+
+getCountryAndState();
+
+// getImagesByCategory("equalizer");
+// getImagesByName("SP-218");

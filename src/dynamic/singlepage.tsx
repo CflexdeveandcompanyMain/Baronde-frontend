@@ -66,7 +66,7 @@ export default function SingleProductPage() {
               </div>
               <img src={Image} className="object-cover w-3/4 bg-white" />
               <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">
-                <p className="font-all font-bold text-xl text-green-400/50 self-center text-center rotate-45">
+                <p className="font-all font-bold text-xl text-[#E7FFC078] self-center text-center rotate-45">
                   barondemusical
                 </p>
               </div>

@@ -10,8 +10,10 @@ import whatsapp from "./assets/whatsapp.png";
 import map from "./assets/map.png";
 import empty from "./assets/empty.png";
 import frame3 from "./assets/frame3.png";
+import pay from "./assets/pay.png";
 
 export {
+  pay,
   bdm,
   headlogo,
   Hero as desktopHero,

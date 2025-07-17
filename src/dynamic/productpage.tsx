@@ -39,7 +39,7 @@ export default function ProductPage() {
                 return (
                   <div
                     key={index}
-                    className="min-w-auto flex-shrink-0 self-stretch"
+                    className="min-w-auto grow self-stretch h-full"
                   >
                     <ProductAuthCard data={item} />
                   </div>
