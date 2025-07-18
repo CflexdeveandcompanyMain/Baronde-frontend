@@ -2,7 +2,6 @@ import { X } from "lucide-react";
 import { SimpleSelect } from "./products";
 import ImageUpload from "./image";
 
-type Fnfile = (val: File[]) => void;
 type Fnstring = (val: string) => void;
 type Fnnumber = (val: number) => void;
 
@@ -15,7 +14,6 @@ export default function EditForm({
   nameFn,
   keyFn,
   descFn,
-  imgFn,
   onIT,
   show,
   close,
@@ -28,7 +26,6 @@ export default function EditForm({
   nameFn: Fnstring;
   keyFn: Fnstring;
   descFn: Fnstring;
-  imgFn: Fnfile;
   onIT: boolean;
   show: () => void;
   close: () => void;
@@ -130,7 +127,7 @@ export default function EditForm({
           <label htmlFor="brand" className="font-all text-xs text-start w-full">
             Product Image (JPG, PNG, Max size: 5MB)
           </label>
-          <ImageUpload set={imgFn} />
+          <ImageUpload />
         </div>
         <div className="flex flex-row items-center w-full justify-between gap-3">
           <button className="w-full p-2 rounded border border-green-600 text-center text-green-600">

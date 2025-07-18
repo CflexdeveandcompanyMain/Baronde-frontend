@@ -1,6 +1,5 @@
-import { useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Upload, X, Image } from "lucide-react";
-
 interface ImageData {
   id: number;
   file: File;
@@ -8,15 +7,13 @@ interface ImageData {
   name: string;
 }
 
-export default function ImageUpload({ set }: { set: (files: File[]) => void }) {
+export default function ImageUpload() {
   const [images, setImages] = useState<ImageData[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
-  useCallback(() => {
-    const files = images.map((img) => img.file);
-    set(files);
-    console.log(files);
-  }, [images]);
+  useEffect(() => {
+    localStorage.setItem("baron:img", JSON.stringify(images));
+  }, []);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();

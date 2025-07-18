@@ -1,9 +1,10 @@
 import { Plus, Search } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { products } from "../raw-datas/rd1";
 import { HeroData } from "../mainpage/Hero/data";
 import AdminCard from "./card";
 import EditForm from "./editform";
+// import { useImage } from "./img";
 
 let D = {
   brand: ["SoundPrince", "Rave"],
@@ -24,8 +25,15 @@ export default function AdminProducts() {
   let [onIt, setIt] = useState(true);
   let [open, setopen] = useState(false);
 
+  const getImage = useMemo(
+    () => JSON.parse(localStorage.getItem("baron:img") || "[]"),
+    []
+  );
+
+  console.log(getImage);
+
   if (
-    eImage.length > 0 &&
+    // eImage.length > 0 &&
     eamount > 0 &&
     ebrand &&
     ecategory &&
@@ -36,17 +44,6 @@ export default function AdminProducts() {
   ) {
     setIt(!onIt);
   }
-
-  console.log(
-    eImage,
-    eamount,
-    ebrand,
-    ecategory,
-    edescription,
-    ediscount,
-    ekeyword,
-    ename
-  );
 
   const openorclose = () => setopen(!open);
 
@@ -79,7 +76,7 @@ export default function AdminProducts() {
   const EName = (val: string) => setEName(val);
   const EDiscount = (val: number) => setEDiscount(val);
   const EDescription = (val: string) => setEDescription(val);
-  const EImage = (val: File[]) => useCallback(() => setEImage(val), [val]);
+  //   const EImage = (val: File[]) => useCallback(() => setEImage(val), [val]);
 
   return (
     <section className="flex flex-col items-start w-full gap-5">
@@ -105,7 +102,6 @@ export default function AdminProducts() {
           show={showIt}
           onIT={onIt}
           which={D}
-          imgFn={EImage}
           keyFn={EKeyword}
           descFn={EDescription}
           nameFn={EName}
