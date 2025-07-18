@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { Upload, X, Image } from "lucide-react";
 
 interface ImageData {
@@ -12,11 +12,11 @@ export default function ImageUpload({ set }: { set: (files: File[]) => void }) {
   const [images, setImages] = useState<ImageData[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
-  // Update parent whenever images change
-  useEffect(() => {
+  useCallback(() => {
     const files = images.map((img) => img.file);
     set(files);
-  }, [images, set]);
+    console.log(files);
+  }, [images]);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();

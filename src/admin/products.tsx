@@ -1,5 +1,5 @@
 import { Plus, Search } from "lucide-react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { products } from "../raw-datas/rd1";
 import { HeroData } from "../mainpage/Hero/data";
 import AdminCard from "./card";
@@ -37,6 +37,17 @@ export default function AdminProducts() {
     setIt(!onIt);
   }
 
+  console.log(
+    eImage,
+    eamount,
+    ebrand,
+    ecategory,
+    edescription,
+    ediscount,
+    ekeyword,
+    ename
+  );
+
   const openorclose = () => setopen(!open);
 
   const result = HeroData.filter((item) => {
@@ -68,7 +79,7 @@ export default function AdminProducts() {
   const EName = (val: string) => setEName(val);
   const EDiscount = (val: number) => setEDiscount(val);
   const EDescription = (val: string) => setEDescription(val);
-  const EImage = (val: File[]) => setEImage(val);
+  const EImage = (val: File[]) => useCallback(() => setEImage(val), [val]);
 
   return (
     <section className="flex flex-col items-start w-full gap-5">
