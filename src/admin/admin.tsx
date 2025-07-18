@@ -13,6 +13,7 @@ import {
 import { useState, type JSX } from "react";
 import AdminMain from "./dash";
 import AdminSettings from "./settings";
+import AdminPayment from "./payment";
 
 let data = [
   {
@@ -65,6 +66,7 @@ const AdminDashboard = () => {
   let Components: { [key: string]: JSX.Element } = {
     dashboard: <AdminMain data={data} />,
     settings: <AdminSettings />,
+    payment: <AdminPayment />,
   };
   return (
     <section className="flex flex-row items-center w-full h-screen">

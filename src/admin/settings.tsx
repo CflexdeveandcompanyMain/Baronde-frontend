@@ -26,6 +26,8 @@ export default function AdminSettings() {
         <div className="flex flex-row items-center w-full gap-2">
           <div className="flex items-center mb-4">
             <input
+              checked={true}
+              disabled={true}
               id="default-checkbox"
               type="checkbox"
               value=""
@@ -33,7 +35,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-lg font-semibold text-[#262626]">
+            <p className="font-all text-base font-medium text-[#262626]">
               Email Notification
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -44,6 +46,8 @@ export default function AdminSettings() {
         <div className="flex flex-row items-center w-full gap-2">
           <div className="flex items-center mb-4">
             <input
+              checked={true}
+              disabled={true}
               id="default-checkbox"
               type="checkbox"
               value=""
@@ -51,7 +55,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-lg font-semibold text-[#262626]">
+            <p className="font-all text-base font-medium text-[#262626]">
               Orders Notification
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -62,6 +66,8 @@ export default function AdminSettings() {
         <div className="flex flex-row items-center w-full gap-2">
           <div className="flex items-center mb-4">
             <input
+              checked={true}
+              disabled={true}
               id="default-checkbox"
               type="checkbox"
               value=""
@@ -69,7 +75,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-lg font-semibold text-[#262626]">
+            <p className="font-all text-base font-medium text-[#262626]">
               Payment Alerts
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -81,6 +87,8 @@ export default function AdminSettings() {
         <div className="flex flex-row items-center w-full gap-2">
           <div className="flex items-center mb-4">
             <input
+              checked={true}
+              disabled={true}
               id="default-checkbox"
               type="checkbox"
               value=""
@@ -88,7 +96,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-lg font-semibold text-[#262626]">
+            <p className="font-all text-base font-medium text-[#262626]">
               Inventory Alerts
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -99,6 +107,8 @@ export default function AdminSettings() {
         <div className="flex flex-row items-center w-full gap-2">
           <div className="flex items-center mb-4">
             <input
+              checked={true}
+              disabled={true}
               id="default-checkbox"
               type="checkbox"
               value=""
@@ -106,7 +116,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-lg font-semibold text-[#262626]">
+            <p className="font-all text-base font-medium text-[#262626]">
               Customers & User activities
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -117,6 +127,8 @@ export default function AdminSettings() {
         <div className="flex flex-row items-center w-full gap-2">
           <div className="flex items-center mb-4">
             <input
+              checked={true}
+              disabled={true}
               id="default-checkbox"
               type="checkbox"
               value=""
@@ -124,7 +136,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-lg font-semibold text-[#262626]">
+            <p className="font-all text-base font-medium text-[#262626]">
               System & Admin-level updates
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
