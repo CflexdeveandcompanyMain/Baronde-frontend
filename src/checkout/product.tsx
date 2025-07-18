@@ -14,6 +14,9 @@ export default function Checkout() {
   let [state, setstate] = useState("Abia");
   let { cart, totals } = useCart();
 
+  if (state) {
+  }
+
   return (
     <>
       <MainPageNavbar />

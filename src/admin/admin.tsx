@@ -8,7 +8,11 @@ import {
   ShoppingBasket,
   Wallet,
   HomeIcon,
+  Settings,
 } from "lucide-react";
+import { useState, type JSX } from "react";
+import AdminMain from "./dash";
+import AdminSettings from "./settings";
 
 let data = [
   {
@@ -33,7 +37,35 @@ let data = [
   },
 ];
 
+let sidebar = [
+  {
+    title: "Dashboard",
+    icon: <HomeIcon className="text-stone-50 group-hover:text-black" />,
+  },
+  {
+    title: "Products",
+    icon: <Package className="text-stone-50 group-hover:text-black" />,
+  },
+  {
+    title: "Orders",
+    icon: <ShoppingBasket className="text-stone-50 group-hover:text-black" />,
+  },
+  {
+    title: "Payment",
+    icon: <Wallet className="text-stone-50 group-hover:text-black" />,
+  },
+  {
+    title: "Settings",
+    icon: <Settings className="text-stone-50 group-hover:text-black" />,
+  },
+];
 const AdminDashboard = () => {
+  let [page, setPage] = useState("dashboard");
+
+  let Components: { [key: string]: JSX.Element } = {
+    dashboard: <AdminMain data={data} />,
+    settings: <AdminSettings />,
+  };
   return (
     <section className="flex flex-row items-center w-full h-screen">
       <section className="sm:flex hidden bg-green-950 flex-col items-center md:p-7 p-3 w-1/4 h-full justify-between">
@@ -54,30 +86,20 @@ const AdminDashboard = () => {
             </div>
           </Link>
           <div className="flex flex-col items-center justify-center w-full gap-6 mt-10">
-            <div className="flex flex-row items-center justify-start gap-2 w-full hover:bg-stone-50 group p-3 hover:rounded-lg duration-200">
-              <HomeIcon className="text-stone-50 group-hover:text-black" />
-              <p className="font-all text-base font-medium text-stone-50 group-hover:text-black">
-                Dashboard
-              </p>
-            </div>
-            <div className="flex flex-row items-center justify-start gap-2 w-full hover:bg-stone-50 group p-3 hover:rounded-lg duration-200">
-              <Package className="text-stone-50 group-hover:text-black" />
-              <p className="font-all text-base font-medium text-stone-50 group-hover:text-black">
-                Products
-              </p>
-            </div>
-            <div className="flex flex-row items-center justify-start gap-2 w-full hover:bg-stone-50 group p-3 hover:rounded-lg duration-200">
-              <ShoppingBasket className="text-stone-50 group-hover:text-black" />
-              <p className="font-all text-base font-medium text-stone-50 group-hover:text-black">
-                Orders
-              </p>
-            </div>
-            <div className="flex flex-row items-center justify-start gap-2 w-full hover:bg-stone-50 group p-3 hover:rounded-lg duration-200">
-              <Wallet className="text-stone-50 group-hover:text-black" />
-              <p className="font-all text-base font-medium text-stone-50 group-hover:text-black">
-                Payment
-              </p>
-            </div>
+            {sidebar.map((item, index) => {
+              return (
+                <div
+                  onClick={() => setPage(item.title.toLowerCase())}
+                  key={index}
+                  className="flex flex-row items-center justify-start gap-2 w-full hover:bg-stone-50 group p-3 hover:rounded-lg duration-200"
+                >
+                  {item.icon}
+                  <p className="font-all text-base font-medium text-stone-50 group-hover:text-black">
+                    {item.title}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="flex flex-row items-center justify-center w-full gap-1">
@@ -88,37 +110,7 @@ const AdminDashboard = () => {
         </div>
       </section>
       <section className="flex sm:w-3/4 bg-white flex-col items-center sm:p-10 p-3 self-start">
-        <div className="flex items-center justify-between w-full">
-          <div className="flex flex-col items-start gap-2">
-            <p className="text-lg sm:text-2xl text-start font-semibold font-all">
-              Welcome, SoundPrince!
-            </p>
-            <p className="text-sm text-stone-400 text-start font-medium font-all">
-              Take a look at your products today!
-            </p>
-          </div>
-        </div>
-        <section className="flex flex-row items-center w-full gap-3 mt-5">
-          {data.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg"
-              >
-                <div className="flex flex-row items-center w-full justify-between">
-                  <p className="font-all text-lg sm:text-2xl font-semibold text-start">
-                    {item.count}
-                  </p>
-                  <div className="p-2 shadown">{item.icon}</div>
-                </div>
-                <p className="font-all text-base text-start w-full font-medium text-stone-500">
-                  {item.title}
-                </p>
-                <p className="font-semibold text-start w-full">----</p>
-              </div>
-            );
-          })}
-        </section>
+        {Components[page]}
       </section>
     </section>
   );
