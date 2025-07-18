@@ -25,7 +25,6 @@ export default function MainPageNavbar() {
   let [down, setdown] = useState(false);
   let [acctdrop, setAcctDrop] = useState(false);
   let [search, setSearch] = useState(false);
-
   const focusRef = (element: HTMLButtonElement) => {
     if (element) {
       element.focus();

@@ -23,15 +23,15 @@ export default function AdminPayment() {
   return (
     <section className="w-full flex flex-col items-start">
       <section className="flex flex-row items-center w-full justify-between">
-        <div className="flex flex-col items-center gap-2 justify-start w-3/4">
+        <div className="flex flex-col items-center sm:gap-2 justify-start w-full sm:w-3/4">
           <p className="font-all text-lg sm:text-2xl text-[#262626] font-medium text-start w-full">
             Payment Overview
           </p>
-          <p className="font-all text-sm text-stone-400 text-start w-full font-medium">
+          <p className="font-all text-sm text-stone-600 text-start w-full font-medium">
             Track, verify, and manage all payment transactions in one place.
           </p>
         </div>
-        <div className="flex justify-end w-1/4 self-center -mt-3">
+        <div className="hidden sm:flex justify-end w-1/4 self-center -mt-3">
           <Search size={16} />
         </div>
       </section>

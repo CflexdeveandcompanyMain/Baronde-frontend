@@ -83,6 +83,16 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               {formatPrice(data.price, "NGN")}
             </p>
           </div>
+          <div className="w-full flex justify-start gap-1">
+            <p className="font-all text-xs font-medium self-center">Brand:</p>
+            <div className="bg-green-100 border flex justify-center self-center border-green-400 py-[1px] px-1 rounded-lg">
+              <p
+                className={`text-start font-medium font-all self-center text-xs`}
+              >
+                {data.brand}
+              </p>
+            </div>
+          </div>
           <button
             onClick={(e) => {
               e.stopPropagation();
