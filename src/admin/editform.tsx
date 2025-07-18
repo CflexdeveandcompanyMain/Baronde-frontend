@@ -2,6 +2,13 @@ import { X } from "lucide-react";
 import { SimpleSelect } from "./products";
 import ImageUpload from "./image";
 
+interface ImageData {
+  id: number;
+  file: File;
+  url: string;
+  name: string;
+}
+
 type Fnstring = (val: string) => void;
 type Fnnumber = (val: number) => void;
 
@@ -17,6 +24,7 @@ export default function EditForm({
   onIT,
   show,
   close,
+  onImagesChange,
 }: {
   which: any;
   brandFn: Fnstring;
@@ -29,11 +37,13 @@ export default function EditForm({
   onIT: boolean;
   show: () => void;
   close: () => void;
+  onImagesChange: (images: ImageData[]) => void;
+  currentImages: ImageData[];
 }) {
   return (
     <section className="flex flex-col items-center sm:w-3/4 w-full bg-white p-2 sm:p-5 overflow-y-scroll">
-      <div onClick={close} className="flex justify-end w-full">
-        <X className="text-end" size={14} />
+      <div onClick={close} className="flex justify-end w-full cursor-pointer">
+        <X className="text-end hover:text-red-500" size={20} />
       </div>
       <div className="flex flex-col items-start w-full gap-3">
         <p className="w-full text-start font-bold text-stone-600 font-all">
@@ -125,18 +135,21 @@ export default function EditForm({
         </div>
         <div className="flex flex-col items-start w-full gap-1">
           <label htmlFor="brand" className="font-all text-xs text-start w-full">
-            Product Image (JPG, PNG, Max size: 5MB)
+            Product Image (JPG, PNG, Max size: 10MB)
           </label>
-          <ImageUpload />
+          <ImageUpload onImagesChange={onImagesChange} maxImages={4} />
         </div>
         <div className="flex flex-row items-center w-full justify-between gap-3">
-          <button className="w-full p-2 rounded border border-green-600 text-center text-green-600">
+          <button
+            onClick={close}
+            className="w-full p-2 rounded border border-green-600 text-center text-green-600 hover:bg-green-50"
+          >
             Cancel
           </button>
           <button
             disabled={onIT}
             onClick={show}
-            className={`w-full p-2 rounded text-center bg-green-700 disabled:bg-stone-400 text-white disabled:text-stone-100`}
+            className={`w-full p-2 rounded text-center bg-green-700 disabled:bg-stone-400 text-white disabled:text-stone-100 hover:bg-green-800 disabled:hover:bg-stone-400`}
           >
             Add product
           </button>
@@ -158,9 +171,13 @@ function Input({
   return (
     <input
       type={input}
-      onChange={(e) => Fn(e.target.value)}
+      onChange={(e) => {
+        const value =
+          input === "number" ? parseFloat(e.target.value) || 0 : e.target.value;
+        Fn(value);
+      }}
       placeholder={placeholder}
-      className="p-2 rounded border border-stone-300 w-full text-xs"
+      className="p-2 rounded border border-stone-300 w-full text-xs focus:border-green-500 focus:outline-none"
     />
   );
 }
@@ -176,8 +193,9 @@ function TextArea({
     <textarea
       placeholder={placeholder}
       onChange={(e) => Fn(e.target.value)}
-      className="p-2 rounded border border-stone-300 w-full text-xs"
+      className="p-2 rounded border border-stone-300 w-full text-xs focus:border-green-500 focus:outline-none"
       cols={20}
+      rows={4}
     />
   );
 }

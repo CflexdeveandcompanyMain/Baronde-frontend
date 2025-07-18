@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Upload, X, Image } from "lucide-react";
+
 interface ImageData {
   id: number;
   file: File;
@@ -7,13 +8,38 @@ interface ImageData {
   name: string;
 }
 
-export default function ImageUpload() {
+interface ImageUploadProps {
+  onImagesChange?: (images: ImageData[]) => void;
+  maxImages?: number;
+}
+
+export default function ImageUpload({
+  onImagesChange,
+  maxImages = 4,
+}: ImageUploadProps) {
   const [images, setImages] = useState<ImageData[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
+  // Load images from localStorage on mount
+  useEffect(() => {
+    const storedImages = localStorage.getItem("baron:img");
+    if (storedImages) {
+      try {
+        const parsedImages = JSON.parse(storedImages);
+        setImages(parsedImages);
+      } catch (error) {
+        console.error("Error parsing stored images:", error);
+      }
+    }
+  }, []);
+
+  // Save to localStorage and notify parent whenever images change
   useEffect(() => {
     localStorage.setItem("baron:img", JSON.stringify(images));
-  }, []);
+    if (onImagesChange) {
+      onImagesChange(images);
+    }
+  }, [images, onImagesChange]);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -40,8 +66,10 @@ export default function ImageUpload() {
 
   const handleFiles = (files: File[]) => {
     const imageFiles = files.filter((file) => file.type.startsWith("image/"));
-    const remainingSlots = 4 - images.length;
+    const remainingSlots = maxImages - images.length;
     const filesToAdd = imageFiles.slice(0, remainingSlots);
+
+    const newImages: ImageData[] = [];
 
     filesToAdd.forEach((file) => {
       if (file.size > 10 * 1024 * 1024) {
@@ -57,7 +85,13 @@ export default function ImageUpload() {
           url: e.target?.result as string,
           name: file.name,
         };
-        setImages((prev) => [...prev, newImage]);
+
+        newImages.push(newImage);
+
+        // Update state when all files are processed
+        if (newImages.length === filesToAdd.length) {
+          setImages((prev) => [...prev, ...newImages]);
+        }
       };
       reader.readAsDataURL(file);
     });
@@ -67,7 +101,7 @@ export default function ImageUpload() {
     setImages((prev) => prev.filter((img) => img.id !== id));
   };
 
-  const canUploadMore = images.length < 4;
+  const canUploadMore = images.length < maxImages;
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -95,7 +129,7 @@ export default function ImageUpload() {
             JPG, PNG, GIF. Max size: 10MB
           </p>
           <p className="text-sm text-gray-500 mb-4">
-            {images.length}/4 images uploaded
+            {images.length}/{maxImages} images uploaded
           </p>
           <input
             type="file"
@@ -117,7 +151,7 @@ export default function ImageUpload() {
       {images.length > 0 && (
         <div className="mt-6">
           <h3 className="text-lg font-medium mb-4 text-gray-800">
-            Uploaded Images ({images.length}/4)
+            Uploaded Images ({images.length}/{maxImages})
           </h3>
           <div className="grid grid-cols-2 gap-4">
             {images.map((image) => (
@@ -144,12 +178,13 @@ export default function ImageUpload() {
         </div>
       )}
 
-      {images.length >= 4 && (
+      {images.length >= maxImages && (
         <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
           <div className="flex items-center">
             <Image className="h-5 w-5 text-blue-600 mr-2" />
             <p className="text-sm text-blue-800">
-              Maximum of 4 images reached. Remove an image to upload more.
+              Maximum of {maxImages} images reached. Remove an image to upload
+              more.
             </p>
           </div>
         </div>

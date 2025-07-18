@@ -1,10 +1,17 @@
 import { Plus, Search } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { products } from "../raw-datas/rd1";
 import { HeroData } from "../mainpage/Hero/data";
 import AdminCard from "./card";
 import EditForm from "./editform";
-// import { useImage } from "./img";
+import { submitProduct } from "./form";
+
+interface ImageData {
+  id: number;
+  file: File;
+  url: string;
+  name: string;
+}
 
 let D = {
   brand: ["SoundPrince", "Rave"],
@@ -21,29 +28,36 @@ export default function AdminProducts() {
   let [ename, setEName] = useState("");
   let [ediscount, setEDiscount] = useState(0);
   let [edescription, setEDescription] = useState("");
-  let [eImage, setEImage] = useState<File[]>([]);
+  let [eImages, setEImages] = useState<ImageData[]>([]);
   let [onIt, setIt] = useState(true);
   let [open, setopen] = useState(false);
 
-  const getImage = useMemo(
-    () => JSON.parse(localStorage.getItem("baron:img") || "[]"),
-    []
-  );
+  const handleImagesChange = useCallback((images: ImageData[]) => {
+    setEImages(images);
+  }, []);
 
-  console.log(getImage);
+  useEffect(() => {
+    const isValid =
+      eImages.length > 0 &&
+      eamount > 0 &&
+      ebrand &&
+      ecategory &&
+      edescription &&
+      ediscount >= 0 &&
+      ekeyword.length > 0 &&
+      ename;
 
-  if (
-    // eImage.length > 0 &&
-    eamount > 0 &&
-    ebrand &&
-    ecategory &&
-    edescription &&
-    ediscount > 0 &&
-    ekeyword &&
-    ename
-  ) {
-    setIt(!onIt);
-  }
+    setIt(!isValid);
+  }, [
+    eImages,
+    eamount,
+    ebrand,
+    ecategory,
+    edescription,
+    ediscount,
+    ekeyword,
+    ename,
+  ]);
 
   const openorclose = () => setopen(!open);
 
@@ -54,17 +68,32 @@ export default function AdminProducts() {
     );
   });
 
+  const handleClose = () => {
+    setopen(false);
+  };
+
   const showIt = () => {
-    console.log(
-      eImage,
+    console.log({
+      images: eImages,
+      amount: eamount,
+      brand: ebrand,
+      category: ecategory,
+      description: edescription,
+      discount: ediscount,
+      keyword: ekeyword,
+      name: ename,
+    });
+    let f = eImages.map((item) => item.file);
+    submitProduct({
+      eImages: f,
       eamount,
       ebrand,
       ecategory,
       edescription,
       ediscount,
       ekeyword,
-      ename
-    );
+      ename,
+    });
   };
 
   const getbrand = (val: string) => setBrand(val);
@@ -76,7 +105,6 @@ export default function AdminProducts() {
   const EName = (val: string) => setEName(val);
   const EDiscount = (val: number) => setEDiscount(val);
   const EDescription = (val: string) => setEDescription(val);
-  //   const EImage = (val: File[]) => useCallback(() => setEImage(val), [val]);
 
   return (
     <section className="flex flex-col items-start w-full gap-5">
@@ -96,21 +124,27 @@ export default function AdminProducts() {
           </button>
         </div>
       </div>
-      <div className="fixed flex justify-center w-full h-screen bg-black/50 z-50 inset-0 py-5">
-        <EditForm
-          close={openorclose}
-          show={showIt}
-          onIT={onIt}
-          which={D}
-          keyFn={EKeyword}
-          descFn={EDescription}
-          nameFn={EName}
-          brandFn={EBrand}
-          amountFn={EAmount}
-          categoryFn={ECategory}
-          discountFn={EDiscount}
-        />
-      </div>
+
+      {open && (
+        <div className="fixed flex justify-center w-full h-screen bg-black/50 z-50 inset-0 py-5">
+          <EditForm
+            close={handleClose}
+            show={showIt}
+            onIT={onIt}
+            which={D}
+            keyFn={EKeyword}
+            descFn={EDescription}
+            nameFn={EName}
+            brandFn={EBrand}
+            amountFn={EAmount}
+            categoryFn={ECategory}
+            discountFn={EDiscount}
+            onImagesChange={handleImagesChange}
+            currentImages={eImages}
+          />
+        </div>
+      )}
+
       <div className="flex sm:flex-row flex-col items-start w-full sm:gap-5 gap-2">
         <div className="flex flex-row items-center w-full sm:w-1/4 gap-1 self-stretch">
           <SimpleSelect options={D["brand"]} setSelectedValue={getbrand} />
@@ -127,6 +161,7 @@ export default function AdminProducts() {
           />
         </div>
       </div>
+
       <div className="w-full p-3 grid md:grid-cols-3 grid-cols-2">
         {result.map((item: any, index: number) => {
           return (
