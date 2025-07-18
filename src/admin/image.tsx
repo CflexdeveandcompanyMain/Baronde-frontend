@@ -20,7 +20,6 @@ export default function ImageUpload({
   const [images, setImages] = useState<ImageData[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
-  // Load images from localStorage on mount
   useEffect(() => {
     const storedImages = localStorage.getItem("baron:img");
     if (storedImages) {
@@ -33,7 +32,6 @@ export default function ImageUpload({
     }
   }, []);
 
-  // Save to localStorage and notify parent whenever images change
   useEffect(() => {
     localStorage.setItem("baron:img", JSON.stringify(images));
     if (onImagesChange) {
@@ -88,7 +86,6 @@ export default function ImageUpload({
 
         newImages.push(newImage);
 
-        // Update state when all files are processed
         if (newImages.length === filesToAdd.length) {
           setImages((prev) => [...prev, ...newImages]);
         }
@@ -104,7 +101,7 @@ export default function ImageUpload({
   const canUploadMore = images.length < maxImages;
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="max-w-2xl mx-auto p-6 w-full">
       <h2 className="text-xl font-semibold mb-4 text-gray-800">
         Product Images
       </h2>

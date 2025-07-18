@@ -1,3 +1,4 @@
+const token = sessionStorage.getItem("baron:token") || "";
 export const submitProduct = async ({
   eImages,
   eamount,
@@ -28,12 +29,20 @@ export const submitProduct = async ({
     discount: ediscount,
   };
   try {
-    const response = await fetch("/api/upload-product", {
-      method: "POST",
-      body: JSON.stringify(obj),
-    });
+    const response = await fetch(
+      "https://baronde.onrender.com/image/v1/upload",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(obj),
+      }
+    );
 
     const result = await response.json();
+    console.log(result);
 
     if (response.ok) {
       alert("Product uploaded successfully!");
