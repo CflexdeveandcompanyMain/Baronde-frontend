@@ -202,35 +202,43 @@ export default function AdminMain({ data }: { data: H }) {
         </section>
 
         <div className="flex flex-col sm:flex-row items-center justify-between w-full mt-4 gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-stone-600 font-all">Show</span>
-            <select
-              value={itemsPerPage}
-              onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
-              className="border border-stone-300 rounded px-2 py-1 text-sm font-all focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value={5}>5</option>
-              <option value={10}>10</option>
-              <option value={15}>15</option>
-              <option value={20}>20</option>
-            </select>
-            <span className="text-sm text-stone-600 font-all">entries</span>
+          <div className="flex flex-row items-center w-full justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-xs sm:text-sm text-stone-600 font-all">
+                Show
+              </span>
+              <select
+                value={itemsPerPage}
+                onChange={(e) =>
+                  handleItemsPerPageChange(Number(e.target.value))
+                }
+                className="border border-stone-300 rounded px-2 py-1 text-sm font-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={15}>15</option>
+                <option value={20}>20</option>
+              </select>
+              <span className="text-xs sm:text-sm text-stone-600 font-all">
+                entries
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-stone-600 font-all">
+                Showing {startIndex + 1} to{" "}
+                {Math.min(endIndex, filteredTable.length)} of{" "}
+                {filteredTable.length} entries
+                {filterOption !== "All" && ` (filtered by ${filterOption})`}
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-stone-600 font-all">
-              Showing {startIndex + 1} to{" "}
-              {Math.min(endIndex, filteredTable.length)} of{" "}
-              {filteredTable.length} entries
-              {filterOption !== "All" && ` (filtered by ${filterOption})`}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 flex-row sm:w-auto w-full sm:justify-center justify-end">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="p-2 border border-stone-300 rounded hover:bg-stone-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-1 border border-stone-300 rounded hover:bg-stone-100 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronLeft size={16} />
             </button>
@@ -239,7 +247,7 @@ export default function AdminMain({ data }: { data: H }) {
               <button
                 key={pageNumber}
                 onClick={() => handlePageChange(pageNumber)}
-                className={`px-3 py-2 border border-stone-300 rounded text-sm font-all ${
+                className={`px-2 py-1 border border-stone-300 rounded text-sm font-all ${
                   currentPage === pageNumber
                     ? "bg-blue-500 text-white border-blue-500"
                     : "hover:bg-stone-100"
@@ -252,7 +260,7 @@ export default function AdminMain({ data }: { data: H }) {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="p-2 border border-stone-300 rounded hover:bg-stone-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-1 border border-stone-300 rounded hover:bg-stone-100 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronRight size={16} />
             </button>
