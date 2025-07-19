@@ -19,7 +19,7 @@ export const submitProduct = async ({
   ediscount: number;
 }) => {
   let obj = {
-    category: ecategory,
+    categories: ecategory,
     image: eImages,
     name: ename,
     description: edescription,
@@ -28,6 +28,7 @@ export const submitProduct = async ({
     keyword: ekeyword,
     discount: ediscount,
   };
+  console.log(obj);
   try {
     const response = await fetch(
       "https://baronde.onrender.com/image/v1/upload",

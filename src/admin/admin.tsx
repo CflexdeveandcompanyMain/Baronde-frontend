@@ -9,14 +9,15 @@ import {
   Wallet,
   HomeIcon,
   Settings,
-  Search,
   Menu,
+  Bell,
 } from "lucide-react";
 import { useState, type JSX } from "react";
 import AdminMain from "./dash";
 import AdminSettings from "./settings";
 import AdminPayment from "./payment";
 import AdminProducts from "./products";
+import AdminNotification from "./notification";
 
 let data = [
   {
@@ -62,6 +63,10 @@ let sidebar = [
     title: "Settings",
     icon: <Settings className="text-stone-50 group-hover:text-black" />,
   },
+  {
+    title: "Notification",
+    icon: <Bell className="text-stone-50 group-hover:text-black" />,
+  },
 ];
 const AdminDashboard = () => {
   let [page, setPage] = useState("dashboard");
@@ -72,6 +77,7 @@ const AdminDashboard = () => {
     settings: <AdminSettings />,
     payment: <AdminPayment />,
     products: <AdminProducts />,
+    notification: <AdminNotification />,
   };
   return (
     <section className="flex flex-row items-center w-full h-screen relative">
@@ -120,7 +126,7 @@ const AdminDashboard = () => {
       <section
         className={`${
           sd ? "left-0" : "-left-full"
-        } sm:hidden flex bg-green-950 flex-col items-center md:p-7 p-3 w-3/4 absolute duration-300 top-0 h-full justify-between`}
+        } sm:hidden flex bg-green-950 flex-col items-center md:p-7 p-3 w-3/4 z-50 absolute duration-300 top-0 h-full justify-between`}
       >
         <div className="flex flex-col items-center w-full">
           <Link
@@ -181,7 +187,7 @@ const AdminDashboard = () => {
             </div>
           </Link>
           <div className="flex flex-row items-center gap-4 justify-end w-full self-center">
-            <Search size={22} />
+            {/* <Search size={22} /> */}
             <Menu onClick={() => setSd(!sd)} size={22} />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { Plus, Search } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { products } from "../raw-datas/rd1";
-import { HeroData } from "../mainpage/Hero/data";
+import { HeroData, type HeroDataType } from "../mainpage/Hero/data";
 import AdminCard from "./card";
 import EditForm from "./editform";
 import { submitProduct } from "./form";
@@ -31,6 +31,9 @@ export default function AdminProducts() {
   let [eImages, setEImages] = useState<ImageData[]>([]);
   let [onIt, setIt] = useState(true);
   let [open, setopen] = useState(false);
+  let [search, setSearch] = useState("");
+  let [items, setItems] = useState<HeroDataType[]>([]);
+  let [trig, setTrig] = useState(false);
 
   const handleImagesChange = useCallback((images: ImageData[]) => {
     setEImages(images);
@@ -61,12 +64,52 @@ export default function AdminProducts() {
 
   const openorclose = () => setopen(!open);
 
-  const result = HeroData.filter((item) => {
-    return (
-      brand.toLowerCase() === item.brand &&
-      cat.toLowerCase().replaceAll(" ", "") === item.category
-    );
-  });
+  useEffect(() => {
+    let newResult: HeroDataType[];
+
+    if (search) {
+      newResult = HeroData.filter((item) => {
+        return item.name.toLowerCase() === search.toLowerCase();
+      });
+    } else {
+      newResult = HeroData.filter((item) => {
+        return (
+          brand.toLowerCase() === item.brand &&
+          cat.toLowerCase().replaceAll(" ", "") === item.category
+        );
+      });
+    }
+
+    setItems(newResult);
+
+    return () => setTrig(!trig);
+  }, [search, brand, cat]);
+
+  // let result = HeroData.filter((item) => {
+  //   return (
+  //     brand.toLowerCase() === item.brand &&
+  //     cat.toLowerCase().replaceAll(" ", "") === item.category
+  //   );
+  // });
+
+  // const handleSearch = (val: string) => {
+  //   console.log(val);
+  //   if (val) {
+  //     console.log("Y");
+  //     setSearch(val);
+  //     result = HeroData.filter((item) => {
+  //       return item.name.toLowerCase() === search.toLowerCase();
+  //     });
+  //   } else {
+  //     console.log("N");
+  //     result = HeroData.filter((item) => {
+  //       return (
+  //         brand.toLowerCase() === item.brand &&
+  //         cat.toLowerCase().replaceAll(" ", "") === item.category
+  //       );
+  //     });
+  //   }
+  // };
 
   const handleClose = () => {
     setopen(false);
@@ -75,9 +118,9 @@ export default function AdminProducts() {
   const showIt = () => {
     console.log({
       images: eImages,
-      amount: eamount,
+      price: eamount,
       brand: ebrand,
-      category: ecategory,
+      categories: ecategory,
       description: edescription,
       discount: ediscount,
       keyword: ekeyword,
@@ -115,7 +158,7 @@ export default function AdminProducts() {
         <div className="w-full flex justify-end">
           <button
             onClick={openorclose}
-            className="bg-green-700 p-2 rounded w-1/2 text-center flex flex-row items-center"
+            className="bg-green-700 p-2 rounded w-auto sm:w-1/2 text-center justify-center flex flex-row items-center"
           >
             <Plus size={14} className="text-white" />
             <p className="font-all text-sm font-medium text-white">
@@ -151,19 +194,20 @@ export default function AdminProducts() {
           <SimpleSelect options={D["product"]} setSelectedValue={getcategory} />
         </div>
         <div className="flex flex-row items-center w-full sm:w-3/4 border border-stone-300 self-stretch rounded">
-          <div className="p-2 flex justify-center">
-            <Search size={18} className="text-stone-400" />
-          </div>
           <input
+            onChange={(e) => setSearch(e.target.value)}
             type="text"
             placeholder="Search..."
-            className="p-2 font-medium text-sm font-all w-full"
+            className="p-2 font-medium text-sm font-all w-full outline-none"
           />
+          <div className="p-2 flex justify-center bg-stone-100 self-stretch">
+            <Search size={18} className="text-stone-400" />
+          </div>
         </div>
       </div>
 
       <div className="w-full p-3 grid md:grid-cols-3 grid-cols-2">
-        {result.map((item: any, index: number) => {
+        {items.map((item: any, index: number) => {
           return (
             <div key={index} className="min-w-auto grow self-stretch h-full">
               <AdminCard data={item} />

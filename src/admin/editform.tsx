@@ -41,7 +41,7 @@ export default function EditForm({
   currentImages: ImageData[];
 }) {
   return (
-    <section className="flex flex-col items-center sm:w-3/4 w-full bg-white p-2 sm:p-5 overflow-y-scroll">
+    <section className="flex flex-col items-center sm:w-3/4 w-full sm:h-auto h-full bg-white p-2 sm:p-5 overflow-y-scroll">
       <div onClick={close} className="flex justify-end w-full cursor-pointer">
         <X className="text-end hover:text-red-500" size={20} />
       </div>
