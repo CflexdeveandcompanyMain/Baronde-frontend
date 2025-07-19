@@ -1,7 +1,7 @@
 export interface HeroDataType {
-  id: number;
-  category: string;
-  image: string[];
+  _id: string;
+  categories: string;
+  images: { public_id: string; url: string; _id: string }[];
   name: string;
   description: string;
   brand: string;
@@ -12,10 +12,14 @@ export interface HeroDataType {
 }
 export let HeroData: HeroDataType[] = [
   {
-    id: 1,
-    category: "fullrangespeaker",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576523/Amplifier/frs1_cjtnzn.png",
+    _id: "",
+    categories: "fullrangespeaker",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576523/Amplifier/frs1_cjtnzn.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-137",
     description: "15 Inch / 4000watt / Pure Acostic / 75.5 coil /Double magnet",
@@ -36,10 +40,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 2,
-    category: "fullrangespeaker",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576523/Amplifier/frs2_ytcvtf.png",
+    _id: "",
+    categories: "fullrangespeaker",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576523/Amplifier/frs2_ytcvtf.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-215GF",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
@@ -60,10 +68,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 3,
-    category: "fullrangespeaker",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576524/Amplifier/frs3_vlhhve.png",
+    _id: "",
+    categories: "fullrangespeaker",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576524/Amplifier/frs3_vlhhve.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-515",
     description:
@@ -85,10 +97,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 4,
-    category: "fullrangespeaker",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576530/Amplifier/frs4_jdoid2.png",
+    _id: "",
+    categories: "fullrangespeaker",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576530/Amplifier/frs4_jdoid2.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-215GF",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big Magnet",
@@ -109,10 +125,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 5,
-    category: "fullrangespeaker",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576532/Amplifier/frs5_lm7p54.png",
+    _id: "",
+    categories: "fullrangespeaker",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576532/Amplifier/frs5_lm7p54.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-215GF",
     description:
@@ -134,10 +154,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 6,
-    category: "newspeakerarrival",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576369/Amplifier/nsa1_bk2obg.png",
+    _id: "",
+    categories: "newspeakerarrival",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576369/Amplifier/nsa1_bk2obg.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-227",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Big magnet",
@@ -159,10 +183,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 7,
-    category: "newspeakerarrival",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576371/Amplifier/nsa2_foup8a.png",
+    _id: "",
+    categories: "newspeakerarrival",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576371/Amplifier/nsa2_foup8a.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-228",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
@@ -184,10 +212,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 8,
-    category: "newspeakerarrival",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576371/Amplifier/nsa3_w7vehh.png",
+    _id: "",
+    categories: "newspeakerarrival",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576371/Amplifier/nsa3_w7vehh.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-229",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double Magnet",
@@ -209,10 +241,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 9,
-    category: "newspeakerarrival",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576373/Amplifier/nsa4_fzqvcy.png",
+    _id: "",
+    categories: "newspeakerarrival",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576373/Amplifier/nsa4_fzqvcy.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-25",
     description: "15 Inch / 2000watt / Pure Acostic / 75.5 coil /Big magnet",
@@ -234,10 +270,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 10,
-    category: "newspeakerarrival",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576382/Amplifier/nsa5_lguhka.png",
+    _id: "",
+    categories: "newspeakerarrival",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576382/Amplifier/nsa5_lguhka.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-20",
     description:
@@ -260,10 +300,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 11,
-    category: "singlesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576056/Amplifier/ss1_vyszzf.png",
+    _id: "",
+    categories: "singlesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576056/Amplifier/ss1_vyszzf.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-18",
     description:
@@ -285,10 +329,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 12,
-    category: "singlesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576048/Amplifier/ss2_nglgtx.png",
+    _id: "",
+    categories: "singlesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576048/Amplifier/ss2_nglgtx.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-18GF",
     description:
@@ -310,10 +358,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 13,
-    category: "singlesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576047/Amplifier/ss3_jfomaf.png",
+    _id: "",
+    categories: "singlesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576047/Amplifier/ss3_jfomaf.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-18AX",
     description:
@@ -335,10 +387,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 14,
-    category: "singlesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576047/Amplifier/ss4_p4iffy.png",
+    _id: "",
+    categories: "singlesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576047/Amplifier/ss4_p4iffy.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-318",
     description:
@@ -360,10 +416,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 15,
-    category: "singlesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576045/Amplifier/ss5_wdnvxu.png",
+    _id: "",
+    categories: "singlesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576045/Amplifier/ss5_wdnvxu.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-18 FX",
     description:
@@ -386,10 +446,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 16,
-    category: "doublesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573328/Amplifier/ds1_nnw69a.png",
+    _id: "",
+    categories: "doublesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573328/Amplifier/ds1_nnw69a.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "POW-221B",
     description:
@@ -413,10 +477,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 17,
-    category: "doublesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573332/Amplifier/ds2_uevo0u.png",
+    _id: "",
+    categories: "doublesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573332/Amplifier/ds2_uevo0u.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-218 DR",
     description:
@@ -438,10 +506,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 18,
-    category: "doublesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573333/Amplifier/ds3_sgrc7g.png",
+    _id: "",
+    categories: "doublesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573333/Amplifier/ds3_sgrc7g.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-218",
     description:
@@ -463,10 +535,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 19,
-    category: "doublesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573333/Amplifier/ds5_mrotnt.png",
+    _id: "",
+    categories: "doublesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573333/Amplifier/ds5_mrotnt.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-218 CRV",
     description:
@@ -489,10 +565,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 20,
-    category: "doublesub",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573338/Amplifier/ds4_wy2diu.png",
+    _id: "",
+    categories: "doublesub",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573338/Amplifier/ds4_wy2diu.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-218 GF",
     description:
@@ -514,10 +594,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 21,
-    category: "amplifier",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572811/Amplifier/am1_q15mxy.png",
+    _id: "",
+    categories: "amplifier",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572811/Amplifier/am1_q15mxy.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SPX7-5000",
     description: "4 channel / 1250watt per channel",
@@ -536,10 +620,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 22,
-    category: "amplifier",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572815/Amplifier/am2_vkq9zu.png",
+    _id: "",
+    categories: "amplifier",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572815/Amplifier/am2_vkq9zu.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP4500X",
     description: "2 channel / 4500watt",
@@ -558,10 +646,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 23,
-    category: "amplifier",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572825/Amplifier/am3_qc4ham.png",
+    _id: "",
+    categories: "amplifier",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572825/Amplifier/am3_qc4ham.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP4000",
     description: "2 channel / 3500watt",
@@ -580,10 +672,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 24,
-    category: "amplifier",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572830/Amplifier/am4_sfsklc.png",
+    _id: "",
+    categories: "amplifier",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572830/Amplifier/am4_sfsklc.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SPX2800S",
     description: "2 channel / 3500watt",
@@ -602,10 +698,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 25,
-    category: "amplifier",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572832/Amplifier/am5_z2k3tb.png",
+    _id: "",
+    categories: "amplifier",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752572832/Amplifier/am5_z2k3tb.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SPX4000S",
     description: "2 channel / 500watt",
@@ -624,10 +724,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 26,
-    category: "flatmixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575006/Amplifier/fm1_zz5m2e.png",
+    _id: "",
+    categories: "flatmixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575006/Amplifier/fm1_zz5m2e.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "CM-16",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
@@ -648,10 +752,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 27,
-    category: "flatmixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575011/Amplifier/fm2_qscpwq.png",
+    _id: "",
+    categories: "flatmixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575011/Amplifier/fm2_qscpwq.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "CMX-1642",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
@@ -672,10 +780,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 28,
-    category: "flatmixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575013/Amplifier/fm3_tyfgif.png",
+    _id: "",
+    categories: "flatmixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575013/Amplifier/fm3_tyfgif.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP4000",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
@@ -696,10 +808,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 29,
-    category: "flatmixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575004/Amplifier/fm4_lredjo.png",
+    _id: "",
+    categories: "flatmixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575004/Amplifier/fm4_lredjo.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SPX2800S",
     description: "15 Inch / 4000watt / Ply wood / 100 coil /Big magnet",
@@ -720,10 +836,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 30,
-    category: "flatmixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575000/Amplifier/fm5_gzjevu.png",
+    _id: "",
+    categories: "flatmixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752575000/Amplifier/fm5_gzjevu.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SPX4000S",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
@@ -744,10 +864,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 31,
-    category: "floormixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574538/Amplifier/frm1_up8cgr.png",
+    _id: "",
+    categories: "floormixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574538/Amplifier/frm1_up8cgr.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-12FX",
     description: "12 Inch / 2000watt / Ply wood / 100 coil /Big magnet",
@@ -769,10 +893,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 32,
-    category: "floormixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574539/Amplifier/frm2_pfrrjt.png",
+    _id: "",
+    categories: "floormixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574539/Amplifier/frm2_pfrrjt.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-12M",
     description: "12 Inch / 700watt / Pure Acostic / 100 coil /Double magnet",
@@ -793,10 +921,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 33,
-    category: "floormixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574544/Amplifier/frm3_ool2yx.png",
+    _id: "",
+    categories: "floormixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574544/Amplifier/frm3_ool2yx.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-12MTX",
     description: "12 Inch / 1000watt / Pure Acostic / 100 coil /Big magnet",
@@ -818,10 +950,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 34,
-    category: "floormixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574542/Amplifier/frm4_npjci7.png",
+    _id: "",
+    categories: "floormixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574542/Amplifier/frm4_npjci7.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-15/15A",
     description: "12 Inch / 2000watt / Plastic body / 100 coil /Big magnet",
@@ -842,10 +978,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 35,
-    category: "floormixer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574540/Amplifier/frm5_unvtrg.png",
+    _id: "",
+    categories: "floormixer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574540/Amplifier/frm5_unvtrg.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-15FX",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Double magnet",
@@ -867,10 +1007,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 36,
-    category: "equalizer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573497/Amplifier/e1_vdmuqe.png",
+    _id: "",
+    categories: "equalizer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573497/Amplifier/e1_vdmuqe.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "DBX-224XL",
     description:
@@ -890,10 +1034,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 37,
-    category: "equalizer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573501/Amplifier/e2_zintvd.png",
+    _id: "",
+    categories: "equalizer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573501/Amplifier/e2_zintvd.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "DBX-EQX 231",
     description:
@@ -914,10 +1062,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 38,
-    category: "equalizer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573502/Amplifier/e3_l9apam.png",
+    _id: "",
+    categories: "equalizer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573502/Amplifier/e3_l9apam.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "Driver Rack Venu 360",
     description:
@@ -939,10 +1091,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 39,
-    category: "equalizer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573506/Amplifier/e4_cdx3tv.png",
+    _id: "",
+    categories: "equalizer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573506/Amplifier/e4_cdx3tv.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "DBX-PA2",
     description:
@@ -964,10 +1120,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 40,
-    category: "equalizer",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573509/Amplifier/e5_a7glt6.png",
+    _id: "",
+    categories: "equalizer",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573509/Amplifier/e5_a7glt6.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "DBX-266XL",
     description:
@@ -989,10 +1149,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 41,
-    category: "linearray",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573767/Amplifier/la1_a7ewku.png",
+    _id: "",
+    categories: "linearray",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573767/Amplifier/la1_a7ewku.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-4",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
@@ -1014,10 +1178,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 42,
-    category: "linearray",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573770/Amplifier/la2_pequun.png",
+    _id: "",
+    categories: "linearray",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573770/Amplifier/la2_pequun.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-415",
     description: "15 Inch / 4000watt / Pure Acostic / 100 coil /Double magnet",
@@ -1039,10 +1207,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 43,
-    category: "linearray",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573770/Amplifier/la3_aff5ge.png",
+    _id: "",
+    categories: "linearray",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573770/Amplifier/la3_aff5ge.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-515",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Big magnet",
@@ -1064,10 +1236,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 44,
-    category: "linearray",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573772/Amplifier/la4_f82rjd.png",
+    _id: "",
+    categories: "linearray",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573772/Amplifier/la4_f82rjd.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP215SD",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",
@@ -1089,10 +1265,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 45,
-    category: "linearray",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573774/Amplifier/la5_zs3wew.png",
+    _id: "",
+    categories: "linearray",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573774/Amplifier/la5_zs3wew.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP28",
     description: "15 Inch / 4800watt / Pure Acostic / 100 coil /Double magnet",
@@ -1114,10 +1294,14 @@ export let HeroData: HeroDataType[] = [
     brand: "soundprince",
   },
   {
-    id: 46,
-    category: "microphone",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574403/Amplifier/zebra-wall-bracket-1537_pk3dtt.png",
+    _id: "",
+    categories: "microphone",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574403/Amplifier/zebra-wall-bracket-1537_pk3dtt.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP4",
     description: "sound breaker mic / 100% wave /Big coverage",
@@ -1139,10 +1323,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 47,
-    category: "microphone",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574405/Amplifier/1537_svoccu.png",
+    _id: "",
+    categories: "microphone",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574405/Amplifier/1537_svoccu.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP4",
     description: "sound breaker mic / 100% wave /Big coverage",
@@ -1164,10 +1352,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 48,
-    category: "microphone",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574397/Amplifier/3_kvvdwk.png",
+    _id: "",
+    categories: "microphone",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574397/Amplifier/3_kvvdwk.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "MIC",
     description: "sound breaker mic / 100% wave /Big coverage",
@@ -1189,10 +1381,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 49,
-    category: "drum",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574052/Amplifier/d1_am11i7.png",
+    _id: "",
+    categories: "drum",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574052/Amplifier/d1_am11i7.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "White Drum",
     description: "4 full set of Drums (complete set)",
@@ -1214,10 +1410,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 50,
-    category: "drum",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573914/Amplifier/purple_bnj69q.png",
+    _id: "",
+    categories: "drum",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573914/Amplifier/purple_bnj69q.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "Purple Drum",
     description: "4 full set of Drums (complete set)",
@@ -1239,10 +1439,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 51,
-    category: "drum",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573914/Amplifier/zebra-wall-bracket-1537_sunpc7.png",
+    _id: "",
+    categories: "drum",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752573914/Amplifier/zebra-wall-bracket-1537_sunpc7.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "Gold Drum",
     description: "4 full set of Drums (complete set)",
@@ -1265,10 +1469,14 @@ export let HeroData: HeroDataType[] = [
     brand: "rave",
   },
   {
-    id: 52,
-    category: "compressor",
-    image: [
-      "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574102/Amplifier/c1_vncaxf.png",
+    _id: "",
+    categories: "compressor",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752574102/Amplifier/c1_vncaxf.png",
+        public_id: "",
+        _id: "",
+      },
     ],
     name: "SP-266X",
     description: "15 Inch / 2000watt / Pure Acostic / 100 coil /Big magnet",

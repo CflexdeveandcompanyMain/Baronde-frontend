@@ -3,16 +3,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const appliances: string[] = [
-  "Refrigerator",
-  "Washing Machine",
-  "Microwave Oven",
-  "Air Conditioner",
-  "Vacuum Cleaner",
-  "Dishwasher",
-  "Water Heater",
-  "Television",
-  "Blender",
-  "1Electric Kettle",
+  "Amplifier",
+  "Compressor",
+  "Double sub",
+  "Drum",
+  "Equalizer",
+  "Flat Mixer",
+  "Floor Mixer",
+  "Full Range Speaker",
+  "Microphone",
+  "Single Sub",
+  "Line Array",
 ];
 
 export default function MainPageSearchBar() {

@@ -26,26 +26,28 @@ export const CartUtils = {
 
   getCart: (): CartItem[] => {
     try {
-      const cart = sessionStorage.getItem("baron:cart");
+      const cart = localStorage.getItem("baron:cart");
       return cart ? JSON.parse(cart) : [];
     } catch (error) {
-      console.error("Error reading cart from sessionStorage:", error);
+      console.error("Error reading cart from localStorage:", error);
       return [];
     }
   },
 
   saveCart: (cart: CartItem[]): void => {
     try {
-      sessionStorage.setItem("baron:cart", JSON.stringify(cart));
+      localStorage.setItem("baron:cart", JSON.stringify(cart));
     } catch (error) {
-      console.error("Error saving cart to sessionStorage:", error);
+      console.error("Error saving cart to localStorage:", error);
     }
   },
 
   addToCart: (product: HeroDataType): CartItem[] => {
     const cart = CartUtils.getCart();
 
-    const existingCount = cart.filter((item) => item.id === product.id).length;
+    const existingCount = cart.filter(
+      (item) => item._id === product._id
+    ).length;
 
     if (existingCount < product.stockQuantity) {
       const cartItem: CartItem = {
@@ -61,32 +63,45 @@ export const CartUtils = {
     return cart;
   },
 
-  incrementQuantity: (productId: number): CartItem[] => {
+  incrementQuantity: (productId: string): CartItem[] => {
     const cart = CartUtils.getCart();
 
-    const existingItem = cart.find((item) => item.id === productId);
+    const existingItem = cart.find((item) => item._id === productId);
+
     if (!existingItem) return cart;
 
-    const currentCount = cart.filter((item) => item.id === productId).length;
+    const newCartItem: CartItem = {
+      ...existingItem,
+      cartItemId: CartUtils.generateCartItemId(),
+      addedAt: Date.now(),
+    };
 
-    if (currentCount < existingItem.stockQuantity) {
-      const newCartItem: CartItem = {
-        ...existingItem,
-        cartItemId: CartUtils.generateCartItemId(),
-        addedAt: Date.now(),
-      };
-
-      cart.push(newCartItem);
-      CartUtils.saveCart(cart);
-    }
+    cart.push(newCartItem);
+    CartUtils.saveCart(cart);
 
     return cart;
   },
 
-  decrementQuantity: (productId: number): CartItem[] => {
+  filterAndCountByIdReduce(products: HeroDataType[]) {
+    return Object.values(
+      products.reduce((acc: any, product) => {
+        const id = product._id;
+
+        if (acc[id]) {
+          acc[id].count++;
+        } else {
+          acc[id] = { product, count: 1 };
+        }
+
+        return acc;
+      }, {})
+    );
+  },
+
+  decrementQuantity: (productId: string): CartItem[] => {
     const cart = CartUtils.getCart();
 
-    const itemsWithProductId = cart.filter((item) => item.id === productId);
+    const itemsWithProductId = cart.filter((item) => item._id === productId);
 
     if (itemsWithProductId.length > 0) {
       const mostRecentItem = itemsWithProductId.sort(
@@ -105,9 +120,9 @@ export const CartUtils = {
     return cart;
   },
 
-  removeAllInstances: (productId: number): CartItem[] => {
+  removeAllInstances: (productId: string): CartItem[] => {
     const cart = CartUtils.getCart();
-    const updatedCart = cart.filter((item) => item.id !== productId);
+    const updatedCart = cart.filter((item) => item._id !== productId);
     CartUtils.saveCart(updatedCart);
     return updatedCart;
   },
@@ -119,9 +134,9 @@ export const CartUtils = {
     return item.price;
   },
 
-  getProductQuantity: (productId: number): number => {
+  getProductQuantity: (productId: string): number => {
     const cart = CartUtils.getCart();
-    return cart.filter((item) => item.id === productId).length;
+    return cart.filter((item) => item._id === productId).length;
   },
 
   computeCartTotals: () => {
@@ -146,17 +161,19 @@ export const CartUtils = {
     };
   },
 
-  canIncrement: (productId: number): boolean => {
+  canIncrement: (productId: string): boolean => {
     const cart = CartUtils.getCart();
-    const currentQuantity = cart.filter((item) => item.id === productId).length;
-    const existingItem = cart.find((item) => item.id === productId);
+    const currentQuantity = cart.filter(
+      (item) => item._id === productId
+    ).length;
+    const existingItem = cart.find((item) => item._id === productId);
 
     return existingItem ? currentQuantity < existingItem.stockQuantity : false;
   },
 
-  isInCart: (productId: number): boolean => {
+  isInCart: (productId: string): boolean => {
     const cart = CartUtils.getCart();
-    const itemIndex = cart.findIndex((item) => item.id === productId);
+    const itemIndex = cart.findIndex((item) => item._id === productId);
     return itemIndex >= 0;
   },
 };
@@ -171,17 +188,17 @@ export const useCart = () => {
     setCartlen(cart.length);
   };
 
-  const incrementQuantity = (productId: number) => {
+  const incrementQuantity = (productId: string) => {
     const updatedCart = CartUtils.incrementQuantity(productId);
     setCart(updatedCart);
   };
 
-  const decrementQuantity = (productId: number) => {
+  const decrementQuantity = (productId: string) => {
     const updatedCart = CartUtils.decrementQuantity(productId);
     setCart(updatedCart);
   };
 
-  const removeAllInstances = (productId: number) => {
+  const removeAllInstances = (productId: string) => {
     const updatedCart = CartUtils.removeAllInstances(productId);
     setCart(updatedCart);
     setCartlen(cart.length);
@@ -200,5 +217,6 @@ export const useCart = () => {
     canIncrement: CartUtils.canIncrement,
     getProductQuantity: CartUtils.getProductQuantity,
     isInCart: CartUtils.isInCart,
+    filterReduce: CartUtils.filterAndCountByIdReduce,
   };
 };

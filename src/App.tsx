@@ -13,7 +13,6 @@ import ShippingPolicy from "./misc/shipping";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserOrderHistory from "./user/order";
 import Testimonial from "./mainpage/navbar/testimonial";
-import { ToastContainer } from "react-toastify";
 import ForgetCode from "./authentication/codeforget";
 import NewPassword from "./authentication/newpassword";
 import ProductPage from "./dynamic/productpage";
@@ -26,11 +25,8 @@ import Checkout from "./checkout/product";
 const queryClient = new QueryClient();
 
 export default function App() {
-  //const getBrand = sessionStorage.getItem("baron:brand");
-  //if (!getBrand) sessionStorage.setItem("baron:brand", "soundprince");
   return (
     <QueryClientProvider client={queryClient}>
-      <ToastContainer />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/signup" element={<UserCreateAccount />} />

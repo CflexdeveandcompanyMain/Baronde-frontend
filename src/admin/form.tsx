@@ -9,7 +9,7 @@ export const submitProduct = async ({
   ekeyword,
   ename,
 }: {
-  eImages: File[];
+  eImages: string[];
   ename: string;
   edescription: string;
   eamount: number;

@@ -4,9 +4,9 @@ import { formatPrice } from "../utils/priceconverter";
 
 interface cartInf {
   item: HeroDataType;
-  handleDecrement: (id: number) => void;
-  handleIncrement: (id: number) => void;
-  handleRemove: (id: number) => void;
+  handleDecrement: (id: string) => void;
+  handleIncrement: (id: string) => void;
+  handleRemove: (id: string) => void;
   quantity: number;
   isAnimating: boolean;
 }
@@ -25,7 +25,7 @@ export default function CartCard(prop: cartInf) {
       <div className="flex flex-row items-center w-full justify-between">
         <div className="flex flex-row items-center gap-3 w-full self-start">
           <img
-            src={item.image[0]}
+            src={item.images[0].url}
             alt={item.name}
             className="w-16 h-16 self-start object-cover rounded-sm"
           />
@@ -44,7 +44,7 @@ export default function CartCard(prop: cartInf) {
           <div className="flex flex-col items-center gap-2 self-center sm:w-auto w-full ml-3">
             <div className="flex items-center bg-white rounded border border-stone-200">
               <button
-                onClick={() => handleDecrement(item.id)}
+                onClick={() => handleDecrement(item._id)}
                 disabled={quantity === 0}
                 className={
                   "w-7 h-7 flex items-center border-r border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
@@ -64,7 +64,7 @@ export default function CartCard(prop: cartInf) {
               </div>
 
               <button
-                onClick={() => handleIncrement(item.id)}
+                onClick={() => handleIncrement(item._id)}
                 className={
                   "w-7 h-7 flex items-center border-l border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
                 }
@@ -73,7 +73,7 @@ export default function CartCard(prop: cartInf) {
               </button>
             </div>
             <div
-              onClick={() => handleRemove(item.id)}
+              onClick={() => handleRemove(item._id)}
               className="flex justify-center cursor-pointer"
             >
               <p className="text-sm text-stone-500 text-center font-all font-medium hover:text-red-500 transition-colors">

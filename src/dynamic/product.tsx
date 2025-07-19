@@ -6,12 +6,11 @@ import { useCart } from "../utils/storage";
 import { usePageData } from "../store/singlepage";
 import { useGlobalState } from "../store/globalstate";
 import type { HeroDataType } from "../mainpage/Hero/data";
-
 export default function ProductAuthCard({ data }: { data: HeroDataType }) {
-  let [image, setImage] = useState(data.image[0]);
+  let [image, setImage] = useState(data.images[0].url);
   let [view, setView] = useState(false);
   let [count, setcount] = useState(0);
-  let isSingleImage = data.image.length === 1;
+  let isSingleImage = data.images.length === 1;
   const [isAnimating, setIsAnimating] = useState(false);
 
   const { incrementQuantity, decrementQuantity, addToCart, isInCart, cart } =
@@ -25,13 +24,13 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   const handleDecrement = () => {
     setcount(count < 0 ? 0 : count - 1);
     triggerAnimation();
-    decrementQuantity(data.id);
+    decrementQuantity(data._id);
   };
 
   const handleIncrement = () => {
     setcount(count + 1);
     triggerAnimation();
-    incrementQuantity(data.id);
+    incrementQuantity(data._id);
   };
 
   let navigate = useNavigate();
@@ -44,7 +43,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
       <div
         onClick={() => {
           setData(data);
-          navigate(`/singleproduct/${data.name}-${data.id}`);
+          navigate(`/singleproduct/${data.name}-${data._id}`);
         }}
         className="flex flex-col items-center sm:shadow justify-between w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2  bg-white"
       >
@@ -55,7 +54,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             </p>
           </div>
           <img
-            src={data.image[0]}
+            src={data.images[0].url}
             className="object-cover h-full w-full bg-white"
           />
           <div className="flex justify-center bg-[#fdb204f3] p-1 shadow absolute top-1.5 left-1.5 ">
@@ -97,7 +96,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              if (isInCart(data.id)) navigate("/cart");
+              if (isInCart(data._id)) navigate("/cart");
               else {
                 addToCart(data);
                 setCartlen(uniqueByName(cart).length);
@@ -138,18 +137,24 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             <div
               className={`${
                 isSingleImage ? "hidden" : "flex"
-              } flex flex-col items-start gap-0.5 w-1/5 justify-start self-start`}
+              } flex flex-col items-start gap-1 w-1/5 justify-start self-start`}
             >
               {isSingleImage ? (
                 <></>
               ) : (
-                data.image.map((item) => {
+                data.images.map((item) => {
                   return (
-                    <img
-                      onClick={() => setImage(item)}
-                      src={item}
-                      className="w-full round object-cover h-full"
-                    />
+                    <div
+                      onClick={() => {
+                        setImage(item.url);
+                        console.log(item.url, image);
+                      }}
+                    >
+                      <img
+                        src={item.url}
+                        className="w-full round object-cover h-full"
+                      />
+                    </div>
                   );
                 })
               )}
@@ -207,7 +212,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                   </div>
 
                   <button
-                    disabled={!isInCart(data.id)}
+                    disabled={!isInCart(data._id)}
                     onClick={handleIncrement}
                     className={
                       "w-10 h-8 flex items-center border-l border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"

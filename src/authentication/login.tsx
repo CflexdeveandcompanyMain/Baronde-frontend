@@ -6,6 +6,7 @@ import { EyeIcon, EyeOffIcon, LoaderCircleIcon } from "lucide-react";
 import { userLogIn } from "../utils/getFetch";
 import { useAuthStore } from "../store/user";
 import ErrorMessage from "../utils/errorMessage";
+import BrandLogo from "../utils/brand";
 
 export default function UserSignInInterface() {
   let [viewPassword, setViewPassword] = useState<boolean>(false);
@@ -73,13 +74,7 @@ export default function UserSignInInterface() {
   return (
     <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
       <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
-        <div className="flex flex-row items-center justify-center gap-1">
-          <img src={bdm} className="w-10 h-10 sm:w-3/5 rounded object-cover" />
-          <div className="flex flex-col items-start self-center">
-            <p className="font-all font-semibold text-2xl">Baron</p>
-            <p className="font-all text-sm text-start -mt-1">DeMusical</p>
-          </div>
-        </div>
+        <BrandLogo img={bdm} />
         <div className="flex flex-col items-start w-full justify-start p-2 my-3">
           <p className="font-all font-semibold text-xl text-start w-full">
             Welcome back

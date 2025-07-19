@@ -12,6 +12,7 @@ import {
 
 import { useGlobalState } from "../../store/globalstate";
 import Mob from "./mob";
+import BrandLogo from "../../utils/brand";
 
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
@@ -31,7 +32,7 @@ export default function MainPageNavbar() {
     }
   };
 
-  const { ser, setSer } = useGlobalState();
+  const { ser, setSer, setBrand } = useGlobalState();
 
   const setSearchBtn = () => {
     setSer();
@@ -41,7 +42,7 @@ export default function MainPageNavbar() {
   return (
     <nav className="flex flex-col items-center w-full">
       <div className="bg-[#E5A000] py-2 px-7 flex flex-row items-center w-full justify-between">
-        <p className="font-all text-xs text-white self-center">
+        <p className="font-all text-[11px] sm:text-xs text-white self-center">
           Check Big sallah sales - 40% off
         </p>
         <div className="flex flex-row items-center gap-1.5">
@@ -60,27 +61,13 @@ export default function MainPageNavbar() {
             <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
             <rect x="2" y="4" width="20" height="16" rx="2" />
           </svg>
-          <p className="font-all text-xs text-white self-center">
+          <p className="font-all text-[11px] sm:text-xs text-white self-center">
             Suscribe & save
           </p>
         </div>
       </div>
       <div className="flex flex-row items-center py-3 px-3 sm:px-7 bg-[#14AE5C] w-full">
-        <Link
-          to={"/"}
-          className="flex flex-row items-center justify-start sm:justify-center gap-0.5 sm:-ml-2 self-center w-1/2"
-        >
-          <img
-            src={headlogo}
-            className="w-10 h-10 sm:w-10 sm:h-10 rounded object-cover"
-          />
-          <div className="flex flex-col items-start">
-            <p className="font-all font-semibold text-xl text-white">Baron</p>
-            <p className="font-all text-[12px] text-start text-white -mt-1">
-              Demusical
-            </p>
-          </div>
-        </Link>
+        <BrandLogo img={headlogo} />
         <MainPageSearchBar />
         <div className="flex flex-row items-center gap-6 w-3/5 sm:w-1/2 justify-end">
           {isVerified ? (
@@ -245,7 +232,10 @@ export default function MainPageNavbar() {
       <div className="w-full bg-white">
         <section className="bg-white p-3 hidden sm:flex justify-center w-3/4 sm:w-[90%] md:w-[70%] mx-auto">
           <ul className="flex flex-row items-center justify-between w-full">
-            <div className="font-all text-sm text-center font-medium list-none">
+            <div
+              onClick={() => setBrand("other")}
+              className="font-all text-sm text-center font-medium list-none"
+            >
               All Deals
             </div>
             <div className="flex flex-col items-center relative">
@@ -277,8 +267,7 @@ export default function MainPageNavbar() {
                   return (
                     <div
                       onClick={() => {
-                        let brnd = item.replaceAll(" ", "");
-                        sessionStorage.setItem("baron:brand", brnd);
+                        setBrand(item);
                         setTimeout(() => setdrop(!drop), 10);
                       }}
                       className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"

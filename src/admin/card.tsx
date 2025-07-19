@@ -1,6 +1,9 @@
+import { Trash } from "lucide-react";
 import type { HeroDataType } from "../mainpage/Hero/data";
 import { formatPrice } from "../utils/priceconverter";
 import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { removeItem } from "../utils/getFetch";
 
 interface EditableData {
   name: string;
@@ -50,8 +53,18 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
     }));
   };
 
+  const queryClient = useQueryClient();
+
+  const {} = useMutation({
+    mutationFn: () => removeItem(data._id),
+    mutationKey: ["adminremove"],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+
   return (
-    <div className="flex flex-col items-center sm:shadow justify-between w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2 bg-white">
+    <div className="flex flex-col items-center sm:shadow justify-between relative w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2 bg-white">
       <div className="flex flex-col items-center h-[50%] relative">
         <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">
           <p className="font-all font-bold text-lg text-[#E7FFC078] self-center text-center rotate-45">
@@ -59,7 +72,7 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
           </p>
         </div>
         <img
-          src={data.image[0]}
+          src={data.images[0].url}
           className="object-cover h-full w-full bg-white"
         />
         <div className="flex justify-center bg-[#fdb204f3] p-1 shadow absolute top-1.5 left-1.5">
@@ -90,9 +103,14 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
             className="w-full text-start font-medium font-all text-sm border border-gray-300 rounded px-2 py-1 focus:outline-none focus:border-green-500"
           />
         ) : (
-          <p className="text-start font-medium font-all text-sm w-full">
-            {editedData.name}
-          </p>
+          <div className="flex flex-row items-center w-full">
+            <p className="text-start font-medium font-all text-sm w-full">
+              {editedData.name}
+            </p>
+            <div className="flex justify-center self-center">
+              <Trash size={16} className="text-red-600" />
+            </div>
+          </div>
         )}
 
         {isEditing ? (

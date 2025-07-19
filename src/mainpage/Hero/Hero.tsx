@@ -1,7 +1,6 @@
-import { desktopHero, p1 } from "../..";
+import { desktopHero } from "../..";
 import HeroProductCard from "./herocard";
 import { Link } from "react-router-dom";
-import { formatPrice } from "../../utils/priceconverter";
 
 export default function MainPageHero() {
   let { isVerified } = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
@@ -21,59 +20,6 @@ export default function MainPageHero() {
               Barondemusical, offering superior sound quality, durability, and
               unmatched performance for musicians.
             </p>
-          </div>
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-2 p-3">
-            {Array(5)
-              .fill("")
-              .map((_, index: number) => {
-                return (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center shadow justify-center min-w-[200px] w-auto bg-white"
-                  >
-                    <div className="relative flex flex-col items-center">
-                      <img
-                        src={p1}
-                        className="object-cover max-h-[200px] w-full bg-white"
-                      />
-                      <div className="flex justify-center bg-[#fdb204f3] p-1 shadow absolute top-0 left-2">
-                        <p
-                          className={`text-white font-all text-center text-xs`}
-                        >
-                          {formatPrice(34000, "NGN")}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-center w-full gap-1.5 bg-slate-100/20 p-1.5">
-                      <p
-                        className={`text-start w-full font-medium font-all text-sm`}
-                      >
-                        Speaker model: SP515
-                      </p>
-                      <p className="font-normal text-start font-all text-[10px] text-gray-600">
-                        15INCH BIG MAGNET /// 4800watt /// Pure Acostic / 100
-                        coil /Double Magnet
-                      </p>
-                      <div className="flex flex-row items-center w-full justify-between">
-                        <p className="text-[#fdb100] text-[12px] text-start font-medium font-all">
-                          {formatPrice(2500000, "NGN")}
-                        </p>
-                        <p
-                          className={`text-black text-[10px] text-start font-all line-through`}
-                        >
-                          {formatPrice(17000, "NGN")}
-                        </p>
-                      </div>
-                      <button
-                        type="button"
-                        className={`bg-green-700 shadow text-sm p-2 w-full font-all font-normal text-white`}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
           </div>
         </section>
         <section className="w-full flex justify-end p-3 fixed bottom-5 sm:bottom-6 right-5 z-50">

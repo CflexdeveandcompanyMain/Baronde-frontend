@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAuthStore } from "../store/user";
 import ErrorMessage from "../utils/errorMessage";
 import { LoaderCircleIcon } from "lucide-react";
+import BrandLogo from "../utils/brand";
 
 export default function ForgotPassword() {
   let [Email, setEmail] = useState("");
@@ -54,13 +55,7 @@ export default function ForgotPassword() {
   return (
     <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
       <section className="w-full bg-white self-start mt-[10%] sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
-        <div className="flex flex-row items-center justify-center gap-1 -ml-2">
-          <img src={bdm} className="w-10 h-10 sm:w-3/5 rounded object-cover" />
-          <div className="flex flex-col items-start">
-            <p className="font-all font-semibold text-2xl">Baron</p>
-            <p className="font-all text-sm text-start -mt-1">DeMusical</p>
-          </div>
-        </div>
+        <BrandLogo img={bdm} />
         <div className="flex flex-col items-start w-full justify-start p-2 my-1.5">
           <p className="font-all font-semibold text-lg text-start w-full">
             Forgot Password

@@ -75,7 +75,7 @@ export default function AdminProducts() {
       newResult = HeroData.filter((item) => {
         return (
           brand.toLowerCase() === item.brand &&
-          cat.toLowerCase().replaceAll(" ", "") === item.category
+          cat.toLowerCase().replaceAll(" ", "") === item.categories
         );
       });
     }
@@ -100,7 +100,7 @@ export default function AdminProducts() {
       keyword: ekeyword,
       name: ename,
     });
-    let f = eImages.map((item) => item.file);
+    const f = eImages.map((item) => item.url);
     submitProduct({
       eImages: f,
       eamount,

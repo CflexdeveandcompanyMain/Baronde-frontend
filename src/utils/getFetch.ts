@@ -162,10 +162,33 @@ export async function getCountryAndState() {
       }),
     }
   );
-  console.log(await request.json());
+  return await request.json();
+}
+
+export async function getProducts() {
+  const request = await fetch("https://baronde.onrender.com/image/v1/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const response = await request.json();
+  return response.data;
 }
 
 getCountryAndState();
 
-// getImagesByCategory("equalizer");
-// getImagesByName("SP-218");
+getProducts();
+
+export async function removeItem(id: string) {
+  const request = await fetch("", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ id }),
+  });
+  return await request.json();
+}

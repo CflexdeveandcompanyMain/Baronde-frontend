@@ -8,10 +8,15 @@ import { empty } from "..";
 import { useGlobalState } from "../store/globalstate";
 import type { HeroDataType } from "../mainpage/Hero/data";
 import CartCard from "./cartd";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
   const cartData = useCart();
   const [data, setData] = useState<HeroDataType[]>(cartData.cart);
+
+  const isVerified = JSON.parse(
+    sessionStorage.getItem("baron:user") || "{}"
+  ).isVerified;
 
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -20,14 +25,14 @@ export default function CartPage() {
     setTimeout(() => setIsAnimating(false), 200);
   };
 
-  const handleIncrement = (id: number) => {
+  const handleIncrement = (id: string) => {
     cartData.incrementQuantity(id);
     triggerAnimation();
   };
 
   let { setCartlen } = useGlobalState();
 
-  const handleDecrement = (id: number) => {
+  const handleDecrement = (id: string) => {
     cartData.decrementQuantity(id);
     triggerAnimation();
   };
@@ -37,10 +42,12 @@ export default function CartPage() {
     setCartlen(uniqueByName(data).length);
   }, []);
 
-  const handleRemove = (id: number) => {
+  const handleRemove = (id: string) => {
     const res: any[] = cartData.removeAllInstances(id);
     setData(res);
   };
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -74,7 +81,7 @@ export default function CartPage() {
               <div className="flex flex-col w-full items-center gap-3">
                 {data.length > 0 ? (
                   data.map((item: HeroDataType, index: number) => {
-                    const quantity = cartData.getProductQuantity(item.id);
+                    const quantity = cartData.getProductQuantity(item._id);
                     return (
                       <div key={index} className="w-full">
                         <CartCard
@@ -126,6 +133,7 @@ export default function CartPage() {
                   </p>
                 </div>
                 <button
+                  onClick={() => navigate(isVerified ? "/checkout" : "/signup")}
                   className="w-full bg-green-700 text-white text-xs font-all text-center p-2.5 mb-2 mt-4 rounded disabled:bg-gray-400"
                   disabled={cartData.cart.length === 0}
                 >

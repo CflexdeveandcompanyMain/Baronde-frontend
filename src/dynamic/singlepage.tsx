@@ -12,8 +12,14 @@ export default function SingleProductPage() {
   let [count, setcount] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const { incrementQuantity, decrementQuantity, addToCart, isInCart, cart } =
-    useCart();
+  const {
+    incrementQuantity,
+    decrementQuantity,
+    addToCart,
+    isInCart,
+    cart,
+    getProductQuantity,
+  } = useCart();
   let { data } = usePageData();
 
   const triggerAnimation = () => {
@@ -24,17 +30,17 @@ export default function SingleProductPage() {
   const handleDecrement = () => {
     setcount(count < 0 ? 0 : count - 1);
     triggerAnimation();
-    decrementQuantity(data.id);
+    decrementQuantity(data._id);
   };
 
   const handleIncrement = () => {
     setcount(count + 1);
     triggerAnimation();
-    incrementQuantity(data.id);
+    incrementQuantity(data._id);
   };
 
-  let [Image, setImage] = useState(data.image[0]);
-  let isSingleImage = data.image.length === 1;
+  let [Image, setImage] = useState(data.images[0].url);
+  let isSingleImage = data.images.length === 1;
 
   let { setCartlen } = useGlobalState();
 
@@ -53,11 +59,11 @@ export default function SingleProductPage() {
                 {isSingleImage ? (
                   <></>
                 ) : (
-                  data.image.map((item: string) => {
+                  data.images.map((item) => {
                     return (
                       <img
-                        onClick={() => setImage(item)}
-                        src={item ?? null}
+                        onClick={() => setImage(item.url)}
+                        src={item.url ?? null}
                         className="w-full round object-cover h-full"
                       />
                     );
@@ -110,12 +116,12 @@ export default function SingleProductPage() {
                           isAnimating ? "scale-125 text-gray-600" : "scale-100"
                         }`}
                       >
-                        {count}
+                        {getProductQuantity(data._id)}
                       </span>
                     </div>
 
                     <button
-                      disabled={!isInCart(data.id)}
+                      disabled={!isInCart(data._id)}
                       onClick={handleIncrement}
                       className={
                         "w-10 h-8 flex items-center border-l border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
@@ -150,24 +156,22 @@ export default function SingleProductPage() {
               </p>
               <ul className="flex flex-col items-start w-full pl-5 gap-2">
                 <li className="font-all text-xs text-start list-disc">
-                  High-quality, affordable products designed to meet your
-                  everyday needs. Crafted for reliability, style, and
-                  performance.
+                  Premium sound quality with professional-grade components.
+                  Crystal clear audio and durable build. Perfect for music
+                  lovers..
                 </li>
                 <li className="font-all text-xs text-start list-disc">
-                  High-quality, affordable products designed to meet your
-                  everyday needs. Crafted for reliability, style, and
-                  performance.
+                  Advanced acoustic technology delivers rich, balanced sound.
+                  Easy setup with universal compatibility. Exceptional value.
                 </li>
                 <li className="font-all text-xs text-start list-disc">
-                  High-quality, affordable products designed to meet your
-                  everyday needs. Crafted for reliability, style, and
-                  performance.
+                  Studio-quality audio reproduction with enhanced bass response.
+                  Sleek design meets superior performance. Highly rated.
                 </li>
                 <li className="font-all text-xs text-start list-disc">
-                  High-quality, affordable products designed to meet your
-                  everyday needs. Crafted for reliability, style, and
-                  performance.
+                  Professional-grade drivers provide immersive listening
+                  experience. Premium materials and reliable construction.
+                  Trusted quality
                 </li>
               </ul>
             </div>
