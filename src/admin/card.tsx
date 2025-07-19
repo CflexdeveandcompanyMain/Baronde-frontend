@@ -139,7 +139,7 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
               type="text"
               value={editedData.brand}
               onChange={(e) => handleInputChange("brand", e.target.value)}
-              className="bg-green-100 border border-green-400 py-[1px] px-1 rounded-lg text-start font-medium font-all text-xs focus:outline-none focus:border-green-500"
+              className="border border-stone-400 py-[1px] px-1 rounded text-start font-medium font-all w-full text-xs focus:outline-none focus:border-green-500"
             />
           ) : (
             <div className="bg-green-100 border flex justify-center self-center border-green-400 py-[1px] px-1 rounded w-auto">
@@ -151,7 +151,7 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
         </div>
 
         {isEditing ? (
-          <div className="flex gap-1 sm:gap-2 mt-2 w-full">
+          <div className="flex flex-col gap-1 sm:gap-2 mt-2 w-full">
             <button
               type="button"
               onClick={handleSave}

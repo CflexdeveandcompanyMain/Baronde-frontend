@@ -5,10 +5,10 @@ export default function AdminSettings() {
     <section className="w-full flex flex-col items-center">
       <section className="flex flex-row items-center w-full justify-between">
         <div className="flex flex-col items-center gap-2 justify-start w-full sm:w-3/4">
-          <p className="font-all text-lg sm:text-2xl text-[#262626] font-medium text-start w-full">
+          <p className="font-all text-xl sm:text-2xl text-[#262626] font-medium text-start w-full">
             Settings
           </p>
-          <p className="font-all text-sm text-stone-600 font-medium">
+          <p className="font-all text-xs sm:text-sm text-stone-600 font-medium">
             Manage your stores backend preferences, notifications settings, and
             more all in one place
           </p>
@@ -35,7 +35,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-base font-medium text-[#262626]">
+            <p className="font-all text-sm sm:text-base font-medium text-[#262626]">
               Email Notification
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -55,7 +55,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-base font-medium text-[#262626]">
+            <p className="font-all text-sm sm:text-base font-medium text-[#262626]">
               Orders Notification
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -75,7 +75,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-base font-medium text-[#262626]">
+            <p className="font-all text-sm sm:text-base font-medium text-[#262626]">
               Payment Alerts
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -96,7 +96,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-base font-medium text-[#262626]">
+            <p className="font-all text-sm sm:text-base font-medium text-[#262626]">
               Inventory Alerts
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -116,7 +116,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-base font-medium text-[#262626]">
+            <p className="font-all text-sm sm:text-base font-medium text-[#262626]">
               Customers & User activities
             </p>
             <p className="font-all text-xs text-start text-[#171717]">
@@ -136,7 +136,7 @@ export default function AdminSettings() {
             />
           </div>
           <div className="flex flex-col items-start self-start">
-            <p className="font-all text-base font-medium text-[#262626]">
+            <p className="font-all text-sm sm:text-base font-medium text-[#262626]">
               System & Admin-level updates
             </p>
             <p className="font-all text-xs text-start text-[#171717]">

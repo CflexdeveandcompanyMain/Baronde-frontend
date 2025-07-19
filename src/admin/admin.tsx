@@ -81,7 +81,6 @@ const AdminDashboard = () => {
   };
   return (
     <section className="flex flex-row items-center w-full h-screen relative">
-      <div className="absolute"></div>
       <section className="sm:flex hidden bg-green-950 flex-col items-center md:p-7 p-3 w-1/4 h-full justify-between">
         <div className="flex flex-col items-center w-full">
           <Link
