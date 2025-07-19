@@ -3,7 +3,7 @@ import type { HeroDataType } from "../mainpage/Hero/data";
 import { formatPrice } from "../utils/priceconverter";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { removeItem } from "../utils/getFetch";
+import { removeFn, editFn } from "../utils/getFetch";
 
 interface EditableData {
   name: string;
@@ -27,8 +27,17 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
     setIsEditing(true);
   };
 
+  const editMutation = useMutation({
+    mutationFn: (item: HeroDataType) => editFn(data._id, item),
+    mutationKey: ["AdminEdit"],
+    onSuccess(data) {
+      console.log(data);
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+
   const handleSave = () => {
-    console.log("Saved data:", editedData);
+    editMutation.mutate({ ...data, ...editedData });
     setIsEditing(false);
   };
 
@@ -55,10 +64,11 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
 
   const queryClient = useQueryClient();
 
-  const {} = useMutation({
-    mutationFn: () => removeItem(data._id),
+  const removeMutation = useMutation({
+    mutationFn: () => removeFn(data._id),
     mutationKey: ["adminremove"],
-    onSuccess() {
+    onSuccess(data) {
+      console.log(data);
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },
   });
@@ -107,7 +117,10 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
             <p className="text-start font-medium font-all text-sm w-full">
               {editedData.name}
             </p>
-            <div className="flex justify-center self-center">
+            <div
+              onClick={() => removeMutation.mutate()}
+              className="flex justify-center self-center"
+            >
               <Trash size={16} className="text-red-600" />
             </div>
           </div>

@@ -1,4 +1,5 @@
 import type { CredentialResponse } from "@react-oauth/google";
+import type { HeroDataType } from "../mainpage/Hero/data";
 
 const token = sessionStorage.getItem("baron:token") ?? "";
 
@@ -181,14 +182,32 @@ getCountryAndState();
 
 getProducts();
 
-export async function removeItem(id: string) {
-  const request = await fetch("", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ id }),
-  });
+export async function removeFn(id: string) {
+  const request = await fetch(
+    `https://baronde.onrender.com/image/v1/product/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id }),
+    }
+  );
+  return await request.json();
+}
+
+export async function editFn(id: string, data: HeroDataType) {
+  const request = await fetch(
+    `https://baronde.onrender.com/image/v1/product/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    }
+  );
   return await request.json();
 }

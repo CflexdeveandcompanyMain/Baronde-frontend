@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ProductAuthCard from "../../dynamic/product";
 import { getProducts } from "../../utils/getFetch";
-import { HeroData, type HeroDataType } from "./data";
+import { type HeroDataType } from "./data";
 import Skeleton from "../../utils/skeleton";
 import { useGlobalState } from "../../store/globalstate";
 
@@ -24,7 +24,7 @@ export default function HeroProductCard({ category }: { category: string }) {
     });
 
   if (status == "success" && data) {
-    let products = HeroData.filter((item: HeroDataType) => {
+    let products = data.filter((item: HeroDataType) => {
       if (brand)
         if (brand === "other")
           return item.categories.toLowerCase() === category.toLowerCase();

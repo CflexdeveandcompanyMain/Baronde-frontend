@@ -5,6 +5,8 @@ import { HeroData, type HeroDataType } from "../mainpage/Hero/data";
 import AdminCard from "./card";
 import EditForm from "./editform";
 import { submitProduct } from "./form";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../utils/getFetch";
 
 interface ImageData {
   id: number;
@@ -32,7 +34,6 @@ export default function AdminProducts() {
   let [onIt, setIt] = useState(true);
   let [open, setopen] = useState(false);
   let [search, setSearch] = useState("");
-  let [items, setItems] = useState<HeroDataType[]>([]);
   let [trig, setTrig] = useState(false);
 
   const handleImagesChange = useCallback((images: ImageData[]) => {
@@ -64,6 +65,18 @@ export default function AdminProducts() {
 
   const openorclose = () => setopen(!open);
 
+  const handleClose = () => {
+    setopen(false);
+  };
+
+  const { data } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => getProducts(),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  let [item, setItems] = useState<HeroDataType[]>(data ?? []);
+
   useEffect(() => {
     let newResult: HeroDataType[];
 
@@ -84,10 +97,6 @@ export default function AdminProducts() {
 
     return () => setTrig(!trig);
   }, [search, brand, cat]);
-
-  const handleClose = () => {
-    setopen(false);
-  };
 
   const showIt = () => {
     console.log({
@@ -181,7 +190,7 @@ export default function AdminProducts() {
       </div>
 
       <div className="w-full sm:p-3 grid md:grid-cols-3 grid-cols-2">
-        {items.map((item: any, index: number) => {
+        {item.map((item: any, index: number) => {
           return (
             <div key={index} className="min-w-auto grow self-stretch h-full">
               <AdminCard data={item} />
