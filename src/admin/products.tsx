@@ -85,32 +85,6 @@ export default function AdminProducts() {
     return () => setTrig(!trig);
   }, [search, brand, cat]);
 
-  // let result = HeroData.filter((item) => {
-  //   return (
-  //     brand.toLowerCase() === item.brand &&
-  //     cat.toLowerCase().replaceAll(" ", "") === item.category
-  //   );
-  // });
-
-  // const handleSearch = (val: string) => {
-  //   console.log(val);
-  //   if (val) {
-  //     console.log("Y");
-  //     setSearch(val);
-  //     result = HeroData.filter((item) => {
-  //       return item.name.toLowerCase() === search.toLowerCase();
-  //     });
-  //   } else {
-  //     console.log("N");
-  //     result = HeroData.filter((item) => {
-  //       return (
-  //         brand.toLowerCase() === item.brand &&
-  //         cat.toLowerCase().replaceAll(" ", "") === item.category
-  //       );
-  //     });
-  //   }
-  // };
-
   const handleClose = () => {
     setopen(false);
   };
@@ -161,7 +135,7 @@ export default function AdminProducts() {
             className="bg-green-700 p-2 rounded w-auto sm:w-1/2 text-center justify-center flex flex-row items-center"
           >
             <Plus size={14} className="text-white" />
-            <p className="font-all text-sm font-medium text-white">
+            <p className="font-all text-xs sm:text-sm font-medium text-white">
               Add products
             </p>
           </button>
@@ -169,7 +143,7 @@ export default function AdminProducts() {
       </div>
 
       {open && (
-        <div className="fixed flex justify-center w-full h-screen bg-black/50 z-50 inset-0 py-5">
+        <div className="fixed flex justify-center w-full h-screen bg-black/50 z-50 inset-0 sm:py-5">
           <EditForm
             close={handleClose}
             show={showIt}
@@ -206,7 +180,7 @@ export default function AdminProducts() {
         </div>
       </div>
 
-      <div className="w-full p-3 grid md:grid-cols-3 grid-cols-2">
+      <div className="w-full sm:p-3 grid md:grid-cols-3 grid-cols-2">
         {items.map((item: any, index: number) => {
           return (
             <div key={index} className="min-w-auto grow self-stretch h-full">
@@ -227,10 +201,10 @@ export function SimpleSelect({
   setSelectedValue: (val: string) => void;
 }) {
   return (
-    <div className="w-full flex-col items-start flex gap-1 h-full">
+    <div className="w-full flex-col items-start flex gap-1 h-full p-1">
       <select
         onChange={(e) => setSelectedValue(e.target.value)}
-        className="w-full p-1 border border-gray-300 rounded font-all text-[13px] outline-none h-full"
+        className="w-full p-1 border border-gray-300 rounded font-all text-[11px] sm:text-[13px] outline-none h-full"
       >
         {options.map((option: string, index: number) => (
           <option

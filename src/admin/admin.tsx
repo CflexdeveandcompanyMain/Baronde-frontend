@@ -187,7 +187,6 @@ const AdminDashboard = () => {
             </div>
           </Link>
           <div className="flex flex-row items-center gap-4 justify-end w-full self-center">
-            {/* <Search size={22} /> */}
             <Menu onClick={() => setSd(!sd)} size={22} />
           </div>
         </div>

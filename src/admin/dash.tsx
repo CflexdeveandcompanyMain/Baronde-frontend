@@ -86,7 +86,10 @@ export default function AdminMain({ data }: { data: H }) {
               {filterD.map((item: string, index: number) => {
                 return (
                   <p
-                    onClick={() => setFilterOption(item)}
+                    onClick={() => {
+                      setFilterOption(item);
+                      setFilter(!filter);
+                    }}
                     key={index}
                     className="font-all text-sm font-medium w-full text-start"
                   >

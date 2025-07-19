@@ -50,7 +50,7 @@ export default function AdminNotification() {
                 className="sm:flex hidden text-green-600 px-2 self-start"
               />
               <div className="flex flex-col items-start w-full">
-                <p className="font-all text-sm text-black sm:text-base font-medium text-start w-full">
+                <p className="font-all text-[12.5px] text-black sm:text-base font-medium text-start w-full">
                   {item.title}
                 </p>
                 <p className="font-all text-xs text-stone-500 font-medium text-start w-full">

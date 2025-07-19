@@ -74,7 +74,7 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
               placeholder="Discount"
             />
           ) : (
-            <p className="text-white font-all text-center text-xs font-semibold">
+            <p className="text-white font-all text-center text-xs font-medium">
               {formatPrice(editedData.discount, "NGN")}
             </p>
           )}
@@ -142,8 +142,8 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
               className="bg-green-100 border border-green-400 py-[1px] px-1 rounded-lg text-start font-medium font-all text-xs focus:outline-none focus:border-green-500"
             />
           ) : (
-            <div className="bg-green-100 border flex justify-center self-center border-green-400 py-[1px] px-1 rounded-lg">
-              <p className="text-start font-medium font-all self-center text-xs">
+            <div className="bg-green-100 border flex justify-center self-center border-green-400 py-[1px] px-1 rounded w-auto">
+              <p className="text-start font-medium font-all self-center text-xs text-green-600">
                 {editedData.brand}
               </p>
             </div>
