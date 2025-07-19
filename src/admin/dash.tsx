@@ -1,5 +1,5 @@
 import { GitPullRequestDraft, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, type JSX } from "react";
+import { useState, useMemo, type JSX } from "react";
 
 type H = {
   title: string;
@@ -7,7 +7,7 @@ type H = {
   count: number;
 }[];
 
-let filterD = ["Amount", "Name", "Most recent", "Oldest"];
+let filterD = ["All", "Delivered", "Undelivered"];
 
 let table = [
   ["Jane Cooper", "#223", 200000, "Paid", "Aug 12, 2025"],
@@ -26,14 +26,25 @@ let table = [
 
 export default function AdminMain({ data }: { data: H }) {
   const [filter, setFilter] = useState(false);
-  const [filterOption, setFilterOption] = useState("mostrecent");
+  const [filterOption, setFilterOption] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  const totalPages = Math.ceil(table.length / itemsPerPage);
+  const filteredTable = useMemo(() => {
+    if (filterOption === "All") {
+      return table;
+    } else if (filterOption === "Delivered") {
+      return table.filter((row) => row[3] === "Delivered");
+    } else if (filterOption === "Undelivered") {
+      return table.filter((row) => row[3] === "Paid" || row[3] === "Pending");
+    }
+    return table;
+  }, [filterOption]);
+
+  const totalPages = Math.ceil(filteredTable.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentTableData = table.slice(startIndex, endIndex);
+  const currentTableData = filteredTable.slice(startIndex, endIndex);
 
   const getPageNumbers = () => {
     const pageNumbers = [];
@@ -64,6 +75,12 @@ export default function AdminMain({ data }: { data: H }) {
   const handleItemsPerPageChange = (items: number) => {
     setItemsPerPage(items);
     setCurrentPage(1);
+  };
+
+  const handleFilterChange = (newFilter: string) => {
+    setFilterOption(newFilter);
+    setCurrentPage(1);
+    setFilter(false);
   };
 
   return (
@@ -109,7 +126,7 @@ export default function AdminMain({ data }: { data: H }) {
             >
               <p className="font-all text-sm font-medium">Sort</p>
               <div className="border border-stone-300 p-1 flex flex-row items-center rounded gap-1">
-                <p className="font-all text-xs font-medium">Paid</p>
+                <p className="font-all text-xs font-medium">{filterOption}</p>
                 <GitPullRequestDraft size={12} className="rotate-90" />
               </div>
             </div>
@@ -126,12 +143,9 @@ export default function AdminMain({ data }: { data: H }) {
               {filterD.map((item: string, index: number) => {
                 return (
                   <p
-                    onClick={() => {
-                      setFilterOption(item);
-                      setFilter(!filter);
-                    }}
+                    onClick={() => handleFilterChange(item)}
                     key={index}
-                    className="font-all text-sm font-medium w-full text-start hover:bg-stone-100 p-1 rounded"
+                    className="font-all text-sm font-medium w-full text-start hover:bg-stone-100 p-1 rounded cursor-pointer"
                   >
                     {item}
                   </p>
@@ -166,9 +180,9 @@ export default function AdminMain({ data }: { data: H }) {
                 <tr key={index} className="hover:bg-gray-200">
                   {item.map((cellItem: string | number, cellIndex: number) => {
                     const color: any = {
-                      Paid: "text-blue-500 font-medium",
-                      Pending: "text-yellow-500 font-medium",
                       Delivered: "text-green-500 font-medium",
+                      Paid: "text-yellow-500 font-medium",
+                      Pending: "text-yellow-500 font-medium",
                     };
                     return (
                       <td
@@ -205,8 +219,10 @@ export default function AdminMain({ data }: { data: H }) {
 
           <div className="flex items-center gap-2">
             <span className="text-sm text-stone-600 font-all">
-              Showing {startIndex + 1} to {Math.min(endIndex, table.length)} of{" "}
-              {table.length} entries
+              Showing {startIndex + 1} to{" "}
+              {Math.min(endIndex, filteredTable.length)} of{" "}
+              {filteredTable.length} entries
+              {filterOption !== "All" && ` (filtered by ${filterOption})`}
             </span>
           </div>
 
