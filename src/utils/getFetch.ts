@@ -175,7 +175,9 @@ export async function getProducts() {
     },
   });
   const response = await request.json();
-  return response.data;
+  console.log(response);
+  if (response.data) return response.data;
+  return [];
 }
 
 getCountryAndState();

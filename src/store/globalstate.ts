@@ -3,6 +3,8 @@ import { create } from "zustand";
 interface GlobalState {
   c: any[];
   ser: boolean;
+  del: boolean;
+  setDel: () => void;
   setSer: () => void;
   cartlen: number;
   setCartlen: (len: number) => void;
@@ -14,6 +16,10 @@ interface GlobalState {
 }
 
 export const useGlobalState = create<GlobalState>()((set) => ({
+  del: false,
+  setDel() {
+    set((state) => ({ ...state, del: !state.del }));
+  },
   brand: "soundprince",
 
   // ✅ Fix: Use get() to access current state

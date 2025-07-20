@@ -1,12 +1,13 @@
 import { Plus, Search } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 import { products } from "../raw-datas/rd1";
-import { HeroData, type HeroDataType } from "../mainpage/Hero/data";
+import { type HeroDataType } from "../mainpage/Hero/data";
 import AdminCard from "./card";
 import EditForm from "./editform";
 import { submitProduct } from "./form";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
+import { useGlobalState } from "../store/globalstate";
 
 interface ImageData {
   id: number;
@@ -34,11 +35,14 @@ export default function AdminProducts() {
   let [onIt, setIt] = useState(true);
   let [open, setopen] = useState(false);
   let [search, setSearch] = useState("");
-  let [trig, setTrig] = useState(false);
 
   const handleImagesChange = useCallback((images: ImageData[]) => {
     setEImages(images);
   }, []);
+
+  const { del } = useGlobalState();
+
+  console.log("Global del state:", del);
 
   useEffect(() => {
     const isValid =
@@ -69,46 +73,64 @@ export default function AdminProducts() {
     setopen(false);
   };
 
-  const { data } = useQuery({
+  const {
+    data: rawData,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["products"],
     queryFn: () => getProducts(),
     staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+    refetchOnMount: true,
   });
 
-  let [item, setItems] = useState<HeroDataType[]>(data ?? []);
+  const filteredItems = useMemo(() => {
+    if (!rawData || !Array.isArray(rawData)) {
+      return [];
+    }
 
-  useEffect(() => {
-    let newResult: HeroDataType[];
+    let filtered: HeroDataType[];
 
-    if (search) {
-      newResult = HeroData.filter((item) => {
-        return item.name.toLowerCase() === search.toLowerCase();
+    if (search.trim()) {
+      filtered = rawData.filter((item: HeroDataType) => {
+        const searchTerm = search.toLowerCase().trim();
+        const itemName = item.name?.toLowerCase() || "";
+        const itemBrand = item.brand?.toLowerCase() || "";
+        const itemCategory = item.categories?.toLowerCase() || "";
+
+        return (
+          itemName.includes(searchTerm) ||
+          itemBrand.includes(searchTerm) ||
+          itemCategory.includes(searchTerm)
+        );
       });
     } else {
-      newResult = HeroData.filter((item) => {
-        return (
-          brand.toLowerCase() === item.brand &&
-          cat.toLowerCase().replaceAll(" ", "") === item.categories
-        );
+      filtered = rawData.filter((item: HeroDataType) => {
+        const itemBrand = item.brand?.toLowerCase() || "";
+        const itemCategory =
+          item.categories?.toLowerCase().replaceAll(" ", "") || "";
+        const filterBrand = brand.toLowerCase();
+        const filterCategory = cat.toLowerCase().replaceAll(" ", "");
+        const brandMatch = itemBrand === filterBrand;
+        const categoryMatch = itemCategory === filterCategory;
+
+        return brandMatch && categoryMatch;
       });
     }
 
-    setItems(newResult);
+    return filtered;
+  }, [rawData, search, brand, cat]);
 
-    return () => setTrig(!trig);
-  }, [search, brand, cat]);
+  useEffect(() => {
+    if (del) {
+      console.log("Delete state changed, refetching data...");
+      refetch();
+    }
+  }, [del, refetch]);
 
   const showIt = () => {
-    console.log({
-      images: eImages,
-      price: eamount,
-      brand: ebrand,
-      categories: ecategory,
-      description: edescription,
-      discount: ediscount,
-      keyword: ekeyword,
-      name: ename,
-    });
     const f = eImages.map((item) => item.url);
     submitProduct({
       eImages: f,
@@ -119,7 +141,20 @@ export default function AdminProducts() {
       ediscount,
       ekeyword,
       ename,
-    });
+    })
+      .then(() => {
+        refetch();
+        setEImages([]);
+        setEAmount(0);
+        setEName("");
+        setEDescription("");
+        setEDiscount(0);
+        setEKeyword(["product"]);
+        setopen(false);
+      })
+      .catch((error) => {
+        console.error("Error creating product:", error);
+      });
   };
 
   const getbrand = (val: string) => setBrand(val);
@@ -132,11 +167,49 @@ export default function AdminProducts() {
   const EDiscount = (val: number) => setEDiscount(val);
   const EDescription = (val: string) => setEDescription(val);
 
+  if (isLoading) {
+    return (
+      <section className="flex flex-col items-start w-full gap-5">
+        <div className="flex justify-start w-full">
+          <p className="font-all text-lg sm:text-2xl font-medium text-start w-full">
+            Loading Products...
+          </p>
+        </div>
+        <div className="w-full grid md:grid-cols-3 grid-cols-2 gap-4">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="animate-pulse">
+              <div className="bg-gray-200 h-64 rounded"></div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <section className="flex flex-col items-start w-full gap-5">
+        <div className="flex justify-start w-full">
+          <p className="font-all text-lg sm:text-2xl font-medium text-start w-full text-red-600">
+            Error loading products
+          </p>
+          <button
+            onClick={() => refetch()}
+            className="bg-red-600 text-white px-4 py-2 rounded"
+          >
+            Retry
+          </button>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="flex flex-col items-start w-full gap-5">
       <div className="flex justify-start w-full">
         <p className="font-all text-lg sm:text-2xl font-medium text-start w-full">
-          Your Product
+          Your Product ({filteredItems.length})
         </p>
         <div className="w-full flex justify-end">
           <button
@@ -173,14 +246,23 @@ export default function AdminProducts() {
 
       <div className="flex sm:flex-row flex-col items-start w-full sm:gap-5 gap-2">
         <div className="flex flex-row items-center w-full sm:w-1/4 gap-1 self-stretch">
-          <SimpleSelect options={D["brand"]} setSelectedValue={getbrand} />
-          <SimpleSelect options={D["product"]} setSelectedValue={getcategory} />
+          <SimpleSelect
+            options={D["brand"]}
+            setSelectedValue={getbrand}
+            currentValue={brand}
+          />
+          <SimpleSelect
+            options={D["product"]}
+            setSelectedValue={getcategory}
+            currentValue={cat}
+          />
         </div>
         <div className="flex flex-row items-center w-full sm:w-3/4 border border-stone-300 self-stretch rounded">
           <input
+            value={search}
             onChange={(e) => setSearch(e.target.value)}
             type="text"
-            placeholder="Search..."
+            placeholder="Search by name, brand, or category..."
             className="p-2 font-medium text-sm font-all w-full outline-none"
           />
           <div className="p-2 flex justify-center bg-stone-100 self-stretch">
@@ -189,14 +271,28 @@ export default function AdminProducts() {
         </div>
       </div>
 
-      <div className="w-full sm:p-3 grid md:grid-cols-3 grid-cols-2">
-        {item.map((item: any, index: number) => {
-          return (
-            <div key={index} className="min-w-auto grow self-stretch h-full">
-              <AdminCard data={item} />
-            </div>
-          );
-        })}
+      <div className="w-full sm:p-3 grid md:grid-cols-3 grid-cols-2 gap-4">
+        {filteredItems.length === 0 ? (
+          <div className="col-span-full flex justify-center py-8">
+            <p className="text-gray-500 font-all">
+              {search
+                ? `No products found for "${search}"`
+                : "No products match the selected filters"}
+            </p>
+          </div>
+        ) : (
+          filteredItems.map((item: HeroDataType, index: number) => {
+            console.log("Rendering item:", item.name, "ID:", item._id);
+            return (
+              <div
+                key={item._id || index}
+                className="min-w-auto grow self-stretch h-full"
+              >
+                <AdminCard data={item} />
+              </div>
+            );
+          })
+        )}
       </div>
     </section>
   );
@@ -205,13 +301,16 @@ export default function AdminProducts() {
 export function SimpleSelect({
   options,
   setSelectedValue,
+  currentValue,
 }: {
   options: string[];
   setSelectedValue: (val: string) => void;
+  currentValue?: string;
 }) {
   return (
     <div className="w-full flex-col items-start flex gap-1 h-full p-1">
       <select
+        value={currentValue}
         onChange={(e) => setSelectedValue(e.target.value)}
         className="w-full p-1 border border-gray-300 rounded font-all text-[11px] sm:text-[13px] outline-none h-full"
       >

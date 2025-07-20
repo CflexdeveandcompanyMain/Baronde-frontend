@@ -40,7 +40,7 @@ export default function MainPageNavbar() {
   };
 
   return (
-    <nav className="flex flex-col items-center w-full">
+    <nav className="flex flex-col items-center w-full sticky top-0 z-50">
       <div className="bg-[#E5A000] py-2 px-7 flex flex-row items-center w-full justify-between">
         <p className="font-all text-[11px] sm:text-xs text-white self-center">
           Check Big sallah sales - 40% off
