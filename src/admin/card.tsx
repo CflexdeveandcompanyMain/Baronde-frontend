@@ -21,7 +21,7 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
     description: data.description,
     price: data.price,
     brand: data.brand,
-    discount: 34000,
+    discount: data.discount,
   });
 
   const { setDel } = useGlobalState();
@@ -112,6 +112,8 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
       alert("Error: Cannot save changes - no product ID found");
       return;
     }
+
+    console.log({ ...data, ...editedData });
 
     editMutation.mutate({ ...data, ...editedData });
   };
@@ -220,7 +222,7 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
             className="w-full font-normal text-justify font-all text-[13px] text-gray-600 border border-gray-300 rounded px-2 py-1 focus:outline-none focus:border-green-500 min-h-[60px] resize-vertical"
           />
         ) : (
-          <p className="font-normal text-justify font-all text-[13px] text-gray-600 w-full">
+          <p className="font-normal text-start font-all text-[13px] text-gray-600 w-full">
             {editedData.description.replaceAll("/", "||")}
           </p>
         )}

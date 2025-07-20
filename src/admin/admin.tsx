@@ -10,14 +10,12 @@ import {
   HomeIcon,
   Settings,
   Menu,
-  Bell,
 } from "lucide-react";
 import { useState, type JSX } from "react";
 import AdminMain from "./dash";
 import AdminSettings from "./settings";
 import AdminPayment from "./payment";
 import AdminProducts from "./products";
-import AdminNotification from "./notification";
 
 let data = [
   {
@@ -52,20 +50,12 @@ let sidebar = [
     icon: <Package className="text-stone-50 group-hover:text-black" />,
   },
   {
-    title: "Orders",
-    icon: <ShoppingBasket className="text-stone-50 group-hover:text-black" />,
-  },
-  {
     title: "Payment",
     icon: <Wallet className="text-stone-50 group-hover:text-black" />,
   },
   {
     title: "Settings",
     icon: <Settings className="text-stone-50 group-hover:text-black" />,
-  },
-  {
-    title: "Notification",
-    icon: <Bell className="text-stone-50 group-hover:text-black" />,
   },
 ];
 const AdminDashboard = () => {
@@ -77,7 +67,6 @@ const AdminDashboard = () => {
     settings: <AdminSettings />,
     payment: <AdminPayment />,
     products: <AdminProducts />,
-    notification: <AdminNotification />,
   };
   return (
     <section className="flex flex-row items-center w-full h-screen relative">

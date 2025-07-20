@@ -84,7 +84,7 @@ export default function HeroProductCard({ category }: { category: string }) {
 
   if (status === "pending") {
     return (
-      <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
+      <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:gap-2 gap-1 ">
         {[1, 2, 3, 4].map((item, index) => (
           <div key={index + item} className="w-full">
             <ProductCardSkeleton />
@@ -95,7 +95,6 @@ export default function HeroProductCard({ category }: { category: string }) {
   }
 
   if (status === "success" && data) {
-    console.log(data);
     let products = data.filter((item: HeroDataType) => {
       if (brand) {
         if (brand === "other") {
@@ -109,7 +108,7 @@ export default function HeroProductCard({ category }: { category: string }) {
     });
 
     return (
-      <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
+      <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:gap-2 gap-1">
         {products.map((item: HeroDataType, index: number) => (
           <div key={index} className="min-w-auto flex-shrink-0 self-stretch">
             <ProductAuthCard data={item} />

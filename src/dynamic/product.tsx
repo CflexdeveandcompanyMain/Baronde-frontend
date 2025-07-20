@@ -142,9 +142,10 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               {isSingleImage ? (
                 <></>
               ) : (
-                data.images.map((item) => {
+                data.images.map((item, index: number) => {
                   return (
                     <div
+                      key={index}
                       onClick={() => {
                         setImage(item.url);
                         console.log(item.url, image);

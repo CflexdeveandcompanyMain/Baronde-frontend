@@ -150,7 +150,7 @@ export default function MainPageNavbar() {
               } justify-start fixed inset-0 z-50 bg-black/40 w-full h-screen`}
             >
               <div className="p-3 shadow rounded h-aut w-full">
-                <Mob />
+                <Mob FN={setSearchBtn} />
               </div>
             </div>
           </div>
