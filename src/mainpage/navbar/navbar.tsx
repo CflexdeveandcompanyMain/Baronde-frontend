@@ -257,9 +257,11 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onBlur={() => {
-                  setdrop(!drop);
-                  setdown(false);
+                onMouseDown={(e) => {
+                  if (e.target === e.currentTarget) {
+                    setdrop(!drop);
+                    setdown(false);
+                  }
                 }}
                 type={"button"}
                 className={`${
@@ -271,7 +273,8 @@ export default function MainPageNavbar() {
                     <div
                       onClick={() => {
                         setBrand(item);
-                        setTimeout(() => setdrop(!drop), 10);
+                        setTimeout(() => setdrop(!drop), 0);
+                        navigate(`/brand/${item}`);
                       }}
                       className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
                       key={index}
@@ -302,7 +305,12 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onBlur={() => setdown(!down)}
+                onMouseDown={(e) => {
+                  if (e.target === e.currentTarget) {
+                    setdown(!down);
+                    setdrop(false);
+                  }
+                }}
                 onClick={() => console.log("BTN")}
                 type={"button"}
                 className={`${
@@ -312,7 +320,10 @@ export default function MainPageNavbar() {
                 {products.map((item, index) => {
                   return (
                     <Link
-                      onClick={() => setTimeout(() => setdown(!down), 0)}
+                      onClick={() => {
+                        setTimeout(() => setdown(!down), 0);
+                        navigate(`/brand/${item}`);
+                      }}
                       to={"/product/" + item.replaceAll(" ", "-").toLowerCase()}
                       className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
                       key={index}

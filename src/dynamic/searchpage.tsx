@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
 import { useMemo } from "react";
 
-// Loading skeleton component for consistency
 function ProductCardSkeleton() {
   return (
     <div className="w-full p-4 border border-gray-200 rounded-lg shadow-sm bg-white">
@@ -72,14 +71,13 @@ export default function SearchPage() {
   const { data, status, isLoading, error } = useQuery({
     queryKey: ["products"],
     queryFn: () => getProducts(),
-    staleTime: 5 * 60 * 1000, // 5 minutes - same as HeroProductCard
-    retry: 3, // Retry failed requests
+    staleTime: 5 * 60 * 1000,
+    retry: 3,
   });
 
   const param = useParams();
   const keyword = param.keyword?.toLowerCase() || "";
 
-  // Use useMemo to optimize filtering and avoid unnecessary recalculations
   const filteredItems = useMemo(() => {
     if (status !== "success" || !data || !keyword) {
       return [];
@@ -91,19 +89,16 @@ export default function SearchPage() {
         return true;
       }
 
-      // Keyword array search (if keywords exist)
       if (item.keyword && Array.isArray(item.keyword)) {
         return item.keyword.some((key: string) =>
           key.toLowerCase().includes(keyword)
         );
       }
 
-      // Brand search
       if (item.brand && item.brand.toLowerCase().includes(keyword)) {
         return true;
       }
 
-      // Description search
       if (
         item.description &&
         item.description.toLowerCase().includes(keyword)
@@ -111,7 +106,6 @@ export default function SearchPage() {
         return true;
       }
 
-      // Category search
       if (item.categories && item.categories.toLowerCase().includes(keyword)) {
         return true;
       }
@@ -120,7 +114,6 @@ export default function SearchPage() {
     });
   }, [data, keyword, status]);
 
-  // Loading state
   if (isLoading || status === "pending") {
     return (
       <>
@@ -160,7 +153,6 @@ export default function SearchPage() {
     );
   }
 
-  // Error state
   if (error) {
     return (
       <>
@@ -212,7 +204,7 @@ export default function SearchPage() {
             <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
               {filteredItems.map((item: HeroDataType, index: number) => (
                 <div
-                  key={item._id || index} // Use _id if available for better React key
+                  key={item._id || index}
                   className="min-w-auto flex-shrink-0 self-stretch"
                 >
                   <ProductAuthCard data={item} />

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import ProductAuthCard from "./product";
-import { HeroData, type HeroDataType } from "../mainpage/Hero/data";
+import { type HeroDataType } from "../mainpage/Hero/data";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
 import { useGlobalState } from "../store/globalstate";
@@ -19,7 +19,7 @@ export default function ProductPage() {
   let cat = parameter.category?.split("-")[0].toLowerCase();
 
   if (status == "success" && data) {
-    let result = HeroData.filter((item: HeroDataType) => {
+    let result = data.filter((item: HeroDataType) => {
       if (brand) {
         if (brand === "other")
           return item.categories.toLowerCase().includes(cat ?? "");

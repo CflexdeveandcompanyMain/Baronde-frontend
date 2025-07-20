@@ -38,7 +38,6 @@ function ProductCardSkeleton() {
         </div>
       </div>
 
-      {/* Price skeleton */}
       <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse relative overflow-hidden mb-3">
         <div
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -49,7 +48,6 @@ function ProductCardSkeleton() {
         ></div>
       </div>
 
-      {/* Button skeleton */}
       <div className="h-10 bg-gray-200 rounded animate-pulse relative overflow-hidden">
         <div
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
