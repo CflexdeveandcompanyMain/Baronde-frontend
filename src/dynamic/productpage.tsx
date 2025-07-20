@@ -11,7 +11,6 @@ export default function ProductPage() {
   const { data, status } = useQuery({
     queryKey: ["products"],
     queryFn: () => getProducts(),
-    staleTime: 5 * 60 * 1000,
   });
 
   let { brand } = useGlobalState();
@@ -31,7 +30,6 @@ export default function ProductPage() {
       }
     });
 
-    // Calculate product count information
     const totalProducts = result?.length || 0;
     const startCount = totalProducts > 0 ? 1 : 0;
     const endCount = totalProducts;

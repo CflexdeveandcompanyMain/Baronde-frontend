@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { fb, ig, wha, whatsapp, youtube } from "..";
+import { fb, ig, wha, youtube } from "..";
 import { useState } from "react";
 
 export default function Footer() {

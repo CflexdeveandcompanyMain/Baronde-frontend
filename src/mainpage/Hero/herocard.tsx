@@ -4,11 +4,9 @@ import { getProducts } from "../../utils/getFetch";
 import { type HeroDataType } from "./data";
 import { useGlobalState } from "../../store/globalstate";
 
-// Animated Product Card Skeleton Component
 function ProductCardSkeleton() {
   return (
-    <div className="w-full p-4 border border-gray-200 rounded-lg shadow-sm bg-white">
-      {/* Image skeleton */}
+    <div className="w-full p-1.5 border border-gray-200 rounded-lg shadow-sm bg-white">
       <div className="w-full h-48 bg-gray-200 rounded-md mb-4 animate-pulse relative overflow-hidden">
         <div
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -19,7 +17,6 @@ function ProductCardSkeleton() {
         ></div>
       </div>
 
-      {/* Title skeleton */}
       <div className="space-y-2 mb-3">
         <div className="h-4 bg-gray-200 rounded animate-pulse relative overflow-hidden">
           <div
@@ -77,7 +74,6 @@ export default function HeroProductCard({ category }: { category: string }) {
   const { data, status } = useQuery({
     queryKey: ["products"],
     queryFn: () => getProducts(),
-    staleTime: 5 * 60 * 1000,
   });
 
   let { brand } = useGlobalState();

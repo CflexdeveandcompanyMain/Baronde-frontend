@@ -213,3 +213,7 @@ export async function editFn(id: string, data: HeroDataType) {
   );
   return await request.json();
 }
+
+// export async function addToCartFn(){
+//   const request = await fetch("https://baronde.onrender.com/cart")
+// }
