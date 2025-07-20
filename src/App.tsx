@@ -21,6 +21,7 @@ import SingleProductPage from "./dynamic/singlepage";
 import AdminDashboard from "./admin/admin";
 import SearchPage from "./dynamic/searchpage";
 import Checkout from "./checkout/product";
+import AllDeals from "./dynamic/alldeal";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ export default function App() {
         <Route path={"/admin"} element={<AdminDashboard />} />
         <Route path={"/search/:keyword"} element={<SearchPage />} />
         <Route path={"/checkout"} element={<Checkout />} />
+        <Route path={"/brand/:brand"} element={<AllDeals />} />
       </Routes>
     </QueryClientProvider>
   );

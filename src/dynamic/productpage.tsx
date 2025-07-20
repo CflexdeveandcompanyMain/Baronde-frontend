@@ -30,6 +30,12 @@ export default function ProductPage() {
         );
       }
     });
+
+    // Calculate product count information
+    const totalProducts = result?.length || 0;
+    const startCount = totalProducts > 0 ? 1 : 0;
+    const endCount = totalProducts;
+
     return (
       <>
         <MainPageNavbar />
@@ -52,7 +58,9 @@ export default function ProductPage() {
                   {formatString(parameter.category ?? "Random")}
                 </p>
                 <p className="font-all text-xs text-start w-full">
-                  showing 1 - 24 of 35 products
+                  {totalProducts > 0
+                    ? `showing ${startCount} - ${endCount} of ${totalProducts} products`
+                    : "No products found"}
                 </p>
               </div>
               <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">

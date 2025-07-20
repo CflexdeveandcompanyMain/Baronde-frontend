@@ -2,19 +2,7 @@ import { ChevronDown, Search, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../../store/globalstate";
-
-const appliances: string[] = [
-  "Refrigerator",
-  "Washing Machine",
-  "Microwave Oven",
-  "Air Conditioner",
-  "Vacuum Cleaner",
-  "Dishwasher",
-  "Water Heater",
-  "Television",
-  "Blender",
-  "1Electric Kettle",
-];
+import { appliances } from "./search";
 
 export default function Mob({ FN }: { FN: () => void }) {
   let [drop, setdrop] = useState<boolean>(false);

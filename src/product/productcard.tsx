@@ -11,7 +11,7 @@ export default function ProductCard(data: HeroDataType) {
     <div className="flex flex-col border border-green-200/50 relative items-center self-stretch h-full justify-between w-[200px] bg-white p-2">
       <div className="flex flex-col items-center h-[50%]">
         <img
-          src={data.image[0]}
+          src={data.images[0].url}
           className="object-cover h-full w-full bg-white"
         />
         <div className="flex justify-center bg-[#fdb204f3] p-1 shadow absolute top-1.5 left-1.5 ">

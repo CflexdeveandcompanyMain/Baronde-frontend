@@ -69,7 +69,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           <p className={`text-start font-medium font-all text-sm w-full`}>
             {data.name}
           </p>
-          <p className="font-normal text-justify font-all text-[13px] text-gray-600 w-full">
+          <p className="font-normal text-start font-all text-[13px] text-gray-600 w-full">
             {data.description.replaceAll("/", "||")}
           </p>
           <div className="flex flex-col sm:flex-row items-start sm:items-center w-full justify-between">

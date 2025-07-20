@@ -3,6 +3,7 @@ import { useAuthStore } from "../store/user";
 import { Link, useNavigate } from "react-router-dom";
 import BrandLogo from "../utils/brand";
 import { bdm } from "..";
+import CountdownTimer from "./timer";
 
 export default function ForgetCode() {
   const [otp, setOTP] = useState(Array(5).fill(""));
@@ -72,10 +73,7 @@ export default function ForgetCode() {
               );
             })}
           </div>
-          <p className="font-all font-medium text-sm text-start w-full text-gray-400">
-            Code resend in
-            <span className="text-orange-500 text-[13px] ml-1">3:12</span>
-          </p>
+          <CountdownTimer />
         </div>
         <button
           disabled={trigger}

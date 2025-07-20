@@ -39,6 +39,8 @@ export default function MainPageNavbar() {
     setSearch(!search);
   };
 
+  const Menoo = () => setmenu(!menu);
+
   return (
     <nav className="flex flex-col items-center w-full sticky top-0 z-50">
       <div className="bg-[#E5A000] py-2 px-7 flex flex-row items-center w-full justify-between">
@@ -227,7 +229,7 @@ export default function MainPageNavbar() {
         </div>
       </div>
       <div className="relative w-full sm:hidden flex bg-white">
-        <MobileDropDown menu={menu} />
+        <MobileDropDown menu={menu} setMenu={Menoo} />
       </div>
       <div className="w-full bg-white">
         <section className="bg-white p-3 hidden sm:flex justify-center w-3/4 sm:w-[90%] md:w-[70%] mx-auto">
@@ -255,8 +257,9 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onMouseDown={(e) => {
-                  if (e.target === e.currentTarget) setdrop(!drop);
+                onBlur={() => {
+                  setdrop(!drop);
+                  setdown(false);
                 }}
                 type={"button"}
                 className={`${
@@ -281,7 +284,10 @@ export default function MainPageNavbar() {
             </div>
             <div className="flex flex-col items-center relative">
               <div
-                onClick={() => setdown(!down)}
+                onClick={() => {
+                  setdown(!down);
+                  setdrop(false);
+                }}
                 className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
               >
                 <p className="font-all text-sm font-medium text-center">
@@ -296,9 +302,7 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onMouseDown={(e) => {
-                  if (e.target === e.currentTarget) setdown(!down);
-                }}
+                onBlur={() => setdown(!down)}
                 onClick={() => console.log("BTN")}
                 type={"button"}
                 className={`${

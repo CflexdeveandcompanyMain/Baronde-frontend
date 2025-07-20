@@ -2,7 +2,7 @@ import { ChevronDown, Search } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const appliances: string[] = [
+export const appliances: string[] = [
   "Amplifier",
   "Compressor",
   "Double sub",

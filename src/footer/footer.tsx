@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { fb, ig, whatsapp, x } from "..";
+import { fb, ig, wha, whatsapp, youtube } from "..";
+import { useState } from "react";
 
 export default function Footer() {
+  let [val, setVal] = useState("");
   return (
     <footer className="w-full p-7 sm:p-10 flex flex-col items-start bg-[#F0FDF4]">
       <section className="flex flex-col sm:flex-row items-center w-full sm:gap-2 gap-10 justify-between">
@@ -22,18 +24,12 @@ export default function Footer() {
             <p className="font-all text-sm font-medium text-[#677279]">
               POLICIES
             </p>
-            <p className="font-all text-xs font-normal text-[#677279]">
-              Search
-            </p>
             <Link
               to={"/term"}
               className="font-all text-xs font-normal text-[#677279]"
             >
               Terms of Services
             </Link>
-            <p className="font-all text-xs font-normal text-[#677279]">
-              Refund policy
-            </p>
             <Link
               to={"/shipping"}
               className="font-all text-xs font-normal text-[#677279]"
@@ -47,7 +43,7 @@ export default function Footer() {
               Privacy policy
             </Link>
             <Link
-              to={"/order"}
+              to={"/about"}
               className="font-all text-xs font-normal text-[#677279]"
             >
               Contact information
@@ -63,11 +59,14 @@ export default function Footer() {
             </p>
             <div className="flex flex-col items-center w-full gap-3">
               <input
+                onChange={(e) => setVal(e.target.value)}
+                value={val}
                 type={"email"}
                 className="text-xs font-medium bg-white w-full p-3 outline-none border border-stone-300"
                 placeholder="email"
               />
               <button
+                onClick={() => setVal("")}
                 type="button"
                 className={`bg-green-900 shadow text-sm p-3 w-full font-all font-normal text-white`}
               >
@@ -86,18 +85,34 @@ export default function Footer() {
             Follow us
           </p>
           <div className="flex flex-row items-center gap-3">
-            <div className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center">
+            <Link
+              to={
+                "https://web.facebook.com/people/Soundprincemusicalworld/61561311194823"
+              }
+              className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center"
+            >
               <img src={fb} className="object-contain" />
-            </div>
-            <div className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center">
+            </Link>
+            <Link
+              to={"https://www.instagram.com/soundprincemusicalworld/"}
+              className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center"
+            >
               <img src={ig} className="object-contain" />
-            </div>
-            <div className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center">
-              <img src={x} className="object-contain" />
-            </div>
-            <div className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center">
-              <img src={whatsapp} className="object-contain" />
-            </div>
+            </Link>
+            <Link
+              to={"https://www.youtube.com/@SoundprinceMusicalworld"}
+              className="w-8 h-8 rounded-full bg-green-950 p-2 flex justify-center"
+            >
+              <img src={youtube} className="object-contain" />
+            </Link>
+            <Link
+              to={
+                "https://wa.me/2349138254838?text=`Hello!, I'm interested in your servce`"
+              }
+              className="w-7 h-7 rounded-full bg-green-950 p-2 flex justify-center"
+            >
+              <img src={wha} className="object-cover" />
+            </Link>
           </div>
         </div>
       </div>

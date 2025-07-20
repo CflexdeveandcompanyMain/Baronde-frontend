@@ -11,8 +11,12 @@ import map from "./assets/map.png";
 import empty from "./assets/empty.png";
 import frame3 from "./assets/frame3.png";
 import pay from "./assets/pay.png";
+import youtube from "./assets/youtube.png";
+import wha from "./assets/wha.png";
 
 export {
+  youtube,
+  wha,
   pay,
   bdm,
   headlogo,

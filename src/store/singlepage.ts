@@ -14,9 +14,9 @@ export const usePageData = create<pageDataT>()((set) => ({
     discount: 0,
     keyword: [""],
     brand: "",
-    category: "",
-    id: 0,
-    image: [""],
+    categories: "",
+    _id: "",
+    images: [{ url: "", public_id: "", _id: "" }],
     stockQuantity: 0,
   },
   setData(data: HeroDataType) {
