@@ -1,57 +1,50 @@
-import { useState } from "react";
-import { bdm } from "../index";
-import { GoogleLogin } from "@react-oauth/google";
-import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeOffIcon, LoaderCircleIcon } from "lucide-react";
-import { userLogIn } from "../utils/getFetch";
-import { useAuthStore } from "../store/user";
-import ErrorMessage from "../utils/errorMessage";
+import { Link, useNavigate } from "react-router-dom";
 import BrandLogo from "../utils/brand";
+import { bdm } from "..";
+import { useState } from "react";
+import ErrorMessage from "../utils/errorMessage";
+import { createAdmin } from "../utils/getFetch";
 
-export default function UserSignInInterface() {
+export default function AdminCreate() {
   let [viewPassword, setViewPassword] = useState<boolean>(false);
-  let [loading, setLoading] = useState<boolean>(true);
-  let [message, setMessage] = useState<string>("");
   let [userInfo, setUserInfo] = useState({
+    name: "",
     email: "",
     password: "",
   });
-  let [lock, setLock] = useState(false);
-  let [trigger, setTrigger] = useState(false);
 
   let navigate = useNavigate();
+  let [trigger, setTrigger] = useState(false);
+  let [message, setMessage] = useState("");
+  let [loading, setLoading] = useState(true);
 
-  let { setCredentials, verifyOtp } = useAuthStore();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const fetchData = async () => {
     try {
-      const result = await userLogIn(userInfo.email, userInfo.password);
-
+      const result = await createAdmin(
+        userInfo.name,
+        userInfo.email,
+        userInfo.password,
+        "admin",
+        "",
+        ""
+      );
       if (!result.user && result.message) {
         setMessage(result.message);
 
-        if (result.message.startsWith("Account locked")) setLock(true);
-
         setTimeout(() => setMessage(""), 5000);
       } else {
-        let { name, email, id, role } = result.user;
-        if (role === "admin") {
-          navigate("/admin");
-          return;
-        }
-
+        console.log(result);
         setMessage("");
-
-        sessionStorage.setItem(
-          "baron:user",
-          JSON.stringify({ name, email, isVerified: true })
-        );
-
-        setCredentials(name, email, "", id);
-
-        verifyOtp();
-
-        navigate("/");
+        navigate("/admin");
       }
     } catch (err: any) {
       if (err.name !== "AbortError") {
@@ -62,38 +55,38 @@ export default function UserSignInInterface() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setTrigger(false);
-
-    setLoading(true);
-
-    setUserInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  let { name, email, password } = userInfo;
+  const handleSubmit = async () => {
+    if (name && email && password) {
+      setTrigger(true);
+      await fetchData();
+    }
   };
 
   return (
-    <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
+    <section className="w-full bg-white h-screen sm:bg-gray-200 flex justify-center">
       <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
         <BrandLogo img={bdm} />
-        <div className="flex flex-col items-start w-full justify-start p-2 my-3">
-          <p className="font-all font-semibold text-xl text-start w-full">
-            Welcome back
-          </p>
-          <small className="font-all font-medium text-stone-600 text-base text-start w-full">
-            Hey!, good to see you again
-          </small>
-        </div>
+        <p className="font-all font-semibold text-xl text-start w-full my-3">
+          Create an Account
+        </p>
         <div className="flex flex-col items-center w-full gap-2.5 p-2">
+          <div className="flex flex-col w-full gap-2">
+            <p className="font-medium text-sm text-start font-all">Name</p>
+            <input
+              type="text"
+              name="name"
+              onChange={handleChange}
+              className="rounded-sm shadow outline-0 font-all border text-sm border-stone-700 p-2"
+              placeholder="e.g John Doe..."
+            />
+          </div>
           <div className="flex flex-col w-full gap-2">
             <p className="font-medium text-sm text-start font-all">Email</p>
             <input
               type="text"
-              onChange={handleChange}
               name="email"
+              onChange={handleChange}
               className="rounded-sm shadow outline-0 border font-all text-sm border-stone-700 p-2"
               placeholder="e.g johndoe@xyz.com"
             />
@@ -102,9 +95,9 @@ export default function UserSignInInterface() {
             <p className="font-medium text-sm text-start font-all">Password</p>
             <div className="flex flex-row items-center w-full border text-sm border-stone-700 rounded-sm shadow">
               <input
+                onChange={handleChange}
                 name="password"
                 type={viewPassword ? "text" : "password"}
-                onChange={handleChange}
                 className="w-full outline-0 p-2 font-all"
                 placeholder="* * * * * * *"
               />
@@ -125,39 +118,26 @@ export default function UserSignInInterface() {
               </div>
             </div>
           </div>
-          <div className="w-full flex justify-between">
+          <div className="flex justify-start w-full">
             <ErrorMessage message={message} />
-            <Link to={"/forgot"}>
-              <span className="font-all text-xs text-end font-normal text-orange-400">
-                Forgot Password?
-              </span>
-            </Link>
           </div>
           <button
-            onClick={async () => {
-              setTrigger(true);
-              await fetchData();
-            }}
-            disabled={lock}
+            onClick={handleSubmit}
             type="button"
-            className={`p-3 ${
-              lock ? "bg-[#D4D4D4]" : "bg-[#008236]"
-            } rounded-sm shadow w-full justify-center flex font-all font-normal text-white`}
+            disabled={trigger && loading}
+            className="p-3 bg-green-700 rounded-sm shadow w-full font-all font-normal flex justify-center text-white"
           >
             {trigger && loading ? (
-              <LoaderCircleIcon
-                className="animate-spin text-center"
-                size={16}
-              />
+              <LoaderCircleIcon className="animate-spin" size={16} />
             ) : (
-              "Sign in"
+              "Create account"
             )}
           </button>
           <div className="w-full flex justify-end">
             <p className="font-all text-xs text-end font-normal">
-              Don't have an account?
-              <Link to={"/signup"}>
-                <span className="text-orange-400"> sign up</span>
+              Already have an account?
+              <Link to={"/signin"}>
+                <span className="text-orange-400"> sign in.</span>
               </Link>
             </p>
           </div>
@@ -167,12 +147,7 @@ export default function UserSignInInterface() {
             <div className="h-[1px] bg-black/30 w-1/2 self-center"></div>
           </div>
         </div>
-        <GoogleLogin
-          width={"100%"}
-          onSuccess={() => console.log("success")}
-          onError={() => console.log("error")}
-        />
-        <div className="flex flex-row items-center self-start my-2 gap-5 justify-between">
+        <div className="flex flex-row items-center self-start my-2 gap-2 justify-between sm:w-1/3 mx-0 w-1/2">
           <Link to={"/policy"} className="font-all text-xs">
             Privacy policy
           </Link>

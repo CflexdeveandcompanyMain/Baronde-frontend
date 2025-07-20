@@ -1,8 +1,6 @@
 import type { CredentialResponse } from "@react-oauth/google";
 import type { HeroDataType } from "../mainpage/Hero/data";
 
-const token = sessionStorage.getItem("baron:token") ?? "";
-
 export async function getFetch(url: string) {
   const request = await fetch(url, {
     method: "GET",
@@ -52,6 +50,32 @@ export async function createUser(
   return response;
 }
 
+export async function createAdmin(
+  name: string,
+  email: string,
+  password: string,
+  role: string,
+  otp: string,
+  otpId: string
+) {
+  const request = await fetch("https://baronde.onrender.com/user/v1/SignUp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, email, password, otp, otpId, role }),
+  });
+  if (
+    request.ok &&
+    request.headers.get("Authorization")?.startsWith("Bearer")
+  ) {
+    const token = request.headers.get("Authorization")?.split(" ")[1] ?? "";
+    sessionStorage.setItem("baron:admintoken", token);
+  }
+  const response = await request.json();
+  return response;
+}
+
 export async function getGoogleUserInfo(token: CredentialResponse) {
   const request = await fetch(`backendurl`, {
     method: "POST",
@@ -73,14 +97,18 @@ export async function userLogIn(email: string, password: string) {
     },
     body: JSON.stringify({ email, password }),
   });
+  const response = await request.json();
   if (
     request.ok &&
     request.headers.get("Authorization")?.startsWith("Bearer")
   ) {
     const token = request.headers.get("Authorization")?.split(" ")[1] ?? "";
-    sessionStorage.setItem("baron:token", token);
+    const { role } = response.user;
+    if (role === "admin") {
+      sessionStorage.setItem("baron:admintoken", token);
+    } else sessionStorage.setItem("baron:token", token);
   }
-  return await request.json();
+  return response;
 }
 
 export async function requestOtp(email: string) {
@@ -119,7 +147,7 @@ export async function resetPassword(
 }
 
 export async function getImagesByCategory(category: string) {
-  console.log(token);
+  const token = sessionStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch(
     "https://baronde.onrender.com/image/v1/categories/:" + category,
     {
@@ -135,7 +163,7 @@ export async function getImagesByCategory(category: string) {
 }
 
 export async function getImagesByName(name: string) {
-  console.log(token);
+  const token = sessionStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch(
     "https://baronde.onrender.com/image/v1/name/:" + name,
     {
@@ -167,6 +195,7 @@ export async function getCountryAndState() {
 }
 
 export async function getProducts() {
+  const token = sessionStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch("https://baronde.onrender.com/image/v1/", {
     method: "GET",
     headers: {
@@ -175,7 +204,6 @@ export async function getProducts() {
     },
   });
   const response = await request.json();
-  console.log(response);
   if (response.data) return response.data;
   return [];
 }
@@ -185,6 +213,7 @@ getCountryAndState();
 getProducts();
 
 export async function removeFn(id: string) {
+  const token = sessionStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch(
     `https://baronde.onrender.com/image/v1/product/${id}`,
     {
@@ -200,6 +229,7 @@ export async function removeFn(id: string) {
 }
 
 export async function editFn(id: string, data: HeroDataType) {
+  const token = sessionStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch(
     `https://baronde.onrender.com/image/v1/product/${id}`,
     {

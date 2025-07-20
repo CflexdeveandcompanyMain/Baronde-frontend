@@ -5,9 +5,9 @@
   --font-all: "IBM Plex Sans";
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 0;
-}
+} */
 
 datalist {
   scrollbar-width: 0;

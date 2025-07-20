@@ -257,12 +257,6 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onMouseDown={(e) => {
-                  if (e.target === e.currentTarget) {
-                    setdrop(!drop);
-                    setdown(false);
-                  }
-                }}
                 type={"button"}
                 className={`${
                   drop ? "flex" : "hidden"
@@ -305,17 +299,11 @@ export default function MainPageNavbar() {
               </div>
               <button
                 ref={focusRef}
-                onMouseDown={(e) => {
-                  if (e.target === e.currentTarget) {
-                    setdown(!down);
-                    setdrop(false);
-                  }
-                }}
                 onClick={() => console.log("BTN")}
                 type={"button"}
                 className={`${
                   down ? "flex" : "hidden"
-                } sm:min-w-[200px] bg-white duration-200 flex-col absolute top-10 items-start border border-black/40 outline-none z-30`}
+                } sm:min-w-[200px] bg-white overflow-y-scroll max-h-[400px] duration-200 flex-col absolute top-10 items-start border border-black/40 outline-none z-30`}
               >
                 {products.map((item, index) => {
                   return (
