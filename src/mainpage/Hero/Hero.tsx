@@ -25,7 +25,7 @@ export default function MainPageHero() {
         <section className="w-full flex justify-end p-3 fixed bottom-5 sm:bottom-6 right-5 z-50">
           <Link
             to={
-              "https://wa.me/2347042300162?text=`Hello!, I'm interested in your servce`"
+              "https://wa.me/2349138254838?text=`Hello!, I'm interested in your servce`"
             }
             className="flex flex-row items-center gap-3 cursor-pointer"
           >
@@ -42,7 +42,7 @@ export default function MainPageHero() {
             <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
               Full Range Speakers
             </p>
-            <Link to={"/"} className="w-full">
+            <Link to={"/product/full-range-speakers"} className="w-full">
               <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
                 view all
               </p>

@@ -1,4 +1,4 @@
-const token = sessionStorage.getItem("baron:token") || "";
+const token = sessionStorage.getItem("baron:admintoken") || "";
 export const submitProduct = async ({
   eImages,
   eamount,

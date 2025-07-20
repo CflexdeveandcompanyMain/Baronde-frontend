@@ -8,6 +8,7 @@ import { countries } from "./data";
 import { formatPrice } from "../utils/priceconverter";
 import type { HeroDataType } from "../mainpage/Hero/data";
 import { useCart } from "../utils/storage";
+import { PaystackButton } from "react-paystack";
 
 // Types
 type DeliveryOption = "ship" | "pickup";
@@ -121,6 +122,7 @@ export default function Checkout() {
 
           {/* Right Column - Order Summary */}
           <OrderSummary
+            formData={formData}
             cart={cart}
             totals={totals}
             filterReduce={filterReduce}
@@ -188,10 +190,10 @@ function DeliverySection({
         />
 
         <InputField
-          label="Company (Optional)"
+          label="Email"
           value={formData.company}
-          onChange={(value: any) => updateFormData("company", value)}
-          placeholder="Enter company name"
+          onChange={(value: any) => updateFormData("email", value)}
+          placeholder="Enter your email"
         />
 
         <InputField
@@ -354,6 +356,7 @@ function OrderSummary({
   discountCode,
   onDiscountChange,
   onApplyDiscount,
+  formData,
 }: {
   cart: HeroDataType[];
   totals: any;
@@ -361,7 +364,28 @@ function OrderSummary({
   discountCode: string;
   onDiscountChange: any;
   onApplyDiscount: any;
+  formData: any;
 }) {
+  const puBlic_key = "pk_test_55b5c8784df9c619e9bcb82982aef69c61978c0e";
+  const { fullName, phoneNumber } = formData.delivery;
+  const email = JSON.parse(sessionStorage.getItem("baron:user") || "{}").email;
+
+  const prop = {
+    amount: totals.total / 1000,
+    email,
+    currency: "NGN",
+    name: fullName,
+    phone: phoneNumber,
+    publicKey: puBlic_key,
+    text: "Continue payment",
+    onSuccess() {
+      alert("Payment was successful");
+    },
+    onClose() {
+      alert("Are you sure you want to close?");
+    },
+  };
+
   return (
     <section className="bg-white sm:w-2/5 w-full rounded shadow p-4 h-fit">
       <div className="flex flex-col gap-4">
@@ -429,6 +453,18 @@ function OrderSummary({
             included
           </p>
         </div>
+        {/* <button
+          onClick={() => console.log(formData)}
+          className="w-full p-2 bg-green-700 text-center text-xs text-white font-all"
+        >
+          Pay Now
+        </button> */}
+
+        <PaystackButton
+          {...prop}
+          text="Pay Now"
+          className="w-full p-2 bg-green-700 text-center text-xs text-white font-all"
+        />
       </div>
     </section>
   );
