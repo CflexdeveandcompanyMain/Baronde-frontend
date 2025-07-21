@@ -64,7 +64,7 @@ export default function MainPageNavbar() {
             <rect x="2" y="4" width="20" height="16" rx="2" />
           </svg>
           <p className="font-all text-[11px] sm:text-xs text-white self-center">
-            Suscribe & save
+            Subscribe & save
           </p>
         </div>
       </div>

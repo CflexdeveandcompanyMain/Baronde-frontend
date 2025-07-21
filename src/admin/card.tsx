@@ -81,7 +81,6 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
     },
     onError: (error, _, context) => {
       console.error("Edit error:", error);
-      // Rollback on error
       if (context?.previousProducts) {
         queryClient.setQueryData(["products"], context.previousProducts);
       }

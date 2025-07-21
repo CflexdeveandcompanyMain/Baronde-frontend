@@ -70,7 +70,7 @@ export default function Footer() {
                 type="button"
                 className={`bg-green-900 shadow text-sm p-3 w-full font-all font-normal text-white`}
               >
-                Suscribe
+                Subscribe
               </button>
             </div>
           </div>

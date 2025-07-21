@@ -1,4 +1,3 @@
-const token = sessionStorage.getItem("baron:admintoken") || "";
 export const submitProduct = async ({
   eImages,
   eamount,
@@ -30,6 +29,7 @@ export const submitProduct = async ({
   };
   console.log(obj);
   try {
+    const token = localStorage.getItem("baron:admintoken") || "";
     const response = await fetch(
       "https://baronde.onrender.com/image/v1/upload",
       {
@@ -43,12 +43,12 @@ export const submitProduct = async ({
     );
 
     const result = await response.json();
-    console.log(result);
-
+    console.log(result, token);
     if (response.ok) {
       alert("Product uploaded successfully!");
       localStorage.removeItem("baron:img");
     } else {
+      console.log(token);
       alert(`Error: ${result.message || "Failed to upload product"}`);
     }
   } catch (error) {

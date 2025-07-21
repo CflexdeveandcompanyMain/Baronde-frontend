@@ -191,7 +191,7 @@ function DeliverySection({
 
         <InputField
           label="Email"
-          value={formData.company}
+          value={formData.email}
           onChange={(value: any) => updateFormData("email", value)}
           placeholder="Enter your email"
         />
@@ -367,12 +367,12 @@ function OrderSummary({
   formData: any;
 }) {
   const puBlic_key = "pk_test_55b5c8784df9c619e9bcb82982aef69c61978c0e";
-  const { fullName, phoneNumber } = formData.delivery;
+  const { fullName, phoneNumber, Email } = formData.delivery;
   const email = JSON.parse(sessionStorage.getItem("baron:user") || "{}").email;
 
   const prop = {
     amount: totals.total / 1000,
-    email,
+    email: Email ?? email,
     currency: "NGN",
     name: fullName,
     phone: phoneNumber,

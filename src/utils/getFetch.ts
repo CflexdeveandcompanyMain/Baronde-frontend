@@ -58,7 +58,7 @@ export async function createAdmin(
   otp: string,
   otpId: string
 ) {
-  const request = await fetch("https://baronde.onrender.com/user/v1/SignUp", {
+  const request = await fetch("https://baronde.onrender.com/user/v1/Signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export async function createAdmin(
     request.headers.get("Authorization")?.startsWith("Bearer")
   ) {
     const token = request.headers.get("Authorization")?.split(" ")[1] ?? "";
-    sessionStorage.setItem("baron:admintoken", token);
+    localStorage.setItem("baron:admintoken", token);
   }
   const response = await request.json();
   return response;
@@ -105,7 +105,7 @@ export async function userLogIn(email: string, password: string) {
     const token = request.headers.get("Authorization")?.split(" ")[1] ?? "";
     const { role } = response.user;
     if (role === "admin") {
-      sessionStorage.setItem("baron:admintoken", token);
+      localStorage.setItem("baron:admintoken", token);
     } else sessionStorage.setItem("baron:token", token);
   }
   return response;
@@ -147,7 +147,7 @@ export async function resetPassword(
 }
 
 export async function getImagesByCategory(category: string) {
-  const token = sessionStorage.getItem("baron:admintoken") ?? "";
+  const token = localStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch(
     "https://baronde.onrender.com/image/v1/categories/:" + category,
     {
@@ -163,7 +163,7 @@ export async function getImagesByCategory(category: string) {
 }
 
 export async function getImagesByName(name: string) {
-  const token = sessionStorage.getItem("baron:admintoken") ?? "";
+  const token = localStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch(
     "https://baronde.onrender.com/image/v1/name/:" + name,
     {
@@ -195,7 +195,7 @@ export async function getCountryAndState() {
 }
 
 export async function getProducts() {
-  const token = sessionStorage.getItem("baron:admintoken") ?? "";
+  const token = localStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch("https://baronde.onrender.com/image/v1/", {
     method: "GET",
     headers: {
@@ -208,12 +208,12 @@ export async function getProducts() {
   return [];
 }
 
-getCountryAndState();
+// getCountryAndState();
 
 getProducts();
 
 export async function removeFn(id: string) {
-  const token = sessionStorage.getItem("baron:admintoken") ?? "";
+  const token = localStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch(
     `https://baronde.onrender.com/image/v1/product/${id}`,
     {
@@ -229,7 +229,7 @@ export async function removeFn(id: string) {
 }
 
 export async function editFn(id: string, data: HeroDataType) {
-  const token = sessionStorage.getItem("baron:admintoken") ?? "";
+  const token = localStorage.getItem("baron:admintoken") ?? "";
   const request = await fetch(
     `https://baronde.onrender.com/image/v1/product/${id}`,
     {
