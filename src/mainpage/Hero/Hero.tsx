@@ -1,6 +1,7 @@
 import { desktopHero } from "../..";
 import HeroProductCard from "./herocard";
 import { Link } from "react-router-dom";
+// import HeroSlider from "./imgslide";
 
 export default function MainPageHero() {
   let { isVerified } = JSON.parse(sessionStorage.getItem("baron:user") || "{}");

@@ -56,7 +56,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             />
 
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <p className="font-all font-bold text-lg text-[#7bc700bb] transform rotate-45 select-none">
+              <p className="font-all font-bold text-base text-[#7bc700bb] transform rotate-45 select-none">
                 barondemusical
               </p>
             </div>
