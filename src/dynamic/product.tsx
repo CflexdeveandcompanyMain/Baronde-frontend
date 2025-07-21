@@ -48,15 +48,19 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
         className="flex flex-col items-center sm:shadow justify-between w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2  bg-white"
       >
         <div className="flex flex-col items-center h-[50%] relative">
-          <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">
-            <p className="font-all font-bold text-lg text-[#E7FFC078] self-center text-center rotate-45">
-              barondemusical
-            </p>
+          <div className="relative w-full h-full">
+            <img
+              src={data.images[0].url}
+              className="object-cover h-full w-full bg-white"
+              alt="Content image"
+            />
+
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <p className="font-all font-bold text-lg text-[#7bc700bb] transform rotate-45 select-none">
+                barondemusical
+              </p>
+            </div>
           </div>
-          <img
-            src={data.images[0].url}
-            className="object-cover h-full w-full bg-white"
-          />
           <div className="flex justify-center bg-[#fdb204f3] p-1 shadow absolute top-1.5 left-1.5 ">
             <p
               className={`text-white font-all text-center text-xs font-semibold`}
@@ -151,16 +155,37 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                         console.log(item.url, image);
                       }}
                     >
-                      <img
-                        src={item.url}
-                        className="w-full round object-cover h-full"
-                      />
+                      <div className="relative w-full h-full">
+                        <img
+                          src={item.url}
+                          className="object-cover h-full w-full bg-white"
+                          alt="Content image"
+                        />
+
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                          <p className="font-all font-bold text-[7px] text-[#7bc700bb] transform rotate-45 select-none">
+                            barondemusical
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   );
                 })
               )}
             </div>
-            <img src={image} className="object-cover w-3/4 bg-white" />
+            <div className="relative w-full h-full">
+              <img
+                src={image}
+                className="object-cover h-full w-full bg-white"
+                alt="Content image"
+              />
+
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <p className="font-all font-bold text-lg text-[#7bc700bb] transform rotate-45 select-none">
+                  barondemusical
+                </p>
+              </div>
+            </div>
           </div>
           <div className="w-full flex flex-col items-start justify-start self-stretch gap-3">
             <div className="w-full sm:flex hidden justify-end pb-2">
