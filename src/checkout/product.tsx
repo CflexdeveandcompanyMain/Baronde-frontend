@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
-import { Check, ChevronDown, ShoppingBag, Truck } from "lucide-react";
+import { ChevronDown, ShoppingBag, Truck } from "lucide-react";
 import { nigerianStates } from "../user/data";
-import { pay } from "..";
+// import { pay } from "..";
 import { countries } from "./data";
 import { formatPrice } from "../utils/priceconverter";
 import type { HeroDataType } from "../mainpage/Hero/data";
 import { useCart, type LocalCartItem } from "../utils/storage";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
+import { PaymentSection } from "./paymentsection";
+import { BillingSection } from "./billingsection";
 
 // Types
 type DeliveryOption = "ship" | "pickup";
@@ -347,102 +349,6 @@ function DeliverySection({
   );
 }
 
-// Payment Section Component
-function PaymentSection({
-  paymentOption,
-  updatePayment,
-}: {
-  paymentOption: string;
-  updatePayment: any;
-}) {
-  return (
-    <section className="w-full p-4 py-7 rounded shadow flex flex-col bg-white">
-      <div className="flex flex-col items-start w-full gap-2 mb-4">
-        <p className="font-all text-lg sm:text-xl font-semibold">Payment</p>
-        <p className="font-all text-sm text-stone-700">
-          All transactions are secured and encrypted
-        </p>
-      </div>
-
-      <PaymentOption
-        value="paystack"
-        checked={paymentOption === "paystack"}
-        onChange={updatePayment}
-        label="Paystack"
-        extra={
-          <img src={pay} className="object-cover w-3/5" alt="Payment methods" />
-        }
-      />
-
-      <PaymentOption
-        extra={<></>}
-        value="cash"
-        checked={paymentOption === "cash"}
-        onChange={updatePayment}
-        label="Cash on delivery"
-      />
-    </section>
-  );
-}
-
-// Billing Section Component
-function BillingSection({
-  billingData,
-  updateBilling,
-}: {
-  billingData: any;
-  updateBilling: any;
-}) {
-  return (
-    <section className="w-full p-4 py-7 rounded shadow flex flex-col bg-white">
-      <div className="flex flex-col items-start w-full gap-2 mb-4">
-        <p className="font-all text-lg sm:text-xl font-semibold">
-          Billing Address
-        </p>
-        <p className="font-all text-sm text-stone-700">
-          Select your billing address option
-        </p>
-      </div>
-
-      <BillingOption
-        value="same"
-        checked={billingData.option === "same"}
-        onChange={(value: any) => updateBilling("option", value)}
-        label="Same as shipping address"
-      />
-
-      <BillingOption
-        value="different"
-        checked={billingData.option === "different"}
-        onChange={(value: any) => updateBilling("option", value)}
-        label="Use a different billing address"
-      />
-
-      <div className="flex items-center gap-3 mt-4 pt-4 border-t border-stone-300">
-        <label className="flex items-center space-x-3 cursor-pointer">
-          <div className="relative">
-            <input
-              type="checkbox"
-              checked={billingData.saveInfo}
-              onChange={(e) => updateBilling("saveInfo", e.target.checked)}
-              className="w-4 h-4 border-[1.5px] border-orange-700 appearance-none rounded"
-            />
-            {billingData.saveInfo && (
-              <Check
-                className="text-orange-700 absolute top-0.5 left-0.5"
-                size={12}
-              />
-            )}
-          </div>
-          <span className="text-sm font-all font-medium">
-            Save this information for next time
-          </span>
-        </label>
-      </div>
-    </section>
-  );
-}
-
 // Updated Order Summary Component
 function OrderSummary({
   cart,
@@ -647,34 +553,6 @@ function PaymentOption({
         <span className="text-sm font-all font-medium">{label}</span>
       </label>
       {extra && <div className="flex items-center">{extra}</div>}
-    </div>
-  );
-}
-
-function BillingOption({
-  value,
-  checked,
-  onChange,
-  label,
-}: {
-  value: any;
-  checked: any;
-  onChange: any;
-  label: any;
-}) {
-  return (
-    <div className="flex items-center justify-between w-full py-3 border-b border-stone-300 last:border-b-0">
-      <label className="flex items-center space-x-3 cursor-pointer">
-        <input
-          type="radio"
-          name="billing"
-          value={value}
-          checked={checked}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-4 h-4 text-green-600 border border-green-700 appearance-none rounded-full checked:bg-green-600"
-        />
-        <span className="text-sm font-all font-medium">{label}</span>
-      </label>
     </div>
   );
 }
