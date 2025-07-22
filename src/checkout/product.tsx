@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import { Check, ChevronDown, ShoppingBag, Truck } from "lucide-react";
@@ -7,8 +7,9 @@ import { pay } from "..";
 import { countries } from "./data";
 import { formatPrice } from "../utils/priceconverter";
 import type { HeroDataType } from "../mainpage/Hero/data";
-import { useCart } from "../utils/storage";
-import { PaystackButton } from "react-paystack";
+import { useCart, type LocalCartItem } from "../utils/storage";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../utils/getFetch";
 
 // Types
 type DeliveryOption = "ship" | "pickup";
@@ -27,6 +28,7 @@ interface FormData {
     city: string;
     zipcode: string;
     phoneNumber: string;
+    email: string;
   };
   payment: {
     option: PaymentOption;
@@ -39,12 +41,14 @@ interface FormData {
 }
 
 export default function Checkout() {
-  const { cart, totals, filterReduce } = useCart();
+  const { cart, totals } = useCart();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState("");
 
   const [formData, setFormData] = useState<FormData>({
     delivery: {
       option: "ship",
-      country: "",
+      country: "Nigeria",
       fullName: "",
       company: "",
       address: "",
@@ -53,6 +57,7 @@ export default function Checkout() {
       city: "",
       zipcode: "",
       phoneNumber: "",
+      email: "",
     },
     payment: {
       option: "paystack",
@@ -88,6 +93,84 @@ export default function Checkout() {
     console.log("Applying discount code:", formData.discountCode);
   };
 
+  // New function to handle checkout with backend
+  const handleCheckout = async () => {
+    setError("");
+    setIsProcessing(true);
+
+    try {
+      // Validate required fields
+      const { fullName, address, phoneNumber, email, city } = formData.delivery;
+
+      if (!fullName || !address || !phoneNumber || !email || !city) {
+        throw new Error("Please fill in all required fields");
+      }
+
+      if (cart.length === 0) {
+        throw new Error("Your cart is empty");
+      }
+
+      // Get user token from storage
+      const user = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
+      const token = user.token || localStorage.getItem("auth_token");
+
+      if (!token) {
+        throw new Error("Please log in to continue");
+      }
+
+      // Prepare shipping address data
+      const shippingAddress = {
+        fullName: formData.delivery.fullName,
+        email: formData.delivery.email,
+        phoneNumber: formData.delivery.phoneNumber,
+        address: formData.delivery.address,
+        apartment: formData.delivery.apartment,
+        city: formData.delivery.city,
+        state: formData.delivery.state,
+        zipcode: formData.delivery.zipcode,
+        country: formData.delivery.country,
+        deliveryOption: formData.delivery.option,
+      };
+
+      // Call your backend API
+      const response = await fetch("/api/order/v1/initiate-checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ shippingAddress }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to initiate checkout");
+      }
+
+      if (data.status === "success" && data.data.authorization_url) {
+        // Redirect to Paystack payment page
+        window.location.href = data.data.authorization_url;
+      } else {
+        throw new Error("Invalid response from server");
+      }
+    } catch (error: any) {
+      console.error("Checkout error:", error);
+      setError(error.message || "An error occurred during checkout");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  useEffect(() => {
+    console.log(cart);
+  }, []);
+
+  const { data, status } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => getProducts(),
+  });
+
   return (
     <>
       <MainPageNavbar />
@@ -95,6 +178,13 @@ export default function Checkout() {
         <div className="w-full sm:w-4/5 flex sm:flex-row flex-col mx-auto gap-7 p-3 sm:py-10">
           {/* Left Column - Forms */}
           <div className="flex flex-col w-full sm:w-3/5 gap-5">
+            {/* Error Display */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-md p-4">
+                <p className="text-red-800 text-sm font-medium">{error}</p>
+              </div>
+            )}
+
             {/* Delivery Section */}
             <DeliverySection
               formData={formData.delivery}
@@ -122,13 +212,15 @@ export default function Checkout() {
 
           {/* Right Column - Order Summary */}
           <OrderSummary
-            formData={formData}
+            status={status}
+            data={data}
             cart={cart}
             totals={totals}
-            filterReduce={filterReduce}
             discountCode={formData.discountCode}
             onDiscountChange={handleDiscountCode}
             onApplyDiscount={applyDiscount}
+            onCheckout={handleCheckout}
+            isProcessing={isProcessing}
           />
         </div>
       </section>
@@ -194,6 +286,8 @@ function DeliverySection({
           value={formData.email}
           onChange={(value: any) => updateFormData("email", value)}
           placeholder="Enter your email"
+          type="email"
+          required
         />
 
         <InputField
@@ -228,6 +322,7 @@ function DeliverySection({
             onChange={(value: any) => updateFormData("city", value)}
             placeholder="Enter city"
             className="flex-1"
+            required
           />
 
           <InputField
@@ -348,66 +443,90 @@ function BillingSection({
   );
 }
 
-// Order Summary Component
+// Updated Order Summary Component
 function OrderSummary({
   cart,
   totals,
-  filterReduce,
+  status,
+  data,
   discountCode,
   onDiscountChange,
   onApplyDiscount,
-  formData,
+  onCheckout,
+  isProcessing,
 }: {
-  cart: HeroDataType[];
+  cart: LocalCartItem[];
   totals: any;
-  filterReduce: (cart: HeroDataType[]) => any[];
+  status: string;
+  data: HeroDataType[];
   discountCode: string;
   onDiscountChange: any;
   onApplyDiscount: any;
-  formData: any;
+  onCheckout: () => void;
+  isProcessing: boolean;
 }) {
-  const puBlic_key = "pk_test_55b5c8784df9c619e9bcb82982aef69c61978c0e";
-  const { fullName, phoneNumber, Email } = formData.delivery;
-  const email = JSON.parse(sessionStorage.getItem("baron:user") || "{}").email;
-
-  const prop = {
-    amount: totals.total / 1000,
-    email: Email ?? email,
-    currency: "NGN",
-    name: fullName,
-    phone: phoneNumber,
-    publicKey: puBlic_key,
-    text: "Continue payment",
-    onSuccess() {
-      alert("Payment was successful");
-    },
-    onClose() {
-      alert("Are you sure you want to close?");
-    },
-  };
-
+  // if (status == "success") console.log(data);
   return (
     <section className="bg-white sm:w-2/5 w-full rounded shadow p-4 h-fit">
       <div className="flex flex-col gap-4">
-        {/* Cart Items */}
-        <div className="space-y-3">
-          {filterReduce(cart).map((item: any) => {
-            const { name, description, _id, price, images } = item.product;
-            return (
-              <CheckoutCard
-                key={_id}
-                stockQuantity={item.count}
-                name={name}
-                _id={_id}
-                images={images}
-                description={description}
-                price={price}
-              />
-            );
-          })}
-        </div>
+        {status === "pending" ? (
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 p-3 border-b border-stone-200 animate-pulse"
+              >
+                <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0"></div>
+                <div className="flex-1 min-w-0 space-y-2">
+                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                  <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                </div>
+                <div className="text-right flex-shrink-0 space-y-2">
+                  <div className="h-3 bg-gray-200 rounded w-16"></div>
+                  <div className="h-4 bg-gray-200 rounded w-20"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : status === "success" && data ? (
+          <div className="space-y-3">
+            {cart.map((item: any) => {
+              const product = data.find((p: any) => p._id === item.productId);
+              if (!product) return null;
 
-        {/* Discount Code */}
+              const { name, description, _id, price, images } = product;
+              return (
+                <CheckoutCard
+                  key={_id}
+                  stockQuantity={item.count}
+                  name={name}
+                  _id={_id}
+                  images={images}
+                  description={description}
+                  price={price}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {cart.map((item: any) => {
+              const { name, description, _id, price, images } = item.product;
+              return (
+                <CheckoutCard
+                  key={_id}
+                  stockQuantity={item.count}
+                  name={name}
+                  _id={_id}
+                  images={images}
+                  description={description}
+                  price={price}
+                />
+              );
+            })}
+          </div>
+        )}
+        // {/* Discount Code */}
         <div className="flex gap-2">
           <input
             type="text"
@@ -424,7 +543,6 @@ function OrderSummary({
             Apply
           </button>
         </div>
-
         {/* Totals */}
         <div className="space-y-2 pt-4 border-t border-stone-300">
           <div className="flex justify-between">
@@ -453,24 +571,24 @@ function OrderSummary({
             included
           </p>
         </div>
-        {/* <button
-          onClick={() => console.log(formData)}
-          className="w-full p-2 bg-green-700 text-center text-xs text-white font-all"
+        {/* Updated Pay Button */}
+        <button
+          onClick={onCheckout}
+          disabled={isProcessing || cart.length === 0}
+          className={`w-full p-2 text-center text-xs text-white font-all rounded transition-colors ${
+            isProcessing || cart.length === 0
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-green-700 hover:bg-green-800"
+          }`}
         >
-          Pay Now
-        </button> */}
-
-        <PaystackButton
-          {...prop}
-          text="Pay Now"
-          className="w-full p-2 bg-green-700 text-center text-xs text-white font-all"
-        />
+          {isProcessing ? "Processing..." : "Pay Now"}
+        </button>
       </div>
     </section>
   );
 }
 
-// Reusable Components
+// Reusable Components (unchanged)
 function DeliveryOption({
   value,
   checked,
@@ -639,7 +757,7 @@ function InputField({
   );
 }
 
-// Checkout Card Component (cleaned up)
+// Checkout Card Component (unchanged)
 type CheckoutCardProps = Pick<
   HeroDataType,
   "name" | "images" | "_id" | "description" | "price" | "stockQuantity"

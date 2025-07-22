@@ -244,6 +244,77 @@ export async function editFn(id: string, data: HeroDataType) {
   return await request.json();
 }
 
-// export async function addToCartFn(){
-//   const request = await fetch("https://baronde.onrender.com/cart")
-// }
+export async function addToCartFn(productId: string, quantity: number) {
+  const token = sessionStorage.getItem("baron:token") ?? "";
+  try {
+    const request = await fetch("https://baronde.onrender.com/cart/v1", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ productId, quantity }),
+    });
+    const response = await request.json();
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
+}
+
+export async function IncrementCartFn(productId: string, quantity: number) {
+  const token = sessionStorage.getItem("baron:token") ?? "";
+  const request = await fetch("https://baronde.onrender.com/cart/v1", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ productId, quantity }),
+  });
+  return await request.json();
+}
+export async function DecrementCartFn(productId: string, quantity: number) {
+  const token = sessionStorage.getItem("baron:token") ?? "";
+  const request = await fetch("https://baronde.onrender.com/cart/v1", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ productId, quantity }),
+  });
+  return await request.json();
+}
+
+export async function DeleteCartFn(productId: string) {
+  const token = sessionStorage.getItem("baron:token") ?? "";
+  try {
+    const request = await fetch(
+      `https://baronde.onrender.com/cart/v1/item/${productId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return await request.json();
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
+}
+
+export async function getCart() {
+  const token = sessionStorage.getItem("baron:token") ?? "";
+  const request = await fetch("https://baronde.onrender.com/cart/v1", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return await request.json();
+}

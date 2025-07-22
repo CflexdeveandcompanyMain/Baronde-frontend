@@ -1,30 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalState } from "../store/globalstate";
 import type { HeroDataType } from "../mainpage/Hero/data";
+import { QueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  type UseMutationResult,
+} from "@tanstack/react-query";
+import {
+  addToCartFn,
+  getCart,
+  IncrementCartFn,
+  DecrementCartFn,
+  DeleteCartFn,
+} from "./getFetch";
 
 export interface CartItem extends HeroDataType {
-  cartItemId: string;
+  productId: string;
+  quantity: number;
+  addedAt?: number;
+}
+
+export interface LocalCartItem {
+  productId: string;
+  quantity: number;
   addedAt: number;
 }
 
-function removeDuplicatesByKey(array: HeroDataType[]) {
-  const seen = new Map();
-  return array.filter((item: HeroDataType) => {
-    const keyValue = item.name;
-    if (seen.has(keyValue)) {
-      return false;
-    }
-    seen.set(keyValue, true);
-    return true;
-  });
-}
-
 export const CartUtils = {
-  generateCartItemId: (): string => {
-    return `cart_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  },
-
-  getCart: (): CartItem[] => {
+  getCart: (): LocalCartItem[] => {
     try {
       const cart = localStorage.getItem("baron:cart");
       return cart ? JSON.parse(cart) : [];
@@ -34,7 +39,7 @@ export const CartUtils = {
     }
   },
 
-  saveCart: (cart: CartItem[]): void => {
+  saveCart: (cart: LocalCartItem[]): void => {
     try {
       localStorage.setItem("baron:cart", JSON.stringify(cart));
     } catch (error) {
@@ -42,111 +47,197 @@ export const CartUtils = {
     }
   },
 
-  addToCart: (product: HeroDataType): CartItem[] => {
+  addToCart: (
+    product: HeroDataType,
+    syncItem: UseMutationResult<
+      any,
+      Error,
+      {
+        productId: string;
+        quantity: number;
+      },
+      unknown
+    >,
+    queryClient: QueryClient
+  ): LocalCartItem[] => {
     const cart = CartUtils.getCart();
-
-    const existingCount = cart.filter(
-      (item) => item._id === product._id
-    ).length;
-
-    if (existingCount < product.stockQuantity) {
-      const cartItem: CartItem = {
-        ...product,
-        price: product.price - product.discount,
-        cartItemId: CartUtils.generateCartItemId(),
-        addedAt: Date.now(),
-      };
-
-      cart.push(cartItem);
-      CartUtils.saveCart(cart);
-    }
-    return cart;
-  },
-
-  incrementQuantity: (productId: string): CartItem[] => {
-    const cart = CartUtils.getCart();
-
-    const existingItem = cart.find((item) => item._id === productId);
-
-    if (!existingItem) return cart;
-
-    const newCartItem: CartItem = {
-      ...existingItem,
-      cartItemId: CartUtils.generateCartItemId(),
-      addedAt: Date.now(),
-    };
-
-    cart.push(newCartItem);
-    CartUtils.saveCart(cart);
-
-    return cart;
-  },
-
-  filterAndCountByIdReduce(products: HeroDataType[]) {
-    return Object.values(
-      products.reduce((acc: any, product) => {
-        const id = product._id;
-
-        if (acc[id]) {
-          acc[id].count++;
-        } else {
-          acc[id] = { product, count: 1 };
-        }
-
-        return acc;
-      }, {})
+    const existingItemIndex = cart.findIndex(
+      (item) => item.productId === product._id
     );
-  },
 
-  decrementQuantity: (productId: string): CartItem[] => {
-    const cart = CartUtils.getCart();
-
-    const itemsWithProductId = cart.filter((item) => item._id === productId);
-
-    if (itemsWithProductId.length > 0) {
-      const mostRecentItem = itemsWithProductId.sort(
-        (a, b) => b.addedAt - a.addedAt
-      )[0];
-      const indexToRemove = cart.findIndex(
-        (item) => item.cartItemId === mostRecentItem.cartItemId
-      );
-
-      if (indexToRemove > -1) {
-        cart.splice(indexToRemove, 1);
-        CartUtils.saveCart(cart);
-      }
+    // Check stock limit
+    const currentQuantity =
+      existingItemIndex > -1 ? cart[existingItemIndex].quantity : 0;
+    if (currentQuantity >= product.stockQuantity) {
+      console.warn("Cannot add more items - stock limit reached");
+      return cart;
     }
 
+    // Sync with backend
+    syncItem.mutate(
+      { productId: product._id, quantity: 1 },
+      {
+        onSuccess(data) {
+          console.log("Add to cart success:", data);
+          queryClient.invalidateQueries({ queryKey: ["getCart"] });
+        },
+        onError(error) {
+          console.error("Add to cart error:", error);
+        },
+      }
+    );
+
+    if (existingItemIndex > -1) {
+      // Update existing item quantity
+      cart[existingItemIndex].quantity += 1;
+      cart[existingItemIndex].addedAt = Date.now();
+    } else {
+      // Add new item
+      cart.push({
+        productId: product._id,
+        quantity: 1,
+        addedAt: Date.now(),
+      });
+    }
+
+    CartUtils.saveCart(cart);
     return cart;
   },
 
-  removeAllInstances: (productId: string): CartItem[] => {
+  incrementQuantity: (
+    productId: string,
+    incrementMutation: UseMutationResult<
+      any,
+      Error,
+      { productId: string; quantity: number },
+      unknown
+    >,
+    queryClient: QueryClient
+  ): LocalCartItem[] => {
     const cart = CartUtils.getCart();
-    const updatedCart = cart.filter((item) => item._id !== productId);
+    const itemIndex = cart.findIndex((item) => item.productId === productId);
+
+    if (itemIndex === -1) {
+      console.warn("Item not found in cart");
+      return cart;
+    }
+
+    // Sync with backend
+    incrementMutation.mutate(
+      { productId, quantity: 1 },
+      {
+        onSuccess(data) {
+          console.log("Increment success:", data);
+          queryClient.invalidateQueries({ queryKey: ["getCart"] });
+        },
+        onError(error) {
+          console.error("Increment error:", error);
+        },
+      }
+    );
+
+    // Update local cart
+    cart[itemIndex].quantity += 1;
+    cart[itemIndex].addedAt = Date.now();
+
+    CartUtils.saveCart(cart);
+    return cart;
+  },
+
+  decrementQuantity: (
+    productId: string,
+    decrementMutation: UseMutationResult<
+      any,
+      Error,
+      { productId: string; quantity: number },
+      unknown
+    >,
+    queryClient: QueryClient
+  ): LocalCartItem[] => {
+    const cart = CartUtils.getCart();
+    const itemIndex = cart.findIndex((item) => item.productId === productId);
+
+    if (itemIndex === -1) {
+      console.warn("Item not found in cart");
+      return cart;
+    }
+
+    // Sync with backend - assuming your backend handles decrement with quantity: -1 or separate endpoint
+    decrementMutation.mutate(
+      { productId, quantity: -1 },
+      {
+        onSuccess(data) {
+          console.log("Decrement success:", data);
+          queryClient.invalidateQueries({ queryKey: ["getCart"] });
+        },
+        onError(error) {
+          console.error("Decrement error:", error);
+        },
+      }
+    );
+
+    if (cart[itemIndex].quantity > 1) {
+      // Decrement quantity
+      cart[itemIndex].quantity -= 1;
+      cart[itemIndex].addedAt = Date.now();
+    } else {
+      // Remove item if quantity becomes 0
+      cart.splice(itemIndex, 1);
+    }
+
+    CartUtils.saveCart(cart);
+    return cart;
+  },
+
+  removeAllInstances: (
+    productId: string,
+    deleteMutation: UseMutationResult<any, Error, string, unknown>,
+    queryClient: QueryClient
+  ): LocalCartItem[] => {
+    const cart = CartUtils.getCart();
+
+    // Sync with backend
+    deleteMutation.mutate(productId, {
+      onSuccess(data) {
+        console.log("Delete success:", data);
+        queryClient.invalidateQueries({ queryKey: ["getCart"] });
+      },
+      onError(error) {
+        console.error("Delete error:", error);
+      },
+    });
+
+    const updatedCart = cart.filter((item) => item.productId !== productId);
     CartUtils.saveCart(updatedCart);
     return updatedCart;
   },
 
-  getFinalPrice: (item: CartItem): number => {
-    if (item.discount) {
-      return item.price * (1 - item.discount / 100);
-    }
-    return item.price;
-  },
-
   getProductQuantity: (productId: string): number => {
     const cart = CartUtils.getCart();
-    return cart.filter((item) => item._id === productId).length;
+    const item = cart.find((item) => item.productId === productId);
+    return item ? item.quantity : 0;
   },
 
-  computeCartTotals: () => {
+  // Get total number of items in cart
+  getTotalItemCount: (): number => {
+    const cart = CartUtils.getCart();
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  },
+
+  computeCartTotals: (products: HeroDataType[]) => {
     const cart = CartUtils.getCart();
 
-    const subtotal = cart.reduce((total, item) => {
-      return total + item.price;
-    }, 0);
+    let subtotal = 0;
+    let totalItems = 0;
 
-    const itemCount = cart.length;
+    cart.forEach((cartItem) => {
+      const product = products.find((p) => p._id === cartItem.productId);
+      if (product) {
+        const itemPrice = product.price - (product.discount || 0);
+        subtotal += itemPrice * cartItem.quantity;
+        totalItems += cartItem.quantity;
+      }
+    });
 
     const tax = subtotal > 1000 ? 700 : 0;
     const total = subtotal + tax;
@@ -157,66 +248,201 @@ export const CartUtils = {
       tax: Number(tax.toFixed(2)),
       total: Number(total.toFixed(2)),
       discount,
-      itemCount,
+      itemCount: totalItems,
     };
   },
 
-  canIncrement: (productId: string): boolean => {
+  canIncrement: (productId: string, products: HeroDataType[]): boolean => {
     const cart = CartUtils.getCart();
-    const currentQuantity = cart.filter(
-      (item) => item._id === productId
-    ).length;
-    const existingItem = cart.find((item) => item._id === productId);
+    const cartItem = cart.find((item) => item.productId === productId);
+    const product = products.find((p) => p._id === productId);
 
-    return existingItem ? currentQuantity < existingItem.stockQuantity : false;
+    if (!cartItem || !product) return false;
+
+    return cartItem.quantity < product.stockQuantity;
   },
 
   isInCart: (productId: string): boolean => {
     const cart = CartUtils.getCart();
-    const itemIndex = cart.findIndex((item) => item._id === productId);
-    return itemIndex >= 0;
+    return cart.some((item) => item.productId === productId);
+  },
+
+  // Convert backend cart data to display format with product details
+  mergeCartWithProducts: (
+    cartItems: LocalCartItem[],
+    products: HeroDataType[]
+  ): CartItem[] => {
+    return cartItems
+      .map((cartItem) => {
+        const product = products.find((p) => p._id === cartItem.productId);
+        if (!product) return null;
+
+        return {
+          ...product,
+          productId: cartItem.productId,
+          quantity: cartItem.quantity,
+          addedAt: cartItem.addedAt,
+          price: product.price - (product.discount || 0), // Apply discount
+        };
+      })
+      .filter(Boolean) as CartItem[];
   },
 };
 
 export const useCart = () => {
-  const [cart, setCart] = useState<CartItem[]>(CartUtils.getCart());
-  let { setCartlen } = useGlobalState();
+  const [cart, setCart] = useState<LocalCartItem[]>(CartUtils.getCart());
+  const [products, setProducts] = useState<HeroDataType[]>([]); // You'll need to pass this or get it from context
+  const { setCartlen } = useGlobalState();
+  const queryClient = useQueryClient();
+
+  const addToCartMutation = useMutation({
+    mutationFn: ({
+      productId,
+      quantity,
+    }: {
+      productId: string;
+      quantity: number;
+    }) => addToCartFn(productId, quantity),
+    mutationKey: ["addtocart"],
+  });
+
+  const incrementMutation = useMutation({
+    mutationFn: ({
+      productId,
+      quantity,
+    }: {
+      productId: string;
+      quantity: number;
+    }) => IncrementCartFn(productId, quantity),
+    mutationKey: ["incrementcart"],
+  });
+
+  const decrementMutation = useMutation({
+    mutationFn: ({
+      productId,
+      quantity,
+    }: {
+      productId: string;
+      quantity: number;
+    }) => DecrementCartFn(productId, quantity),
+    mutationKey: ["decrementcart"],
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (productId: string) => DeleteCartFn(productId),
+    mutationKey: ["deletecart"],
+  });
+
+  const { data: backendCartData, status } = useQuery({
+    queryFn: () => getCart(),
+    queryKey: ["getCart"],
+  });
+
+  // Sync server data with local state
+  useEffect(() => {
+    if (backendCartData && status === "success") {
+      // Assuming backend returns: { data: { items: [{ product: {...}, quantity: number }] } }
+      const backendCart: LocalCartItem[] =
+        backendCartData.data?.items?.map((item: any) => ({
+          productId: item.product._id || item.product,
+          quantity: item.quantity,
+          addedAt: Date.now(),
+        })) || [];
+
+      setCart(backendCart);
+      CartUtils.saveCart(backendCart);
+
+      // Update cart length with total quantity
+      const totalItems = backendCart.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      setCartlen(totalItems);
+    }
+  }, [backendCartData, status, setCartlen]);
 
   const addToCart = (product: HeroDataType) => {
-    const updatedCart = CartUtils.addToCart(product);
+    const updatedCart = CartUtils.addToCart(
+      product,
+      addToCartMutation,
+      queryClient
+    );
     setCart(updatedCart);
-    setCartlen(cart.length);
+    const totalItems = updatedCart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    setCartlen(totalItems);
   };
 
   const incrementQuantity = (productId: string) => {
-    const updatedCart = CartUtils.incrementQuantity(productId);
+    const updatedCart = CartUtils.incrementQuantity(
+      productId,
+      incrementMutation,
+      queryClient
+    );
     setCart(updatedCart);
+    const totalItems = updatedCart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    setCartlen(totalItems);
   };
 
   const decrementQuantity = (productId: string) => {
-    const updatedCart = CartUtils.decrementQuantity(productId);
+    const updatedCart = CartUtils.decrementQuantity(
+      productId,
+      decrementMutation,
+      queryClient
+    );
     setCart(updatedCart);
+    const totalItems = updatedCart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    setCartlen(totalItems);
   };
 
   const removeAllInstances = (productId: string) => {
-    const updatedCart = CartUtils.removeAllInstances(productId);
+    const updatedCart = CartUtils.removeAllInstances(
+      productId,
+      deleteMutation,
+      queryClient
+    );
     setCart(updatedCart);
-    setCartlen(cart.length);
-    return removeDuplicatesByKey(updatedCart);
+    const totalItems = updatedCart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    setCartlen(totalItems);
+    return updatedCart;
   };
 
-  const totals = CartUtils.computeCartTotals();
+  // Get cart with product details for display
+  const getCartWithProducts = () => {
+    return CartUtils.mergeCartWithProducts(cart, products);
+  };
+
+  const totals = CartUtils.computeCartTotals(products);
 
   return {
     cart,
+    cartWithProducts: getCartWithProducts(),
     addToCart,
     incrementQuantity,
     decrementQuantity,
     removeAllInstances,
     totals,
-    canIncrement: CartUtils.canIncrement,
+    canIncrement: (productId: string) =>
+      CartUtils.canIncrement(productId, products),
     getProductQuantity: CartUtils.getProductQuantity,
     isInCart: CartUtils.isInCart,
-    filterReduce: CartUtils.filterAndCountByIdReduce,
+    getTotalItemCount: CartUtils.getTotalItemCount,
+    setProducts, // Method to set products for calculations
+    // Expose mutation states for loading/error handling
+    isAddingToCart: addToCartMutation.isPending,
+    isIncrementing: incrementMutation.isPending,
+    isDecrementing: decrementMutation.isPending,
+    isDeleting: deleteMutation.isPending,
   };
 };

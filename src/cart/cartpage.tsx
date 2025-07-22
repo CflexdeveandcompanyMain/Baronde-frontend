@@ -1,18 +1,17 @@
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import Footer from "../footer/footer";
-import { formatPrice, uniqueByName } from "../utils/priceconverter";
+import { formatPrice } from "../utils/priceconverter";
 import { ChevronDown, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useCart } from "../utils/storage";
+import { useCart, type LocalCartItem } from "../utils/storage";
 import { empty } from "..";
 import { useGlobalState } from "../store/globalstate";
-import type { HeroDataType } from "../mainpage/Hero/data";
 import CartCard from "./cartd";
 import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
   const cartData = useCart();
-  const [data, setData] = useState<HeroDataType[]>(cartData.cart);
+  const [cartdata, setData] = useState<LocalCartItem[]>(cartData.cart);
 
   const isVerified = JSON.parse(
     sessionStorage.getItem("baron:user") || "{}"
@@ -37,15 +36,14 @@ export default function CartPage() {
     triggerAnimation();
   };
 
-  useEffect(() => {
-    setData(uniqueByName(data));
-    setCartlen(uniqueByName(data).length);
-  }, []);
-
   const handleRemove = (id: string) => {
     const res: any[] = cartData.removeAllInstances(id);
     setData(res);
   };
+
+  useEffect(() => {
+    setCartlen(cartdata.length);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -56,7 +54,7 @@ export default function CartPage() {
         <div className="flex flex-col items-start w-[95%] gap-2 sm:h-auto md:w-4/5 mx-auto mt-4 sm:mt-6">
           <div className="flex flex-col items-start w-full gap-2">
             <p className="font-all text-lg font-semibold text-start w-full">
-              My Cart ({data.length} items)
+              My Cart ({cartdata.length} items)
             </p>
           </div>
           <div className="flex md:flex-row flex-col items-center w-full md:gap-5">
@@ -79,9 +77,11 @@ export default function CartPage() {
                 </div>
               </div>
               <div className="flex flex-col w-full items-center gap-3">
-                {data.length > 0 ? (
-                  data.map((item: HeroDataType, index: number) => {
-                    const quantity = cartData.getProductQuantity(item._id);
+                {cartdata.length > 0 ? (
+                  cartdata.map((item: LocalCartItem, index: number) => {
+                    const quantity = cartData.getProductQuantity(
+                      item.productId
+                    );
                     return (
                       <div key={index} className="w-full">
                         <CartCard
