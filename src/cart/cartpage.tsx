@@ -8,10 +8,34 @@ import { empty } from "..";
 import { useGlobalState } from "../store/globalstate";
 import CartCard from "./cartd";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../utils/getFetch";
 
 export default function CartPage() {
   const cartData = useCart();
   const [cartdata, setData] = useState<LocalCartItem[]>(cartData.cart);
+  const [total, setTotal] = useState(0);
+
+  const { data: products } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => getProducts(),
+  });
+
+  useEffect(() => {
+    if (products && cartdata.length > 0) {
+      const newTotal = cartdata.reduce((sum, item) => {
+        const product = products.find((p: any) => p._id === item.productId);
+        if (product) {
+          const quantity = cartData.getProductQuantity(item.productId);
+          return sum + quantity * product.price;
+        }
+        return sum;
+      }, 0);
+      setTotal(newTotal);
+    } else {
+      setTotal(0);
+    }
+  }, [cartdata, products, cartData]);
 
   const isVerified = JSON.parse(
     sessionStorage.getItem("baron:user") || "{}"
@@ -26,6 +50,7 @@ export default function CartPage() {
 
   const handleIncrement = (id: string) => {
     cartData.incrementQuantity(id);
+    setData([...cartData.cart]);
     triggerAnimation();
   };
 
@@ -33,6 +58,7 @@ export default function CartPage() {
 
   const handleDecrement = (id: string) => {
     cartData.decrementQuantity(id);
+    setData([...cartData.cart]);
     triggerAnimation();
   };
 
@@ -42,9 +68,8 @@ export default function CartPage() {
   };
 
   useEffect(() => {
-    console.log(cartdata);
     setCartlen(cartdata.length);
-  }, []);
+  }, [cartdata, setCartlen]);
 
   const navigate = useNavigate();
 
@@ -113,7 +138,7 @@ export default function CartPage() {
                     Total
                   </p>
                   <p className="font-all text-xs font-medium text-start text-green-700">
-                    {formatPrice(cartData.totals.total, "NGN")}
+                    {formatPrice(total, "NGN")}
                   </p>
                 </div>
                 <div className="flex flex-row items-center w-full justify-between border-b border-stone-400 py-3">
