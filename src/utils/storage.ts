@@ -28,6 +28,17 @@ export interface LocalCartItem {
   addedAt: number;
 }
 
+// Helper function to check if user is verified
+const isUserVerified = (): boolean => {
+  try {
+    const user = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
+    return user.isVerified === true;
+  } catch (error) {
+    console.error("Error reading user verification status:", error);
+    return false;
+  }
+};
+
 export const CartUtils = {
   getCart: (): LocalCartItem[] => {
     try {
@@ -64,8 +75,6 @@ export const CartUtils = {
     const existingItemIndex = cart.findIndex(
       (item) => item.productId === product._id
     );
-
-    // Check stock limit
     const currentQuantity =
       existingItemIndex > -1 ? cart[existingItemIndex].quantity : 0;
     if (currentQuantity >= product.stockQuantity) {
@@ -73,35 +82,38 @@ export const CartUtils = {
       return cart;
     }
 
-    // Sync with backend
-    syncItem.mutate(
-      { productId: product._id, quantity: 1 },
-      {
-        onSuccess(data) {
-          console.log("Add to cart success:", data);
-          queryClient.invalidateQueries({ queryKey: ["getCart"] });
-        },
-        onError(error) {
-          console.error("Add to cart error:", error);
-        },
-      }
-    );
+    console.log("Adding....", isUserVerified());
 
-    if (existingItemIndex > -1) {
-      // Update existing item quantity
-      cart[existingItemIndex].quantity += 1;
-      cart[existingItemIndex].addedAt = Date.now();
+    if (isUserVerified()) {
+      console.log("User is verified");
+      syncItem.mutate(
+        { productId: product._id, quantity: 1 },
+        {
+          onSuccess(data) {
+            console.log("Add to cart success:", data);
+            queryClient.invalidateQueries({ queryKey: ["getCart"] });
+          },
+          onError(error) {
+            console.error("Add to cart error:", error);
+          },
+        }
+      );
+      return cart;
     } else {
-      // Add new item
-      cart.push({
-        productId: product._id,
-        quantity: 1,
-        addedAt: Date.now(),
-      });
-    }
+      if (existingItemIndex > -1) {
+        cart[existingItemIndex].quantity += 1;
+        cart[existingItemIndex].addedAt = Date.now();
+      } else {
+        cart.push({
+          productId: product._id,
+          quantity: 1,
+          addedAt: Date.now(),
+        });
+      }
 
-    CartUtils.saveCart(cart);
-    return cart;
+      CartUtils.saveCart(cart);
+      return cart;
+    }
   },
 
   incrementQuantity: (
@@ -122,26 +134,27 @@ export const CartUtils = {
       return cart;
     }
 
-    // Sync with backend
-    incrementMutation.mutate(
-      { productId, quantity: 1 },
-      {
-        onSuccess(data) {
-          console.log("Increment success:", data);
-          queryClient.invalidateQueries({ queryKey: ["getCart"] });
-        },
-        onError(error) {
-          console.error("Increment error:", error);
-        },
-      }
-    );
+    if (isUserVerified()) {
+      incrementMutation.mutate(
+        { productId, quantity: 1 },
+        {
+          onSuccess(data) {
+            console.log("Increment success:", data);
+            queryClient.invalidateQueries({ queryKey: ["getCart"] });
+          },
+          onError(error) {
+            console.error("Increment error:", error);
+          },
+        }
+      );
+      return cart;
+    } else {
+      cart[itemIndex].quantity += 1;
+      cart[itemIndex].addedAt = Date.now();
 
-    // Update local cart
-    cart[itemIndex].quantity += 1;
-    cart[itemIndex].addedAt = Date.now();
-
-    CartUtils.saveCart(cart);
-    return cart;
+      CartUtils.saveCart(cart);
+      return cart;
+    }
   },
 
   decrementQuantity: (
@@ -152,6 +165,7 @@ export const CartUtils = {
       { productId: string; quantity: number },
       unknown
     >,
+    deleteMutation: UseMutationResult<any, Error, string, unknown>,
     queryClient: QueryClient
   ): LocalCartItem[] => {
     const cart = CartUtils.getCart();
@@ -162,31 +176,37 @@ export const CartUtils = {
       return cart;
     }
 
-    // Sync with backend - assuming your backend handles decrement with quantity: -1 or separate endpoint
-    decrementMutation.mutate(
-      { productId, quantity: -1 },
-      {
-        onSuccess(data) {
-          console.log("Decrement success:", data);
-          queryClient.invalidateQueries({ queryKey: ["getCart"] });
-        },
-        onError(error) {
-          console.error("Decrement error:", error);
-        },
-      }
-    );
-
-    if (cart[itemIndex].quantity > 1) {
-      // Decrement quantity
-      cart[itemIndex].quantity -= 1;
-      cart[itemIndex].addedAt = Date.now();
+    if (isUserVerified()) {
+      decrementMutation.mutate(
+        { productId, quantity: -1 },
+        {
+          onSuccess(data) {
+            console.log("Decrement success:", data);
+            queryClient.invalidateQueries({ queryKey: ["getCart"] });
+          },
+          onError(error) {
+            console.error("Decrement error:", error);
+          },
+        }
+      );
+      return cart;
     } else {
-      // Remove item if quantity becomes 0
-      cart.splice(itemIndex, 1);
-    }
+      if (cart[itemIndex].quantity > 1) {
+        cart[itemIndex].quantity -= 1;
+        cart[itemIndex].addedAt = Date.now();
+      } else {
+        if (cart[itemIndex].quantity == 1)
+          CartUtils.removeAllInstances(
+            cart[itemIndex].productId,
+            deleteMutation,
+            queryClient
+          );
+        cart.splice(itemIndex, 1);
+      }
 
-    CartUtils.saveCart(cart);
-    return cart;
+      CartUtils.saveCart(cart);
+      return cart;
+    }
   },
 
   removeAllInstances: (
@@ -196,20 +216,22 @@ export const CartUtils = {
   ): LocalCartItem[] => {
     const cart = CartUtils.getCart();
 
-    // Sync with backend
-    deleteMutation.mutate(productId, {
-      onSuccess(data) {
-        console.log("Delete success:", data);
-        queryClient.invalidateQueries({ queryKey: ["getCart"] });
-      },
-      onError(error) {
-        console.error("Delete error:", error);
-      },
-    });
-
-    const updatedCart = cart.filter((item) => item.productId !== productId);
-    CartUtils.saveCart(updatedCart);
-    return updatedCart;
+    if (isUserVerified()) {
+      deleteMutation.mutate(productId, {
+        onSuccess(data) {
+          console.log("Delete success:", data);
+          queryClient.invalidateQueries({ queryKey: ["getCart"] });
+        },
+        onError(error) {
+          console.error("Delete error:", error);
+        },
+      });
+      return cart;
+    } else {
+      const updatedCart = cart.filter((item) => item.productId !== productId);
+      CartUtils.saveCart(updatedCart);
+      return updatedCart;
+    }
   },
 
   getProductQuantity: (productId: string): number => {
@@ -218,7 +240,6 @@ export const CartUtils = {
     return item ? item.quantity : 0;
   },
 
-  // Get total number of items in cart
   getTotalItemCount: (): number => {
     const cart = CartUtils.getCart();
     return cart.reduce((total, item) => total + item.quantity, 0);
@@ -267,7 +288,6 @@ export const CartUtils = {
     return cart.some((item) => item.productId === productId);
   },
 
-  // Convert backend cart data to display format with product details
   mergeCartWithProducts: (
     cartItems: LocalCartItem[],
     products: HeroDataType[]
@@ -291,7 +311,7 @@ export const CartUtils = {
 
 export const useCart = () => {
   const [cart, setCart] = useState<LocalCartItem[]>(CartUtils.getCart());
-  const [products, setProducts] = useState<HeroDataType[]>([]); // You'll need to pass this or get it from context
+  const [products, setProducts] = useState<HeroDataType[]>([]);
   const { setCartlen } = useGlobalState();
   const queryClient = useQueryClient();
 
@@ -333,33 +353,40 @@ export const useCart = () => {
     mutationKey: ["deletecart"],
   });
 
-  const { data: backendCartData, status } = useQuery({
+  const { data: data, status } = useQuery({
     queryFn: () => getCart(),
     queryKey: ["getCart"],
+    enabled: isUserVerified(),
   });
 
-  // Sync server data with local state
   useEffect(() => {
-    if (backendCartData && status === "success") {
-      // Assuming backend returns: { data: { items: [{ product: {...}, quantity: number }] } }
+    if (isUserVerified() && data && status === "success") {
       const backendCart: LocalCartItem[] =
-        backendCartData.data?.items?.map((item: any) => ({
+        data.data?.items?.map((item: any) => ({
           productId: item.product._id || item.product,
           quantity: item.quantity,
           addedAt: Date.now(),
         })) || [];
+      console.log(backendCart);
 
       setCart(backendCart);
       CartUtils.saveCart(backendCart);
 
-      // Update cart length with total quantity
       const totalItems = backendCart.reduce(
         (total, item) => total + item.quantity,
         0
       );
       setCartlen(totalItems);
+    } else if (!isUserVerified()) {
+      const localCart = CartUtils.getCart();
+      setCart(localCart);
+      const totalItems = localCart.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      setCartlen(totalItems);
     }
-  }, [backendCartData, status, setCartlen]);
+  }, [data, status, setCartlen]);
 
   const addToCart = (product: HeroDataType) => {
     const updatedCart = CartUtils.addToCart(
@@ -393,6 +420,7 @@ export const useCart = () => {
     const updatedCart = CartUtils.decrementQuantity(
       productId,
       decrementMutation,
+      deleteMutation,
       queryClient
     );
     setCart(updatedCart);
@@ -418,7 +446,6 @@ export const useCart = () => {
     return updatedCart;
   };
 
-  // Get cart with product details for display
   const getCartWithProducts = () => {
     return CartUtils.mergeCartWithProducts(cart, products);
   };
@@ -438,11 +465,11 @@ export const useCart = () => {
     getProductQuantity: CartUtils.getProductQuantity,
     isInCart: CartUtils.isInCart,
     getTotalItemCount: CartUtils.getTotalItemCount,
-    setProducts, // Method to set products for calculations
-    // Expose mutation states for loading/error handling
+    setProducts,
     isAddingToCart: addToCartMutation.isPending,
     isIncrementing: incrementMutation.isPending,
     isDecrementing: decrementMutation.isPending,
     isDeleting: deleteMutation.isPending,
+    isUserVerified: isUserVerified(),
   };
 };

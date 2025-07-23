@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { formatPrice, uniqueByName } from "../utils/priceconverter";
+import { formatPrice } from "../utils/priceconverter";
 import { Minus, Plus, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../utils/storage";
 import { usePageData } from "../store/singlepage";
-import { useGlobalState } from "../store/globalstate";
 import type { HeroDataType } from "../mainpage/Hero/data";
 export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let [image, setImage] = useState(data.images[0].url);
@@ -35,8 +34,6 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
 
   let navigate = useNavigate();
   let { setData } = usePageData();
-
-  let { setCartlen } = useGlobalState();
 
   return (
     <div className="relative flex flex-col self-stretch h-full flex-grow">
@@ -103,7 +100,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               if (isInCart(data._id)) navigate("/cart");
               else {
                 addToCart(data);
-                setCartlen(uniqueByName(cart).length);
+                // setCartlen(data.length);
               }
             }}
             type="button"
@@ -173,7 +170,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 })
               )}
             </div>
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full max-h-[400px]">
               <img
                 src={image}
                 className="object-cover h-full w-full bg-white"

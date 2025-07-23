@@ -42,6 +42,7 @@ export default function CartPage() {
   };
 
   useEffect(() => {
+    console.log(cartdata);
     setCartlen(cartdata.length);
   }, []);
 

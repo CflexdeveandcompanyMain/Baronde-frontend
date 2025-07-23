@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
 import { PaymentSection } from "./paymentsection";
 import { BillingSection } from "./billingsection";
+import { useNavigate } from "react-router-dom";
 
 // Types
 type DeliveryOption = "ship" | "pickup";
@@ -71,7 +72,6 @@ export default function Checkout() {
     discountCode: "",
   });
 
-  // Generic handler for updating nested form data
   const updateFormData = (
     section: keyof FormData,
     field: string,
@@ -91,36 +91,33 @@ export default function Checkout() {
   };
 
   const applyDiscount = () => {
-    // Implement discount logic here
     console.log("Applying discount code:", formData.discountCode);
   };
 
-  // New function to handle checkout with backend
   const handleCheckout = async () => {
     setError("");
     setIsProcessing(true);
 
     try {
-      // Validate required fields
       const { fullName, address, phoneNumber, email, city } = formData.delivery;
 
       if (!fullName || !address || !phoneNumber || !email || !city) {
         throw new Error("Please fill in all required fields");
       }
 
+      const navigate = useNavigate();
+
       if (cart.length === 0) {
         throw new Error("Your cart is empty");
       }
-
-      // Get user token from storage
       const user = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
-      const token = user.token || localStorage.getItem("auth_token");
+      const token = user.token || sessionStorage.getItem("baron:token");
+
+      if (!user.isVerified) navigate("/signup");
 
       if (!token) {
         throw new Error("Please log in to continue");
       }
-
-      // Prepare shipping address data
       const shippingAddress = {
         fullName: formData.delivery.fullName,
         email: formData.delivery.email,
@@ -134,7 +131,6 @@ export default function Checkout() {
         deliveryOption: formData.delivery.option,
       };
 
-      // Call your backend API
       const response = await fetch("/api/order/v1/initiate-checkout", {
         method: "POST",
         headers: {

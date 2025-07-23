@@ -36,6 +36,11 @@ export default function CartCard(prop: cartInf) {
     const productItem: HeroDataType = data.find(
       (itm: HeroDataType) => itm._id === item.productId
     );
+    console.log(
+      item.quantity,
+      productItem.price,
+      formatPrice(item.quantity * productItem.price, "NGN")
+    );
     return (
       <div className="flex flex-col sm:flex-row items-center w-full justify-between p-3 bg-white/80 border-t border-stone-400 pt-3">
         <div className="flex flex-row items-center w-full justify-between">
@@ -60,7 +65,9 @@ export default function CartCard(prop: cartInf) {
             <div className="flex flex-col items-center gap-2 self-center sm:w-auto w-full ml-3">
               <div className="flex items-center bg-white rounded border border-stone-200">
                 <button
-                  onClick={() => handleDecrement(productItem._id)}
+                  onClick={() => {
+                    handleDecrement(productItem._id);
+                  }}
                   disabled={quantity === 0}
                   className={
                     "w-7 h-7 flex items-center border-r border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
@@ -80,7 +87,9 @@ export default function CartCard(prop: cartInf) {
                 </div>
 
                 <button
-                  onClick={() => handleIncrement(productItem._id)}
+                  onClick={() => {
+                    handleIncrement(productItem._id);
+                  }}
                   className={
                     "w-7 h-7 flex items-center border-l border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
                   }
@@ -89,7 +98,9 @@ export default function CartCard(prop: cartInf) {
                 </button>
               </div>
               <div
-                onClick={() => handleRemove(productItem._id)}
+                onClick={() => {
+                  handleRemove(productItem._id);
+                }}
                 className="flex justify-center cursor-pointer"
               >
                 <p className="text-sm text-stone-500 text-center font-all font-medium hover:text-red-500 transition-colors">
@@ -101,7 +112,7 @@ export default function CartCard(prop: cartInf) {
         </div>
         <div className="sm:w-1/4 w-full flex justify-start sm:my-auto mt-3 sm:justify-end self-start sm:self-center">
           <p className="font-all text-sm sm:text-xs text-center bg-green-100/20 sm:border-none border rounded-lg border-green-500/20 p-2.5 font-medium self-center text-green-700">
-            {formatPrice(item.quantity * productItem.price, "NGN")}
+            {formatPrice(quantity * productItem.price, "NGN")}
           </p>
         </div>
       </div>
