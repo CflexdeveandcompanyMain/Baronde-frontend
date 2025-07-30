@@ -173,16 +173,13 @@ export default function Checkout() {
       <MainPageNavbar />
       <section className="w-full min-h-screen py-3 bg-gray-200">
         <div className="w-full sm:w-4/5 flex sm:flex-row flex-col mx-auto gap-7 p-3 sm:py-10">
-          {/* Left Column - Forms */}
           <div className="flex flex-col w-full sm:w-3/5 gap-5">
-            {/* Error Display */}
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-md p-4">
                 <p className="text-red-800 text-sm font-medium">{error}</p>
               </div>
             )}
 
-            {/* Delivery Section */}
             <DeliverySection
               formData={formData.delivery}
               updateFormData={(field: any, value: any) =>
@@ -190,7 +187,6 @@ export default function Checkout() {
               }
             />
 
-            {/* Payment Section */}
             <PaymentSection
               paymentOption={formData.payment.option}
               updatePayment={(value: any) =>
@@ -198,7 +194,6 @@ export default function Checkout() {
               }
             />
 
-            {/* Billing Section */}
             <BillingSection
               billingData={formData.billing}
               updateBilling={(field: any, value: any) =>
@@ -207,7 +202,6 @@ export default function Checkout() {
             />
           </div>
 
-          {/* Right Column - Order Summary */}
           <OrderSummary
             status={status}
             data={data}
@@ -226,7 +220,6 @@ export default function Checkout() {
   );
 }
 
-// Updated Order Summary Component
 function OrderSummary({
   cart,
   totals,
@@ -248,7 +241,6 @@ function OrderSummary({
   onCheckout: () => void;
   isProcessing: boolean;
 }) {
-  // if (status == "success") console.log(data);
   return (
     <section className="bg-white sm:w-2/5 w-full rounded shadow p-4 h-fit">
       <div className="flex flex-col gap-4">
@@ -309,7 +301,6 @@ function OrderSummary({
             })}
           </div>
         )}
-        // {/* Discount Code */}
         <div className="flex gap-2">
           <input
             type="text"
@@ -326,7 +317,6 @@ function OrderSummary({
             Apply
           </button>
         </div>
-        {/* Totals */}
         <div className="space-y-2 pt-4 border-t border-stone-300">
           <div className="flex justify-between">
             <p className="font-all text-sm font-medium text-stone-500">
@@ -347,14 +337,13 @@ function OrderSummary({
           </div>
 
           <p className="font-all text-xs text-stone-600 mt-2">
-            Tax fee of{" "}
+            Tax fee of
             <span className="text-orange-500">
               ₦{(totals.total * 0.00023).toFixed(2)}
-            </span>{" "}
+            </span>
             included
           </p>
         </div>
-        {/* Updated Pay Button */}
         <button
           onClick={onCheckout}
           disabled={isProcessing || cart.length === 0}
@@ -371,7 +360,6 @@ function OrderSummary({
   );
 }
 
-// Reusable Components (unchanged)
 export function DeliveryOption({
   value,
   checked,
