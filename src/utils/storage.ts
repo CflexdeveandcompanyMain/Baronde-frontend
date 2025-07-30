@@ -263,7 +263,6 @@ export const CartUtils = {
         totalItems += cartItem.quantity;
       }
     });
-    console.log(subtotal);
     const tax =
       subtotal > 100000 ? 2000 : Number((subtotal * 0.015).toFixed(2) + 100);
     const total = subtotal + tax;
@@ -305,7 +304,7 @@ export const CartUtils = {
           productId: cartItem.productId,
           quantity: cartItem.quantity,
           addedAt: cartItem.addedAt,
-          price: product.price - (product.discount || 0), // Apply discount
+          price: product.price - (product.discount || 0),
         };
       })
       .filter(Boolean) as CartItem[];

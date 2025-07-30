@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
 
 export default function CartPage() {
-  const cartData = useCart();
+  const cartData: any = useCart();
   const [cartdata, setData] = useState<LocalCartItem[]>(cartData.cart);
   const [total, setTotal] = useState(0);
 
@@ -22,7 +22,7 @@ export default function CartPage() {
 
   useEffect(() => {
     if (products && cartData.cart.length > 0) {
-      const newTotal = cartData.cart.reduce((sum, item) => {
+      const newTotal = cartData.cart.reduce((sum: any, item: any) => {
         const product = products.find((p: any) => p._id === item.productId);
         if (product) {
           const quantity = cartData.getProductQuantity(item.productId);
