@@ -250,7 +250,7 @@ export const CartUtils = {
     return cart.reduce((total, item) => total + item.quantity, 0);
   },
 
-  computeCartTotals: (products: HeroDataType[]) => {
+  computeCartTotals: (products: HeroDataType[] = []) => {
     const cart = CartUtils.getCart();
 
     let subtotal = 0;
@@ -292,7 +292,7 @@ export const CartUtils = {
 
   mergeCartWithProducts: (
     cartItems: LocalCartItem[],
-    products: HeroDataType[]
+    products: HeroDataType[] = []
   ): CartItem[] => {
     return cartItems
       .map((cartItem) => {

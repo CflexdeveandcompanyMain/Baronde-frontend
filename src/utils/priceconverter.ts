@@ -11,5 +11,7 @@ export const uniqueByName = (products: HeroDataType[]) =>
   products.filter(
     (product: HeroDataType, index: number, self) =>
       index ===
-      self.findIndex((p) => p.name.toLowerCase() === product.name.toLowerCase())
+      self.findIndex(
+        (p) => p.name && p.name.toLowerCase() === product.name.toLowerCase()
+      )
   );

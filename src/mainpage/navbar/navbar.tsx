@@ -234,7 +234,10 @@ export default function MainPageNavbar() {
         <section className="bg-white p-3 hidden sm:flex justify-center w-3/4 sm:w-[90%] md:w-[70%] mx-auto">
           <ul className="flex flex-row items-center justify-between w-full">
             <div
-              onClick={() => setBrand("other")}
+              onClick={() => {
+                setBrand("other");
+                navigate("/brand/all");
+              }}
               className="font-all text-sm text-center font-medium list-none"
             >
               All Deals

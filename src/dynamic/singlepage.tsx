@@ -4,9 +4,9 @@ import MainPageNavbar from "../mainpage/navbar/navbar";
 import { usePageData } from "../store/singlepage";
 import { Link } from "react-router-dom";
 import { Minus, Plus } from "lucide-react";
-import { formatPrice, uniqueByName } from "../utils/priceconverter";
+import { formatPrice /**uniqueByName*/ } from "../utils/priceconverter";
 import { useCart } from "../utils/storage";
-import { useGlobalState } from "../store/globalstate";
+// import { useGlobalState } from "../store/globalstate";
 
 export default function SingleProductPage() {
   let [count, setcount] = useState(0);
@@ -17,7 +17,7 @@ export default function SingleProductPage() {
     decrementQuantity,
     addToCart,
     isInCart,
-    cart,
+    // cart,
     getProductQuantity,
   } = useCart();
   let { data } = usePageData();
@@ -41,8 +41,11 @@ export default function SingleProductPage() {
 
   let [Image, setImage] = useState(data.images[0].url);
   let isSingleImage = data.images.length === 1;
+  // console.log(cart);
 
-  let { setCartlen } = useGlobalState();
+  const blockToAdd = isInCart(data._id);
+
+  // let { setCartlen } = useGlobalState();
 
   return (
     <>
@@ -70,7 +73,10 @@ export default function SingleProductPage() {
                   })
                 )}
               </div>
-              <img src={Image} className="object-cover w-3/4 bg-white" />
+              <img
+                src={Image}
+                className="object-cover w-3/4 mx-auto bg-white"
+              />
               <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">
                 <p className="font-all font-bold text-xl text-[#E7FFC078] self-center text-center rotate-45">
                   barondemusical
@@ -137,16 +143,13 @@ export default function SingleProductPage() {
                       View cart
                     </div>
                   </Link>
-                  <div
-                    onClick={() => {
-                      addToCart(data);
-
-                      setCartlen(uniqueByName(cart).length);
-                    }}
-                    className="w-full p-3 bg-green-600 cursor-pointer text-center font-all font-medium text-sm text-white"
+                  <button
+                    disabled={blockToAdd}
+                    onClick={() => addToCart(data)}
+                    className="w-full p-3 bg-green-600 disabled:bg-gray-300 cursor-pointer text-center font-all font-medium text-sm text-white"
                   >
                     Add to cart
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -154,6 +157,7 @@ export default function SingleProductPage() {
               <p className="font-all text-base text-stone-400 w-full text-start sm:text-xl font-semibold">
                 Description
               </p>
+
               <ul className="flex flex-col items-start w-full pl-5 gap-2">
                 <li className="font-all text-xs text-start list-disc">
                   Premium sound quality with professional-grade components.

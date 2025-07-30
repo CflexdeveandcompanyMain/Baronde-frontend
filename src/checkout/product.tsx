@@ -115,12 +115,13 @@ export default function Checkout() {
       const shippingAddress = {
         street: formData.delivery.address,
         city: formData.delivery.city,
-        zipcode: formData.delivery.zipcode,
+        zipCode: formData.delivery.zipcode,
         country: formData.delivery.country,
       };
 
       const response = await checkoutFn(shippingAddress);
       const data = await response.json();
+      localStorage.setItem("resHead", JSON.stringify(data));
 
       if (!response.ok) {
         throw new Error(data.message || "Failed to initiate checkout");
@@ -152,8 +153,8 @@ export default function Checkout() {
     <>
       <MainPageNavbar />
       <section className="w-full min-h-screen py-3 bg-gray-200">
-        <div className="w-full sm:w-4/5 flex sm:flex-row flex-col mx-auto gap-7 p-3 sm:py-10">
-          <div className="flex flex-col w-full sm:w-3/5 gap-5">
+        <div className="w-full md:w-4/5 flex md:flex-row flex-col mx-auto gap-7 p-3 sm:py-10">
+          <div className="flex flex-col w-full md:w-3/5 gap-5">
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-md p-4">
                 <p className="text-red-800 text-sm font-medium">{error}</p>
@@ -219,7 +220,7 @@ function OrderSummary({
   isProcessing: boolean;
 }) {
   return (
-    <section className="bg-white sm:w-2/5 w-full rounded shadow p-4 h-fit">
+    <section className="bg-white md:w-2/5 w-full rounded shadow p-4 h-fit">
       <div className="flex flex-col gap-4">
         {status === "pending" ? (
           <div className="space-y-3">

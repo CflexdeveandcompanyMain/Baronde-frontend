@@ -76,7 +76,7 @@ export default function CartPage() {
               My Cart ({cartData.cart.length} items)
             </p>
           </div>
-          <div className="flex md:flex-row flex-col items-center w-full md:gap-5">
+          <div className="flex md:flex-row flex-col items-center w-full md:gap-5 self-start">
             <div className="flex flex-col items-start md:w-[65%] w-full bg-white sm:p-4 rounded md:rounded-b rounded-t rounded-x">
               <div className="flex flex-row items-center w-full justify-start gap-2 pb-1">
                 <div className="w-full flex">
@@ -145,9 +145,7 @@ export default function CartPage() {
                 <div className="flex justify-center w-full py-1">
                   <p className="font-all text-xs text-center self-center text-stone-700">
                     Tax included
-                    <span className="text-orange-600 underline mx-0.5">
-                      Shipping
-                    </span>
+                    <span className="font-bold underline mx-0.5">Shipping</span>
                     calculated at checkout
                   </p>
                 </div>

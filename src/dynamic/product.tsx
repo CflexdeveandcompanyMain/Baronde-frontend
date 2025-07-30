@@ -12,8 +12,15 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let isSingleImage = data.images.length === 1;
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const { incrementQuantity, decrementQuantity, addToCart, isInCart, cart } =
-    useCart();
+  const {
+    incrementQuantity,
+    decrementQuantity,
+    addToCart,
+    isInCart,
+    getProductQuantity,
+  } = useCart();
+
+  const blockToAdd = isInCart(data._id);
 
   const triggerAnimation = () => {
     setIsAnimating(true);
@@ -94,17 +101,17 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             </div>
           </div>
           <button
+            disabled={blockToAdd}
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
               if (isInCart(data._id)) navigate("/cart");
               else {
                 addToCart(data);
-                // setCartlen(data.length);
               }
             }}
             type="button"
-            className={`bg-green-700 shadow text-xs p-2.5 w-full font-all font-medium text-white`}
+            className={`bg-green-700 shadow text-xs p-2.5 w-full font-all disabled:bg-gray-300 font-medium text-white`}
           >
             Add to Cart
           </button>
@@ -145,13 +152,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               ) : (
                 data.images.map((item, index: number) => {
                   return (
-                    <div
-                      key={index}
-                      onClick={() => {
-                        setImage(item.url);
-                        console.log(item.url, image);
-                      }}
-                    >
+                    <div key={index} onClick={() => setImage(item.url)}>
                       <div className="relative w-full h-full">
                         <img
                           src={item.url}
@@ -216,7 +217,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 <div className="flex items-center bg-white rounded border border-stone-200">
                   <button
                     onClick={handleDecrement}
-                    disabled={cart.length === 0}
+                    disabled={getProductQuantity(data._id) === 0}
                     className={
                       "w-10 h-8 flex items-center border-r border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
                     }
@@ -230,7 +231,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                         isAnimating ? "scale-125 text-gray-600" : "scale-100"
                       }`}
                     >
-                      {cart.length}
+                      {getProductQuantity(data._id)}
                     </span>
                   </div>
 
@@ -246,11 +247,15 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 </div>
               </div>
               <div className="flex flex-row items-center w-full justify-between gap-4">
-                <div onClick={() => addToCart(data)} className="w-full">
-                  <div className="w-full p-3 bg-amber-600 text-center font-all font-medium text-sm text-white">
+                <button
+                  disabled={true}
+                  onClick={() => addToCart(data)}
+                  className="w-full"
+                >
+                  <p className="w-full p-3 bg-amber-600 text-center disabled:bg-gray-300 font-all font-medium text-sm text-white">
                     Add Cart
-                  </div>
-                </div>
+                  </p>
+                </button>
                 <div
                   onClick={() => setView(!view)}
                   className="w-full p-3 bg-green-600 text-center font-all font-medium text-sm text-white"

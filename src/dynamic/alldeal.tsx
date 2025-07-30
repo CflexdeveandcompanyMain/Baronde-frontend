@@ -18,7 +18,7 @@ export default function AllDeals() {
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
       if (brand) {
-        if (brand === "All") return data;
+        if (brand === "all") return data;
         return item.brand.toLowerCase().includes(brand);
       }
     });
