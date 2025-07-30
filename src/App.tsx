@@ -23,6 +23,7 @@ import SearchPage from "./dynamic/searchpage";
 import Checkout from "./checkout/product";
 import AllDeals from "./dynamic/alldeal";
 import AdminCreate from "./authentication/admincreate";
+import CheckoutSuccess from "./checkout/onSuccess";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ export default function App() {
         <Route path={"/checkout"} element={<Checkout />} />
         <Route path={"/brand/:brand"} element={<AllDeals />} />
         <Route path={"/adminsignup"} element={<AdminCreate />} />
+        <Route path={"/checkout/success"} element={<CheckoutSuccess />} />
       </Routes>
     </QueryClientProvider>
   );

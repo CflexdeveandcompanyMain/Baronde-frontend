@@ -14,6 +14,7 @@ import {
   IncrementCartFn,
   DecrementCartFn,
   DeleteCartFn,
+  getProducts,
 } from "./getFetch";
 
 export interface CartItem extends HeroDataType {
@@ -254,7 +255,6 @@ export const CartUtils = {
 
     let subtotal = 0;
     let totalItems = 0;
-
     cart.forEach((cartItem) => {
       const product = products.find((p) => p._id === cartItem.productId);
       if (product) {
@@ -263,16 +263,15 @@ export const CartUtils = {
         totalItems += cartItem.quantity;
       }
     });
-
-    const tax = subtotal > 1000 ? 700 : 0;
+    console.log(subtotal);
+    const tax =
+      subtotal > 100000 ? 2000 : Number((subtotal * 0.015).toFixed(2) + 100);
     const total = subtotal + tax;
-    const discount = subtotal > 500000 ? 3000 : 0;
 
     return {
       subtotal: Number(subtotal.toFixed(2)),
       tax: Number(tax.toFixed(2)),
       total: Number(total.toFixed(2)),
-      discount,
       itemCount: totalItems,
     };
   },
@@ -315,9 +314,13 @@ export const CartUtils = {
 
 export const useCart = () => {
   const [cart, setCart] = useState<LocalCartItem[]>(CartUtils.getCart());
-  const [products, setProducts] = useState<HeroDataType[]>([]);
   const { setCartlen } = useGlobalState();
   const queryClient = useQueryClient();
+
+  const getAllProducts = useQuery({
+    queryKey: ["products"],
+    queryFn: () => getProducts(),
+  });
 
   const addToCartMutation = useMutation({
     mutationFn: ({
@@ -388,7 +391,7 @@ export const useCart = () => {
       );
       setCartlen(totalItems);
     }
-  }, [data, status, setCartlen]);
+  }, [data, status, setCartlen, getAllProducts.status]);
 
   const addToCart = (product: HeroDataType) => {
     const updatedCart = CartUtils.addToCart(
@@ -449,10 +452,10 @@ export const useCart = () => {
   };
 
   const getCartWithProducts = () => {
-    return CartUtils.mergeCartWithProducts(cart, products);
+    return CartUtils.mergeCartWithProducts(cart, getAllProducts.data);
   };
 
-  const totals = CartUtils.computeCartTotals(products);
+  const totals = CartUtils.computeCartTotals(getAllProducts.data);
 
   return {
     cart,
@@ -463,11 +466,10 @@ export const useCart = () => {
     removeAllInstances,
     totals,
     canIncrement: (productId: string) =>
-      CartUtils.canIncrement(productId, products),
+      CartUtils.canIncrement(productId, getAllProducts.data),
     getProductQuantity: CartUtils.getProductQuantity,
     isInCart: CartUtils.isInCart,
     getTotalItemCount: CartUtils.getTotalItemCount,
-    setProducts,
     isAddingToCart: addToCartMutation.isPending,
     isIncrementing: incrementMutation.isPending,
     isDecrementing: decrementMutation.isPending,

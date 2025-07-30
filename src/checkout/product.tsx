@@ -6,7 +6,7 @@ import { formatPrice } from "../utils/priceconverter";
 import type { HeroDataType } from "../mainpage/Hero/data";
 import { useCart, type LocalCartItem } from "../utils/storage";
 import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "../utils/getFetch";
+import { checkoutFn, getProducts } from "../utils/getFetch";
 import { PaymentSection } from "./paymentsection";
 import { BillingSection } from "./billingsection";
 import { useNavigate } from "react-router-dom";
@@ -88,9 +88,7 @@ export default function Checkout() {
     setFormData((prev) => ({ ...prev, discountCode: value }));
   };
 
-  const applyDiscount = () => {
-    console.log("Applying discount code:", formData.discountCode);
-  };
+  const navigate = useNavigate();
 
   const handleCheckout = async () => {
     setError("");
@@ -103,14 +101,10 @@ export default function Checkout() {
         throw new Error("Please fill in all required fields");
       }
 
-      const navigate = useNavigate();
-
       if (cart.length === 0) {
         throw new Error("Your cart is empty");
       }
-      const user = JSON.parse(
-        sessionStorage.getItem("baron:user") || "{}"
-      ).isVerified;
+      const user = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
       const token = user.token || sessionStorage.getItem("baron:token");
 
       if (!user.isVerified) navigate("/signup");
@@ -119,27 +113,13 @@ export default function Checkout() {
         throw new Error("Please log in to continue");
       }
       const shippingAddress = {
-        fullName: formData.delivery.fullName,
-        email: formData.delivery.email,
-        phoneNumber: formData.delivery.phoneNumber,
-        address: formData.delivery.address,
-        apartment: formData.delivery.apartment,
+        street: formData.delivery.address,
         city: formData.delivery.city,
-        state: formData.delivery.state,
         zipcode: formData.delivery.zipcode,
         country: formData.delivery.country,
-        deliveryOption: formData.delivery.option,
       };
 
-      const response = await fetch("/api/order/v1/initiate-checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ shippingAddress }),
-      });
-
+      const response = await checkoutFn(shippingAddress);
       const data = await response.json();
 
       if (!response.ok) {
@@ -209,7 +189,6 @@ export default function Checkout() {
             totals={totals}
             discountCode={formData.discountCode}
             onDiscountChange={handleDiscountCode}
-            onApplyDiscount={applyDiscount}
             onCheckout={handleCheckout}
             isProcessing={isProcessing}
           />
@@ -227,7 +206,6 @@ function OrderSummary({
   data,
   discountCode,
   onDiscountChange,
-  onApplyDiscount,
   onCheckout,
   isProcessing,
 }: {
@@ -237,7 +215,6 @@ function OrderSummary({
   data: HeroDataType[];
   discountCode: string;
   onDiscountChange: any;
-  onApplyDiscount: any;
   onCheckout: () => void;
   isProcessing: boolean;
 }) {
@@ -311,7 +288,7 @@ function OrderSummary({
           />
           <button
             type="button"
-            onClick={onApplyDiscount}
+            // onClick={onApplyDiscount}
             className="bg-green-700 text-sm text-white font-medium font-all px-4 py-2 rounded hover:bg-green-800 transition-colors"
           >
             Apply
@@ -323,7 +300,7 @@ function OrderSummary({
               Subtotal ({cart.length} items)
             </p>
             <p className="font-all text-sm font-medium text-green-700">
-              {formatPrice(totals.total, "NGN")}
+              {formatPrice(totals.subtotal, "NGN")}
             </p>
           </div>
 
@@ -338,8 +315,8 @@ function OrderSummary({
 
           <p className="font-all text-xs text-stone-600 mt-2">
             Tax fee of
-            <span className="text-orange-500">
-              ₦{(totals.total * 0.00023).toFixed(2)}
+            <span className="text-orange-500 px-1">
+              ₦{(totals.total - totals.subtotal).toFixed(2)}
             </span>
             included
           </p>
