@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
-import { ChevronDown, ShoppingBag, Truck } from "lucide-react";
-import { nigerianStates } from "../user/data";
-// import { pay } from "..";
-import { countries } from "./data";
+import { ChevronDown } from "lucide-react";
 import { formatPrice } from "../utils/priceconverter";
 import type { HeroDataType } from "../mainpage/Hero/data";
 import { useCart, type LocalCartItem } from "../utils/storage";
@@ -13,6 +10,7 @@ import { getProducts } from "../utils/getFetch";
 import { PaymentSection } from "./paymentsection";
 import { BillingSection } from "./billingsection";
 import { useNavigate } from "react-router-dom";
+import DeliverySection from "./delivery";
 
 // Types
 type DeliveryOption = "ship" | "pickup";
@@ -110,7 +108,9 @@ export default function Checkout() {
       if (cart.length === 0) {
         throw new Error("Your cart is empty");
       }
-      const user = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
+      const user = JSON.parse(
+        sessionStorage.getItem("baron:user") || "{}"
+      ).isVerified;
       const token = user.token || sessionStorage.getItem("baron:token");
 
       if (!user.isVerified) navigate("/signup");
@@ -147,7 +147,6 @@ export default function Checkout() {
       }
 
       if (data.status === "success" && data.data.authorization_url) {
-        // Redirect to Paystack payment page
         window.location.href = data.data.authorization_url;
       } else {
         throw new Error("Invalid response from server");
@@ -224,124 +223,6 @@ export default function Checkout() {
       </section>
       <Footer />
     </>
-  );
-}
-
-// Delivery Section Component
-function DeliverySection({
-  formData,
-  updateFormData,
-}: {
-  formData: any;
-  updateFormData: any;
-}) {
-  return (
-    <section className="flex flex-col shadow w-full p-4 bg-white rounded">
-      <div className="flex justify-start w-full mb-4">
-        <p className="font-all text-lg sm:text-xl font-semibold text-[#333333]">
-          Delivery
-        </p>
-      </div>
-
-      {/* Delivery Options */}
-      <div className="flex flex-col w-full mb-4">
-        <DeliveryOption
-          value="ship"
-          checked={formData.option === "ship"}
-          onChange={(value: any) => updateFormData("option", value)}
-          label="Ship"
-          icon={<Truck className="text-green-500" size={16} />}
-        />
-        <DeliveryOption
-          value="pickup"
-          checked={formData.option === "pickup"}
-          onChange={(value: any) => updateFormData("option", value)}
-          label="Pick up in store"
-          icon={<ShoppingBag className="text-green-500" size={16} />}
-        />
-      </div>
-
-      {/* Form Fields */}
-      <div className="flex flex-col gap-3">
-        <FormField
-          label="Country"
-          value={formData.country}
-          onChange={(value: any) => updateFormData("country", value)}
-          options={countries}
-          placeholder="Select country..."
-        />
-
-        <InputField
-          label="Full Name"
-          value={formData.fullName}
-          onChange={(value: any) => updateFormData("fullName", value)}
-          placeholder="Enter your full name"
-          required
-        />
-
-        <InputField
-          label="Email"
-          value={formData.email}
-          onChange={(value: any) => updateFormData("email", value)}
-          placeholder="Enter your email"
-          type="email"
-          required
-        />
-
-        <InputField
-          label="Address"
-          value={formData.address}
-          onChange={(value: any) => updateFormData("address", value)}
-          placeholder="Enter your delivery address"
-          required
-        />
-
-        <InputField
-          label="Apartment/suite etc (optional)"
-          value={formData.apartment}
-          onChange={(value: any) => updateFormData("apartment", value)}
-          placeholder="Apartment, suite, unit, etc."
-        />
-
-        {/* Location Fields */}
-        <div className="flex flex-row gap-3 mt-2">
-          <FormField
-            label="State"
-            value={formData.state}
-            onChange={(value: any) => updateFormData("state", value)}
-            options={nigerianStates}
-            placeholder="Select state"
-            className="flex-1"
-          />
-
-          <InputField
-            label="City"
-            value={formData.city}
-            onChange={(value: any) => updateFormData("city", value)}
-            placeholder="Enter city"
-            className="flex-1"
-            required
-          />
-
-          <InputField
-            label="Zipcode"
-            value={formData.zipcode}
-            onChange={(value: any) => updateFormData("zipcode", value)}
-            placeholder="Zipcode"
-            className="flex-1"
-          />
-        </div>
-
-        <InputField
-          label="Phone Number"
-          value={formData.phoneNumber}
-          onChange={(value: any) => updateFormData("phoneNumber", value)}
-          placeholder="Enter your phone number"
-          type="tel"
-          required
-        />
-      </div>
-    </section>
   );
 }
 
@@ -491,7 +372,7 @@ function OrderSummary({
 }
 
 // Reusable Components (unchanged)
-function DeliveryOption({
+export function DeliveryOption({
   value,
   checked,
   onChange,
@@ -522,7 +403,7 @@ function DeliveryOption({
   );
 }
 
-function FormField({
+export function FormField({
   label,
   value,
   onChange,
@@ -566,7 +447,7 @@ function FormField({
   );
 }
 
-function InputField({
+export function InputField({
   label,
   value,
   onChange,
