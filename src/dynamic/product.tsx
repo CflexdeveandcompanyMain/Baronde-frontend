@@ -248,11 +248,11 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               </div>
               <div className="flex flex-row items-center w-full justify-between gap-4">
                 <button
-                  disabled={true}
+                  disabled={blockToAdd}
                   onClick={() => addToCart(data)}
-                  className="w-full"
+                  className="w-full p-3 bg-amber-600 disabled:bg-gray-300"
                 >
-                  <p className="w-full p-3 bg-amber-600 text-center disabled:bg-gray-300 font-all font-medium text-sm text-white">
+                  <p className="w-full text-center font-all font-medium text-sm text-white">
                     Add Cart
                   </p>
                 </button>
