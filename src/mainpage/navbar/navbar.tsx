@@ -21,7 +21,6 @@ export default function MainPageNavbar() {
     sessionStorage.getItem("baron:user") || "{}"
   );
 
-  let { cartlen } = useGlobalState();
   let [drop, setdrop] = useState(false);
   let [down, setdown] = useState(false);
   let [acctdrop, setAcctDrop] = useState(false);
@@ -32,7 +31,7 @@ export default function MainPageNavbar() {
     }
   };
 
-  const { ser, setSer, setBrand } = useGlobalState();
+  const { ser, setSer, setBrand, cartlen } = useGlobalState();
 
   const setSearchBtn = () => {
     setSer();

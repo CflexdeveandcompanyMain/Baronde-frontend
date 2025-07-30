@@ -92,6 +92,7 @@ export const CartUtils = {
           onSuccess(data) {
             console.log("Add to cart success:", data);
             queryClient.invalidateQueries({ queryKey: ["getCart"] });
+            queryClient.invalidateQueries({ queryKey: ["products"] });
           },
           onError(error) {
             console.error("Add to cart error:", error);
@@ -141,6 +142,7 @@ export const CartUtils = {
           onSuccess(data) {
             console.log("Increment success:", data);
             queryClient.invalidateQueries({ queryKey: ["getCart"] });
+            queryClient.invalidateQueries({ queryKey: ["products"] });
           },
           onError(error) {
             console.error("Increment error:", error);
@@ -183,6 +185,7 @@ export const CartUtils = {
           onSuccess(data) {
             console.log("Decrement success:", data);
             queryClient.invalidateQueries({ queryKey: ["getCart"] });
+            queryClient.invalidateQueries({ queryKey: ["products"] });
           },
           onError(error) {
             console.error("Decrement error:", error);
@@ -221,6 +224,7 @@ export const CartUtils = {
         onSuccess(data) {
           console.log("Delete success:", data);
           queryClient.invalidateQueries({ queryKey: ["getCart"] });
+          queryClient.invalidateQueries({ queryKey: ["products"] });
         },
         onError(error) {
           console.error("Delete error:", error);
@@ -367,8 +371,6 @@ export const useCart = () => {
           quantity: item.quantity,
           addedAt: Date.now(),
         })) || [];
-      console.log(backendCart);
-
       setCart(backendCart);
       CartUtils.saveCart(backendCart);
 

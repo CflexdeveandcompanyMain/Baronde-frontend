@@ -5,7 +5,6 @@ import { ChevronDown, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart, type LocalCartItem } from "../utils/storage";
 import { empty } from "..";
-import { useGlobalState } from "../store/globalstate";
 import CartCard from "./cartd";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -16,14 +15,14 @@ export default function CartPage() {
   const [cartdata, setData] = useState<LocalCartItem[]>(cartData.cart);
   const [total, setTotal] = useState(0);
 
-  const { data: products } = useQuery({
+  const { status, data: products } = useQuery({
     queryKey: ["products"],
     queryFn: () => getProducts(),
   });
 
   useEffect(() => {
-    if (products && cartdata.length > 0) {
-      const newTotal = cartdata.reduce((sum, item) => {
+    if (products && cartData.cart.length > 0) {
+      const newTotal = cartData.cart.reduce((sum, item) => {
         const product = products.find((p: any) => p._id === item.productId);
         if (product) {
           const quantity = cartData.getProductQuantity(item.productId);
@@ -35,7 +34,7 @@ export default function CartPage() {
     } else {
       setTotal(0);
     }
-  }, [cartdata, products, cartData]);
+  }, [cartdata, products, cartData, status]);
 
   const isVerified = JSON.parse(
     sessionStorage.getItem("baron:user") || "{}"
@@ -54,8 +53,6 @@ export default function CartPage() {
     triggerAnimation();
   };
 
-  let { setCartlen } = useGlobalState();
-
   const handleDecrement = (id: string) => {
     cartData.decrementQuantity(id);
     setData([...cartData.cart]);
@@ -67,10 +64,6 @@ export default function CartPage() {
     setData(res);
   };
 
-  useEffect(() => {
-    setCartlen(cartdata.length);
-  }, [cartdata, setCartlen]);
-
   const navigate = useNavigate();
 
   return (
@@ -80,7 +73,7 @@ export default function CartPage() {
         <div className="flex flex-col items-start w-[95%] gap-2 sm:h-auto md:w-4/5 mx-auto mt-4 sm:mt-6">
           <div className="flex flex-col items-start w-full gap-2">
             <p className="font-all text-lg font-semibold text-start w-full">
-              My Cart ({cartdata.length} items)
+              My Cart ({cartData.cart.length} items)
             </p>
           </div>
           <div className="flex md:flex-row flex-col items-center w-full md:gap-5">
@@ -103,8 +96,8 @@ export default function CartPage() {
                 </div>
               </div>
               <div className="flex flex-col w-full items-center gap-3">
-                {cartdata.length > 0 ? (
-                  cartdata.map((item: LocalCartItem, index: number) => {
+                {cartData.cart.length > 0 ? (
+                  cartData.cart.map((item: LocalCartItem, index: number) => {
                     const quantity = cartData.getProductQuantity(
                       item.productId
                     );

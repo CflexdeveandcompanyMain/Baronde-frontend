@@ -27,6 +27,7 @@ function ProductCardSkeleton() {
             }}
           ></div>
         </div>
+
         <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse relative overflow-hidden">
           <div
             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
