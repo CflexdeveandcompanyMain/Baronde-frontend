@@ -334,3 +334,18 @@ export async function checkoutFn(shippingAddress: any) {
   );
   return response;
 }
+
+export async function getOrderFn() {
+  const token = sessionStorage.getItem("baron:token") ?? "";
+  const response = await fetch("https://baronde.onrender.com/order/v1", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const res = await response.json();
+  return res;
+}
+
+getOrderFn();

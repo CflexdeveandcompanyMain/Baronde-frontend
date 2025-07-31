@@ -242,7 +242,7 @@ function OrderSummary({
             ))}
           </div>
         ) : status === "success" && data ? (
-          <div className="space-y-3">
+          <div className="space-y-3 max-h-[350px] overflow-scroll">
             {cart.map((item: any) => {
               const product = data.find((p: any) => p._id === item.productId);
               if (!product) return null;

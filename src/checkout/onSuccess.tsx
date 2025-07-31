@@ -1,6 +1,4 @@
 import { Check } from "lucide-react";
-import { formatPrice } from "../utils/priceconverter";
-
 export default function CheckoutSuccess() {
   return (
     <section className="w-full h-screen bg-slate-100 flex justify-center">
@@ -13,14 +11,11 @@ export default function CheckoutSuccess() {
             Payment Successful!
           </p>
           <p className="text-base font-all text-center w-full">
-            We have received payment of:
+            We have received your payment
           </p>
         </div>
-        <p className="font-all text-xl text-center w-full font-semibold">
-          {formatPrice(500000, "NGN")}
-        </p>
         <button
-          onClick={() => (window.location.href = "/")}
+          onClick={() => (window.location.href = "/signin")}
           className="bg-black p-2 text-sm my-3 rounded sm:w-2/5 w-1/2 mx-auto shadow text-white font-all"
         >
           Go back home

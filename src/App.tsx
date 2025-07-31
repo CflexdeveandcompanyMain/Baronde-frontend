@@ -59,7 +59,6 @@ export default function App() {
         <Route path={"/brand/:brand"} element={<AllDeals />} />
         <Route path={"/adminsignup"} element={<AdminCreate />} />
         <Route path={"/checkout/success"} element={<CheckoutSuccess />} />
-
         <Route path={"/checkout/failure"} element={<CheckoutFailure />} />
       </Routes>
     </QueryClientProvider>

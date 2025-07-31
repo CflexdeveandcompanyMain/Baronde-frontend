@@ -32,7 +32,7 @@ export default function CheckoutFailure() {
             </ul>
           </div>
           <button
-            onClick={() => (window.location.href = "/")}
+            onClick={() => (window.location.href = "/signin")}
             className="bg-black p-2 text-sm my-3 rounded shadow text-white font-all"
           >
             Go back home
