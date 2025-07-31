@@ -67,7 +67,7 @@ export default function CartPage() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className="flex flex-col w-full">
       <MainPageNavbar />
       <section className="w-full h-screen bg-white sm:bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
         <div className="flex flex-col items-start w-[95%] gap-2 sm:h-auto md:w-4/5 mx-auto mt-4 sm:mt-6">
@@ -95,7 +95,7 @@ export default function CartPage() {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col w-full items-center gap-3">
+              <div className="flex flex-col w-full items-center gap-3 overflow-scroll max-h-[400px]">
                 {cartData.cart.length > 0 ? (
                   cartData.cart.map((item: LocalCartItem, index: number) => {
                     const quantity = cartData.getProductQuantity(
@@ -168,6 +168,6 @@ export default function CartPage() {
         </div>
       </section>
       <Footer />
-    </>
+    </div>
   );
 }
