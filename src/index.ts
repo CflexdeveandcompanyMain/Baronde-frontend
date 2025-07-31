@@ -13,8 +13,10 @@ import frame3 from "./assets/frame3.png";
 import pay from "./assets/pay.png";
 import youtube from "./assets/youtube.png";
 import wha from "./assets/wha.png";
+import danger from "./assets/danger.png";
 
 export {
+  danger,
   youtube,
   wha,
   pay,

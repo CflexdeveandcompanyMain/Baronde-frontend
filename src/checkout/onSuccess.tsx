@@ -19,6 +19,12 @@ export default function CheckoutSuccess() {
         <p className="font-all text-xl text-center w-full font-semibold">
           {formatPrice(500000, "NGN")}
         </p>
+        <button
+          onClick={() => (window.location.href = "/")}
+          className="bg-black p-2 text-sm my-3 rounded sm:w-2/5 w-1/2 mx-auto shadow text-white font-all"
+        >
+          Go back home
+        </button>
       </div>
     </section>
   );

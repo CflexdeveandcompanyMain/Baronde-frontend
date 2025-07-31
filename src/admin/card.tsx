@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { removeFn, editFn } from "../utils/getFetch";
 import { useGlobalState } from "../store/globalstate";
+import { motion } from "framer-motion";
 
 interface EditableData {
   name: string;
@@ -188,7 +189,12 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
   };
 
   return (
-    <div className="flex flex-col items-center sm:shadow justify-between relative w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2 bg-white">
+    <motion.div
+      initial={{ scale: 0.4, opacity: 0.5 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 1 }}
+      className="flex flex-col items-center sm:shadow justify-between relative w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2 bg-white"
+    >
       <div className="flex flex-col items-center h-[50%] relative">
         <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">
           <p className="font-all font-bold text-lg text-[#E7FFC078] self-center text-center rotate-45">
@@ -336,6 +342,6 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
           </button>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

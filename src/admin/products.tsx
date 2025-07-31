@@ -271,7 +271,7 @@ export default function AdminProducts() {
         </div>
       </div>
 
-      <div className="w-full sm:p-3 grid md:grid-cols-3 grid-cols-2 gap-1 sm:gap-2">
+      <div className="w-full sm:p-3 grid md:grid-cols-2 grid-cols-1 gap-1 sm:gap-2">
         {filteredItems.length === 0 ? (
           <div className="col-span-full flex justify-center py-8">
             <p className="text-gray-500 font-all">

@@ -1,11 +1,10 @@
 import type { HeroDataType } from "../mainpage/Hero/data";
-import { useGlobalState } from "../store/globalstate";
-import { formatPrice, uniqueByName } from "../utils/priceconverter";
+import { formatPrice } from "../utils/priceconverter";
 import { useCart } from "../utils/storage";
 
 export default function ProductCard(data: HeroDataType) {
-  let { addToCart, cart } = useCart();
-  let { setCartlen } = useGlobalState();
+  let { addToCart } = useCart();
+  // let { setCartlen } = useGlobalState();
 
   return (
     <div className="flex flex-col border border-green-200/50 relative items-center self-stretch h-full justify-between w-[200px] bg-white p-2">
@@ -43,7 +42,7 @@ export default function ProductCard(data: HeroDataType) {
           onClick={() => {
             console.log("atc");
             addToCart(data);
-            setCartlen(uniqueByName(cart).length);
+            // setCartlen(uniqueByName(cart).length);
           }}
           type="button"
           className={`bg-green-700 shadow text-sm p-2 w-full font-all font-normal text-white`}

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../utils/storage";
 import { usePageData } from "../store/singlepage";
 import type { HeroDataType } from "../mainpage/Hero/data";
+import { motion } from "framer-motion";
 export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let [image, setImage] = useState(data.images[0].url);
   let [view, setView] = useState(false);
@@ -43,7 +44,15 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
   let { setData } = usePageData();
 
   return (
-    <div className="relative flex flex-col self-stretch h-full flex-grow">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.4 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.8,
+      }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative flex flex-col self-stretch h-full flex-grow"
+    >
       <div
         onClick={() => {
           setData(data);
@@ -69,7 +78,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             <p
               className={`text-white font-all text-center text-xs font-semibold`}
             >
-              {formatPrice(34000, "NGN")}
+              {formatPrice(data.discount, "NGN")}
             </p>
           </div>
         </div>
@@ -252,13 +261,13 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                   onClick={() => addToCart(data)}
                   className="w-full p-3 bg-amber-600 disabled:bg-gray-300"
                 >
-                  <p className="w-full text-center font-all font-medium text-sm text-white">
+                  <p className="w-full text-center font-all font-medium text-xs sm:text-sm text-white">
                     Add Cart
                   </p>
                 </button>
                 <div
                   onClick={() => setView(!view)}
-                  className="w-full p-3 bg-green-600 text-center font-all font-medium text-sm text-white"
+                  className="w-full p-3 bg-green-600 text-center font-all font-medium text-xs sm:text-sm text-white"
                 >
                   Continue shopping
                 </div>
@@ -267,6 +276,6 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

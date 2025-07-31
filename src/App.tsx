@@ -24,6 +24,7 @@ import Checkout from "./checkout/product";
 import AllDeals from "./dynamic/alldeal";
 import AdminCreate from "./authentication/admincreate";
 import CheckoutSuccess from "./checkout/onSuccess";
+import CheckoutFailure from "./checkout/onFailure";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,8 @@ export default function App() {
         <Route path={"/brand/:brand"} element={<AllDeals />} />
         <Route path={"/adminsignup"} element={<AdminCreate />} />
         <Route path={"/checkout/success"} element={<CheckoutSuccess />} />
+
+        <Route path={"/checkout/failure"} element={<CheckoutFailure />} />
       </Routes>
     </QueryClientProvider>
   );

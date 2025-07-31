@@ -6,6 +6,7 @@ import { type HeroDataType } from "../mainpage/Hero/data";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
 import { useGlobalState } from "../store/globalstate";
+import { motion } from "framer-motion";
 
 export default function ProductPage() {
   const { data, status } = useQuery({
@@ -39,16 +40,8 @@ export default function ProductPage() {
         <MainPageNavbar />
         <section className="w-full h-full py-3 bg-gray-200 flex flex-col z-10 items-center sm:gap-5 justify-start gap-4">
           <div className="flex flex-col items-start w-full sm:gap-10 sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
-            <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
-              <p className="font-all font-semibold text-2xl text-center w-full text-green-600">
-                Shop From
-                <span className="text-[#E5A000] font-all"> The Best</span>
-              </p>
-              <p className="font-all text-sm text-center w-full">
-                Discover premium musical instruments and audio equipment at
-                Barondemusical, offering superior sound quality, durability, and
-                unmatched performance for musicians.
-              </p>
+            <div className="w-[90%] sm:w-3/4 mx-auto">
+              <ShopBy />
             </div>
             <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
               <div className="flex flex-col items-start gap-2 w-full px-3">
@@ -61,7 +54,7 @@ export default function ProductPage() {
                     : "No products found"}
                 </p>
               </div>
-              <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+              <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
                 {result?.map((item: any, index: number) => {
                   return (
                     <div
@@ -90,4 +83,26 @@ function formatString(category: string) {
     return seperated
       .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
       .join(" ");
+}
+
+export function ShopBy() {
+  return (
+    <motion.div
+      initial={{ scale: 0.3, opacity: 0.2 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 1 }}
+      style={{ width: "100%" }}
+      className="flex flex-col items-center mx-auto self-center"
+    >
+      <p className="font-all font-semibold text-2xl text-center w-full text-green-600">
+        Shop From
+        <span className="text-[#E5A000] font-all"> The Best</span>
+      </p>
+      <p className="font-all text-sm text-center w-full">
+        Discover premium musical instruments and audio equipment at
+        Barondemusical, offering superior sound quality, durability, and
+        unmatched performance for musicians.
+      </p>
+    </motion.div>
+  );
 }

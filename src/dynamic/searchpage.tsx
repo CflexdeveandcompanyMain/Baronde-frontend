@@ -136,7 +136,7 @@ export default function SearchPage() {
                 Searching for "{param.keyword}"...
               </p>
             </div>
-            <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
+            <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
               {[1, 2, 3, 4].map((index) => (
                 <div
                   key={index}
@@ -201,7 +201,7 @@ export default function SearchPage() {
           </div>
 
           {filteredItems.length > 0 ? (
-            <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
+            <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
               {filteredItems.map((item: HeroDataType, index: number) => (
                 <div
                   key={item._id || index}

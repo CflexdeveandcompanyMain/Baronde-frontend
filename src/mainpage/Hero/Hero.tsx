@@ -1,7 +1,7 @@
 import { desktopHero } from "../..";
 import HeroProductCard from "./herocard";
 import { Link } from "react-router-dom";
-// import HeroSlider from "./imgslide";
+import { motion } from "framer-motion";
 
 export default function MainPageHero() {
   let { isVerified } = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
@@ -11,18 +11,7 @@ export default function MainPageHero() {
         <img src={desktopHero} className="object-cover w-full h-full" />
       </div>
       <section className="flex flex-col items-start sm:w-[95%] mx-auto w-full bg-slate-50 py-7">
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
-            <p className="font-all font-semibold text-2xl text-center w-full">
-              Featured <span className="text-[#E5A000] font-all">Products</span>
-            </p>
-            <p className="font-all text-sm text-center w-full">
-              Discover premium musical instruments and audio equipment at
-              Barondemusical, offering superior sound quality, durability, and
-              unmatched performance for musicians.
-            </p>
-          </div>
-        </section>
+        <HeroIntro />
         <section className="w-full flex justify-end p-3 fixed bottom-5 sm:bottom-6 right-5 z-50">
           <Link
             to={
@@ -215,5 +204,28 @@ export default function MainPageHero() {
       </section>
       <section className="py-7 flex flex-col items-center gap-4 overflow-hidden w-full px-3"></section>
     </section>
+  );
+}
+
+export function HeroIntro() {
+  return (
+    <motion.section
+      initial={{ scale: 0.4, opacity: 0.5, left: -20 }}
+      whileInView={{ scale: 1, opacity: 1, right: -20 }}
+      transition={{ duration: 0.8 }}
+      className="w-full flex flex-col items-center justify-center gap-3"
+    >
+      <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
+        <p className="font-all font-semibold text-2xl text-center w-full">
+          Featured <span className="text-[#E5A000] font-all">Products</span>
+        </p>
+        <p className="font-all text-sm text-center w-full">
+          Experience the perfect harmony of sound and craftsmanship at
+          Barondemusical — your destination for premium musical instruments and
+          audio gear. Discover unmatched quality, lasting durability, and
+          performance that inspires every note.
+        </p>
+      </div>
+    </motion.section>
   );
 }
