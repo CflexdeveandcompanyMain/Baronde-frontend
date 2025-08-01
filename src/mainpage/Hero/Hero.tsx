@@ -5,6 +5,26 @@ import { motion } from "framer-motion";
 
 export default function MainPageHero() {
   let { isVerified } = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
+
+  const divFn = (title: string, url: string) => {
+    return (
+      <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+        <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
+          {title}
+        </p>
+        <Link
+          onClick={(e) => (!isVerified ? e.preventDefault() : {})}
+          to={`/product/${url}`}
+          className="w-full"
+        >
+          <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+            view all
+          </p>
+        </Link>
+      </div>
+    );
+  };
+
   return (
     <section className="flex flex-col items-center w-full bg-slate-100/50">
       <div className="w-full h-[180px] sm:h-auto max-h-[500px]">
@@ -28,175 +48,73 @@ export default function MainPageHero() {
           </Link>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Full Range Speakers
-            </p>
-            <Link to={"/product/full-range-speakers"} className="w-full">
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("Full Range Speakers", "fullrangespeaker")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="fullrangespeaker" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              New Speaker Arrival
-            </p>
-            <Link
-              onClick={(e) => (!isVerified ? e.preventDefault() : {})}
-              to={"/product/new-speaker"}
-              className="w-full"
-            >
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("New Speaker Arrival", "new-speaker")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="newspeakerarrival" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Single sub
-            </p>
-            <Link to={"/product/single-sub"} className="w-full">
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("Single sub", "single-sub")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="singlesub" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Double sub
-            </p>
-            <Link to={"/product/double-sub"} className="w-full">
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("Double sub", "double-sub")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="doublesub" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Amplifier
-            </p>
-            <Link to={"/product/amplifier"} className="w-full">
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("Amplifier", "amplifier")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="amplifier" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Flat Mixers
-            </p>
-            <Link to={"/product/flat-mixer"} className="w-full">
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("Flat Mixers", "flat-mixer")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="flatmixer" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Floor Mixers
-            </p>
-            <Link to={"/product/floor-mixer"} className="w-full">
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("Floor Mixers", "floor-mixer")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="floormixer" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Equalizers
-            </p>
-            <Link to={"/product/equalizer"} className="w-full">
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("Equalizers", "equalizer")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="equalizer" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Line Arrays
-            </p>
-            <Link to={"/product/line-array"} className="w-full">
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("Line Arrays", "line-array")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="linearray" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Microphones
-            </p>
-            <Link to={"/product/microphone"} className="w-full">
-              <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-                view all
-              </p>
-            </Link>
-          </div>
+          {divFn("Microphone", "microphone")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="microphone" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Drums
-            </p>
-          </div>
+          {divFn("Drums", "drum")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="drum" />
           </div>
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
-          <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-            <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-              Compressors
-            </p>
-          </div>
+          {divFn("Compressors", "compressor")}
           <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
             <HeroProductCard category="compressor" />
           </div>

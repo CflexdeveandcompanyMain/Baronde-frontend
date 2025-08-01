@@ -3,7 +3,7 @@ import { getOrderFn } from "../utils/getFetch";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import Footer from "../footer/footer";
 import { formatPrice } from "../utils/priceconverter";
-import { Clock, Truck } from "lucide-react";
+import { Clock, Loader, Truck } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function UserOrderHistory() {
@@ -38,7 +38,8 @@ export default function UserOrderHistory() {
         <MainPageNavbar />
         <section className="w-full min-h-screen bg-white sm:bg-gray-200 flex flex-col items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto mb-4"></div>
+            {/* <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto mb-4"></div> */}
+            <Loader className="text-emerald-500 h-12 w-12 mx-auto animate-spin text-center" />
             <p className="font-all text-lg">Loading your orders...</p>
           </div>
         </section>
@@ -224,7 +225,7 @@ function OrderCard({ product }: { product: any }) {
         </div>
       </div>
       <div
-        className={`w-1/3 px-2 p-2 rounded-lg sm:rounded-2xl border gap-1 flex flex-row sm:justify-center self-start sm:self-center ${getStatusColor(
+        className={`w-1/3 px-2 p-2 rounded-lg sm:rounded-2xl border gap-1 flex flex-row justify-center self-start sm:self-center ${getStatusColor(
           productStatus
         )}`}
       >

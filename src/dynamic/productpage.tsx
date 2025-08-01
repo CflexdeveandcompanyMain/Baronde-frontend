@@ -43,8 +43,9 @@ export default function ProductPage() {
             <motion.div
               initial={{ scale: 0.4, opacity: 0.5 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1 }}
-              className="bg-[url('./assets/Hero2.png')] bg-cover w-full flex justify-center min-h-[300px] sm:min-h-[400px] bg-center bg-emerald-950/95 bg-blend-overlay"
+              // whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 3 }}
+              className="bg-[url('./assets/Hero2.png')] bg-cover w-full flex justify-center min-h-[300px] sm:min-h-[400px] bg-center bg-emerald-950 bg-blend-overlay"
             >
               <div className="flex flex-col items-center gap-2 self-center">
                 <p className="font-all text-3xl font-bold text-white">
@@ -111,7 +112,7 @@ export function ShopBy() {
         Shop From
         <span className="text-[#E5A000] font-all"> The Best</span>
       </p>
-      <p className="font-all font-medium text-sm text-center w-full">
+      <p className="font-all text-sm text-center w-full">
         Discover premium musical instruments and audio equipment at
         Barondemusical, offering superior sound quality, durability, and
         unmatched performance for musicians.
