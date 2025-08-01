@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { headlogo, MainPageSearchBar, MobileDropDown } from "../..";
+import { bdm, MainPageSearchBar, MobileDropDown } from "../..";
 import { useState } from "react";
 import { brand, products } from "../../raw-datas/rd1";
 import {
@@ -44,33 +44,8 @@ export default function MainPageNavbar() {
   return (
     <nav className="flex flex-col items-center w-full sticky top-0 z-50">
       <Marq />
-      {/* <div className="bg-[#E5A000] py-2 px-7 flex flex-row items-center w-full justify-between">
-        <p className="font-all text-[11px] sm:text-xs text-white self-center">
-          Check Big sallah sales - 40% off
-        </p>
-        <div className="flex flex-row items-center gap-1.5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-mail-icon lucide-mail text-white self-center"
-          >
-            <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
-            <rect x="2" y="4" width="20" height="16" rx="2" />
-          </svg>
-          <p className="font-all text-[11px] sm:text-xs text-white self-center">
-            Subscribe & save
-          </p>
-        </div>
-      </div> */}
       <div className="flex flex-row items-center py-3 px-3 sm:px-7 bg-[#14AE5C] w-full">
-        <BrandLogo img={headlogo} />
+        <BrandLogo img={bdm} />
         <MainPageSearchBar />
         <div className="flex flex-row items-center gap-6 w-3/5 sm:w-1/2 justify-end">
           {isVerified ? (

@@ -5,8 +5,34 @@
     <link rel="icon" type="image/svg+xml" href="/relicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Baron</title>
-    <script type="module" crossorigin src="/assets/index-BXziucQX.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-C2gF42R5.css">
+    <style>
+      @keyframes scroll-left {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .animate-scroll {
+        animation: scroll-left 15s linear infinite;
+      }
+
+      .animate-scroll-fast {
+        animation: scroll-left 8s linear infinite;
+      }
+
+      .animate-scroll-slow {
+        animation: scroll-left 25s linear infinite;
+      }
+
+      .animate-paused {
+        animation-play-state: paused;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-D4TeSr8n.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Dja840PV.css">
   </head>
   <body>
     <div id="root"></div>

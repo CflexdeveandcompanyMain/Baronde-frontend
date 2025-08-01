@@ -58,7 +58,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           setData(data);
           navigate(`/singleproduct/${data.name}-${data._id}`);
         }}
-        className="flex flex-col items-center sm:shadow justify-between w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2  bg-white"
+        className="flex flex-col items-center justify-between w-auto min-h-full border border-stone-200 sm:min-w-[200px] p-2  bg-white"
       >
         <div className="flex flex-col items-center h-[50%] relative">
           <div className="relative w-full h-full">
@@ -130,7 +130,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               setView(!view);
             }}
             type="button"
-            className={`border border-green-700/40 text-xs mt-2 p-2.5 w-full font-all font-medium text-green-700`}
+            className={`border border-green-700/40 text-xs mt-0.5 p-2.5 w-full font-all font-medium text-green-700`}
           >
             Quick view
           </button>

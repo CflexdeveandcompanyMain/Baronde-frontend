@@ -111,7 +111,7 @@ export function ShopBy() {
         Shop From
         <span className="text-[#E5A000] font-all"> The Best</span>
       </p>
-      <p className="font-all text-sm text-center w-full">
+      <p className="font-all font-medium text-sm text-center w-full">
         Discover premium musical instruments and audio equipment at
         Barondemusical, offering superior sound quality, durability, and
         unmatched performance for musicians.
