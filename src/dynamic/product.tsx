@@ -91,7 +91,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           </p>
           <div className="flex flex-col sm:flex-row items-start sm:items-center w-full justify-between">
             <p className="text-[#fdb100] text-sm text-start font-medium font-all">
-              {formatPrice(data.price - 34000, "NGN")}
+              {formatPrice(data.price - data.discount, "NGN")}
             </p>
             <p
               className={`text-black text-[11px] text-start font-medium font-all line-through`}

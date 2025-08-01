@@ -13,6 +13,7 @@ import {
 import { useGlobalState } from "../../store/globalstate";
 import Mob from "./mob";
 import BrandLogo from "../../utils/brand";
+import Marq from "../../utils/marq";
 
 export default function MainPageNavbar() {
   let [menu, setmenu] = useState(false);
@@ -42,7 +43,8 @@ export default function MainPageNavbar() {
 
   return (
     <nav className="flex flex-col items-center w-full sticky top-0 z-50">
-      <div className="bg-[#E5A000] py-2 px-7 flex flex-row items-center w-full justify-between">
+      <Marq />
+      {/* <div className="bg-[#E5A000] py-2 px-7 flex flex-row items-center w-full justify-between">
         <p className="font-all text-[11px] sm:text-xs text-white self-center">
           Check Big sallah sales - 40% off
         </p>
@@ -66,7 +68,7 @@ export default function MainPageNavbar() {
             Subscribe & save
           </p>
         </div>
-      </div>
+      </div> */}
       <div className="flex flex-row items-center py-3 px-3 sm:px-7 bg-[#14AE5C] w-full">
         <BrandLogo img={headlogo} />
         <MainPageSearchBar />

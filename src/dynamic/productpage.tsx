@@ -38,16 +38,29 @@ export default function ProductPage() {
     return (
       <>
         <MainPageNavbar />
-        <section className="w-full h-full py-3 bg-gray-200 flex flex-col z-10 items-center sm:gap-5 justify-start gap-4">
-          <div className="flex flex-col items-start w-full sm:gap-10 sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
-            <div className="w-[90%] sm:w-3/4 mx-auto">
+        <section className="w-full h-full pb-3 pt-0 bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
+          <div className="flex flex-col items-start w-full sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
+            <motion.div
+              initial={{ scale: 0.4, opacity: 0.5 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="bg-[url('./assets/Hero2.png')] bg-cover w-full flex justify-center min-h-[300px] sm:min-h-[400px] bg-center bg-emerald-950/95 bg-blend-overlay"
+            >
+              <div className="flex flex-col items-center gap-2 self-center">
+                <p className="font-all text-3xl font-bold text-white">
+                  BaronDeMusical
+                </p>
+                <p className="font-all sm:text-lg font-medium text-center w-full text-base text-white">
+                  {formatString(parameter.category ?? "Random")}
+                </p>
+              </div>
+            </motion.div>
+
+            <div className="w-[90%] sm:w-3/4 mx-auto sm:mt-10">
               <ShopBy />
             </div>
             <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
               <div className="flex flex-col items-start gap-2 w-full px-3">
-                <p className="font-all sm:text-xl font-semibold text-start w-full text-lg">
-                  {formatString(parameter.category ?? "Random")}
-                </p>
                 <p className="font-all text-xs text-start w-full">
                   {totalProducts > 0
                     ? `showing ${startCount} - ${endCount} of ${totalProducts} products`
