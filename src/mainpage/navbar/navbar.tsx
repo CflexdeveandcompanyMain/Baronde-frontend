@@ -44,7 +44,7 @@ export default function MainPageNavbar() {
   return (
     <nav className="flex flex-col items-center w-full sticky top-0 z-50">
       <Marq />
-      <div className="flex flex-row items-center py-3 px-3 sm:px-7 bg-[#14AE5C] w-full">
+      <div className="flex flex-row items-center py-3 px-3 sm:px-7 bg-green-800 w-full">
         <BrandLogo img={bdm} />
         <MainPageSearchBar />
         <div className="flex flex-row items-center gap-6 w-3/5 sm:w-1/2 justify-end">
@@ -207,7 +207,7 @@ export default function MainPageNavbar() {
       <div className="relative w-full sm:hidden flex bg-white">
         <MobileDropDown menu={menu} setMenu={Menoo} />
       </div>
-      <div className="w-full bg-white">
+      <div className="w-full bg-white border-b border-green-800/30">
         <section className="bg-white p-3 hidden sm:flex justify-center w-3/4 sm:w-[90%] md:w-[70%] mx-auto">
           <ul className="flex flex-row items-center justify-between w-full">
             <div

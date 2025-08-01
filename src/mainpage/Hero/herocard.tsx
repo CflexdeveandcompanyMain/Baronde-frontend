@@ -90,17 +90,22 @@ export default function HeroProductCard({ category }: { category: string }) {
   }
 
   if (status === "success" && data) {
-    let products = data.filter((item: HeroDataType) => {
-      if (brand) {
-        if (brand === "other") {
-          return item.categories.toLowerCase() === category.toLowerCase();
+    let products: HeroDataType[] = data
+      .filter((item: HeroDataType) => {
+        if (brand) {
+          if (brand === "other") {
+            return (
+              item.categories.replaceAll(" ", "").toLowerCase() ===
+              category.replaceAll(" ", "").toLowerCase()
+            );
+          }
         }
-      }
-      return (
-        item.categories.toLowerCase() === category.toLowerCase() &&
-        item.brand === brand
-      );
-    });
+        return (
+          item.categories.replaceAll(" ", "").toLowerCase() ===
+            category.replaceAll(" ", "").toLowerCase() && item.brand === brand
+        );
+      })
+      .slice(0, 5);
 
     return (
       <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:gap-2 gap-1">
