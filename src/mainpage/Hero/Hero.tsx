@@ -1,7 +1,7 @@
-import { desktopHero } from "../..";
 import HeroProductCard from "./herocard";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import HeroCarousel from "../../utils/carousel";
 
 export default function MainPageHero() {
   let { isVerified } = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
@@ -27,9 +27,7 @@ export default function MainPageHero() {
 
   return (
     <section className="flex flex-col items-center w-full bg-slate-100/50">
-      <div className="w-full h-[180px] sm:h-auto max-h-[500px]">
-        <img src={desktopHero} className="object-cover w-full h-full" />
-      </div>
+      <HeroCarousel />
       <section className="flex flex-col items-start sm:w-[95%] mx-auto w-full bg-slate-50 py-7">
         <HeroIntro />
         <section className="w-full flex justify-end p-3 fixed bottom-5 sm:bottom-6 right-5 z-50">
