@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { Minus, Plus } from "lucide-react";
 import { formatPrice /**uniqueByName*/ } from "../utils/priceconverter";
 import { useCart } from "../utils/storage";
-// import { useGlobalState } from "../store/globalstate";
 
 export default function SingleProductPage() {
   let [count, setcount] = useState(0);
@@ -17,7 +16,6 @@ export default function SingleProductPage() {
     decrementQuantity,
     addToCart,
     isInCart,
-    // cart,
     getProductQuantity,
   } = useCart();
   let { data } = usePageData();
@@ -41,11 +39,8 @@ export default function SingleProductPage() {
 
   let [Image, setImage] = useState(data.images[0].url);
   let isSingleImage = data.images.length === 1;
-  // console.log(cart);
-
+  console.log(data);
   const blockToAdd = isInCart(data._id);
-
-  // let { setCartlen } = useGlobalState();
 
   return (
     <>
@@ -146,7 +141,7 @@ export default function SingleProductPage() {
                   <button
                     disabled={blockToAdd}
                     onClick={() => addToCart(data)}
-                    className="w-full p-3 bg-green-600 disabled:bg-gray-300 cursor-pointer text-center font-all font-medium text-sm text-white"
+                    className="w-full p-3 bg-green-800 disabled:bg-gray-300 cursor-pointer text-center font-all font-medium text-sm text-white"
                   >
                     Add to cart
                   </button>

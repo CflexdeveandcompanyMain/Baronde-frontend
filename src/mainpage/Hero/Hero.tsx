@@ -2,29 +2,9 @@ import HeroProductCard from "./herocard";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import HeroCarousel from "../../utils/carousel";
+import { HeroObject } from "../../raw-datas/rd1";
 
 export default function MainPageHero() {
-  let { isVerified } = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
-
-  const divFn = (title: string, url: string) => {
-    return (
-      <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-        <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
-          {title}
-        </p>
-        <Link
-          onClick={(e) => (!isVerified ? e.preventDefault() : {})}
-          to={`/product/${url}`}
-          className="w-full"
-        >
-          <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
-            view all
-          </p>
-        </Link>
-      </div>
-    );
-  };
-
   return (
     <section className="flex flex-col items-center w-full bg-slate-100/50">
       <HeroCarousel />
@@ -45,78 +25,14 @@ export default function MainPageHero() {
             />
           </Link>
         </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Full Range Speakers", "fullrangespeaker")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="fullrangespeaker" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("New Speaker Arrival", "new-speaker")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="newspeakerarrival" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Single sub", "single-sub")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="singlesub" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Double sub", "double-sub")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="doublesub" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Amplifier", "amplifier")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="amplifier" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Flat Mixers", "flat-mixer")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="flatmixer" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Floor Mixers", "floor-mixer")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="floormixer" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Equalizers", "equalizer")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="equalizer" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Line Arrays", "line-array")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="linearray" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Microphone", "microphone")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="microphone" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Drums", "drum")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="drum" />
-          </div>
-        </section>
-        <section className="w-full flex flex-col items-center justify-center gap-3">
-          {divFn("Compressors", "compressor")}
-          <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
-            <HeroProductCard category="compressor" />
-          </div>
-        </section>
+        {HeroObject.map((item, index) => {
+          const { title, product } = item;
+          return (
+            <div className="w-full sm:p-1 p-3" key={index}>
+              <HeroSection title={title} product={product} />
+            </div>
+          );
+        })}
       </section>
       <section className="py-7 flex flex-col items-center gap-4 overflow-hidden w-full px-3"></section>
     </section>
@@ -143,5 +59,33 @@ export function HeroIntro() {
         </p>
       </div>
     </motion.section>
+  );
+}
+
+const divFn = (title: string, url: string) => {
+  return (
+    <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
+      <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
+        {title}
+      </p>
+      <Link to={`/product/${url}`} className="w-full">
+        <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+          view all
+        </p>
+      </Link>
+    </div>
+  );
+};
+
+function HeroSection(prop: { title: string; product: string }) {
+  const { title, product } = prop;
+
+  return (
+    <section className="w-full flex flex-col items-center justify-center gap-3">
+      {divFn(title, product)}
+      <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+        <HeroProductCard category={product} />
+      </div>
+    </section>
   );
 }

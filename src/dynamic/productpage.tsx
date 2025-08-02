@@ -17,7 +17,7 @@ export default function ProductPage() {
   let { brand } = useGlobalState();
 
   let parameter = useParams();
-  let cat = parameter.category?.split("-")[0].toLowerCase();
+  let cat = parameter.category?.replaceAll(" ", "").toLowerCase();
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
@@ -26,7 +26,7 @@ export default function ProductPage() {
           return item.categories.toLowerCase().includes(cat ?? "");
         return (
           item.categories.toLowerCase().includes(cat ?? "") &&
-          item.brand == brand
+          item.brand.toLowerCase() == brand.toLowerCase()
         );
       }
     });

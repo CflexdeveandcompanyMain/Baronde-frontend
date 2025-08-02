@@ -44,7 +44,7 @@ export default function MobileDropDown({
             return (
               <Link
                 onClick={setMenu}
-                to={"/product/" + item.replaceAll(" ", "-").toLowerCase()}
+                to={"/product/" + item.replaceAll(" ", "").toLowerCase()}
                 key={index}
                 className="font-all text-xs text-start"
               >

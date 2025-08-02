@@ -87,7 +87,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             {data.name}
           </p>
           <p className="font-normal text-start font-all text-[13px] text-gray-600 w-full">
-            {data.description.replaceAll("/", "||")}
+            {data.description.replaceAll("/", "||").substring(0, 100) + "..."}
           </p>
           <div className="flex flex-col sm:flex-row items-start sm:items-center w-full justify-between">
             <p className="text-[#fdb100] text-sm text-start font-medium font-all">
@@ -120,7 +120,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               }
             }}
             type="button"
-            className={`bg-green-700 shadow text-xs p-2.5 w-full font-all disabled:bg-gray-300 font-medium text-white`}
+            className={`bg-green-800 shadow text-xs p-2.5 w-full font-all disabled:bg-gray-300 font-medium text-white`}
           >
             Add to Cart
           </button>
@@ -267,7 +267,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 </button>
                 <div
                   onClick={() => setView(!view)}
-                  className="w-full p-3 bg-green-600 text-center font-all font-medium text-xs sm:text-sm text-white"
+                  className="w-full p-3 bg-green-800 text-center font-all font-medium text-xs sm:text-sm text-white"
                 >
                   Continue shopping
                 </div>

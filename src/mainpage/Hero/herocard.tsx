@@ -68,7 +68,6 @@ function ProductCardSkeleton() {
     </div>
   );
 }
-
 export default function HeroProductCard({ category }: { category: string }) {
   const { data, status } = useQuery({
     queryKey: ["products"],
@@ -117,6 +116,4 @@ export default function HeroProductCard({ category }: { category: string }) {
       </div>
     );
   }
-
-  return null;
 }
