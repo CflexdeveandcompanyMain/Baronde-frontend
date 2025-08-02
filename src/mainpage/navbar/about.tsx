@@ -1,6 +1,7 @@
 import { Phone, Star } from "lucide-react";
 import { fb, ig, MainPageNavbar, map, whatsapp, x } from "../..";
 import Footer from "../../footer/footer";
+import { motion } from "framer-motion";
 
 export default function About() {
   return (
@@ -8,7 +9,12 @@ export default function About() {
       <MainPageNavbar />
       <section className="w-full h-full py-3 bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
         <div className="flex flex-col items-start w-[95%] gap-2 sm:h-auto sm:w-3/5 mx-auto mt-4 sm:mt-6">
-          <div className="flex flex-col items-center w-full">
+          <motion.div
+            initial={{ scale: 0.3, opacity: 0.4 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="flex flex-col items-center w-full"
+          >
             <p className="font-all text-xl text-center w-full text-orange-500 font-semibold">
               <span className="text-emerald-700 font-all">Who</span> are we
             </p>
@@ -31,7 +37,7 @@ export default function About() {
               questions or for personalized recommendations—we're here to make
               your musical journey as smooth as possible.
             </p>
-          </div>
+          </motion.div>
           <div className="relative flex flex-col w-full">
             <img
               src={map}
