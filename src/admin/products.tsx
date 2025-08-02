@@ -1,6 +1,6 @@
 import { Plus, Search } from "lucide-react";
 import { useCallback, useEffect, useState, useMemo } from "react";
-import { products } from "../raw-datas/rd1";
+import { products, brand as BB } from "../raw-datas/rd1";
 import { type HeroDataType } from "../mainpage/Hero/data";
 import AdminCard from "./card";
 import EditForm from "./editform";
@@ -15,11 +15,6 @@ interface ImageData {
   url: string;
   name: string;
 }
-
-let D = {
-  brand: ["SoundPrince", "Rave"],
-  product: products,
-};
 
 export default function AdminProducts() {
   let [brand, setBrand] = useState("soundprince");
@@ -124,10 +119,7 @@ export default function AdminProducts() {
   }, [rawData, search, brand, cat]);
 
   useEffect(() => {
-    if (del) {
-      console.log("Delete state changed, refetching data...");
-      refetch();
-    }
+    if (del) refetch();
   }, [del, refetch]);
 
   const showIt = () => {
@@ -230,7 +222,6 @@ export default function AdminProducts() {
             close={handleClose}
             show={showIt}
             onIT={onIt}
-            which={D}
             keyFn={EKeyword}
             descFn={EDescription}
             nameFn={EName}
@@ -247,12 +238,12 @@ export default function AdminProducts() {
       <div className="flex sm:flex-row flex-col items-start w-full sm:gap-5 gap-2">
         <div className="flex flex-row items-center w-full sm:w-1/4 gap-1 self-stretch">
           <SimpleSelect
-            options={D["brand"]}
+            options={BB}
             setSelectedValue={getbrand}
             currentValue={brand}
           />
           <SimpleSelect
-            options={D["product"]}
+            options={products}
             setSelectedValue={getcategory}
             currentValue={cat}
           />

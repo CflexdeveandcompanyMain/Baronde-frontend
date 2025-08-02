@@ -35,4 +35,19 @@ export const products: string[] = [
   "Wireless Microphone",
   "Powered Monitor",
 ];
-export const brand: string[] = ["soundprince", "rave", "other"];
+export const brand: string[] = [
+  "Soundprince",
+  "JBL",
+  "Mackkie",
+  "High class",
+  "Fdb",
+  "Behringer",
+  "Infinity",
+  "Big sound",
+  "Yamaha",
+  "Amaz",
+  "Dbass",
+  "Dbx",
+  "Ariz sound",
+  "Virgin sound",
+];

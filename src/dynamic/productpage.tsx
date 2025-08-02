@@ -42,14 +42,15 @@ export default function ProductPage() {
           <div className="flex flex-col items-start w-full sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
             <motion.div
               initial={{ scale: 0.4, opacity: 0.5 }}
-              animate={{ scale: 1, opacity: 1 }}
-              // whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 3 }}
-              className="bg-[url('./assets/Hero2.png')] bg-cover w-full flex justify-center min-h-[300px] sm:min-h-[400px] bg-center bg-emerald-950 bg-blend-overlay"
+              // animate={{ scale: 1, opacity: 1 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1.3 }}
+              className="bg-[url('https://res.cloudinary.com/dmaag3pvx/image/upload/v1754139989/Frame_2147225481_t3syop.png')] relative bg-cover w-full flex justify-center min-h-[300px] sm:min-h-[400px] bg-center"
             >
-              <div className="flex flex-col items-center gap-2 self-center">
-                <p className="font-all text-3xl font-bold text-white">
-                  BaronDeMusical
+              <div className="w-full h-full absolute z-10 inset-0 bg-green-900/50"></div>
+              <div className="flex flex-col items-center gap-2 self-center absolute mx-auto z-30">
+                <p className="font-all text-4xl font-black text-white">
+                  Barondemusical
                 </p>
                 <p className="font-all sm:text-lg font-medium text-center w-full text-base text-white">
                   {formatString(parameter.category ?? "Random")}

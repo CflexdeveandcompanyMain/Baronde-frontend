@@ -1,6 +1,7 @@
 import { X } from "lucide-react";
 import { SimpleSelect } from "./products";
 import ImageUpload from "./image";
+import { brand, products } from "../raw-datas/rd1";
 
 interface ImageData {
   id: number;
@@ -13,7 +14,6 @@ type Fnstring = (val: string) => void;
 type Fnnumber = (val: number) => void;
 
 export default function EditForm({
-  which,
   brandFn,
   categoryFn,
   amountFn,
@@ -26,7 +26,6 @@ export default function EditForm({
   close,
   onImagesChange,
 }: {
-  which: any;
   brandFn: Fnstring;
   categoryFn: Fnstring;
   amountFn: Fnnumber;
@@ -57,7 +56,7 @@ export default function EditForm({
             >
               Brand
             </label>
-            <SimpleSelect options={which["brand"]} setSelectedValue={brandFn} />
+            <SimpleSelect options={brand} setSelectedValue={brandFn} />
           </div>
           <div className="flex flex-col items-start justify-start w-full">
             <label
@@ -66,10 +65,7 @@ export default function EditForm({
             >
               Category
             </label>
-            <SimpleSelect
-              options={which["product"]}
-              setSelectedValue={categoryFn}
-            />
+            <SimpleSelect options={products} setSelectedValue={categoryFn} />
           </div>
         </div>
         <div className="flex flex-col items-start justify-start md:w-1/3 sm:w-1/2 w-full">
