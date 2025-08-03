@@ -65,11 +65,11 @@ export function HeroIntro() {
 const divFn = (title: string, url: string) => {
   return (
     <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-      <p className="font-all font-semibold text-base sm:text-lg text-start p-3 w-full self-center">
+      <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
         {title}
       </p>
       <Link to={`/product/${url}`} className="w-full">
-        <p className="font-all text-xs text-red-600 self-center underline w-full text-end">
+        <p className="font-all text-xs text-red-600 font-semibold self-center underline w-full text-end">
           view all
         </p>
       </Link>
@@ -81,9 +81,9 @@ function HeroSection(prop: { title: string; product: string }) {
   const { title, product } = prop;
 
   return (
-    <section className="w-full flex flex-col items-center justify-center gap-3">
+    <section className="w-full flex flex-col items-center justify-center mt-2 gap-1 sm:gap-3">
       {divFn(title, product)}
-      <div className="overflow-x-scroll w-full flex flex-row items-center gap-3">
+      <div className="w-full flex flex-row items-center gap-3">
         <HeroProductCard category={product} />
       </div>
     </section>

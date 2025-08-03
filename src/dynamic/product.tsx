@@ -58,13 +58,13 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           setData(data);
           navigate(`/singleproduct/${data.name}-${data._id}`);
         }}
-        className="flex flex-col items-center justify-between w-auto min-h-full border border-stone-200 sm:min-w-[200px] p-2  bg-white"
+        className="flex flex-col items-center justify-between w-auto min-h-full h-fit border border-stone-200 sm:min-w-[200px] p-2  bg-white"
       >
-        <div className="flex flex-col items-center h-[50%] relative">
-          <div className="relative w-full h-full">
+        <div className="flex flex-col items-center h-auto w-full relative">
+          <div className="relative w-full h-auto">
             <img
               src={data.images[0].url}
-              className="object-cover h-full w-full bg-white"
+              className="object-cover h-full w-3/5 mx-auto bg-white"
               alt="Content image"
             />
 
@@ -87,9 +87,9 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             {data.name}
           </p>
           <p className="font-normal text-start font-all text-[13px] text-gray-600 w-full">
-            {data.description.replaceAll("/", "||").substring(0, 100) + "..."}
+            {data.description.replaceAll("/", "||").substring(0, 120) + "..."}
           </p>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center w-full justify-between">
+          <div className="flex flex-row items-start sm:items-center w-full justify-between">
             <p className="text-[#fdb100] text-sm text-start font-medium font-all">
               {formatPrice(data.price - data.discount, "NGN")}
             </p>

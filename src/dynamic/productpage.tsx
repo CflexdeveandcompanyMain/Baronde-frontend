@@ -22,11 +22,10 @@ export default function ProductPage() {
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
       if (brand) {
-        if (brand === "other")
-          return item.categories.toLowerCase().includes(cat ?? "");
         return (
-          item.categories.toLowerCase().includes(cat ?? "") &&
-          item.brand.toLowerCase() == brand.toLowerCase()
+          (item.categories.toLowerCase().includes(cat ?? "") &&
+            item.brand.toLowerCase() == brand.toLowerCase()) ||
+          item.description.includes(cat ?? "")
         );
       }
     });
@@ -42,7 +41,6 @@ export default function ProductPage() {
           <div className="flex flex-col items-start w-full sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
             <motion.div
               initial={{ scale: 0.4, opacity: 0.5 }}
-              // animate={{ scale: 1, opacity: 1 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1.3 }}
               className="bg-[url('https://res.cloudinary.com/dmaag3pvx/image/upload/v1754139989/Frame_2147225481_t3syop.png')] relative bg-cover w-full flex justify-center min-h-[300px] sm:min-h-[400px] bg-center"

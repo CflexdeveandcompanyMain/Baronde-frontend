@@ -91,17 +91,12 @@ export default function HeroProductCard({ category }: { category: string }) {
   if (status === "success" && data) {
     let products: HeroDataType[] = data
       .filter((item: HeroDataType) => {
-        if (brand) {
-          if (brand === "other") {
-            return (
-              item.categories.replaceAll(" ", "").toLowerCase() ===
-              category.replaceAll(" ", "").toLowerCase()
-            );
-          }
-        }
+        let normalizedCategory = category.replaceAll(" ", "").toLowerCase();
+        let normalizedItemCategory = item.categories
+          .replaceAll(" ", "")
+          .toLowerCase();
         return (
-          item.categories.replaceAll(" ", "").toLowerCase() ===
-            category.replaceAll(" ", "").toLowerCase() && item.brand === brand
+          normalizedItemCategory === normalizedCategory && item.brand === brand
         );
       })
       .slice(0, 5);
@@ -109,7 +104,10 @@ export default function HeroProductCard({ category }: { category: string }) {
     return (
       <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:gap-2 gap-1">
         {products.map((item: HeroDataType, index: number) => (
-          <div key={index} className="min-w-auto flex-shrink-0 self-stretch">
+          <div
+            key={index}
+            className="min-w-auto flex-shrink-0 self-stretch h-auto"
+          >
             <ProductAuthCard data={item} />
           </div>
         ))}
