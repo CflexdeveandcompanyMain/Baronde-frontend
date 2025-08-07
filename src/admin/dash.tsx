@@ -1,6 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { GitPullRequestDraft, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useMemo, type JSX, useEffect } from "react";
+import { useState, useMemo, type JSX, } from "react";
 
 type H = {
   title: string;
