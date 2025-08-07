@@ -14,7 +14,6 @@ import {
 import { useState, type JSX } from "react";
 import AdminMain from "./dash";
 import AdminSettings from "./settings";
-import AdminPayment from "./payment";
 import AdminProducts from "./products";
 
 let data = [
@@ -49,10 +48,10 @@ let sidebar = [
     title: "Products",
     icon: <Package className="text-stone-50 group-hover:text-black" />,
   },
-  {
-    title: "Payment",
-    icon: <Wallet className="text-stone-50 group-hover:text-black" />,
-  },
+  // {
+  //   title: "Payment",
+  //   icon: <Wallet className="text-stone-50 group-hover:text-black" />,
+  // },
   {
     title: "Settings",
     icon: <Settings className="text-stone-50 group-hover:text-black" />,
@@ -65,7 +64,7 @@ const AdminDashboard = () => {
   let Components: { [key: string]: JSX.Element } = {
     dashboard: <AdminMain data={data} />,
     settings: <AdminSettings />,
-    payment: <AdminPayment />,
+    // payment: <AdminPayment />,
     products: <AdminProducts />,
   };
   return (
