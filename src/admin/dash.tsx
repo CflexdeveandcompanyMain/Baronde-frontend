@@ -1,5 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import { GitPullRequestDraft, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useMemo, type JSX } from "react";
+import { useState, useMemo, type JSX, useEffect } from "react";
 
 type H = {
   title: string;
@@ -40,6 +41,10 @@ export default function AdminMain({ data }: { data: H }) {
     }
     return table;
   }, [filterOption]);
+
+  // const {status,data}=useQuery({
+  //   queryKey:["gettotal"]
+  // });
 
   const totalPages = Math.ceil(filteredTable.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
