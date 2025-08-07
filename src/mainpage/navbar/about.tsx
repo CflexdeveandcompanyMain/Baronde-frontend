@@ -1,5 +1,5 @@
 import { Phone, Star } from "lucide-react";
-import { fb, ig, MainPageNavbar, map, whatsapp, x } from "../..";
+import { fb, ig, MainPageNavbar, whatsapp, x } from "../..";
 import Footer from "../../footer/footer";
 import { motion } from "framer-motion";
 
@@ -40,7 +40,9 @@ export default function About() {
           </motion.div>
           <div className="relative flex flex-col w-full">
             <img
-              src={map}
+              src={
+                "https://res.cloudinary.com/dmaag3pvx/image/upload/v1754564154/map_mkyrsa.png"
+              }
               className="w-full object-cover sm:h-auto h-[330px]"
             />
             <div className="flex flex-col items-start gap-4 absolute w-3/4 sm:max-w-[40%] top-12 p-2 left-3 bg-white rounded-sm">
