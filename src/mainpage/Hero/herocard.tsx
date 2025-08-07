@@ -101,6 +101,14 @@ export default function HeroProductCard({ category }: { category: string }) {
         );
       })
       .slice(0, 5);
+    if (products.length == 0)
+      return (
+        <div className="w-full flex justify-center">
+          <p className="font-all text-xs text-center w-full font-semibold text-stone-700">
+            Sorry, no products in this category yet
+          </p>
+        </div>
+      );
 
     return (
       <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:gap-2 gap-1">

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import HeroCarousel from "../../utils/carousel";
 import { HeroObject } from "../../raw-datas/rd1";
+import { useEffect, useState } from "react";
 
 export default function MainPageHero() {
   return (
@@ -68,11 +69,13 @@ const divFn = (title: string, url: string) => {
       <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
         {title}
       </p>
-      <Link to={`/product/${url}`} className="w-full">
-        <p className="font-all text-xs text-red-600 font-semibold self-center underline w-full text-end">
-          view all
-        </p>
-      </Link>
+      <div className="w-full flex justify-end">
+        <Link to={`/product/${url}`} className="w-auto">
+          <p className="font-all text-xs text-red-600 font-semibold self-center underline w-full text-end">
+            view all
+          </p>
+        </Link>
+      </div>
     </div>
   );
 };

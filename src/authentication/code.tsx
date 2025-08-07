@@ -44,7 +44,8 @@ export default function VerifyCode() {
           email,
           password,
           otp.join(""),
-          otpid
+          otpid,
+          "user"
         );
         if (result.user) {
           let { name, email, id } = result.user;
