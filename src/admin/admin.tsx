@@ -1,43 +1,12 @@
 import { Link } from "react-router-dom";
 import { bdm, frame3 } from "..";
-import {
-  LogOut,
-  User,
-  Package,
-  Tag,
-  ShoppingBasket,
-  Wallet,
-  HomeIcon,
-  Settings,
-  Menu,
-} from "lucide-react";
+import { LogOut, Package, HomeIcon, Settings, Menu } from "lucide-react";
 import { useState, type JSX } from "react";
 import AdminMain from "./dash";
 import AdminSettings from "./settings";
 import AdminProducts from "./products";
-
-let data = [
-  {
-    title: "Total Sales",
-    icon: <Tag size={17} />,
-    count: 0,
-  },
-  {
-    title: "Total Products",
-    icon: <ShoppingBasket size={17} />,
-    count: 0,
-  },
-  {
-    title: "Total Customers",
-    icon: <User size={17} />,
-    count: 0,
-  },
-  {
-    title: "Total Payment",
-    icon: <Wallet size={17} />,
-    count: 0,
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { adminAnalytics } from "../utils/getFetch";
 
 let sidebar = [
   {
@@ -48,10 +17,6 @@ let sidebar = [
     title: "Products",
     icon: <Package className="text-stone-50 group-hover:text-black" />,
   },
-  // {
-  //   title: "Payment",
-  //   icon: <Wallet className="text-stone-50 group-hover:text-black" />,
-  // },
   {
     title: "Settings",
     icon: <Settings className="text-stone-50 group-hover:text-black" />,
@@ -61,10 +26,18 @@ const AdminDashboard = () => {
   let [page, setPage] = useState("dashboard");
   let [sd, setSd] = useState(false);
 
+  const { status, data } = useQuery({
+    queryKey: ["getAnalytics"],
+    queryFn: () => adminAnalytics(),
+  });
+
+  if (status === "success" && data) {
+    console.log(data);
+  }
+
   let Components: { [key: string]: JSX.Element } = {
-    dashboard: <AdminMain data={data} />,
+    dashboard: <AdminMain data={data.data} />,
     settings: <AdminSettings />,
-    // payment: <AdminPayment />,
     products: <AdminProducts />,
   };
   return (

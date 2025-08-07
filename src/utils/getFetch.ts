@@ -330,53 +330,15 @@ export async function getOrderFn() {
   return res;
 }
 
-export async function getAllUserOrder() {
+export async function adminAnalytics() {
   const token = localStorage.getItem("baron:admintoken") ?? "";
-  const request = await fetch(
-    `${API_ENDPOINT}/order-analytics/v1/users-orders`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  const response = await request.json();
-  return response;
-}
-
-getAllUserOrder();
-
-export async function totalRevenue() {
-  const token = localStorage.getItem("baron:admintoken") ?? "";
-
-  const request = await fetch(
-    `${API_ENDPOINT}/order-analytics/v1/total-revenue`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  const response = await request.json();
-  return response;
-}
-export async function totalOrder() {
-  const token = localStorage.getItem("baron:admintoken") ?? "";
-
-  const request = await fetch(
-    `${API_ENDPOINT}/order-analytics/v1/total-orders`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const request = await fetch(`${API_ENDPOINT}/order-analytics/v1/analytics`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const response = await request.json();
   return response;
 }

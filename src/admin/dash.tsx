@@ -1,5 +1,14 @@
-import { GitPullRequestDraft, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useMemo, type JSX, } from "react";
+import {
+  GitPullRequestDraft,
+  ChevronLeft,
+  ChevronRight,
+  Tag,
+  ShoppingBasket,
+  Wallet,
+  Truck,
+} from "lucide-react";
+import { useState, useMemo, type JSX } from "react";
+import { formatPrice } from "../utils/priceconverter";
 
 type H = {
   title: string;
@@ -24,7 +33,15 @@ let table = [
   ["Frank Miller", "#234", 780000, "Pending", "Mar 10, 2025"],
 ];
 
-export default function AdminMain({ data }: { data: H }) {
+interface adminT {
+  pendingPayments: number;
+  successfulPayments: number;
+  totalOrders: number;
+  totalRevenue: number;
+  usersWithOrders: any[];
+}
+
+export default function AdminMain({ data }: { data: adminT }) {
   const [filter, setFilter] = useState(false);
   const [filterOption, setFilterOption] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,10 +57,6 @@ export default function AdminMain({ data }: { data: H }) {
     }
     return table;
   }, [filterOption]);
-
-  // const {status,data}=useQuery({
-  //   queryKey:["gettotal"]
-  // });
 
   const totalPages = Math.ceil(filteredTable.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -86,6 +99,13 @@ export default function AdminMain({ data }: { data: H }) {
     setCurrentPage(1);
     setFilter(false);
   };
+  let {
+    // pendingPayments,
+    usersWithOrders,
+    successfulPayments,
+    totalOrders,
+    totalRevenue,
+  } = data;
 
   return (
     <>
@@ -100,25 +120,78 @@ export default function AdminMain({ data }: { data: H }) {
         </div>
       </div>
       <section className="sm:flex grid grid-cols-2 sm:flex-row items-center w-full gap-3 mt-5">
-        {data.map((item: any, index: number) => {
-          return (
-            <div
-              key={index}
-              className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg"
-            >
-              <div className="flex flex-row items-center w-full justify-between">
-                <p className="font-all text-lg sm:text-2xl font-semibold text-start">
-                  {item.count}
-                </p>
-                <div className="p-2 shadown">{item.icon}</div>
-              </div>
-              <p className="font-all text-sm sm:text-base text-start w-full font-medium text-stone-500">
-                {item.title}
-              </p>
-              <p className="font-semibold text-start w-full">----</p>
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
+          <div className="flex flex-row items-center w-full justify-between">
+            <p className="font-all text-lg font-semibold text-start">
+              {formatPrice(totalRevenue, "NGN")}
+            </p>
+            <div className="p-2 shadown">
+              <Tag size={17} />
             </div>
-          );
-        })}
+          </div>
+          <p className="font-all text-sm  text-start w-full font-medium text-stone-500">
+            Total Sales
+          </p>
+          <div className="flex flex-row items-center w-auto gap-1">
+            <div className="bg-yellow-400 animate-bounce duration-300 h-0.5 w-0.5 rounded-full"></div>
+            <div className="bg-red-400 h-0.5 w-0.5 rounded-full animate-bounce duration-500"></div>
+            <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
+          </div>
+        </div>
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
+          <div className="flex flex-row items-center w-full justify-between">
+            <p className="font-all text-lg font-semibold text-start">
+              {totalOrders}
+            </p>
+            <div className="p-2 shadown">
+              <ShoppingBasket size={17} />
+            </div>
+          </div>
+          <p className="font-all text-sm  text-start w-full font-medium text-stone-500">
+            Total Orders
+          </p>
+          <div className="flex flex-row items-center w-auto gap-1">
+            <div className="bg-yellow-400 animate-bounce duration-300 h-0.5 w-0.5 rounded-full"></div>
+            <div className="bg-red-400 h-0.5 w-0.5 rounded-full animate-bounce duration-500"></div>
+            <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
+          </div>
+        </div>
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
+          <div className="flex flex-row items-center w-full justify-between">
+            <p className="font-all text-lg font-semibold text-start">
+              {successfulPayments}
+            </p>
+            <div className="p-2 shadown">
+              <Wallet size={17} />
+            </div>
+          </div>
+          <p className="font-all text-sm  text-start w-full font-medium text-stone-500">
+            Successful Payments
+          </p>
+          <div className="flex flex-row items-center w-auto gap-1">
+            <div className="bg-yellow-400 animate-bounce duration-300 h-0.5 w-0.5 rounded-full"></div>
+            <div className="bg-red-400 h-0.5 w-0.5 rounded-full animate-bounce duration-500"></div>
+            <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
+          </div>
+        </div>
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
+          <div className="flex flex-row items-center w-full justify-between">
+            <p className="font-all text-lg font-semibold text-start">
+              {usersWithOrders.length}
+            </p>
+            <div className="p-2 shadown">
+              <Truck size={17} />
+            </div>
+          </div>
+          <p className="font-all text-sm  text-start w-full font-medium text-stone-500">
+            User with Order
+          </p>
+          <div className="flex flex-row items-center w-auto gap-1">
+            <div className="bg-yellow-400 animate-bounce duration-300 h-0.5 w-0.5 rounded-full"></div>
+            <div className="bg-red-400 h-0.5 w-0.5 rounded-full animate-bounce duration-500"></div>
+            <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
+          </div>
+        </div>
       </section>
       <section className="flex flex-col items-center w-full mt-3 border border-stone-300 gap-2 rounded-lg p-3">
         <div className="flex flex-row items-center w-full justify-between">
