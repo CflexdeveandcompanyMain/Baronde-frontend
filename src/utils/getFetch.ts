@@ -29,14 +29,15 @@ export async function createUser(
   email: string,
   password: string,
   otp: string,
-  otpId: string
+  otpId: string,
+  role: string
 ) {
   const request = await fetch(`${API_ENDPOINT}/user/v1/SignUp`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, email, password, otp, otpId }),
+    body: JSON.stringify({ name, email, password, otp, otpId, role }),
   });
   if (
     request.ok &&

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import HeroCarousel from "../../utils/carousel";
 import { HeroObject } from "../../raw-datas/rd1";
-import { useEffect, useState } from "react";
 
 export default function MainPageHero() {
   return (
