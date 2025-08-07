@@ -1,6 +1,6 @@
 import type { CredentialResponse } from "@react-oauth/google";
 import type { HeroDataType } from "../mainpage/Hero/data";
-const API_ENDPOINT = "https://baronde-production.up.railway.app";
+const API_ENDPOINT = import.meta.env.VITE_API_BASE_URL;
 
 export async function getFetch(url: string) {
   const request = await fetch(url, {
