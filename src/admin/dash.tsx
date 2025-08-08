@@ -7,14 +7,8 @@ import {
   Wallet,
   Truck,
 } from "lucide-react";
-import { useState, useMemo, type JSX } from "react";
+import { useState, useMemo } from "react";
 import { formatPrice } from "../utils/priceconverter";
-
-type H = {
-  title: string;
-  icon: JSX.Element;
-  count: number;
-}[];
 
 let filterD = ["All", "Delivered", "Undelivered"];
 
