@@ -36,7 +36,7 @@ const AdminDashboard = () => {
   }
 
   let Components: { [key: string]: JSX.Element } = {
-    dashboard: <AdminMain data={data.data} />,
+    dashboard: data && <AdminMain data={data.data} />,
     settings: <AdminSettings />,
     products: <AdminProducts />,
   };
