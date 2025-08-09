@@ -36,10 +36,11 @@ const AdminDashboard = () => {
   }
 
   let Components: { [key: string]: JSX.Element } = {
-    dashboard: data && <AdminMain data={data.data} />,
+    dashboard: data && data.data && <AdminMain data={data.data} />,
     settings: <AdminSettings />,
     products: <AdminProducts />,
   };
+
   return (
     <section className="flex flex-row items-center w-full h-screen relative">
       <section className="sm:flex hidden bg-green-950 flex-col items-center md:p-7 p-3 w-1/4 h-full justify-between">
