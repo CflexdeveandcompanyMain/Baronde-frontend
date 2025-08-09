@@ -29,14 +29,6 @@ let table = [
   ["Frank Miller", "#234", 780000, "Pending", "Mar 10, 2025"],
 ];
 
-interface adminT {
-  pendingPayments: number;
-  successfulPayments: number;
-  totalOrders: number;
-  totalRevenue: number;
-  usersWithOrders: any[];
-}
-
 export default function AdminMain() {
   const [filter, setFilter] = useState(false);
   const [filterOption, setFilterOption] = useState("All");
