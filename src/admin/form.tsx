@@ -1,3 +1,4 @@
+const API_ENDPOINT = import.meta.env.VITE_API_BASE_URL;
 export const submitProduct = async ({
   eImages,
   eamount,
@@ -17,8 +18,6 @@ export const submitProduct = async ({
   ekeyword: string[];
   ediscount: number;
 }) => {
-  
-const API_ENDPOINT = import.meta.env.VITE_API_BASE_URL;
   let obj = {
     categories: ecategory,
     image: eImages,
