@@ -5,15 +5,14 @@ import ProductAuthCard from "./product";
 import { type HeroDataType } from "../mainpage/Hero/data";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
-import { useGlobalState } from "../store/globalstate";
 import { motion } from "framer-motion";
+import { useGlobalState } from "../store/globalstate";
 
 export default function ProductPage() {
   const { data, status } = useQuery({
     queryKey: ["products"],
     queryFn: () => getProducts(),
   });
-
   let { brand } = useGlobalState();
 
   let parameter = useParams();
@@ -21,9 +20,13 @@ export default function ProductPage() {
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
+      console.log(cat, item.categories.toLowerCase().replaceAll(" ", ""));
       if (brand) {
         return (
-          (item.categories.toLowerCase().includes(cat ?? "") &&
+          (item.categories
+            .toLowerCase()
+            .replaceAll(" ", "")
+            .includes(cat ?? "") &&
             item.brand.toLowerCase() == brand.toLowerCase()) ||
           item.description.includes(cat ?? "")
         );

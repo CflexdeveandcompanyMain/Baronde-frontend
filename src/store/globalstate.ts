@@ -8,7 +8,7 @@ interface GlobalState {
   setSer: () => void;
   cartlen: number;
   setCartlen: (len: number) => void;
-  setC: (item: any[]) => void; // Fixed: should be any[] not any
+  setC: (item: any[]) => void;
   showCartDesktop: boolean;
   setShowCartDesktop: () => void;
   brand: string;
@@ -22,14 +22,14 @@ export const useGlobalState = create<GlobalState>()((set) => ({
   },
   brand: "soundprince",
 
-  // ✅ Fix: Use get() to access current state
   setBrand(brand: string) {
-    set({ brand }); // Cleaner syntax
+    sessionStorage.setItem("baron:currbrand", brand);
+    set({ brand });
   },
 
   ser: false,
   setSer() {
-    set((state) => ({ ser: !state.ser })); // Simplified
+    set((state) => ({ ser: !state.ser }));
   },
 
   cartlen: 0,
@@ -39,8 +39,7 @@ export const useGlobalState = create<GlobalState>()((set) => ({
 
   c: [],
   setC(item) {
-    // Fixed parameter type
-    set({ c: item }); // Simplified
+    set({ c: item });
   },
 
   showCartDesktop: false,

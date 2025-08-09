@@ -247,7 +247,7 @@ export default function MainPageNavbar() {
                       onClick={() => {
                         setBrand(item);
                         setTimeout(() => setdrop(!drop), 0);
-                        navigate(`/brand/${item.toLowerCase()}`);
+                        //navigate(`/brand/${item.toLowerCase()}`);
                       }}
                       className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
                       key={index}
