@@ -31,17 +31,15 @@ export const submitProduct = async ({
   console.log(obj);
   try {
     const token = localStorage.getItem("baron:admintoken") || "";
-    const response = await fetch(
-      `${API_ENDPOINT}/image/v1/upload`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(obj),
-      }
-    );
+    console.log(API_ENDPOINT, token);
+    const response = await fetch(`${API_ENDPOINT}/image/v1/upload`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(obj),
+    });
 
     const result = await response.json();
     console.log(result, token);
