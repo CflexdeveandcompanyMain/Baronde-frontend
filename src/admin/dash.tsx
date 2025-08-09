@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import { useState, useMemo } from "react";
 import { formatPrice } from "../utils/priceconverter";
+import { useQuery } from "@tanstack/react-query";
+import { adminAnalytics } from "../utils/getFetch";
 
 let filterD = ["All", "Delivered", "Undelivered"];
 
@@ -35,7 +37,7 @@ interface adminT {
   usersWithOrders: any[];
 }
 
-export default function AdminMain({ data }: { data: adminT }) {
+export default function AdminMain() {
   const [filter, setFilter] = useState(false);
   const [filterOption, setFilterOption] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,6 +53,15 @@ export default function AdminMain({ data }: { data: adminT }) {
     }
     return table;
   }, [filterOption]);
+
+  const { status, data } = useQuery({
+    queryKey: ["getAnalytics"],
+    queryFn: () => adminAnalytics(),
+  });
+
+  if (status === "success" && data) {
+    console.log(data);
+  }
 
   const totalPages = Math.ceil(filteredTable.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -117,7 +128,7 @@ export default function AdminMain({ data }: { data: adminT }) {
         <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
-              {formatPrice(totalRevenue, "NGN")}
+              {formatPrice(totalRevenue ?? 0, "NGN")}
             </p>
             <div className="p-2 shadown">
               <Tag size={17} />
@@ -135,7 +146,7 @@ export default function AdminMain({ data }: { data: adminT }) {
         <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
-              {totalOrders}
+              {totalOrders ?? 0}
             </p>
             <div className="p-2 shadown">
               <ShoppingBasket size={17} />
@@ -153,7 +164,7 @@ export default function AdminMain({ data }: { data: adminT }) {
         <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
-              {successfulPayments}
+              {successfulPayments ?? 0}
             </p>
             <div className="p-2 shadown">
               <Wallet size={17} />
@@ -171,7 +182,7 @@ export default function AdminMain({ data }: { data: adminT }) {
         <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
-              {usersWithOrders.length}
+              {usersWithOrders.length ?? 0}
             </p>
             <div className="p-2 shadown">
               <Truck size={17} />

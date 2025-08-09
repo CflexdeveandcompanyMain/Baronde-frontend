@@ -5,8 +5,6 @@ import { useState, type JSX } from "react";
 import AdminMain from "./dash";
 import AdminSettings from "./settings";
 import AdminProducts from "./products";
-import { useQuery } from "@tanstack/react-query";
-import { adminAnalytics } from "../utils/getFetch";
 
 let sidebar = [
   {
@@ -26,17 +24,8 @@ const AdminDashboard = () => {
   let [page, setPage] = useState("dashboard");
   let [sd, setSd] = useState(false);
 
-  const { status, data } = useQuery({
-    queryKey: ["getAnalytics"],
-    queryFn: () => adminAnalytics(),
-  });
-
-  if (status === "success" && data) {
-    console.log(data);
-  }
-
   let Components: { [key: string]: JSX.Element } = {
-    dashboard: data && data.data && <AdminMain data={data.data} />,
+    dashboard: <AdminMain />,
     settings: <AdminSettings />,
     products: <AdminProducts />,
   };
