@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { brand, products } from "../../raw-datas/rd1";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ChevronDown, InboxIcon, PhoneCallIcon } from "lucide-react";
+import { useGlobalState } from "../../store/globalstate";
 
 export default function MobileDropDown({
   menu,
@@ -16,7 +17,8 @@ export default function MobileDropDown({
     brands: false,
   });
 
-  let navigate = useNavigate();
+  let { setBrand } = useGlobalState();
+
   return (
     <div
       className={`${
@@ -78,7 +80,7 @@ export default function MobileDropDown({
                 onClick={() => {
                   setdrops((state) => ({ ...state, brands: !state.brands }));
                   setMenu();
-                  navigate(`/brand/${item}`);
+                  setBrand(item);
                 }}
                 key={index}
                 value="A deals"
