@@ -17,6 +17,8 @@ export const submitProduct = async ({
   ekeyword: string[];
   ediscount: number;
 }) => {
+  
+const API_ENDPOINT = import.meta.env.VITE_API_BASE_URL;
   let obj = {
     categories: ecategory,
     image: eImages,
@@ -31,7 +33,7 @@ export const submitProduct = async ({
   try {
     const token = localStorage.getItem("baron:admintoken") || "";
     const response = await fetch(
-      "https://baronde.onrender.com/image/v1/upload",
+      `${API_ENDPOINT}/image/v1/upload`,
       {
         method: "POST",
         headers: {
