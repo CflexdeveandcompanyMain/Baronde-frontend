@@ -7,7 +7,7 @@ import {
   Wallet,
   Truck,
 } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { formatPrice } from "../utils/priceconverter";
 import { useQuery } from "@tanstack/react-query";
 import { adminAnalytics } from "../utils/getFetch";
@@ -96,13 +96,30 @@ export default function AdminMain() {
     setCurrentPage(1);
     setFilter(false);
   };
-  let {
-    // pendingPayments,
-    usersWithOrders,
-    successfulPayments,
-    totalOrders,
-    totalRevenue,
-  } = data;
+
+  const [datas, setDatas] = useState({
+    usersWithOrders: [],
+    successfulPayments: 0,
+    totalOrders: 0,
+    totalRevenue: 0,
+  });
+
+  useEffect(() => {
+    if (data) {
+      const { usersWithOrders, successfulPayments, totalOrders, totalRevenue } =
+        data.data;
+      setDatas({
+        usersWithOrders,
+        successfulPayments,
+        totalOrders,
+        totalRevenue,
+      });
+      console.log(datas);
+    }
+  }, [status]);
+
+  let { usersWithOrders, successfulPayments, totalOrders, totalRevenue } =
+    datas;
 
   return (
     <>
@@ -174,7 +191,7 @@ export default function AdminMain() {
         <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
-              {usersWithOrders.length ?? 0}
+              {usersWithOrders ? usersWithOrders.length : 0}
             </p>
             <div className="p-2 shadown">
               <Truck size={17} />
