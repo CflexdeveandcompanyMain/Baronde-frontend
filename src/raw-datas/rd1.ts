@@ -54,61 +54,7 @@ export const brand: string[] = [
   "Virgin sound",
 ];
 
-export const HeroObject = [
-  {
-    title: "Full Range Speakers",
-    product: "fullrangespeaker",
-  },
-  {
-    title: "New Speakers Arrival",
-    product: "newspeakerarrival",
-  },
-  {
-    title: "Single sub",
-    product: "singlesub",
-  },
-  {
-    title: "Double sub",
-    product: "doublesub",
-  },
-  {
-    title: "Dj controllers",
-    product: "djcontrollers",
-  },
-  {
-    title: "Amplifier",
-    product: "amplifier",
-  },
-  {
-    title: "Flat Mixers",
-    product: "flatmixer",
-  },
-  {
-    title: "Floor Mixers",
-    product: "floormixer",
-  },
-  {
-    title: "Equalizers",
-    product: "equalizer",
-  },
-  {
-    title: "Line Arrays",
-    product: "linearray",
-  },
-  {
-    title: "Microphones",
-    product: "microphone",
-  },
-  {
-    title: "Drums",
-    product: "drum",
-  },
-  {
-    title: "Compressors",
-    product: "compressor",
-  },
-  {
-    title: "Guitars",
-    product: "guitar",
-  },
-];
+export const HeroObject = products.map((item) => ({
+  title: item,
+  product: item.toLowerCase(),
+}));

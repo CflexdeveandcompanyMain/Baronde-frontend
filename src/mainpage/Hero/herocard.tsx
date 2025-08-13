@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import ProductAuthCard from "../../dynamic/product";
 import { getProducts } from "../../utils/getFetch";
 import { type HeroDataType } from "./data";
-import { useGlobalState } from "../../store/globalstate";
+// import { useGlobalState } from "../../store/globalstate";
 
 function ProductCardSkeleton() {
   return (
@@ -74,8 +74,6 @@ export default function HeroProductCard({ category }: { category: string }) {
     queryFn: () => getProducts(),
   });
 
-  let { brand } = useGlobalState();
-
   if (status === "pending") {
     return (
       <div className="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 sm:gap-2 gap-1 ">
@@ -96,11 +94,9 @@ export default function HeroProductCard({ category }: { category: string }) {
         let normalizedItemCategory = item.categories
           .replaceAll(" ", "")
           .toLowerCase();
-        return (
-          normalizedItemCategory === normalizedCategory && item.brand === brand
-        );
+        return normalizedItemCategory === normalizedCategory;
       })
-      .slice(0, 5);
+      .slice(0, 4);
     if (products.length == 0)
       return (
         <div className="w-full flex justify-center">
