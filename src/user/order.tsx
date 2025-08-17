@@ -16,7 +16,11 @@ export default function UserOrderHistory() {
 
   useEffect(() => {
     if (status === "success" && data?.data) {
+<<<<<<< HEAD
       setOrders(data.data);
+=======
+      setOrders(data.data.filter((order: any) => order.status !== 'pending'));
+>>>>>>> refs/remotes/origin/main
     }
   }, [status, data]);
 
