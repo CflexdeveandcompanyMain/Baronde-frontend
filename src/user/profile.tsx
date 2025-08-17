@@ -49,14 +49,14 @@ export default function UserProfile() {
             </p>
           </div>
         </section>
-        <section className="w-[95%] bg-white self-center sm:h-auto sm:w-3/5 mx-auto flex flex-col items-center p-3">
+        {/* <section className="w-[95%] bg-white self-center sm:h-auto sm:w-3/5 mx-auto flex flex-col items-center p-3">
           <div className="flex flex-col items-start w-full justify-start gap-3">
             <p className="font-all font-medium text-base">Address Details</p>
             <p className="ml-5 font-all font-medium text-xs">
               11, 9idiffu street, Abia state, Nigeria
             </p>
           </div>
-        </section>
+        </section> */}
         <div
           className={`${
             drop ? "flex" : "hidden"
