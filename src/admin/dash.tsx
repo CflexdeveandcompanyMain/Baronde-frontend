@@ -14,20 +14,7 @@ import { adminAnalytics } from "../utils/getFetch";
 
 let filterD = ["All", "Delivered", "Undelivered"];
 
-let table = [
-  ["Jane Cooper", "#223", 200000, "Paid", "Aug 12, 2025"],
-  ["Wade Warren", "#224", 203000, "Delivered", "Jun 3, 2025"],
-  ["Brooklyn Simpson", "#225", 1032000, "Paid", "Nov 18, 2025"],
-  ["Cuy Hawkins", "#226", 2210000, "Pending", "July 14, 2025"],
-  ["Jane Cooper", "#227", 200000, "Paid", "Aug 12, 2025"],
-  ["Cuy Hawkins", "#228", 2210000, "Pending", "July 14, 2025"],
-  ["Alice Johnson", "#229", 450000, "Delivered", "Sep 5, 2025"],
-  ["Bob Smith", "#230", 675000, "Paid", "Oct 22, 2025"],
-  ["Carol Davis", "#231", 890000, "Pending", "Dec 1, 2025"],
-  ["David Wilson", "#232", 320000, "Delivered", "Jan 15, 2025"],
-  ["Eva Brown", "#233", 540000, "Paid", "Feb 28, 2025"],
-  ["Frank Miller", "#234", 780000, "Pending", "Mar 10, 2025"],
-];
+let table: any[] = [];
 
 export default function AdminMain() {
   const [filter, setFilter] = useState(false);
@@ -52,7 +39,9 @@ export default function AdminMain() {
   });
 
   if (status === "success" && data) {
-    console.log(data);
+    let Info = data.data.usersWithOrders.filter(
+      (item: any) => item.orders.length > 0
+    );
   }
 
   const totalPages = Math.ceil(filteredTable.length / itemsPerPage);
@@ -108,8 +97,9 @@ export default function AdminMain() {
     if (data) {
       const { usersWithOrders, successfulPayments, totalOrders, totalRevenue } =
         data.data;
+      let Info = usersWithOrders.filter((item: any) => item.orders.length > 0);
       setDatas({
-        usersWithOrders,
+        usersWithOrders: Info.length,
         successfulPayments,
         totalOrders,
         totalRevenue,
@@ -191,14 +181,14 @@ export default function AdminMain() {
         <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
-              {usersWithOrders ? usersWithOrders.length : 0}
+              {usersWithOrders}
             </p>
             <div className="p-2 shadown">
               <Truck size={17} />
             </div>
           </div>
           <p className="font-all text-sm  text-start w-full font-medium text-stone-500">
-            User with Order
+            Users with Order
           </p>
           <div className="flex flex-row items-center w-auto gap-1">
             <div className="bg-yellow-400 animate-bounce duration-300 h-0.5 w-0.5 rounded-full"></div>
