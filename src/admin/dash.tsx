@@ -38,12 +38,6 @@ export default function AdminMain() {
     queryFn: () => adminAnalytics(),
   });
 
-  if (status === "success" && data) {
-    let Info = data.data.usersWithOrders.filter(
-      (item: any) => item.orders.length > 0
-    );
-  }
-
   const totalPages = Math.ceil(filteredTable.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
