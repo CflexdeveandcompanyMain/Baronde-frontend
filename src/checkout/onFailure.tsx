@@ -32,11 +32,7 @@ export default function CheckoutFailure() {
             </ul>
           </div>
           <button
-<<<<<<< HEAD
-            onClick={() => (window.location.href = "/signin")}
-=======
             onClick={() => (window.location.href = "/")}
->>>>>>> refs/remotes/origin/main
             className="bg-black p-2 text-sm my-3 rounded shadow text-white font-all"
           >
             Go back home
