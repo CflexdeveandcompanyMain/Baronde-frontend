@@ -2,6 +2,7 @@ import { Phone, Star } from "lucide-react";
 import { fb, ig, MainPageNavbar, whatsapp, x } from "../..";
 import Footer from "../../footer/footer";
 import { motion } from "framer-motion";
+import { AspectRatio } from "@chakra-ui/layout";
 
 export default function About() {
   return (
@@ -13,12 +14,12 @@ export default function About() {
             initial={{ scale: 0.3, opacity: 0.4 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="flex flex-col items-center w-full"
+            className="flex flex-col items-center w-full bg-white shadow-lg p-2 rounded-xl"
           >
-            <p className="font-all text-xl text-center w-full text-orange-500 font-semibold">
-              <span className="text-emerald-700 font-all">Who</span> are we
+            <p className="font-all text-xl text-center w-full font-semibold">
+              <span className="text-black font-all">Who</span> are we
             </p>
-            <p className="font-all text-[12.5px] text-start">
+            <p className="font-all text-[12.5px] text-start font-medium">
               Welcome to Barondemusical, your go-to place for high-quality
               musical equipment! We specialize in offering top-notch SoundPrince
               and other products gear, carefully selected to meet the needs of
@@ -39,13 +40,10 @@ export default function About() {
             </p>
           </motion.div>
           <div className="relative flex flex-col w-full">
-            <img
-              src={
-                "https://res.cloudinary.com/dmaag3pvx/image/upload/v1754564154/map_mkyrsa.png"
-              }
-              className="w-full object-cover sm:h-auto h-[330px]"
-            />
-            <div className="flex flex-col items-start gap-4 absolute w-3/4 sm:max-w-[40%] top-12 p-2 left-3 bg-white rounded-sm">
+            <AspectRatio ratio={16 / 9}>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.952912260219!2d3.375295414770757!3d6.5276316452784755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2ae68280c1%3A0xdc9e87a367c3d9cb!2sLagos!5e0!3m2!1sen!2sng!4v1567723392506!5m2!1sen!2sng" />
+            </AspectRatio>
+            <div className="flex flex-col items-start gap-4 absolute w-3/4 sm:max-w-[40%] top-1/3 p-2 left-3 bg-white rounded-sm">
               <p className="font-semibold text-xs text-start w-full font-all">
                 Sound Prince Musical World
               </p>
@@ -73,25 +71,26 @@ export default function About() {
               </div>
             </div>
           </div>
-          <div className="flex flex-row items-center gap-4">
-            <div className="h-10 w-10 rounded-full flex justify-center bg-green-950">
+          <div className="flex flex-row items-center gap-4 mt-5">
+            <div className="h-7 w-7 rounded-full flex justify-center bg-green-950">
               <Phone className="text-white self-center" size={13} />
             </div>
-            <p className="font-bold text-green-900 font-all text-lg">
-              Contact Us: <span className="text-orange-600">08138254832</span>
+            <p className="font-bold text-green-800 font-all text-base">
+              Contact Us:{" "}
+              <span className="text-orange-600 text-base">08138254832</span>
             </p>
           </div>
           <div className="flex flex-row items-center gap-3 mt-2">
-            <div className="w-9 h-9 rounded-full bg-green-950 p-2 flex justify-center">
+            <div className="w-8 h-8 rounded-full bg-green-950 p-2 flex justify-center">
               <img src={fb} className="object-contain scale-90" />
             </div>
-            <div className="w-9 h-9 rounded-full bg-green-950 p-2 flex justify-center">
+            <div className="w-8 h-8 rounded-full bg-green-950 p-2 flex justify-center">
               <img src={ig} className="object-contain scale-90" />
             </div>
-            <div className="w-9 h-9 rounded-full bg-green-950 p-2 flex justify-center">
+            <div className="w-8 h-8 rounded-full bg-green-950 p-2 flex justify-center">
               <img src={x} className="object-contain scale-90" />
             </div>
-            <div className="w-9 h-9 rounded-full bg-green-950 p-2 flex justify-center">
+            <div className="w-8 h-8 rounded-full bg-green-950 p-2 flex justify-center">
               <img src={whatsapp} className="object-contain scale-90" />
             </div>
           </div>
