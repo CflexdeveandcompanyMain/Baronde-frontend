@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { bdm, frame3 } from "..";
-import { LogOut, Package, HomeIcon, Settings, Menu } from "lucide-react";
+import { LogOut, Package, HomeIcon, Settings, Menu, Truck } from "lucide-react";
 import { useState, type JSX } from "react";
 import AdminMain from "./dash";
 import AdminSettings from "./settings";
 import AdminProducts from "./products";
+import AdminUpdateStatus from "./status";
 
 let sidebar = [
   {
@@ -19,6 +20,10 @@ let sidebar = [
     title: "Settings",
     icon: <Settings className="text-stone-50 group-hover:text-black" />,
   },
+  {
+    title: "Order status",
+    icon: <Truck className="text-stone-50 group-hover:text-black" />,
+  },
 ];
 const AdminDashboard = () => {
   let [page, setPage] = useState("dashboard");
@@ -28,6 +33,7 @@ const AdminDashboard = () => {
     dashboard: <AdminMain />,
     settings: <AdminSettings />,
     products: <AdminProducts />,
+    "order status": <AdminUpdateStatus />,
   };
 
   return (

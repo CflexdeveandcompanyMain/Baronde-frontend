@@ -87,7 +87,6 @@ export default function HeroProductCard({ category }: { category: string }) {
   }
 
   if (status === "success" && data) {
-    console.log(data);
     let products: HeroDataType[] = data
       .filter((item: HeroDataType) => {
         let normalizedCategory = category.replaceAll(" ", "").toLowerCase();

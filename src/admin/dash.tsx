@@ -12,9 +12,7 @@ import { dateEE, formatPrice, removeDuplicate } from "../utils/priceconverter";
 import { useQuery } from "@tanstack/react-query";
 import { adminAnalytics } from "../utils/getFetch";
 
-let filterD = ["All", "Ascending", "Descending"];
-
-// let table: any[] = [];
+let filterD = ["All", "Ascending", "Descending", "Delivered", "Undelivered"];
 
 export default function AdminMain() {
   const [filter, setFilter] = useState(false);
@@ -109,6 +107,7 @@ export default function AdminMain() {
   };
 
   useEffect(() => {
+    console.log(tab);
     if (filterOption === "Ascending") {
       setTab(
         tab.sort(
@@ -121,13 +120,16 @@ export default function AdminMain() {
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         )
       );
+    } else if (filterOption === "Delivered") {
+      setTab(tab.filter((item) => item.orderStatus === "Delivered"));
+    } else if (filterOption === "Undelivered") {
+      setTab(tab.filter((item) => item.orderStatus === "paid"));
     }
   }, [filterOption]);
 
   const totalPages = Math.ceil(tab.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  // const currentTableData = tab.slice(startIndex, endIndex);
 
   useCallback(() => {
     if (data) {
@@ -195,77 +197,57 @@ export default function AdminMain() {
         </div>
       </div>
       <section className="sm:flex grid grid-cols-2 sm:flex-row items-center w-full gap-3 mt-5">
-        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 shadow-lg border-stone-500/10 border  p-2 rounded-lg">
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border-stone-500/10 border  p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
-            <p className="font-all text-lg font-semibold text-start">
+            <p className="font-all text-lg font-medium text-start">
               {formatPrice(totalRevenue ?? 0, "NGN")}
             </p>
             <div className="p-2 shadown">
-              <Tag size={17} />
+              <Tag size={24} className="text-fuchsia-600" />
             </div>
           </div>
           <p className="font-all text-sm  text-start w-full font-medium text-stone-500">
             Total Sales
           </p>
-          <div className="flex flex-row items-center w-auto gap-1">
-            <div className="bg-yellow-400 animate-bounce duration-300 h-0.5 w-0.5 rounded-full"></div>
-            <div className="bg-red-400 h-0.5 w-0.5 rounded-full animate-bounce duration-500"></div>
-            <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
-          </div>
         </div>
-        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 shadow-lg border-stone-500/10 border  p-2 rounded-lg">
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300  border-stone-500/10 border  p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
-            <p className="font-all text-lg font-semibold text-start">
+            <p className="font-all text-lg font-medium text-start">
               {totalOrders ?? 0}
             </p>
             <div className="p-2 shadown">
-              <ShoppingBasket size={17} />
+              <ShoppingBasket size={24} className="text-green-600" />
             </div>
           </div>
           <p className="font-all text-sm  text-start w-full font-medium text-stone-500">
             Total Orders
           </p>
-          <div className="flex flex-row items-center w-auto gap-1">
-            <div className="bg-yellow-400 animate-bounce duration-300 h-0.5 w-0.5 rounded-full"></div>
-            <div className="bg-red-400 h-0.5 w-0.5 rounded-full animate-bounce duration-500"></div>
-            <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
-          </div>
         </div>
-        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 shadow-lg border-stone-500/10 border  p-2 rounded-lg">
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300  border-stone-500/10 border  p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
-            <p className="font-all text-lg font-semibold text-start">
+            <p className="font-all text-lg font-medium text-start">
               {successfulPayments ?? 0}
             </p>
             <div className="p-2 shadown">
-              <Wallet size={17} />
+              <Wallet size={24} className="text-orange-600" />
             </div>
           </div>
           <p className="font-all text-sm  text-start w-full font-medium text-stone-500">
             Successful Payments
           </p>
-          <div className="flex flex-row items-center w-auto gap-1">
-            <div className="bg-yellow-400 animate-bounce duration-300 h-0.5 w-0.5 rounded-full"></div>
-            <div className="bg-red-400 h-0.5 w-0.5 rounded-full animate-bounce duration-500"></div>
-            <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
-          </div>
         </div>
-        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 shadow-lg border-stone-500/10 border  p-2 rounded-lg">
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300  border-stone-500/10 border  p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
-            <p className="font-all text-lg font-semibold text-start">
+            <p className="font-all text-lg font-medium text-start">
               {usersWithOrders}
             </p>
             <div className="p-2 shadown">
-              <Truck size={17} />
+              <Truck size={24} className="text-sky-600" />
             </div>
           </div>
           <p className="font-all text-sm  text-start w-full font-medium text-stone-500">
             Users with Order
           </p>
-          <div className="flex flex-row items-center w-auto gap-1">
-            <div className="bg-yellow-400 animate-bounce duration-300 h-0.5 w-0.5 rounded-full"></div>
-            <div className="bg-red-400 h-0.5 w-0.5 rounded-full animate-bounce duration-500"></div>
-            <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
-          </div>
         </div>
       </section>
       <section className="flex flex-col items-center w-full mt-3 border border-stone-300 gap-2 rounded-lg p-3">
@@ -289,7 +271,7 @@ export default function AdminMain() {
               }}
               className={`${
                 filter ? "flex" : "hidden"
-              } flex-col items-center gap-2 bg-stone-50 min-w-[200x] cursor-pointer outline-1 p-2 absolute top-8 z-10 border border-stone-300 rounded shadow-lg`}
+              } flex-col items-center gap-2 bg-stone-50 min-w-[200x] cursor-pointer outline-1 p-2 absolute top-8 z-10 border border-stone-300 rounded`}
             >
               {filterD.map((item: string, index: number) => {
                 return (
@@ -309,22 +291,22 @@ export default function AdminMain() {
           <table className="min-w-full table-auto rounded-lg">
             <thead className="w-full">
               <tr className="w-full">
-                <th className="py-2 font-all text-sm text-start px-4 font-medium text-stone-600 whitespace-nowrap">
+                <th className="py-2 font-all text-sm text-start px-5.5 font-medium text-stone-600 whitespace-nowrap">
                   Customer Name
                 </th>
-                <th className="py-2 font-all text-sm text-start px-4 font-medium text-stone-600 whitespace-nowrap">
+                <th className="py-2 font-all text-sm text-start px-5.5 font-medium text-stone-600 whitespace-nowrap">
                   Product
                 </th>
-                <th className="py-2 font-all text-sm text-start px-4 font-medium text-stone-600 whitespace-nowrap">
+                <th className="py-2 font-all text-sm text-start px-5.5 font-medium text-stone-600 whitespace-nowrap">
                   Order ID
                 </th>
-                <th className="py-2 font-all text-sm text-start px-4 font-medium text-stone-600 whitespace-nowrap">
+                <th className="py-2 font-all text-sm text-start px-5.5 font-medium text-stone-600 whitespace-nowrap">
                   Amount
                 </th>
-                <th className="py-2 font-all text-sm text-start px-4 font-medium text-stone-600 whitespace-nowrap">
+                <th className="py-2 font-all text-sm text-start px-5.5 font-medium text-stone-600 whitespace-nowrap">
                   Status
                 </th>
-                <th className="py-2 font-all text-sm text-start px-4 font-medium text-stone-600 whitespace-nowrap">
+                <th className="py-2 font-all text-sm text-start px-5.5 font-medium text-stone-600 whitespace-nowrap">
                   Date
                 </th>
               </tr>
@@ -334,37 +316,37 @@ export default function AdminMain() {
                 <tr key={index} className="hover:bg-gray-200">
                   <td
                     key={1}
-                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                    className={`capitalize font-semibold font-all text-sm text-start px-5.5 py-4 whitespace-nowrap`}
                   >
                     {item.name}
                   </td>
                   <td
                     key={10}
-                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                    className={`capitalize font-medium font-all text-xs text-start px-5.5 py-4 whitespace-nowrap`}
                   >
                     {item.product}
                   </td>
                   <td
                     key={2}
-                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                    className={`capitalize font-medium font-all text-xs text-start px-5.5 py-4 whitespace-nowrap`}
                   >
                     {"#" + item._id}
                   </td>
                   <td
                     key={3}
-                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                    className={`capitalize font-medium font-all text-xs text-start px-5.5 py-4 whitespace-nowrap`}
                   >
                     {formatPrice(item.totalAmount, "NGN")}
                   </td>
                   <td
                     key={4}
-                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                    className={`capitalize font-medium font-all text-xs text-start px-5.5 py-4 whitespace-nowrap`}
                   >
                     {item.orderStatus}
                   </td>
                   <td
                     key={5}
-                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                    className={`capitalize font-medium font-all text-xs text-start px-5.5 py-4 whitespace-nowrap`}
                   >
                     {item.date}
                   </td>

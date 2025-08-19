@@ -342,3 +342,17 @@ export async function adminAnalytics() {
   const response = await request.json();
   return response;
 }
+
+export async function updateOrderstateFn(id: string, status: string) {
+  const token = localStorage.getItem("baron:admintoken") ?? "";
+  const response = await fetch(`${API_ENDPOINT}/order/v1/${id}/status`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ orderStatus: status }),
+  });
+  const res = await response.json();
+  return res;
+}
