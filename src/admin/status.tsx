@@ -75,59 +75,63 @@ export default function AdminUpdateStatus() {
           </p>
         </div>
         <section className="grid grid-cols-1 w-full gap-6 mt-8">
-          {tab.map((item, index: number) => {
-            const { name, order } = item;
-            return (
-              <div
-                key={index}
-                className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
-              >
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-100">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-blue-600 font-semibold text-lg font-all">
-                        {name.charAt(0).toUpperCase()}
-                      </span>
-                    </div>
-                    <div>
-                      <h2 className="text-lg font-semibold text-gray-900 capitalize font-all">
-                        {name}
-                      </h2>
-                      <p className="text-sm font-all text-gray-600">
-                        {order.length} order{order.length !== 1 ? "s" : ""}
-                      </p>
+          {tab.length > 0 ? (
+            tab.map((item, index: number) => {
+              const { name, order } = item;
+              return (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+                >
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-100">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <span className="text-blue-600 font-semibold text-lg font-all">
+                          {name.charAt(0).toUpperCase()}
+                        </span>
+                      </div>
+                      <div>
+                        <h2 className="text-lg font-semibold text-gray-900 capitalize font-all">
+                          {name}
+                        </h2>
+                        <p className="text-sm font-all text-gray-600">
+                          {order.length} order{order.length !== 1 ? "s" : ""}
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  <div className="p-6 space-y-6">
+                    {order.map((item: any, index: number) => {
+                      const {
+                        city,
+                        street,
+                        status,
+                        orderStatus,
+                        totalAmount,
+                        items,
+                        id,
+                      } = item;
+                      return (
+                        <OrderComponent
+                          key={id}
+                          city={city}
+                          street={street}
+                          orderStatus={orderStatus}
+                          totalAmount={totalAmount}
+                          index={index}
+                          items={items}
+                          status={status}
+                          id={id}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="p-6 space-y-6">
-                  {order.map((item: any, index: number) => {
-                    const {
-                      city,
-                      street,
-                      status,
-                      orderStatus,
-                      totalAmount,
-                      items,
-                      id,
-                    } = item;
-                    return (
-                      <OrderComponent
-                        key={id}
-                        city={city}
-                        street={street}
-                        orderStatus={orderStatus}
-                        totalAmount={totalAmount}
-                        index={index}
-                        items={items}
-                        status={status}
-                        id={id}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <p className="font-all text-xl font-semibold">No Orders yet!</p>
+          )}
         </section>
       </div>
     </>
@@ -192,7 +196,6 @@ function OrderComponent({
     if (type === "payment") {
       const paymentStyles = {
         paid: "bg-green-100 text-green-800`",
-        pending: "bg-yellow-100 text-yellow-800`",
         failed: "bg-red-100 text-red-800`",
       };
       return `${baseClasses} ${
@@ -201,11 +204,9 @@ function OrderComponent({
       }`;
     } else {
       const orderStyles = {
-        pending: "bg-blue-100 text-blue-800`",
-        processing: "bg-indigo-100 text-indigo-800`",
-        shipped: "bg-purple-100 text-purple-800`",
-        delivered: "bg-green-100 text-green-800`",
-        cancelled: "bg-red-100 text-red-800`",
+        processing: "bg-indigo-100 text-indigo-800",
+        shipped: "bg-purple-100 text-purple-800",
+        delivered: "bg-green-100 text-green-800",
       };
       return `${baseClasses} ${
         orderStyles[status as keyof typeof orderStyles] ||
@@ -215,9 +216,9 @@ function OrderComponent({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
+    <div className="w-full bg-white rounded-xl shadow-sm border border-gray-100 p-2 sm:p-4 hover:shadow-md transition-shadow duration-200">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between p-1">
         <h3 className="text-lg font-semibold text-gray-900 font-all">
           Order #{index + 1}
         </h3>
@@ -232,7 +233,7 @@ function OrderComponent({
       </div>
 
       {/* Amount */}
-      <div className="mb-4">
+      <div className="p-2">
         <div className="flex items-center justify-between">
           <span className="text-sm font-all text-gray-600">Total Amount</span>
           <span className="text-lg font-bold text-green-600 font-all">
@@ -298,11 +299,8 @@ function OrderComponent({
               name="orderStatus"
               className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-all text-gray-900 shadow-sm outline-none"
             >
-              <option className="font-all" value="pending">
-                Pending
-              </option>
-              <option className="font-all" value="processing">
-                Processing
+              <option className="font-all" value="shipped">
+                Paid
               </option>
               <option className="font-all" value="shipped">
                 Shipped
@@ -311,7 +309,7 @@ function OrderComponent({
                 Delivered
               </option>
               <option className="font-all" value="cancelled">
-                Cancelled
+                Processing
               </option>
             </select>
           </div>

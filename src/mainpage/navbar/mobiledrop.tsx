@@ -71,14 +71,14 @@ export default function MobileDropDown({
             className={`${drop.brands ? "rotate-180" : "rotate-360"}`}
           />
         </div>
-        <datalist
+        <div
           className={`${
             drop.brands ? "flex" : "hidden"
-          } flex-col items-start gap-2.5 duration-500 justify-start w-full pl-4`}
+          } flex-col items-start gap-1 duration-500 justify-start w-full pl-4`}
         >
           {brand.map((item: string, index: number) => {
             return (
-              <option
+              <button
                 onClick={() => {
                   setdrops((state) => ({ ...state, brands: !state.brands }));
                   setMenu();
@@ -86,13 +86,14 @@ export default function MobileDropDown({
                   navigate(`/brand/${item}`);
                 }}
                 key={index}
-                className="font-all text-xs text-start"
+                className="font-all text-xs text-start hover:bg-gray-100 p-2 w-full rounded transition-colors"
+                type="button"
               >
                 {item}
-              </option>
+              </button>
             );
           })}
-        </datalist>
+        </div>
       </div>
       <Link
         onClick={() => setMenu()}

@@ -12,7 +12,7 @@ import { dateEE, formatPrice, removeDuplicate } from "../utils/priceconverter";
 import { useQuery } from "@tanstack/react-query";
 import { adminAnalytics } from "../utils/getFetch";
 
-let filterD = ["All", "Ascending", "Descending", "Delivered", "Undelivered"];
+let filterD = ["Paid", "Processing", "Shipped", "Delivered", "Cancelled"];
 
 export default function AdminMain() {
   const [filter, setFilter] = useState(false);
@@ -107,24 +107,8 @@ export default function AdminMain() {
   };
 
   useEffect(() => {
+    setTab(tab.filter((item) => item.orderStatus === filterOption));
     console.log(tab);
-    if (filterOption === "Ascending") {
-      setTab(
-        tab.sort(
-          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-        )
-      );
-    } else if (filterOption === "Descending") {
-      setTab(
-        tab.sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-        )
-      );
-    } else if (filterOption === "Delivered") {
-      setTab(tab.filter((item) => item.orderStatus === "Delivered"));
-    } else if (filterOption === "Undelivered") {
-      setTab(tab.filter((item) => item.orderStatus === "paid"));
-    }
   }, [filterOption]);
 
   const totalPages = Math.ceil(tab.length / itemsPerPage);
