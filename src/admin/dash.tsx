@@ -75,35 +75,37 @@ export default function AdminMain() {
   let Info: any[];
 
   const update = (inf: any[]) => {
-    inf.map((item) => {
-      let {
-        orders,
-        user: { name },
-      } = item;
-      orders.forEach((order: any) => {
-        let { orderStatus, _id, totalAmount, updatedAt, items } = order;
-        let str = "";
-        items.forEach((item: any) => {
-          let {
-            product: { name },
-            quantity,
-          } = item;
-          str += `${name} x ${quantity} `;
-        });
+    if (inf.length > 0) {
+      inf.map((item) => {
+        let {
+          orders,
+          user: { name },
+        } = item;
+        orders.forEach((order: any) => {
+          let { orderStatus, _id, totalAmount, updatedAt, items } = order;
+          let str = "";
+          items.forEach((item: any) => {
+            let {
+              product: { name },
+              quantity,
+            } = item;
+            str += `${name} x ${quantity} `;
+          });
 
-        setTab((prev: any) => [
-          ...prev,
-          {
-            name,
-            orderStatus,
-            _id,
-            totalAmount,
-            date: dateEE(updatedAt),
-            product: str,
-          },
-        ]);
+          setTab((prev: any) => [
+            ...prev,
+            {
+              name,
+              orderStatus,
+              _id,
+              totalAmount,
+              date: dateEE(updatedAt),
+              product: str,
+            },
+          ]);
+        });
       });
-    });
+    }
   };
 
   useEffect(() => {
