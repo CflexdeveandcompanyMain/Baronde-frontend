@@ -25,7 +25,7 @@ export default function MobileDropDown({
     <div
       className={`${
         menu ? "flex" : "hidden"
-      } flex-col items-center w-full gap-5 absolute min-h-screen z-30 h-auto top-0 bg-white p-5`}
+      } flex-col items-center w-full gap-5 overflow-y-auto absolute h-screen z-30 top-0 bg-white p-5`}
     >
       <div className="mr-0 -mt-[1.6rem] justify-end self-end w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-white"></div>
       <div className="flex flex-col items-center w-full gap-2">
@@ -39,10 +39,10 @@ export default function MobileDropDown({
             className={`${drop.products ? "rotate-180" : "rotate-360"}`}
           />
         </div>
-        <datalist
+        <div
           className={`${
             drop.products ? "flex" : "hidden"
-          } flex-col items-start gap-2.5 duration-500 justify-start w-full pl-4`}
+          } flex-col items-start gap-2.5 duration-500 justify-start w-full pl-4 max-h-60 overflow-y-auto`}
         >
           {products.map((item: string, index: number) => {
             return (
@@ -50,13 +50,13 @@ export default function MobileDropDown({
                 onClick={setMenu}
                 to={"/product/" + item.replaceAll(" ", "").toLowerCase()}
                 key={index}
-                className="font-all text-xs text-start"
+                className="font-all text-xs text-start hover:bg-gray-100 p-2 w-full rounded transition-colors"
               >
                 {item}
               </Link>
             );
           })}
-        </datalist>
+        </div>
       </div>
       <div className="flex flex-col items-center w-full gap-2">
         <div className="flex flex-row items-center justify-between w-full">
@@ -74,7 +74,7 @@ export default function MobileDropDown({
         <div
           className={`${
             drop.brands ? "flex" : "hidden"
-          } flex-col items-start gap-1 duration-500 justify-start w-full pl-4`}
+          } flex-col items-start gap-1 duration-500 justify-start w-full pl-4 max-h-60 overflow-y-auto`}
         >
           {brand.map((item: string, index: number) => {
             return (
