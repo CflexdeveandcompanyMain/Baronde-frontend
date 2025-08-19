@@ -130,6 +130,7 @@ export default function AdminMain() {
           ]);
         });
       });
+      setTab(Array.from(new Map(tab.map((item) => [item._id, item])).values()));
     }
   }, [status]);
 
@@ -144,13 +145,10 @@ export default function AdminMain() {
         totalOrders,
         totalRevenue,
       });
-      // console.log(datas);
+      console.log(data.data);
     }
-    console.log(Info[0].orders);
     update(Info);
   }, [status]);
-
-  if (tab.length > 0) console.log(tab);
 
   let { usersWithOrders, successfulPayments, totalOrders, totalRevenue } =
     datas;
@@ -313,7 +311,7 @@ export default function AdminMain() {
                     key={2}
                     className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
                   >
-                    {item._id}
+                    {"#" + item._id}
                   </td>
                   <td
                     key={3}
