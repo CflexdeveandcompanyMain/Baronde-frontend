@@ -15,3 +15,16 @@ export const uniqueByName = (products: HeroDataType[]) =>
         (p) => p.name && p.name.toLowerCase() === product.name.toLowerCase()
       )
   );
+
+export const dateEE = (d: string) => {
+  const iso = d;
+  const date = new Date(iso);
+
+  const formatted =
+    date.getFullYear() +
+    "/" +
+    String(date.getMonth() + 1).padStart(2, "0") +
+    "/" +
+    String(date.getDate()).padStart(2, "0");
+  return formatted;
+};

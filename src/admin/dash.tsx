@@ -7,14 +7,14 @@ import {
   Wallet,
   Truck,
 } from "lucide-react";
-import { useState, useMemo, useEffect } from "react";
-import { formatPrice } from "../utils/priceconverter";
+import { useState, useEffect, useCallback } from "react";
+import { dateEE, formatPrice } from "../utils/priceconverter";
 import { useQuery } from "@tanstack/react-query";
 import { adminAnalytics } from "../utils/getFetch";
 
-let filterD = ["All", "Delivered", "Undelivered"];
+let filterD = ["All", "Ascending", "Descending"];
 
-let table: any[] = [];
+// let table: any[] = [];
 
 export default function AdminMain() {
   const [filter, setFilter] = useState(false);
@@ -22,26 +22,10 @@ export default function AdminMain() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  const filteredTable = useMemo(() => {
-    if (filterOption === "All") {
-      return table;
-    } else if (filterOption === "Delivered") {
-      return table.filter((row) => row[3] === "Delivered");
-    } else if (filterOption === "Undelivered") {
-      return table.filter((row) => row[3] === "Paid" || row[3] === "Pending");
-    }
-    return table;
-  }, [filterOption]);
-
   const { status, data } = useQuery({
     queryKey: ["getAnalytics"],
     queryFn: () => adminAnalytics(),
   });
-
-  const totalPages = Math.ceil(filteredTable.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentTableData = filteredTable.slice(startIndex, endIndex);
 
   const getPageNumbers = () => {
     const pageNumbers = [];
@@ -81,26 +65,92 @@ export default function AdminMain() {
   };
 
   const [datas, setDatas] = useState({
-    usersWithOrders: [],
+    usersWithOrders: 0,
     successfulPayments: 0,
     totalOrders: 0,
     totalRevenue: 0,
   });
 
+  const [tab, setTab] = useState<any[]>([]);
+  let Info: any[];
+
+  const update = (inf: any[]) => {
+    inf.map((item) => {
+      let {
+        orders,
+        user: { name },
+      } = item;
+      orders.forEach((order: any) => {
+        let { orderStatus, _id, totalAmount, updatedAt } = order;
+        console.log(name, orderStatus, _id, totalAmount, dateEE(updatedAt));
+        setTab((prev: any) => [
+          ...prev,
+          { name, orderStatus, _id, totalAmount, date: dateEE(updatedAt) },
+        ]);
+      });
+    });
+  };
+
+  useEffect(() => {
+    if (filterOption === "Ascending") {
+      setTab(
+        tab.sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        )
+      );
+    } else if (filterOption === "Descending") {
+      setTab(
+        tab.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        )
+      );
+    }
+  }, [filterOption]);
+
+  const totalPages = Math.ceil(tab.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  // const currentTableData = tab.slice(startIndex, endIndex);
+
+  useCallback(() => {
+    if (data) {
+      const { usersWithOrders } = data.data;
+      Info = usersWithOrders.filter((item: any) => item.orders.length > 0);
+      Info.map((item) => {
+        let {
+          orders,
+          user: { name },
+        } = item;
+        orders.forEach((order: any) => {
+          let { orderStatus, _id, totalAmount, updatedAt } = order;
+          console.log(name, orderStatus, _id, totalAmount, dateEE(updatedAt));
+          setTab((prev: any) => [
+            ...prev,
+            { name, orderStatus, _id, totalAmount, date: dateEE(updatedAt) },
+          ]);
+        });
+      });
+    }
+  }, [status]);
+
   useEffect(() => {
     if (data) {
       const { usersWithOrders, successfulPayments, totalOrders, totalRevenue } =
         data.data;
-      let Info = usersWithOrders.filter((item: any) => item.orders.length > 0);
+      Info = usersWithOrders.filter((item: any) => item.orders.length > 0);
       setDatas({
         usersWithOrders: Info.length,
         successfulPayments,
         totalOrders,
         totalRevenue,
       });
-      console.log(datas);
+      // console.log(datas);
     }
+    console.log(Info[0].orders);
+    update(Info);
   }, [status]);
+
+  if (tab.length > 0) console.log(tab);
 
   let { usersWithOrders, successfulPayments, totalOrders, totalRevenue } =
     datas;
@@ -251,25 +301,38 @@ export default function AdminMain() {
               </tr>
             </thead>
             <tbody>
-              {currentTableData.map((item, index) => (
+              {tab.map((item, index) => (
                 <tr key={index} className="hover:bg-gray-200">
-                  {item.map((cellItem: string | number, cellIndex: number) => {
-                    const color: any = {
-                      Delivered: "text-green-500 font-medium",
-                      Paid: "text-yellow-500 font-medium",
-                      Pending: "text-yellow-500 font-medium",
-                    };
-                    return (
-                      <td
-                        key={cellIndex}
-                        className={`${color[cellItem]} font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
-                      >
-                        {typeof cellItem === "number" && cellIndex === 2
-                          ? `$${cellItem.toLocaleString()}`
-                          : cellItem}
-                      </td>
-                    );
-                  })}
+                  <td
+                    key={1}
+                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                  >
+                    {item.name}
+                  </td>
+                  <td
+                    key={2}
+                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                  >
+                    {item._id}
+                  </td>
+                  <td
+                    key={3}
+                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                  >
+                    {formatPrice(item.totalAmount, "NGN")}
+                  </td>
+                  <td
+                    key={4}
+                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                  >
+                    {item.orderStatus}
+                  </td>
+                  <td
+                    key={5}
+                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                  >
+                    {item.date}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -301,9 +364,8 @@ export default function AdminMain() {
 
             <div className="flex items-center gap-2">
               <span className="text-xs text-stone-600 font-all">
-                Showing {startIndex + 1} to{" "}
-                {Math.min(endIndex, filteredTable.length)} of{" "}
-                {filteredTable.length} entries
+                Showing {startIndex + 1} to {Math.min(endIndex, tab.length)} of{" "}
+                {tab.length} entries
                 {filterOption !== "All" && ` (filtered by ${filterOption})`}
               </span>
             </div>
