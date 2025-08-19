@@ -28,3 +28,14 @@ export const dateEE = (d: string) => {
     String(date.getDate()).padStart(2, "0");
   return formatted;
 };
+
+export const removeDuplicate = (orders: any[]) => {
+  const uniqueOrders = orders.reduce((acc, current) => {
+    const exists = acc.find((order: any) => order._id === current._id);
+    if (!exists) {
+      acc.push(current);
+    }
+    return acc;
+  }, []);
+  return uniqueOrders;
+};

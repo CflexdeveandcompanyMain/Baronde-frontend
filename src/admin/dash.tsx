@@ -8,7 +8,7 @@ import {
   Truck,
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
-import { dateEE, formatPrice } from "../utils/priceconverter";
+import { dateEE, formatPrice, removeDuplicate } from "../utils/priceconverter";
 import { useQuery } from "@tanstack/react-query";
 import { adminAnalytics } from "../utils/getFetch";
 
@@ -81,11 +81,26 @@ export default function AdminMain() {
         user: { name },
       } = item;
       orders.forEach((order: any) => {
-        let { orderStatus, _id, totalAmount, updatedAt } = order;
-        console.log(name, orderStatus, _id, totalAmount, dateEE(updatedAt));
+        let { orderStatus, _id, totalAmount, updatedAt, items } = order;
+        let str = "";
+        items.forEach((item: any) => {
+          let {
+            product: { name },
+            quantity,
+          } = item;
+          str += `${name} x ${quantity} `;
+        });
+
         setTab((prev: any) => [
           ...prev,
-          { name, orderStatus, _id, totalAmount, date: dateEE(updatedAt) },
+          {
+            name,
+            orderStatus,
+            _id,
+            totalAmount,
+            date: dateEE(updatedAt),
+            product: str,
+          },
         ]);
       });
     });
@@ -122,15 +137,28 @@ export default function AdminMain() {
           user: { name },
         } = item;
         orders.forEach((order: any) => {
-          let { orderStatus, _id, totalAmount, updatedAt } = order;
-          console.log(name, orderStatus, _id, totalAmount, dateEE(updatedAt));
+          let { orderStatus, _id, totalAmount, updatedAt, items } = order;
+          let str = "";
+          items.forEach((item: any) => {
+            let {
+              product: { name },
+              quantity,
+            } = item;
+            str += `${name} x ${quantity} `;
+          });
           setTab((prev: any) => [
             ...prev,
-            { name, orderStatus, _id, totalAmount, date: dateEE(updatedAt) },
+            {
+              name,
+              orderStatus,
+              _id,
+              totalAmount,
+              date: dateEE(updatedAt),
+              product: str,
+            },
           ]);
         });
       });
-      setTab(Array.from(new Map(tab.map((item) => [item._id, item])).values()));
     }
   }, [status]);
 
@@ -145,7 +173,6 @@ export default function AdminMain() {
         totalOrders,
         totalRevenue,
       });
-      console.log(data.data);
     }
     update(Info);
   }, [status]);
@@ -256,7 +283,6 @@ export default function AdminMain() {
             <button
               ref={focusRef}
               onMouseDown={(e) => {
-                console.log(filterOption);
                 if (e.target === e.currentTarget) setFilter(!filter);
               }}
               className={`${
@@ -285,6 +311,9 @@ export default function AdminMain() {
                   Customer Name
                 </th>
                 <th className="py-2 font-all text-sm text-start px-4 font-medium text-stone-600 whitespace-nowrap">
+                  Product
+                </th>
+                <th className="py-2 font-all text-sm text-start px-4 font-medium text-stone-600 whitespace-nowrap">
                   Order ID
                 </th>
                 <th className="py-2 font-all text-sm text-start px-4 font-medium text-stone-600 whitespace-nowrap">
@@ -299,13 +328,19 @@ export default function AdminMain() {
               </tr>
             </thead>
             <tbody>
-              {tab.map((item, index) => (
+              {removeDuplicate(tab).map((item: any, index: number) => (
                 <tr key={index} className="hover:bg-gray-200">
                   <td
                     key={1}
                     className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
                   >
                     {item.name}
+                  </td>
+                  <td
+                    key={10}
+                    className={`capitalize font-medium font-all text-xs text-start px-4 py-2 whitespace-nowrap`}
+                  >
+                    {item.product}
                   </td>
                   <td
                     key={2}
