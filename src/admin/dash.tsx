@@ -195,7 +195,7 @@ export default function AdminMain() {
         </div>
       </div>
       <section className="sm:flex grid grid-cols-2 sm:flex-row items-center w-full gap-3 mt-5">
-        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 shadow-lg border-stone-500/10 border  p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
               {formatPrice(totalRevenue ?? 0, "NGN")}
@@ -213,7 +213,7 @@ export default function AdminMain() {
             <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
           </div>
         </div>
-        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 shadow-lg border-stone-500/10 border  p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
               {totalOrders ?? 0}
@@ -231,7 +231,7 @@ export default function AdminMain() {
             <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
           </div>
         </div>
-        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 shadow-lg border-stone-500/10 border  p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
               {successfulPayments ?? 0}
@@ -249,7 +249,7 @@ export default function AdminMain() {
             <div className="bg-green-400 h-0.5 w-0.5 rounded-full animate-bounce duration-700"></div>
           </div>
         </div>
-        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 border border-green-300/70 p-2 rounded-lg">
+        <div className="flex w-full flex-col items-start justify-start hover:scale-110 duration-300 shadow-lg border-stone-500/10 border  p-2 rounded-lg">
           <div className="flex flex-row items-center w-full justify-between">
             <p className="font-all text-lg font-semibold text-start">
               {usersWithOrders}
@@ -375,8 +375,8 @@ export default function AdminMain() {
         </section>
 
         <div className="flex flex-col sm:flex-row items-center justify-between w-full mt-4 gap-4">
-          <div className="flex flex-row items-center w-full justify-between">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center w-full justify-between">
+            <div className="flex items-start sm:items-center gap-2">
               <span className="text-xs sm:text-sm text-stone-600 font-all">
                 Show
               </span>
@@ -385,7 +385,7 @@ export default function AdminMain() {
                 onChange={(e) =>
                   handleItemsPerPageChange(Number(e.target.value))
                 }
-                className="border border-stone-300 rounded px-2 py-1 text-sm font-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-stone-300 rounded px-1 sm:px-2 py-1 text-sm font-all focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value={5}>5</option>
                 <option value={10}>10</option>
@@ -397,7 +397,7 @@ export default function AdminMain() {
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="hidden sm:flex item-end sm:items-center gap-2">
               <span className="text-xs text-stone-600 font-all">
                 Showing {startIndex + 1} to {Math.min(endIndex, tab.length)} of{" "}
                 {tab.length} entries
@@ -436,6 +436,13 @@ export default function AdminMain() {
             >
               <ChevronRight size={16} />
             </button>
+          </div>
+          <div className="sm:hidden flex item-end sm:items-center gap-2">
+            <span className="text-xs text-stone-600 font-all">
+              Showing {startIndex + 1} to {Math.min(endIndex, tab.length)} of{" "}
+              {tab.length} entries
+              {filterOption !== "All" && ` (filtered by ${filterOption})`}
+            </span>
           </div>
         </div>
       </section>
