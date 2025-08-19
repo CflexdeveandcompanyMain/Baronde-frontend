@@ -299,7 +299,7 @@ function OrderComponent({
               name="orderStatus"
               className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-all text-gray-900 shadow-sm outline-none"
             >
-              <option className="font-all" value="shipped">
+              <option className="font-all" value="paid">
                 Paid
               </option>
               <option className="font-all" value="shipped">
@@ -308,7 +308,7 @@ function OrderComponent({
               <option className="font-all" value="delivered">
                 Delivered
               </option>
-              <option className="font-all" value="cancelled">
+              <option className="font-all" value="processing">
                 Processing
               </option>
             </select>

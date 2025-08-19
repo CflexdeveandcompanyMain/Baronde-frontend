@@ -3,7 +3,7 @@ import { getOrderFn } from "../utils/getFetch";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import Footer from "../footer/footer";
 import { formatPrice } from "../utils/priceconverter";
-import { Clock, Loader, Truck } from "lucide-react";
+import { CheckCircle, Clock, Loader, PackageCheck, Truck } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function UserOrderHistory() {
@@ -15,6 +15,7 @@ export default function UserOrderHistory() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
+    if (data) console.log(data.data);
     if (status === "success" && data?.data) {
       setOrders(data.data.filter((order: any) => order.status !== "pending"));
     }
@@ -97,6 +98,7 @@ export default function UserOrderHistory() {
                 .map((order: any, orderIndex: number) => {
                   const orderItems = order.items || [];
                   const orderDate = formatDate(order.createdAt);
+                  const orderStatus = order.orderStatus;
 
                   return (
                     <div
@@ -118,7 +120,7 @@ export default function UserOrderHistory() {
                               size={16}
                             />
                             <p className="font-all text-xs text-center self-center">
-                              Status: {order.orderStatus || "Processing"}
+                              Status: {orderStatus}
                             </p>
                           </div>
                         </div>
@@ -128,6 +130,7 @@ export default function UserOrderHistory() {
                           <OrderCard
                             key={item._id || itemIndex}
                             product={item.product}
+                            status={orderStatus}
                           />
                         ))}
                       </div>
@@ -150,7 +153,7 @@ export default function UserOrderHistory() {
   );
 }
 
-function OrderCard({ product }: { product: any }) {
+function OrderCard({ product, status }: { product: any; status: string }) {
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
       case "delivered":
@@ -160,28 +163,100 @@ function OrderCard({ product }: { product: any }) {
         return "bg-blue-200 border-blue-400 text-blue-700";
       case "processing":
         return "bg-yellow-200 border-yellow-400 text-yellow-700";
-      case "cancelled":
-        return "bg-red-200 border-red-400 text-red-700";
+      case "paid":
+        return "bg-purple-200 border-purple-400 text-purple-700";
       default:
         return "bg-green-200 border-green-400 text-green-700";
     }
   };
 
-  const formatDate = (dateString: any) => {
-    try {
-      return new Date(dateString).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      });
-    } catch (error) {
-      return "TBD";
-    }
-  };
+  useEffect(() => console.log(product), []);
 
   const productImage = product.images?.[0].url || "/placeholder-image.jpg";
-  const productStatus = product.status || "On Route";
-  const estimatedDelivery = formatDate(product.updatedAt);
+
+  const divI = () => {
+    if (status === "paid") {
+      return (
+        <div
+          className={`w-1/3 px-2 p-2 rounded-lg sm:rounded-2xl border gap-1 flex flex-row justify-center self-start sm:self-center ${getStatusColor(
+            status
+          )}`}
+        >
+          <CheckCircle
+            className={`self-center ${getStatusColor("paid")}`}
+            size={16}
+          />
+          <p
+            className={`font-all text-xs text-center self-center ${getStatusColor(
+              "paid"
+            )}`}
+          >
+            {"paid"}
+          </p>
+        </div>
+      );
+    } else if (status === "delivered") {
+      return (
+        <div
+          className={`w-1/3 px-2 p-2 rounded-lg sm:rounded-2xl border gap-1 flex flex-row justify-center self-start sm:self-center ${getStatusColor(
+            "delivered"
+          )}`}
+        >
+          <PackageCheck
+            className={`self-center ${getStatusColor("delivered")}`}
+            size={16}
+          />
+          <p
+            className={`font-all text-xs text-center self-center ${getStatusColor(
+              "delivered"
+            )}`}
+          >
+            {"delivered"}
+          </p>
+        </div>
+      );
+    } else if (status === "processing") {
+      return (
+        <div
+          className={`w-1/3 px-2 p-2 rounded-lg sm:rounded-2xl border gap-1 flex flex-row justify-center self-start sm:self-center ${getStatusColor(
+            "processing"
+          )}`}
+        >
+          <Clock
+            className={`self-center ${getStatusColor("processing")}`}
+            size={16}
+          />
+          <p
+            className={`font-all text-xs text-center self-center ${getStatusColor(
+              "processing"
+            )}`}
+          >
+            {"processing"}
+          </p>
+        </div>
+      );
+    } else if (status === "shipped") {
+      return (
+        <div
+          className={`w-1/3 px-2 p-2 rounded-lg sm:rounded-2xl border gap-1 flex flex-row justify-center self-start sm:self-center ${getStatusColor(
+            "shipped"
+          )}`}
+        >
+          <Truck
+            className={`self-center ${getStatusColor("shipped")}`}
+            size={16}
+          />
+          <p
+            className={`font-all text-xs text-center self-center ${getStatusColor(
+              "shipped"
+            )}`}
+          >
+            {"shipped"}
+          </p>
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="flex flex-col sm:flex-row items-center w-full gap-3 justify-between p-3 bg-white/80 border-t border-stone-400 pt-3">
@@ -220,20 +295,11 @@ function OrderCard({ product }: { product: any }) {
           <Clock className="text-gray-500" size={14} />
           <p className="font-all text-xs font-semibold self-center text-gray-500 w-full text-start items-start">
             Est Delivery:
-            <span className="text-black/90 pl-1">{estimatedDelivery}</span>
+            <span className="text-black/90 pl-1">Max 15days</span>
           </p>
         </div>
       </div>
-      <div
-        className={`w-1/3 px-2 p-2 rounded-lg sm:rounded-2xl border gap-1 flex flex-row justify-center self-start sm:self-center ${getStatusColor(
-          productStatus
-        )}`}
-      >
-        <Truck className="self-center" size={16} />
-        <p className="font-all text-xs text-center self-center">
-          {productStatus}
-        </p>
-      </div>
+      <>{divI()}</>
     </div>
   );
 }
