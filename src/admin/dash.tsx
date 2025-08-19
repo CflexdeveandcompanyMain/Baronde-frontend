@@ -75,7 +75,7 @@ export default function AdminMain() {
   let Info: any[];
 
   const update = (inf: any[]) => {
-    if (inf.length > 0) {
+    if (inf && inf.length > 0) {
       inf.map((item) => {
         let {
           orders,
