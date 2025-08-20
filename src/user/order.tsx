@@ -17,7 +17,7 @@ export default function UserOrderHistory() {
   useEffect(() => {
     if (data) console.log(data.data);
     if (status === "success" && data?.data) {
-      setOrders(data.data.filter((order: any) => order.status !== "pending"));
+      setOrders(data.data);
     }
   }, [status, data]);
 
@@ -99,6 +99,7 @@ export default function UserOrderHistory() {
                   const orderItems = order.items || [];
                   const orderDate = formatDate(order.createdAt);
                   const orderStatus = order.orderStatus;
+                  console.log(order);
 
                   return (
                     <div
@@ -126,13 +127,18 @@ export default function UserOrderHistory() {
                         </div>
                       </div>
                       <div className="flex flex-col w-full items-center gap-3 mt-3">
-                        {orderItems.map((item: any, itemIndex: number) => (
-                          <OrderCard
-                            key={item._id || itemIndex}
-                            product={item.product}
-                            status={orderStatus}
-                          />
-                        ))}
+                        {orderItems.map(
+                          (item: any, itemIndex: number) => (
+                            console.log(item),
+                            (
+                              <OrderCard
+                                key={item._id || itemIndex}
+                                product={item.product}
+                                status={orderStatus}
+                              />
+                            )
+                          )
+                        )}
                       </div>
                       {order.totalAmount && (
                         <div className="flex justify-end w-full mt-3 pt-3 border-t border-gray-200">
@@ -172,7 +178,8 @@ function OrderCard({ product, status }: { product: any; status: string }) {
 
   useEffect(() => console.log(product), []);
 
-  const productImage = product.images?.[0].url || "/placeholder-image.jpg";
+  const productImage =
+    (product && product.images?.[0].url) || "/placeholder-image.jpg";
 
   const divI = () => {
     if (status === "paid") {
@@ -263,7 +270,7 @@ function OrderCard({ product, status }: { product: any; status: string }) {
       <div className="flex flex-row items-center gap-3 w-full self-start">
         <img
           src={productImage}
-          alt={product.name || "Product"}
+          alt={(product && product.name) || "Product"}
           className="w-20 h-20 self-start object-cover rounded-sm"
           onError={(e: any) => {
             e.target.src = "/placeholder-image.jpg";
@@ -272,11 +279,12 @@ function OrderCard({ product, status }: { product: any; status: string }) {
         <div className="flex sm:flex-row flex-col items-start gap-1 w-full sm:gap-5 sm:self-center">
           <div className="flex flex-col items-start gap-2">
             <p className="w-full text-sm font-semibold text-start font-all">
-              {product.name || "Product Name"}
+              {(product && product.name) || "Product Name"}
             </p>
             <p className="w-full sm:text-xs text-sm font-normal text-gray-500 text-start font-all">
-              {product.description.substring(0, 100) ||
-                "No description available"}
+              {product
+                ? product.description.substring(0, 100)
+                : "No description available"}
             </p>
           </div>
         </div>
@@ -285,17 +293,19 @@ function OrderCard({ product, status }: { product: any; status: string }) {
         <div className="flex flex-row items-start justify-start w-full gap-4 self-center">
           <p className="self-center font-all text-start sm:text-center text-gray-400 text-sm">
             Qty:
-            <span className="text-black/90">{product.quantity || 1}</span>
+            <span className="text-black/90">
+              {(product && product.quantity) || 1}
+            </span>
           </p>
           <p className="self-center font-all text-xs font-semibold text-start sm:text-center text-orange-600/80">
-            {formatPrice(product.price || 0, "NGN")}
+            {formatPrice((product && product.price) || 0, "NGN")}
           </p>
         </div>
         <div className="flex flex-row items-start gap-2 self-center justify-start w-full">
           <Clock className="text-gray-500" size={14} />
           <p className="font-all text-xs font-semibold self-center text-gray-500 w-full text-start items-start">
             Est Delivery:
-            <span className="text-black/90 pl-1">Max 15days</span>
+            <span className="text-black/90 pl-1">Max 3days</span>
           </p>
         </div>
       </div>

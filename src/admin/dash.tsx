@@ -83,11 +83,9 @@ export default function AdminMain() {
           let { orderStatus, _id, totalAmount, updatedAt, items } = order;
           let str = "";
           items.forEach((item: any) => {
-            let {
-              product: { name },
-              quantity,
-            } = item;
-            str += `${name} x ${quantity} `;
+            let { product, quantity } = item;
+            const name = product && product.name;
+            str += `${name ?? "Null"} x ${quantity} `;
           });
 
           setTab((prev: any) => [
@@ -155,6 +153,7 @@ export default function AdminMain() {
       const { usersWithOrders, successfulPayments, totalOrders, totalRevenue } =
         data.data;
       Info = usersWithOrders.filter((item: any) => item.orders.length > 0);
+      console.log(Info);
       setDatas({
         usersWithOrders: Info.length,
         successfulPayments,

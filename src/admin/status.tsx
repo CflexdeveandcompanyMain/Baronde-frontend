@@ -35,7 +35,7 @@ export default function AdminUpdateStatus() {
             updatedAt,
             items,
             paymentDetails: { status },
-            shippingAddress: { city, street },
+            shippingAddress: { city, street, zipCode },
           } = order;
 
           const obg = {
@@ -47,6 +47,7 @@ export default function AdminUpdateStatus() {
             status,
             city,
             street,
+            zipcode: zipCode,
           };
           od.push(obg);
         });
@@ -102,6 +103,7 @@ export default function AdminUpdateStatus() {
                   </div>
                   <div className="p-6 space-y-6">
                     {order.map((item: any, index: number) => {
+                      console.log(item);
                       const {
                         city,
                         street,
@@ -110,6 +112,7 @@ export default function AdminUpdateStatus() {
                         totalAmount,
                         items,
                         id,
+                        zipcode,
                       } = item;
                       return (
                         <OrderComponent
@@ -121,6 +124,7 @@ export default function AdminUpdateStatus() {
                           index={index}
                           items={items}
                           status={status}
+                          zipcode={zipcode}
                           id={id}
                         />
                       );
@@ -147,7 +151,9 @@ function OrderComponent({
   orderStatus,
   status,
   id,
+  zipcode,
 }: {
+  zipcode: string;
   id: string;
   status: string;
   index: number;
@@ -250,6 +256,16 @@ function OrderComponent({
         </p>
       </div>
 
+      {/* Zipcode and Phone Number */}
+      <div className="mb-6">
+        <span className="text-sm font-all text-gray-600">
+          Zipcode & Phone Number
+        </span>
+        <p className="text-sm font-all font-medium text-gray-900 mt-1 capitalize">
+          {zipcode}
+        </p>
+      </div>
+
       {/* Items Grid */}
       <div className="mb-6">
         <span className="text-sm font-all text-gray-600 block mb-3">
@@ -258,8 +274,10 @@ function OrderComponent({
         <div className="grid grid-cols-2 gap-3">
           {items.map((item: any, index: number) => {
             const { product, quantity } = item;
-            const { name, images } = product;
-            const firstImage = images[0].url;
+            //const { name, images } = product;
+            const name = product && product.name;
+            const images = product && product.images;
+            const firstImage = images && images[0].url;
             return (
               <div
                 key={index}

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
-import { ChevronDown } from "lucide-react";
 import { formatPrice } from "../utils/priceconverter";
 import type { HeroDataType } from "../mainpage/Hero/data";
 import { useCart, type LocalCartItem } from "../utils/storage";
@@ -115,7 +114,8 @@ export default function Checkout() {
       const shippingAddress = {
         street: formData.delivery.address,
         city: formData.delivery.city,
-        zipCode: formData.delivery.zipcode,
+        zipCode:
+          formData.delivery.zipcode + " + " + formData.delivery.phoneNumber,
         country: formData.delivery.country,
       };
 
@@ -371,7 +371,6 @@ export function DeliveryOption({
 
 export function FormField({
   label,
-  value,
   onChange,
   options,
   placeholder,
@@ -381,7 +380,7 @@ export function FormField({
   value?: any;
   onChange?: any;
   label: string;
-  options?: any;
+  options?: any[];
   placeholder?: any;
   className?: string;
   required?: boolean;
@@ -391,23 +390,23 @@ export function FormField({
       <label className="font-all text-sm font-medium">
         {label} {required && <span className="text-red-500">*</span>}
       </label>
-      <div className="flex border border-stone-600 w-full">
-        <input
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          className="flex-1 p-2 outline-0 font-all text-sm"
-          list={`${label.toLowerCase().replace(/\s+/g, "-")}-options`}
-          required={required}
-        />
-        <ChevronDown className="w-8 self-center text-stone-500" size={16} />
-      </div>
-      {options && (
-        <datalist id={`${label.toLowerCase().replace(/\s+/g, "-")}-options`}>
+      {options && options?.length > 0 && (
+        <select
+          className="flex border border-stone-600 w-full self-stretch px-1 py-[7px] rounded"
+          id={`${label.toLowerCase().replace(/\s+/g, "-")}-options`}
+          onChange={onChange}
+        >
+          {placeholder && (
+            <option value="" disabled>
+              {placeholder}
+            </option>
+          )}
           {options.map((option: any, index: number) => (
-            <option key={index} value={option} />
+            <option key={index} value={option} className="font-all text-sm">
+              {option}
+            </option>
           ))}
-        </datalist>
+        </select>
       )}
     </div>
   );
