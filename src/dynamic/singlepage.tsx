@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import { usePageData } from "../store/singlepage";
@@ -42,14 +42,19 @@ export default function SingleProductPage() {
   console.log(data);
   const blockToAdd = isInCart(data._id);
 
+  useEffect(() => {
+    console.log(Image);
+  }, [Image]);
+
   return (
     <>
       <MainPageNavbar />
       <section className="w-full bg-white sm:bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4 py-5">
         <div className="flex flex-col items-start w-[95%] gap-2 sm:h-auto md:w-3/4 mx-auto mt-4 sm:mt-6">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
-            <div className="flex flex-row relative items-center border border-stone-200 bg-white w-full rounded self-stretch gap-2">
+            <div className="flex flex-row items-center border border-stone-200 p-1 bg-white w-full rounded self-stretch gap-[2px]">
               <div
+                onClick={() => console.log("Maeny")}
                 className={`${
                   isSingleImage ? "hidden" : "flex"
                 } flex flex-col items-start gap-0.5 w-1/5 justify-start self-start`}
@@ -57,25 +62,47 @@ export default function SingleProductPage() {
                 {isSingleImage ? (
                   <></>
                 ) : (
-                  data.images.map((item) => {
+                  data.images.map((item, index) => {
                     return (
-                      <img
-                        onClick={() => setImage(item.url)}
-                        src={item.url ?? null}
-                        className="w-full round object-cover h-full"
-                      />
+                      <div
+                        key={index}
+                        onClick={() => {
+                          setImage(item.url);
+                        }}
+                        className={`${
+                          item.url === Image ? "border-3 border-green-400" : ""
+                        } cursor-pointer w-full h-16 sm:h-20 rounded`} // Added explicit height and cursor
+                      >
+                        <div className="relative w-full h-full">
+                          <img
+                            src={item.url}
+                            className="object-cover h-full w-full bg-white rounded"
+                            alt="Content image"
+                          />
+
+                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <p className="font-all font-bold text-[7px] text-[#7bc700bb] transform rotate-45 select-none">
+                              barondemusical
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     );
                   })
                 )}
               </div>
-              <img
-                src={Image}
-                className="object-cover w-3/4 mx-auto bg-white"
-              />
-              <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">
-                <p className="font-all font-bold text-xl text-[#E7FFC078] self-center text-center rotate-45">
-                  barondemusical
-                </p>
+              <div className="relative w-full h-full max-h-[400px]">
+                <img
+                  src={Image}
+                  className="object-cover h-full w-full bg-white rounded"
+                  alt="Content image"
+                />
+
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <p className="font-all font-bold text-lg text-[#7bc700bb] transform rotate-45 select-none">
+                    barondemusical
+                  </p>
+                </div>
               </div>
             </div>
             <div className="w-full flex flex-col items-start justify-start self-stretch gap-1 bg-white p-3">
