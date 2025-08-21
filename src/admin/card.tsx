@@ -215,10 +215,13 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
         <div className="flex justify-center bg-[#fdb204f3] p-1 shadow absolute top-1.5 left-1.5">
           {isEditing ? (
             <input
-              type="number"
+              type="text"
               value={editedData.discount}
               onChange={(e) =>
-                handleInputChange("discount", parseInt(e.target.value) || 0)
+                handleInputChange(
+                  "discount",
+                  parseInt(e.target.value == "" ? "0" : e.target.value)
+                )
               }
               className="text-white font-all text-center text-xs font-semibold bg-transparent border border-white/50 rounded px-1 focus:outline-none focus:border-white w-16"
               placeholder="Discount"

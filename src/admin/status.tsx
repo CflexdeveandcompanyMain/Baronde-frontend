@@ -103,7 +103,6 @@ export default function AdminUpdateStatus() {
                   </div>
                   <div className="p-6 space-y-6">
                     {order.map((item: any, index: number) => {
-                      console.log(item);
                       const {
                         city,
                         street,

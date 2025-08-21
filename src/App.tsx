@@ -22,7 +22,6 @@ import AdminDashboard from "./admin/admin";
 import SearchPage from "./dynamic/searchpage";
 import Checkout from "./checkout/product";
 import AllDeals from "./dynamic/alldeal";
-import AdminCreate from "./authentication/admincreate";
 import CheckoutSuccess from "./checkout/onSuccess";
 import CheckoutFailure from "./checkout/onFailure";
 
@@ -57,7 +56,7 @@ export default function App() {
         <Route path={"/search/:keyword"} element={<SearchPage />} />
         <Route path={"/checkout"} element={<Checkout />} />
         <Route path={"/brand/:brand"} element={<AllDeals />} />
-        <Route path={"/adminsignup"} element={<AdminCreate />} />
+        {/* <Route path={"/adminsignup"} element={<AdminCreate />} /> */}
         <Route path={"/checkout/success"} element={<CheckoutSuccess />} />
         <Route path={"/checkout/failure"} element={<CheckoutFailure />} />
       </Routes>

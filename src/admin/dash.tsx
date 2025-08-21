@@ -153,7 +153,6 @@ export default function AdminMain() {
       const { usersWithOrders, successfulPayments, totalOrders, totalRevenue } =
         data.data;
       Info = usersWithOrders.filter((item: any) => item.orders.length > 0);
-      console.log(Info);
       setDatas({
         usersWithOrders: Info.length,
         successfulPayments,
