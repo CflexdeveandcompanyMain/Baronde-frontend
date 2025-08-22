@@ -44,7 +44,7 @@ export default function ForgetCode() {
   return (
     <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
       <section className="w-full bg-white self-start mt-[10%] sm:mt-[10%] sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
-        <BrandLogo img={bdm} />
+        <BrandLogo img={bdm} color="black" />
         <div className="flex flex-col items-start w-full justify-start p-2 my-1.5">
           <p className="font-all font-semibold text-lg text-start w-full">
             Enter verification code

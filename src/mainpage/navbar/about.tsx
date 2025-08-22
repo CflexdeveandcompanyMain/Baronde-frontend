@@ -63,13 +63,13 @@ export default function About() {
                   <Star className="text-orange-600" size={"16"} />
                   <Star className="text-orange-600" size={"16"} />
                 </div>
-                <p className="font-medium text-start text-blue-600 text-xs font-all">
+                {/* <p className="font-medium text-start text-blue-600 text-xs font-all">
                   2 reviews
-                </p>
+                </p> */}
               </div>
-              <p className="font-all text-sm text-start w-full">
+              {/* <p className="font-all text-sm text-start w-full">
                 View larger map
-              </p>
+              </p> */}
             </div>
           </div>
           {/* </div> */}

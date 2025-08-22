@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { bdm } from "../index";
-import { GoogleLogin } from "@react-oauth/google";
+// import { GoogleLogin } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeOffIcon, LoaderCircleIcon } from "lucide-react";
 import { userLogIn } from "../utils/getFetch";
@@ -78,7 +78,7 @@ export default function UserSignInInterface() {
   return (
     <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
       <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
-        <BrandLogo img={bdm} />
+        <BrandLogo img={bdm} color="black" />
         <div className="flex flex-col items-start w-full justify-start p-2 my-3">
           <p className="font-all font-semibold text-xl text-start w-full">
             Welcome back
@@ -161,17 +161,17 @@ export default function UserSignInInterface() {
               </Link>
             </p>
           </div>
-          <div className="flex flex-row items-center w-full gap-2">
+          {/* <div className="flex flex-row items-center w-full gap-2">
             <div className="h-[1px] bg-black/30 w-1/2 self-center"></div>
             <p className="font-medium font-all text-sm self-center">or</p>
             <div className="h-[1px] bg-black/30 w-1/2 self-center"></div>
-          </div>
+          </div> */}
         </div>
-        <GoogleLogin
+        {/* <GoogleLogin
           width={"100%"}
           onSuccess={() => console.log("success")}
           onError={() => console.log("error")}
-        />
+        /> */}
         <div className="flex flex-row items-center self-start my-2 gap-5 justify-between">
           <Link to={"/policy"} className="font-all text-xs">
             Privacy policy

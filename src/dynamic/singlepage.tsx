@@ -4,7 +4,7 @@ import MainPageNavbar from "../mainpage/navbar/navbar";
 import { usePageData } from "../store/singlepage";
 import { Link } from "react-router-dom";
 import { Minus, Plus } from "lucide-react";
-import { formatPrice /**uniqueByName*/ } from "../utils/priceconverter";
+import { formatPrice } from "../utils/priceconverter";
 import { useCart } from "../utils/storage";
 
 export default function SingleProductPage() {

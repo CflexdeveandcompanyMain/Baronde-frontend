@@ -66,7 +66,7 @@ export default function AdminCreate() {
   return (
     <section className="w-full bg-white h-screen sm:bg-gray-200 flex justify-center">
       <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
-        <BrandLogo img={bdm} />
+        <BrandLogo img={bdm} color="black" />
         <p className="font-all font-semibold text-xl text-start w-full my-3">
           Create an Account
         </p>

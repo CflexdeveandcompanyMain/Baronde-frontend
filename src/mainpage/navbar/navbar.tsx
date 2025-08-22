@@ -44,10 +44,10 @@ export default function MainPageNavbar() {
   return (
     <nav className="flex flex-col items-center w-full sticky top-0 z-50">
       <Marq />
-      <div className="flex flex-row items-center p-2 sm:px-7 bg-green-800 w-full">
-        <BrandLogo img={bdm} />
+      <div className="flex flex-row items-center p-2 sm:px-7 justify-between bg-green-800 w-full">
+        <BrandLogo img={bdm} color="white" />
         <MainPageSearchBar />
-        <div className="flex flex-row items-center gap-6 w-3/5 sm:w-1/2 justify-end">
+        <div className="flex flex-row items-end gap-6 w-3/5 sm:w-1/2 justify-end">
           {isVerified ? (
             <div className="flex flex-col items-center relative cursor-pointer">
               <div
