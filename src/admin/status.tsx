@@ -16,14 +16,12 @@ export default function AdminUpdateStatus() {
       const filteredUsers = usersWithOrders.filter(
         (item: any) => item.orders.length > 0
       );
-
-      // Reset tab array to prevent duplicates
       const newTab: any[] = [];
 
       filteredUsers.forEach((item: any) => {
         const {
           orders,
-          user: { name },
+          user: { name, email },
         } = item;
 
         const od: any[] = [];
@@ -53,7 +51,8 @@ export default function AdminUpdateStatus() {
         });
 
         const ObjInfo = {
-          name: name,
+          name,
+          email,
           order: od,
         };
 
@@ -62,7 +61,7 @@ export default function AdminUpdateStatus() {
 
       setTab(newTab);
     }
-  }, [status, data]); // Remove Info.length dependency and use data instead
+  }, [status, data]);
 
   return (
     <>
@@ -78,21 +77,21 @@ export default function AdminUpdateStatus() {
         <section className="grid grid-cols-1 w-full gap-6 mt-8">
           {tab.length > 0 ? (
             tab.map((item, index: number) => {
-              const { name, order } = item;
+              const { name, order, email } = item;
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+                  className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden"
                 >
-                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-100">
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-3 border-b border-gray-100">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                        <span className="text-blue-600 font-semibold text-lg font-all">
+                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                        <span className="text-blue-600 font-semibold text-base font-all">
                           {name.charAt(0).toUpperCase()}
                         </span>
                       </div>
                       <div>
-                        <h2 className="text-lg font-semibold text-gray-900 capitalize font-all">
+                        <h2 className="text-base font-semibold text-gray-900 capitalize font-all">
                           {name}
                         </h2>
                         <p className="text-sm font-all text-gray-600">
@@ -101,7 +100,7 @@ export default function AdminUpdateStatus() {
                       </div>
                     </div>
                   </div>
-                  <div className="p-6 space-y-6">
+                  <div className="p-3">
                     {order.map((item: any, index: number) => {
                       const {
                         city,
@@ -112,6 +111,7 @@ export default function AdminUpdateStatus() {
                         items,
                         id,
                         zipcode,
+                        phoneNumber,
                       } = item;
                       return (
                         <OrderComponent
@@ -124,6 +124,8 @@ export default function AdminUpdateStatus() {
                           items={items}
                           status={status}
                           zipcode={zipcode}
+                          email={email}
+                          phoneNumber={phoneNumber}
                           id={id}
                         />
                       );
@@ -151,7 +153,11 @@ function OrderComponent({
   status,
   id,
   zipcode,
+  email,
+  phoneNumber,
 }: {
+  phoneNumber: string;
+  email: string;
   zipcode: string;
   id: string;
   status: string;
@@ -165,7 +171,6 @@ function OrderComponent({
   const [ordstatus, setOrderStatus] = useState(orderStatus);
   const queryClient = useQueryClient();
 
-  // Reset local state when orderStatus prop changes (after refetch)
   useEffect(() => {
     setOrderStatus(orderStatus);
   }, [orderStatus]);
@@ -174,7 +179,6 @@ function OrderComponent({
     mutationFn: () => updateOrderstateFn(id, ordstatus),
     onSuccess: () => {
       console.log("Status updated successfully");
-      // Invalidate and refetch the analytics data
       queryClient.invalidateQueries({
         queryKey: ["getAnalytics"],
         exact: true,
@@ -182,7 +186,6 @@ function OrderComponent({
     },
     onError: (error) => {
       console.error("Failed to update status:", error);
-      // Reset the local state on error
       setOrderStatus(orderStatus);
     },
   });
@@ -222,7 +225,6 @@ function OrderComponent({
 
   return (
     <div className="w-full bg-white rounded-xl shadow-sm border border-gray-100 p-2 sm:p-4 hover:shadow-md transition-shadow duration-200">
-      {/* Header */}
       <div className="flex items-center justify-between p-1">
         <h3 className="text-lg font-semibold text-gray-900 font-all">
           Order #{index + 1}
@@ -236,8 +238,6 @@ function OrderComponent({
           </span>
         </div>
       </div>
-
-      {/* Amount */}
       <div className="p-2">
         <div className="flex items-center justify-between">
           <span className="text-sm font-all text-gray-600">Total Amount</span>
@@ -246,34 +246,39 @@ function OrderComponent({
           </span>
         </div>
       </div>
-
-      {/* Address */}
-      <div className="mb-6">
+      <div className="my-2">
         <span className="text-sm font-all text-gray-600">Delivery Address</span>
         <p className="text-sm font-all font-medium text-gray-900 mt-1 capitalize">
           {street}, {city}
         </p>
       </div>
 
-      {/* Zipcode and Phone Number */}
-      <div className="mb-6">
-        <span className="text-sm font-all text-gray-600">
-          Zipcode & Phone Number
-        </span>
+      <div className="my-2">
+        <span className="text-sm font-all text-gray-600">Zipcode</span>
         <p className="text-sm font-all font-medium text-gray-900 mt-1 capitalize">
           {zipcode}
         </p>
       </div>
+      <div className="my-2">
+        <span className="text-sm font-all text-gray-600">Contact Email</span>
+        <p className="text-sm font-all font-medium text-gray-900 mt-1">
+          {email}
+        </p>
+      </div>
+      <div className="my-2">
+        <span className="text-sm font-all text-gray-600">Phone Number</span>
+        <p className="text-sm font-all font-medium text-gray-900 mt-1">
+          {phoneNumber ?? ""}
+        </p>
+      </div>
 
-      {/* Items Grid */}
-      <div className="mb-6">
+      <div className="my-2">
         <span className="text-sm font-all text-gray-600 block mb-3">
           Order Items
         </span>
         <div className="grid grid-cols-2 gap-3">
           {items.map((item: any, index: number) => {
             const { product, quantity } = item;
-            //const { name, images } = product;
             const name = product && product.name;
             const images = product && product.images;
             const firstImage = images && images[0].url;
@@ -301,9 +306,8 @@ function OrderComponent({
         </div>
       </div>
 
-      {/* Status Update Controls */}
-      <div className="border-t pt-4">
-        <div className="flex items-center gap-3">
+      <div className="border-t border-stone-500 pt-2">
+        <div className="flex flex-row items-center gap-3">
           <div className="flex-1">
             <label className="block text-sm font-all font-medium text-gray-700 mb-2">
               Update Status
@@ -314,7 +318,7 @@ function OrderComponent({
                 setOrderStatus(e.target.value);
               }}
               name="orderStatus"
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-all text-gray-900 shadow-sm outline-none"
+              className="w-full rounded border border-gray-300 bg-white p-2 text-sm font-all text-gray-900 outline-none"
             >
               <option className="font-all" value="paid">
                 Paid
@@ -330,7 +334,7 @@ function OrderComponent({
               </option>
             </select>
           </div>
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 mt-4">
             <button
               onClick={handleSaveChanges}
               disabled={orderStatus === ordstatus || statusMutation.isPending}

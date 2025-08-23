@@ -63,13 +63,7 @@ export default function About() {
                   <Star className="text-orange-600" size={"16"} />
                   <Star className="text-orange-600" size={"16"} />
                 </div>
-                {/* <p className="font-medium text-start text-blue-600 text-xs font-all">
-                  2 reviews
-                </p> */}
               </div>
-              {/* <p className="font-all text-sm text-start w-full">
-                View larger map
-              </p> */}
             </div>
           </div>
           {/* </div> */}
@@ -79,7 +73,7 @@ export default function About() {
             </div>
             <p className="font-bold text-green-800 font-all text-base">
               Contact Us:{" "}
-              <span className="text-orange-600 text-base">08138254832</span>
+              <span className="text-orange-600 text-base">09138254838</span>
             </p>
           </div>
           <div className="flex flex-row items-center gap-3 mt-2">
