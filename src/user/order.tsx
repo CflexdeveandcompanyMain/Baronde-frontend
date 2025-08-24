@@ -3,7 +3,14 @@ import { getOrderFn } from "../utils/getFetch";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import Footer from "../footer/footer";
 import { formatPrice } from "../utils/priceconverter";
-import { CheckCircle, Clock, Loader, PackageCheck, Truck } from "lucide-react";
+import {
+  CheckCircle,
+  Clock,
+  Loader,
+  PackageCheck,
+  PackageX,
+  Truck,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function UserOrderHistory() {
@@ -99,7 +106,7 @@ export default function UserOrderHistory() {
                   const orderItems = order.items || [];
                   const orderDate = formatDate(order.createdAt);
                   const orderStatus = order.orderStatus;
-                  console.log(order);
+                  const deliveryDate = order.deliveryDate;
 
                   return (
                     <div
@@ -127,18 +134,14 @@ export default function UserOrderHistory() {
                         </div>
                       </div>
                       <div className="flex flex-col w-full items-center gap-3 mt-3">
-                        {orderItems.map(
-                          (item: any, itemIndex: number) => (
-                            console.log(item),
-                            (
-                              <OrderCard
-                                key={item._id || itemIndex}
-                                product={item.product}
-                                status={orderStatus}
-                              />
-                            )
-                          )
-                        )}
+                        {orderItems.map((item: any, itemIndex: number) => (
+                          <OrderCard
+                            key={item._id || itemIndex}
+                            product={item.product}
+                            status={orderStatus}
+                            date={deliveryDate}
+                          />
+                        ))}
                       </div>
                       {order.totalAmount && (
                         <div className="flex justify-end w-full mt-3 pt-3 border-t border-gray-200">
@@ -159,7 +162,15 @@ export default function UserOrderHistory() {
   );
 }
 
-function OrderCard({ product, status }: { product: any; status: string }) {
+function OrderCard({
+  product,
+  status,
+  date,
+}: {
+  product: any;
+  status: string;
+  date: string;
+}) {
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
       case "delivered":
@@ -167,8 +178,8 @@ function OrderCard({ product, status }: { product: any; status: string }) {
       case "shipped":
       case "on route":
         return "bg-blue-200 border-blue-400 text-blue-700";
-      case "processing":
-        return "bg-yellow-200 border-yellow-400 text-yellow-700";
+      case "cancelled":
+        return "bg-red-200 border-red-400 text-red-700";
       case "paid":
         return "bg-purple-200 border-purple-400 text-purple-700";
       default:
@@ -176,10 +187,10 @@ function OrderCard({ product, status }: { product: any; status: string }) {
     }
   };
 
-  useEffect(() => console.log(product), []);
-
   const productImage =
     (product && product.images?.[0].url) || "/placeholder-image.jpg";
+
+  const deliveryDate = new Date(date).toISOString().split("T")[0];
 
   const divI = () => {
     if (status === "paid") {
@@ -222,23 +233,23 @@ function OrderCard({ product, status }: { product: any; status: string }) {
           </p>
         </div>
       );
-    } else if (status === "processing") {
+    } else if (status === "cancelled") {
       return (
         <div
           className={`w-1/3 px-2 p-2 rounded-lg sm:rounded-2xl border gap-1 flex flex-row justify-center self-start sm:self-center ${getStatusColor(
-            "processing"
+            "cancelled"
           )}`}
         >
-          <Clock
-            className={`self-center ${getStatusColor("processing")}`}
+          <PackageX
+            className={`self-center ${getStatusColor("cancelled")}`}
             size={16}
           />
           <p
             className={`font-all text-xs text-center self-center ${getStatusColor(
-              "processing"
+              "cancelled"
             )}`}
           >
-            {"processing"}
+            {"cancelled"}
           </p>
         </div>
       );
@@ -305,7 +316,7 @@ function OrderCard({ product, status }: { product: any; status: string }) {
           <Clock className="text-gray-500" size={14} />
           <p className="font-all text-xs font-semibold self-center text-gray-500 w-full text-start items-start">
             Est Delivery:
-            <span className="text-black/90 pl-1">Max 3days</span>
+            <span className="text-black/90 pl-1">{deliveryDate}</span>
           </p>
         </div>
       </div>

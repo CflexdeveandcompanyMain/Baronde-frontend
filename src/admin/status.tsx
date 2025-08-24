@@ -11,6 +11,10 @@ export default function AdminUpdateStatus() {
   });
 
   useEffect(() => {
+    console.log(new Date().toISOString());
+  }, []);
+
+  useEffect(() => {
     if (status === "success" && data) {
       console.log(data);
       const { usersWithOrders } = data.data;
@@ -36,6 +40,7 @@ export default function AdminUpdateStatus() {
             paymentDetails: { status },
             shippingAddress: { city, street, zipCode },
             phoneNumber,
+            deliveryDate,
           } = order;
 
           const obg = {
@@ -49,6 +54,7 @@ export default function AdminUpdateStatus() {
             phoneNumber,
             street,
             zipcode: zipCode,
+            deliveryDate,
           };
           od.push(obg);
         });
@@ -115,6 +121,7 @@ export default function AdminUpdateStatus() {
                         id,
                         zipcode,
                         phoneNumber,
+                        deliveryDate,
                       } = item;
                       return (
                         <OrderComponent
@@ -129,6 +136,7 @@ export default function AdminUpdateStatus() {
                           zipcode={zipcode}
                           email={email}
                           phoneNumber={phoneNumber}
+                          deliveryDate={deliveryDate}
                           id={id}
                         />
                       );
@@ -138,7 +146,9 @@ export default function AdminUpdateStatus() {
               );
             })
           ) : (
-            <p className="font-all text-xl font-semibold">No Orders yet!</p>
+            <>
+              <p className="font-all text-xl font-semibold">No Orders yet!</p>
+            </>
           )}
         </section>
       </div>
@@ -158,6 +168,7 @@ function OrderComponent({
   zipcode,
   email,
   phoneNumber,
+  deliveryDate,
 }: {
   phoneNumber: string;
   email: string;
@@ -170,16 +181,27 @@ function OrderComponent({
   city: string;
   items: any;
   orderStatus: string;
+  deliveryDate: string;
 }) {
   const [ordstatus, setOrderStatus] = useState(orderStatus);
   const queryClient = useQueryClient();
+  const [delivery, setDelivery] = useState(deliveryDate);
 
   useEffect(() => {
     setOrderStatus(orderStatus);
   }, [orderStatus]);
 
+  useEffect(() => {
+    setDelivery(deliveryDate);
+  }, [deliveryDate]);
+
+  const isSameDate =
+    deliveryDate.split("T")[0] ===
+    new Date(delivery).toISOString().split("T")[0];
+
   const statusMutation = useMutation({
-    mutationFn: () => updateOrderstateFn(id, ordstatus),
+    mutationFn: () =>
+      updateOrderstateFn(id, ordstatus, new Date(delivery).toISOString()),
     onSuccess: (data) => {
       console.log("Status updated successfully", data);
       queryClient.invalidateQueries({
@@ -194,24 +216,23 @@ function OrderComponent({
   });
 
   const handleSaveChanges = () => {
-    if (ordstatus !== orderStatus) {
+    if (ordstatus !== orderStatus || !isSameDate) {
       statusMutation.mutate();
     }
   };
 
-  // Status badge styling
   const getStatusBadge = (status: string, type: "payment" | "order") => {
     const baseClasses =
       "inline-flex px-2 py-1 rounded-full text-xs font-medium";
 
     if (type === "payment") {
       const paymentStyles = {
-        paid: "bg-green-100 text-green-800`",
-        failed: "bg-red-100 text-red-800`",
+        paid: "bg-green-100 text-green-800",
+        failed: "bg-red-100 text-red-800",
       };
       return `${baseClasses} ${
         paymentStyles[status as keyof typeof paymentStyles] ||
-        "bg-gray-100 text-gray-800`"
+        "bg-gray-100 text-gray-800"
       }`;
     } else {
       const orderStyles = {
@@ -221,10 +242,19 @@ function OrderComponent({
       };
       return `${baseClasses} ${
         orderStyles[status as keyof typeof orderStyles] ||
-        "bg-gray-100 text-gray-800`"
+        "bg-gray-100 text-gray-800"
       }`;
     }
   };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = e.target.value;
+    setDelivery(newDate);
+  };
+
+  useEffect(() => {
+    console.log("Delivery state updated:", delivery);
+  }, [delivery]);
 
   return (
     <div className="w-full bg-white rounded-xl shadow-sm border border-gray-100 p-2 sm:p-4 hover:shadow-md transition-shadow duration-200">
@@ -253,6 +283,13 @@ function OrderComponent({
         <span className="text-sm font-all text-gray-600">Delivery Address</span>
         <p className="text-sm font-all font-medium text-gray-900 mt-1 capitalize">
           {street}, {city}
+        </p>
+      </div>
+
+      <div className="my-2">
+        <span className="text-sm font-all text-gray-600">Delivery Date</span>
+        <p className="text-sm font-all font-medium text-gray-900 mt-1 capitalize">
+          {new Date(deliveryDate).toISOString().split("T")[0]}
         </p>
       </div>
 
@@ -308,53 +345,65 @@ function OrderComponent({
           })}
         </div>
       </div>
-
-      <div className="border-t border-stone-500 pt-2">
-        <div className="flex flex-row items-center gap-3">
-          <div className="flex-1">
-            <label className="block text-sm font-all font-medium text-gray-700 mb-2">
-              Update Status
-            </label>
-            <select
-              value={ordstatus}
-              onChange={(e) => {
-                setOrderStatus(e.target.value);
-              }}
-              name="orderStatus"
-              className="w-full rounded border border-gray-300 bg-white p-2 text-sm font-all text-gray-900 outline-none"
-            >
-              <option className="font-all" value="paid">
-                Paid
-              </option>
-              <option className="font-all" value="shipped">
-                Shipped
-              </option>
-              <option className="font-all" value="delivered">
-                Delivered
-              </option>
-              <option className="font-all" value="cancelled">
-                Cancelled
-              </option>
-            </select>
-          </div>
-          <div className="flex-shrink-0 mt-4">
-            <button
-              onClick={handleSaveChanges}
-              disabled={orderStatus === ordstatus || statusMutation.isPending}
-              className="px-4 py-2 bg-blue-600 text-white font-medium -mb-20 text-sm font-all rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 transition-colors duration-200"
-            >
-              {statusMutation.isPending ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 font-all border-white border-t-transparent rounded-full animate-spin"></div>
-                  Saving
-                </div>
-              ) : (
-                "Save"
-              )}
-            </button>
+      <div className="flex flex-col sm:flex-row items-center w-full gap-3">
+        <div className="flex flex-col w-full">
+          <label className="block text-sm font-all font-medium text-gray-700 mb-2">
+            Update Status
+          </label>
+          <select
+            value={ordstatus ?? orderStatus}
+            onChange={(e) => {
+              setOrderStatus(e.target.value);
+            }}
+            name="orderStatus"
+            className="w-full rounded border border-gray-300 bg-white p-2 text-sm font-all text-gray-900 outline-none"
+          >
+            <option className="font-all" value="paid">
+              Paid
+            </option>
+            <option className="font-all" value="shipped">
+              Shipped
+            </option>
+            <option className="font-all" value="delivered">
+              Delivered
+            </option>
+            <option className="font-all" value="cancelled">
+              Cancelled
+            </option>
+          </select>
+        </div>
+        <div className="flex flex-col items-start w-full justify-start">
+          <p className="text-sm font-all font-medium text-gray-700">
+            Update Delivery date
+          </p>
+          <div className="flex flex-row items-center w-full gap-2">
+            <input
+              value={
+                delivery ? new Date(delivery).toISOString().split("T")[0] : ""
+              }
+              onChange={handleDateChange}
+              type="date"
+              className="rounded outline-none border border-stone-300 p-1 mt-1"
+            />
           </div>
         </div>
       </div>
+      <button
+        onClick={handleSaveChanges}
+        disabled={
+          (orderStatus === ordstatus && isSameDate) || statusMutation.isPending
+        }
+        className="px-4 py-2 bg-blue-600 text-white font-medium text-sm mt-3 font-all rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 transition-colors duration-200"
+      >
+        {statusMutation.isPending ? (
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 border-2 font-all border-white border-t-transparent rounded-full animate-spin"></div>
+            Saving
+          </div>
+        ) : (
+          "Save"
+        )}
+      </button>
     </div>
   );
 }

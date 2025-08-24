@@ -180,10 +180,10 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 })
               )}
             </div>
-            <div className="relative w-full h-full max-h-[400px]">
+            <div className="relative w-full h-full">
               <img
                 src={image}
-                className="object-cover h-full w-full bg-white"
+                className="object-cover h-full w-full bg-white max-h-[300px]"
                 alt="Content image"
               />
 

@@ -2,7 +2,7 @@ import { ChevronDown, Search, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../../store/globalstate";
-import { appliances } from "./search";
+import { products } from "../../raw-datas/rd1";
 
 export default function Mob({ FN }: { FN: () => void }) {
   let [drop, setdrop] = useState<boolean>(false);
@@ -47,11 +47,18 @@ export default function Mob({ FN }: { FN: () => void }) {
             type={"button"}
             className={`${
               drop ? "flex" : "hidden"
-            } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
+            } sm:min-w-[200px] max-h-[300px] overflow-y-scroll bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
           >
-            {appliances.map((item, index) => {
+            {products.map((item, index) => {
               return (
                 <p
+                  onClick={() => {
+                    setdrop(!drop);
+                    FN();
+                    navigate(
+                      "/product/" + item.replaceAll(" ", "").toLowerCase()
+                    );
+                  }}
                   className="p-2 w-full hover:bg-gray-200 text-start font-all text-sm"
                   key={index}
                 >

@@ -20,7 +20,6 @@ export default function ProductPage() {
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
-      console.log(cat, item.categories.toLowerCase().replaceAll(" ", ""));
       if (brand) {
         return (
           (item.categories
