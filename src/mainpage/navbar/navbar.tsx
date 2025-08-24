@@ -289,7 +289,6 @@ export default function MainPageNavbar() {
                     <Link
                       onClick={() => {
                         setTimeout(() => setdown(!down), 0);
-                        // navigate(`/brand/${item}`);
                       }}
                       to={"/product/" + item.replaceAll(" ", "").toLowerCase()}
                       className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
