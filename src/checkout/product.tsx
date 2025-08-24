@@ -114,12 +114,11 @@ export default function Checkout() {
       const shippingAddress = {
         street: formData.delivery.address,
         city: formData.delivery.city,
-        zipCode:
-          formData.delivery.zipcode + " + " + formData.delivery.phoneNumber,
+        zipCode: formData.delivery.zipcode,
         country: formData.delivery.country,
       };
-
-      const response = await checkoutFn(shippingAddress);
+      const phone = formData.delivery.phoneNumber;
+      const response = await checkoutFn(shippingAddress, phone);
       const data = await response.json();
       localStorage.setItem("resHead", JSON.stringify(data));
 

@@ -10,7 +10,7 @@ export default function BrandLogo({
   return (
     <Link
       to={"/"}
-      className="flex flex-row items-center justify-start sm:justify-start gap-0.5 sm:-ml-2 self-center"
+      className="flex flex-row items-center justify-start sm:justify-start gap-0.5 sm:-ml-2 self-center w-1/2"
     >
       <img src={img} className="w-9 h-9 rounded object-cover" />
       <div className="flex flex-col items-start">

@@ -304,7 +304,7 @@ export async function getCart() {
   return await request.json();
 }
 
-export async function checkoutFn(shippingAddress: any) {
+export async function checkoutFn(shippingAddress: any, phone: string) {
   const token = sessionStorage.getItem("baron:token") ?? "";
   const response = await fetch(`${API_ENDPOINT}/order/v1/checkout`, {
     method: "POST",
@@ -312,7 +312,7 @@ export async function checkoutFn(shippingAddress: any) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ shippingAddress }),
+    body: JSON.stringify({ shippingAddress, phoneNumber: phone }),
   });
   return response;
 }

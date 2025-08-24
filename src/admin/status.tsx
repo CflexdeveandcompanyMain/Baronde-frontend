@@ -12,6 +12,7 @@ export default function AdminUpdateStatus() {
 
   useEffect(() => {
     if (status === "success" && data) {
+      console.log(data);
       const { usersWithOrders } = data.data;
       const filteredUsers = usersWithOrders.filter(
         (item: any) => item.orders.length > 0
@@ -34,6 +35,7 @@ export default function AdminUpdateStatus() {
             items,
             paymentDetails: { status },
             shippingAddress: { city, street, zipCode },
+            phoneNumber,
           } = order;
 
           const obg = {
@@ -44,6 +46,7 @@ export default function AdminUpdateStatus() {
             items,
             status,
             city,
+            phoneNumber,
             street,
             zipcode: zipCode,
           };
@@ -177,8 +180,8 @@ function OrderComponent({
 
   const statusMutation = useMutation({
     mutationFn: () => updateOrderstateFn(id, ordstatus),
-    onSuccess: () => {
-      console.log("Status updated successfully");
+    onSuccess: (data) => {
+      console.log("Status updated successfully", data);
       queryClient.invalidateQueries({
         queryKey: ["getAnalytics"],
         exact: true,
@@ -329,8 +332,8 @@ function OrderComponent({
               <option className="font-all" value="delivered">
                 Delivered
               </option>
-              <option className="font-all" value="processing">
-                Processing
+              <option className="font-all" value="cancelled">
+                Cancelled
               </option>
             </select>
           </div>
