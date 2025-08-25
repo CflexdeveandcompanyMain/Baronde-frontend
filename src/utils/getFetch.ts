@@ -106,7 +106,10 @@ export async function userLogIn(email: string, password: string) {
     const { role } = response.user;
     if (role === "admin") {
       localStorage.setItem("baron:admintoken", token);
-    } else sessionStorage.setItem("baron:token", token);
+    } else {
+      sessionStorage.setItem("baron:token", token);
+    }
+    localStorage.setItem("baron:role", role);
   }
   return response;
 }

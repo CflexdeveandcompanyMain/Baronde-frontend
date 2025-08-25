@@ -36,7 +36,6 @@ export default function UserCreateAccount() {
   const fetchData = async () => {
     try {
       const result = await getOTP(userInfo.name, userInfo.email);
-
       if (!result.otpId && result.message) {
         setMessage(result.message);
 
@@ -59,8 +58,7 @@ export default function UserCreateAccount() {
     } catch (err: any) {
       if (err.name !== "AbortError") {
         setError(err.message || "Unknown error");
-
-        console.log(error);
+        console.log(err, error);
       }
     } finally {
       setLoading(false);
@@ -68,19 +66,11 @@ export default function UserCreateAccount() {
   };
 
   const handleSubmit = async () => {
-    if (name && email && password) {
+    if (name && email && password.length >= 8) {
       setTrigger(true);
       await fetchData();
     }
   };
-
-  // const sendUserToken = (token: CredentialResponse) => {
-  //   if (token) {
-  //     getGoogleUserInfo(token)
-  //       .then((result) => console.log(result))
-  //       .catch((err) => console.error(err));
-  //   }
-  // };
 
   return (
     <section className="w-full bg-white h-screen sm:bg-gray-200 flex justify-center">
@@ -136,6 +126,9 @@ export default function UserCreateAccount() {
                 />
               </div>
             </div>
+            <p className="font-all text-[11px] w-full text-start">
+              Password must be 8 characters long.
+            </p>
           </div>
           <div className="flex justify-start w-full">
             <ErrorMessage message={message} />

@@ -35,7 +35,6 @@ export default function VerifyCode() {
   };
 
   const handleSubmit = async () => {
-    console.log(name, email, password, otpid, otp.join(""));
     if (otpid && otp.join("")) {
       try {
         setTrigger(true);
@@ -48,15 +47,15 @@ export default function VerifyCode() {
           "user"
         );
         if (result.user) {
-          let { name, email, id } = result.user;
+          let { name, email, id, role } = result.user;
           sessionStorage.setItem(
             "baron:user",
             JSON.stringify({ name, email, isVerified: true })
           );
+          localStorage.setItem("baron:role", role);
           setCredentials(name, email, password, id);
           navigate("/");
         }
-        console.log(result);
       } catch (e) {
         console.log("Error: " + e);
       }

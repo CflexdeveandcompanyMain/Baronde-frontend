@@ -26,7 +26,7 @@ export default function UserSignInInterface() {
   const fetchData = async () => {
     try {
       const result = await userLogIn(userInfo.email, userInfo.password);
-
+      console.log(result);
       if (!result.user && result.message) {
         setMessage(result.message);
 
@@ -161,17 +161,8 @@ export default function UserSignInInterface() {
               </Link>
             </p>
           </div>
-          {/* <div className="flex flex-row items-center w-full gap-2">
-            <div className="h-[1px] bg-black/30 w-1/2 self-center"></div>
-            <p className="font-medium font-all text-sm self-center">or</p>
-            <div className="h-[1px] bg-black/30 w-1/2 self-center"></div>
-          </div> */}
         </div>
-        {/* <GoogleLogin
-          width={"100%"}
-          onSuccess={() => console.log("success")}
-          onError={() => console.log("error")}
-        /> */}
+
         <div className="flex flex-row items-center self-start my-2 gap-5 justify-between">
           <Link to={"/policy"} className="font-all text-xs">
             Privacy policy

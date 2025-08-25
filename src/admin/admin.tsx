@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { bdm, frame3 } from "..";
 import { LogOut, Package, HomeIcon, Settings, Menu, Truck } from "lucide-react";
-import { useState, type JSX } from "react";
+import { useEffect, useState, type JSX, type ReactNode } from "react";
 import AdminMain from "./dash";
 import AdminSettings from "./settings";
 import AdminProducts from "./products";
@@ -28,6 +28,8 @@ let sidebar = [
 const AdminDashboard = () => {
   let [page, setPage] = useState("dashboard");
   let [sd, setSd] = useState(false);
+
+  let navigate = useNavigate();
 
   let Components: { [key: string]: JSX.Element } = {
     dashboard: <AdminMain />,
@@ -72,7 +74,13 @@ const AdminDashboard = () => {
             })}
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center w-full gap-1">
+        <div
+          onClick={() => {
+            localStorage.setItem("baron:admintoken", "");
+            navigate("/");
+          }}
+          className="flex flex-row items-center justify-center w-full gap-1"
+        >
           <LogOut className={"text-red-500"} size={16} />
           <p className="font-all text-base font-medium text-center text-red-500">
             Log out
@@ -120,7 +128,13 @@ const AdminDashboard = () => {
             })}
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center w-full gap-1">
+        <div
+          onClick={() => {
+            localStorage.setItem("baron:admintoken", "");
+            navigate("/");
+          }}
+          className="flex flex-row items-center justify-center w-full gap-1"
+        >
           <LogOut className={"text-red-500"} size={16} />
           <p className="font-all text-base font-medium text-center text-red-500">
             Log out
@@ -153,3 +167,19 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+export const ProtectedRoute = ({ child }: { child: ReactNode }) => {
+  const role = localStorage.getItem("baron:role");
+
+  if (role) console.log(role);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (role !== "admin") {
+      navigate("/");
+      return;
+    }
+  }, []);
+
+  return child;
+};

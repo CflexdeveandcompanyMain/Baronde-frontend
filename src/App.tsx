@@ -18,7 +18,7 @@ import NewPassword from "./authentication/newpassword";
 import ProductPage from "./dynamic/productpage";
 import CartPage from "./cart/cartpage";
 import SingleProductPage from "./dynamic/singlepage";
-import AdminDashboard from "./admin/admin";
+import AdminDashboard, { ProtectedRoute } from "./admin/admin";
 import SearchPage from "./dynamic/searchpage";
 import Checkout from "./checkout/product";
 import AllDeals from "./dynamic/alldeal";
@@ -54,11 +54,13 @@ export default function App() {
           path={"/singleproduct/:category"}
           element={<SingleProductPage />}
         />
-        <Route path={"/admin"} element={<AdminDashboard />} />
+        <Route
+          path={"/admin"}
+          element={<ProtectedRoute child={<AdminDashboard />} />}
+        />
         <Route path={"/search/:keyword"} element={<SearchPage />} />
         <Route path={"/checkout"} element={<Checkout />} />
         <Route path={"/brand/:brand"} element={<AllDeals />} />
-        {/* <Route path={"/adminsignup"} element={<AdminCreate />} /> */}
         <Route path={"/checkout/success"} element={<CheckoutSuccess />} />
         <Route path={"/checkout/failure"} element={<CheckoutFailure />} />
       </Routes>

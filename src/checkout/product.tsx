@@ -45,6 +45,8 @@ export default function Checkout() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState("");
 
+  let { isVerified } = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
+
   const [formData, setFormData] = useState<FormData>({
     delivery: {
       option: "ship",
@@ -92,6 +94,11 @@ export default function Checkout() {
   const handleCheckout = async () => {
     setError("");
     setIsProcessing(true);
+
+    if (!isVerified) {
+      navigate("/signup");
+      return;
+    }
 
     try {
       const { fullName, address, phoneNumber, email, city } = formData.delivery;
@@ -147,7 +154,6 @@ export default function Checkout() {
     queryKey: ["products"],
     queryFn: () => getProducts(),
   });
-
   return (
     <>
       <MainPageNavbar />
@@ -201,11 +207,8 @@ export default function Checkout() {
 
 function OrderSummary({
   cart,
-  totals,
   status,
   data,
-  discountCode,
-  onDiscountChange,
   onCheckout,
   isProcessing,
 }: {
@@ -278,49 +281,7 @@ function OrderSummary({
             })}
           </div>
         )}
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={discountCode}
-            onChange={(e) => onDiscountChange(e.target.value)}
-            placeholder="Discount code"
-            className="p-2 flex-1 border border-stone-400 font-all text-sm rounded"
-          />
-          <button
-            type="button"
-            // onClick={onApplyDiscount}
-            className="bg-green-700 text-sm text-white font-medium font-all px-4 py-2 rounded hover:bg-green-800 transition-colors"
-          >
-            Apply
-          </button>
-        </div>
-        <div className="space-y-2 pt-4 border-t border-stone-300">
-          <div className="flex justify-between">
-            <p className="font-all text-sm font-medium text-stone-500">
-              Subtotal ({cart.length} items)
-            </p>
-            <p className="font-all text-sm font-medium text-green-700">
-              {formatPrice(totals.subtotal, "NGN")}
-            </p>
-          </div>
 
-          <div className="flex justify-between pt-2 border-t border-stone-300">
-            <p className="font-all text-sm font-semibold text-stone-500">
-              Total
-            </p>
-            <p className="font-all text-sm font-semibold text-green-700">
-              {formatPrice(totals.total, "NGN")}
-            </p>
-          </div>
-
-          <p className="font-all text-xs text-stone-600 mt-2">
-            Tax fee of
-            <span className="text-orange-500 px-1">
-              ₦{(totals.total - totals.subtotal).toFixed(2)}
-            </span>
-            included
-          </p>
-        </div>
         <button
           onClick={onCheckout}
           disabled={isProcessing || cart.length === 0}
