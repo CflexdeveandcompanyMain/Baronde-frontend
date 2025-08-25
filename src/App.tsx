@@ -24,6 +24,7 @@ import Checkout from "./checkout/product";
 import AllDeals from "./dynamic/alldeal";
 import CheckoutSuccess from "./checkout/onSuccess";
 import CheckoutFailure from "./checkout/onFailure";
+import Contact from "./mainpage/navbar/contact";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ export default function App() {
         <Route path={"/term"} element={<TermsOfService />} />
         <Route path={"/policy"} element={<PrivatePolicy />} />
         <Route path={"/shipping"} element={<ShippingPolicy />} />
+        <Route path={"/contact"} element={<Contact />} />
         <Route path={"/order"} element={<UserOrderHistory />} />
         <Route path={"/testimonial"} element={<Testimonial />} />
         <Route path={"/cart"} element={<CartPage />} />
