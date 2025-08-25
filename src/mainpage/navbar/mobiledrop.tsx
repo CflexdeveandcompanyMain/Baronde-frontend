@@ -98,13 +98,6 @@ export default function MobileDropDown({
       <Link
         onClick={() => setMenu()}
         to={"/about"}
-        className="font-all text-sm text-start w-full font-medium"
-      >
-        Contact us
-      </Link>
-      <Link
-        onClick={() => setMenu()}
-        to={"/about"}
         className="font-all text-sm text-start font-medium w-full"
       >
         About

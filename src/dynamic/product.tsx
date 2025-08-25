@@ -94,7 +94,9 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               {formatPrice(data.price - data.discount, "NGN")}
             </p>
             <p
-              className={`text-black text-[11px] text-start font-medium font-all line-through`}
+              className={`${
+                data.discount ? "" : "hidden"
+              } text-black text-[11px] text-start font-medium font-all line-through`}
             >
               {formatPrice(data.price, "NGN")}
             </p>

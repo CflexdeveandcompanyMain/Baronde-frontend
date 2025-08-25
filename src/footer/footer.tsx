@@ -44,12 +44,6 @@ export default function Footer() {
               >
                 Privacy policy
               </Link>
-              <Link
-                to={"/about"}
-                className="font-all text-xs font-normal text-[#677279]"
-              >
-                Contact information
-              </Link>
             </div>
             <div className="flex flex-col items-center gap-3 justify-start self-start">
               <p className="font-all text-sm text-start w-full font-medium text-[#677279]">
@@ -115,6 +109,17 @@ export default function Footer() {
               >
                 <img src={wha} className="object-cover" />
               </Link>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="flex flex-row items-center gap-4 mt-5 sm:mt-5">
+                {/* <div className="h-6 w-10 rounded-full flex justify-center bg-green-950">
+                    <Phone className="text-white self-center" size={13} />
+                  </div> */}
+                <p className="font-bold text-green-800 font-all text-sm">
+                  Contact Us:{" "}
+                  <span className="text-orange-600 text-sm">09138254838</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
