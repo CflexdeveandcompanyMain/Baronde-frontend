@@ -16,7 +16,11 @@ export default function ProductPage() {
   let { brand } = useGlobalState();
 
   let parameter = useParams();
-  let cat: string = parameter.category?.replaceAll(" ", "").toLowerCase() ?? "";
+  let cat: string =
+    parameter.category
+      ?.replaceAll(" ", "")
+      .replaceAll("/", "-")
+      .toLowerCase() ?? "";
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
