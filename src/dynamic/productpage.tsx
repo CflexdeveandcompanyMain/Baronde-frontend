@@ -16,18 +16,17 @@ export default function ProductPage() {
   let { brand } = useGlobalState();
 
   let parameter = useParams();
-  let cat = parameter.category?.replaceAll(" ", "").toLowerCase();
+  let cat: string = parameter.category?.replaceAll(" ", "").toLowerCase() ?? "";
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
       if (brand) {
         return (
-          (item.categories
+          item.categories
             .toLowerCase()
             .replaceAll(" ", "")
-            .includes(cat ?? "") &&
-            item.brand.toLowerCase() == brand.toLowerCase()) ||
-          item.description.includes(cat ?? "")
+            .includes(cat?.length > 5 ? cat.substring(0, 5) : cat) ||
+          item.description.includes(cat?.length > 5 ? cat.substring(0, 5) : cat)
         );
       }
     });
