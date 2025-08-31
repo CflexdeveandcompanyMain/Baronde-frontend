@@ -93,7 +93,7 @@ export default function HeroProductCard({ category }: { category: string }) {
         let normalizedItemCategory = item.categories
           .replaceAll(" ", "")
           .toLowerCase();
-        return normalizedItemCategory === normalizedCategory;
+        return normalizedCategory.includes(normalizedItemCategory);
       })
       .slice(0, 4);
     if (products.length == 0)
