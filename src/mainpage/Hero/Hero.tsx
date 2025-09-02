@@ -27,6 +27,7 @@ export default function MainPageHero() {
         </section>
         {HeroObject.map((item, index) => {
           const { title, product } = item;
+          console.log(title, product);
           return (
             <div className="w-full sm:p-1 p-3" key={index}>
               <HeroSection title={title} product={product} />

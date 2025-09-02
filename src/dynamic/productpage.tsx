@@ -16,22 +16,24 @@ export default function ProductPage() {
   let { brand } = useGlobalState();
 
   let parameter = useParams();
-  let cat: string =
-    parameter.category
-      ?.replaceAll(" ", "")
-      .replaceAll("/", "-")
-      .toLowerCase() ?? "";
+  let cat: string = parameter.category?.replaceAll(" ", "").toLowerCase() ?? "";
+
+  if (cat === "double+full_range_speaker") cat = "fullrangespeaker";
+  if (cat === "piano+keyboard") cat = "piano";
+  if (cat === "single+hanging_speaker") cat = "singlespeaker";
+  if (cat === "floor+stage_monitor") cat = "floormonitor";
+  if (cat === "power_surge+sequence") cat = "powersurge";
+  if (cat === "amplifier_rack") cat = "amplifier";
+  if (cat === "drums") cat = "drum";
+  if (cat === "guitars") cat = "guitar";
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
       if (brand) {
-        return (
-          item.categories
-            .toLowerCase()
-            .replaceAll(" ", "")
-            .includes(cat?.length > 5 ? cat.substring(0, 5) : cat) ||
-          item.description.includes(cat?.length > 5 ? cat.substring(0, 5) : cat)
-        );
+        return item.categories
+          .toLowerCase()
+          .replaceAll(" ", "")
+          .includes(cat.replaceAll("_", ""));
       }
     });
 
@@ -56,7 +58,11 @@ export default function ProductPage() {
                   Barondemusical
                 </p>
                 <p className="font-all sm:text-lg font-medium text-center w-full text-base text-white">
-                  {formatString(parameter.category ?? "Random")}
+                  {formatString(
+                    parameter.category
+                      ?.replaceAll("_", " ")
+                      .replaceAll("+", "/") ?? "Random"
+                  )}
                 </p>
               </div>
             </motion.div>
@@ -94,13 +100,10 @@ export default function ProductPage() {
 }
 
 function formatString(category: string) {
-  let seperated: string[] | string = category.split("-");
-  if (seperated.length === 1)
-    return category.charAt(0).toUpperCase() + category.slice(1);
-  else
-    return seperated
-      .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
-      .join(" ");
+  return (
+    category[0].toUpperCase() +
+    category.replaceAll("+", "/").replaceAll("_", " ").slice(1)
+  );
 }
 
 export function ShopBy() {

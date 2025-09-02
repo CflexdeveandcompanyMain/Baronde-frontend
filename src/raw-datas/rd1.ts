@@ -3,9 +3,9 @@ export const products: string[] = [
   "Power amplifier",
   "Single sub",
   "Double sub",
-  "Double-full range speaker",
-  "Single-hanging speaker",
-  "Floor-stage monitor",
+  "Double/full range speaker",
+  "Single/hanging speaker",
+  "Floor/stage monitor",
   "Drums",
   "Analog mixer",
   "Digital mixer",
@@ -24,12 +24,12 @@ export const products: string[] = [
   "Guitars",
   "Guitar effect",
   "Speaker management",
-  "Power surge-sequence",
+  "Power surge/sequence",
   "Studio microphone",
   "Studio speaker",
   "Microphone stand",
   "Wind instruments",
-  "Piano-keyboard",
+  "Piano/keyboard",
 ];
 
 export const brand: string[] = [
@@ -51,5 +51,5 @@ export const brand: string[] = [
 
 export const HeroObject = products.map((item) => ({
   title: item,
-  product: item.toLowerCase(),
+  product: item.toLowerCase().replaceAll(" ", "_").replaceAll("/", "+"),
 }));

@@ -74,6 +74,19 @@ export default function HeroProductCard({ category }: { category: string }) {
     queryFn: () => getProducts(),
   });
 
+  if (data) {
+    console.log(data.filter((item: any) => item.categories.includes("amp")));
+  }
+
+  if (category === "double+full_range_speaker") category = "fullrangespeaker";
+  if (category === "piano+keyboard") category = "piano";
+  if (category === "single+hanging_speaker") category = "singlespeaker";
+  if (category === "floor+stage_monitor") category = "floormonitor";
+  if (category === "power_surge+sequence") category = "powersurge";
+  if (category === "amplifier_rack") category = "amplifier";
+  if (category === "drums") category = "drum";
+  if (category === "guitars") category = "guitar";
+
   if (status === "pending") {
     return (
       <div className="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 sm:gap-2 gap-1 ">
@@ -89,7 +102,10 @@ export default function HeroProductCard({ category }: { category: string }) {
   if (status === "success" && data) {
     let products: HeroDataType[] = data
       .filter((item: HeroDataType) => {
-        let normalizedCategory = category.replaceAll(" ", "").toLowerCase();
+        let normalizedCategory = category
+          .replaceAll("_", "")
+          .replaceAll("/", "")
+          .toLowerCase();
         let normalizedItemCategory = item.categories
           .replaceAll(" ", "")
           .toLowerCase();
