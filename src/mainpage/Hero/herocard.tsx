@@ -74,10 +74,6 @@ export default function HeroProductCard({ category }: { category: string }) {
     queryFn: () => getProducts(),
   });
 
-  if (data) {
-    console.log(data.filter((item: any) => item.categories.includes("amp")));
-  }
-
   if (category === "double+full_range_speaker") category = "fullrangespeaker";
   if (category === "piano+keyboard") category = "piano";
   if (category === "single+hanging_speaker") category = "singlespeaker";

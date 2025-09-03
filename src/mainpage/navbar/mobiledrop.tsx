@@ -48,7 +48,12 @@ export default function MobileDropDown({
             return (
               <Link
                 onClick={setMenu}
-                to={"/product/" + item.replaceAll(" ", "_").toLowerCase()}
+                to={"/product/" + 
+                  item
+                  .replaceAll(" ", "_")
+                  .replaceAll("/", "+")
+                  .toLowerCase()
+                }
                 key={index}
                 className="font-all text-xs text-start hover:bg-gray-100 p-2 w-full rounded transition-colors"
               >
