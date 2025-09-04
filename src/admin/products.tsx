@@ -37,8 +37,6 @@ export default function AdminProducts() {
 
   const { del } = useGlobalState();
 
-  console.log("Global del state:", del);
-
   useEffect(() => {
     const isValid =
       eImages.length > 0 &&
@@ -150,9 +148,58 @@ export default function AdminProducts() {
   };
 
   const getbrand = (val: string) => setBrand(val);
-  const getcategory = (val: string) => setCat(val);
+  const getcategory = (val: string) => {
+    switch (val) {
+      case "Single/hanging speaker":
+        setCat("Single Speaker");
+        break;
+      case "Amplifier rack":
+        setCat("AMP RACK");
+        break;
+      case "Double/full range speaker":
+        setCat("Full Range Speaker");
+        break;
+      case "Floor/stage monitor":
+        setCat("Floor Monitor");
+        break;
+      case "Power surge/sequence":
+        setCat("Power Surge");
+        break;
+      case "Wireless mic":
+        setCat("Wireless Microphone");
+        break;
+      case "Wired mic":
+        setCat("Wired Microphone");
+        break;
+      case "Piano/keyboard":
+        setCat("Piano");
+        break;
+      default:
+        setCat(val);
+    }
+  };
   const EBrand = (val: string) => setEBrand(val);
-  const ECategory = (val: string) => setECategory(val);
+  const ECategory = (val: string) => {
+    switch (val) {
+      case "Single/hanging speaker":
+        setECategory("Single Speaker");
+        break;
+      case "Double/full range speaker":
+        setECategory("Full Range Speaker");
+        break;
+      case "Floor/stage monitor":
+        setECategory("Floor Monitor");
+        break;
+      case "Power surge/sequence":
+        setECategory("Power Surge");
+        break;
+      case "Piano/keyboard":
+        setECategory("Piano");
+        break;
+      default:
+        setECategory(val);
+    }
+  };
   const EAmount = (val: number) => setEAmount(val);
   const EKeyword = (val: string) => setEKeyword(val.split(","));
   const EName = (val: string) => setEName(val);
@@ -273,7 +320,7 @@ export default function AdminProducts() {
           </div>
         ) : (
           filteredItems.map((item: HeroDataType, index: number) => {
-            console.log("Rendering item:", item.name, "ID:", item._id);
+            //console.log("Rendering item:", item.name, "ID:", item._id);
             return (
               <div
                 key={item._id || index}

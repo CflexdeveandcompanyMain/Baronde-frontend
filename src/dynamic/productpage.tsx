@@ -23,9 +23,10 @@ export default function ProductPage() {
   if (cat === "single+hanging_speaker") cat = "singlespeaker";
   if (cat === "floor+stage_monitor") cat = "floormonitor";
   if (cat === "power_surge+sequence") cat = "powersurge";
-  if (cat === "amplifier_rack") cat = "amplifier";
+  if (cat === "amplifier_rack") cat = "amp_rack";
   if (cat === "drums") cat = "drum";
   if (cat === "guitars") cat = "guitar";
+  if (cat === "mixer_amplifier") cat = "amplifier";
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {

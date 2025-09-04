@@ -53,3 +53,5 @@ export const HeroObject = products.map((item) => ({
   title: item,
   product: item.toLowerCase().replaceAll(" ", "_").replaceAll("/", "+"),
 }));
+
+console.log(HeroObject);

@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import ProductAuthCard from "../../dynamic/product";
 import { getProducts } from "../../utils/getFetch";
 import { type HeroDataType } from "./data";
-// import { useGlobalState } from "../../store/globalstate";
 
 function ProductCardSkeleton() {
   return (
@@ -79,9 +78,12 @@ export default function HeroProductCard({ category }: { category: string }) {
   if (category === "single+hanging_speaker") category = "singlespeaker";
   if (category === "floor+stage_monitor") category = "floormonitor";
   if (category === "power_surge+sequence") category = "powersurge";
-  if (category === "amplifier_rack") category = "amplifier";
+  if (category === "amplifier_rack") category = "amp_rack";
   if (category === "drums") category = "drum";
   if (category === "guitars") category = "guitar";
+  if (category === "mixer_amplifier") category = "amplifier";
+  if (category === "wired_mic") category = "wiredmicrophone";
+  if (category === "wireless_mic") category = "wirelessmicrophone";
 
   if (status === "pending") {
     return (
@@ -96,6 +98,9 @@ export default function HeroProductCard({ category }: { category: string }) {
   }
 
   if (status === "success" && data) {
+    let hs: any = {};
+    data.forEach((item: any) => (hs[item.categories] = 1));
+    console.log(hs);
     let products: HeroDataType[] = data
       .filter((item: HeroDataType) => {
         let normalizedCategory = category
@@ -105,7 +110,8 @@ export default function HeroProductCard({ category }: { category: string }) {
         let normalizedItemCategory = item.categories
           .replaceAll(" ", "")
           .toLowerCase();
-        return normalizedCategory.includes(normalizedItemCategory);
+        console.log(normalizedCategory, normalizedItemCategory);
+        return normalizedCategory == normalizedItemCategory;
       })
       .slice(0, 4);
     if (products.length == 0)
