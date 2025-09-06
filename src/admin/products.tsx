@@ -1,11 +1,11 @@
-import { Plus, Search } from "lucide-react";
+import { Loader, Plus, Search } from "lucide-react";
 import { useCallback, useEffect, useState, useMemo } from "react";
 import { products, brand as BB } from "../raw-datas/rd1";
 import { type HeroDataType } from "../mainpage/Hero/data";
 import AdminCard from "./card";
 import EditForm from "./editform";
 import { submitProduct } from "./form";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
 import { useGlobalState } from "../store/globalstate";
 
@@ -30,6 +30,9 @@ export default function AdminProducts() {
   let [onIt, setIt] = useState(true);
   let [open, setopen] = useState(false);
   let [search, setSearch] = useState("");
+  let [pending, setPending] = useState(false);
+  let [uploadSuccess, setUploadSuccess] = useState(false);
+  let [uploadError, setUploadError] = useState(false);
 
   const handleImagesChange = useCallback((images: ImageData[]) => {
     setEImages(images);
@@ -120,31 +123,41 @@ export default function AdminProducts() {
     if (del) refetch();
   }, [del, refetch]);
 
+  const addProductMutation = useMutation({
+    mutationFn: (f: string[]) =>
+      submitProduct({
+        eImages: f,
+        eamount,
+        ebrand,
+        ecategory,
+        edescription,
+        ediscount,
+        ekeyword,
+        ename,
+      }),
+    mutationKey: ["addproduct"],
+    onSuccess() {
+      refetch();
+      setEImages([]);
+      setEAmount(0);
+      setEName("");
+      setEDescription("");
+      setEDiscount(0);
+      setEKeyword(["product"]);
+      setopen(false);
+      setPending(false);
+      setUploadSuccess(true);
+    },
+    onError(error) {
+      console.error("Error creating product:", error);
+      setUploadError(true);
+    },
+  });
+
   const showIt = () => {
     const f = eImages.map((item) => item.url);
-    submitProduct({
-      eImages: f,
-      eamount,
-      ebrand,
-      ecategory,
-      edescription,
-      ediscount,
-      ekeyword,
-      ename,
-    })
-      .then(() => {
-        refetch();
-        setEImages([]);
-        setEAmount(0);
-        setEName("");
-        setEDescription("");
-        setEDiscount(0);
-        setEKeyword(["product"]);
-        setopen(false);
-      })
-      .catch((error) => {
-        console.error("Error creating product:", error);
-      });
+    addProductMutation.mutate(f);
+    setPending(true);
   };
 
   const getbrand = (val: string) => setBrand(val);
@@ -192,6 +205,12 @@ export default function AdminProducts() {
         break;
       case "Power surge/sequence":
         setECategory("Power Surge");
+        break;
+      case "Wireless mic":
+        setECategory("Wireless Microphone");
+        break;
+      case "Wired mic":
+        setECategory("Wired Microphone");
         break;
       case "Piano/keyboard":
         setECategory("Piano");
@@ -246,6 +265,52 @@ export default function AdminProducts() {
 
   return (
     <section className="flex flex-col items-start w-full gap-5">
+      {pending ? (
+        <div className="fixed bg-black/60 inset-0 flex justify-center z-50">
+          <div className="self-center w-auto">
+            <Loader
+              size={32}
+              className="text-white text-center self-center animate-spin"
+            />
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {uploadSuccess ? (
+        <div className="fixed bg-black/60 inset-0 flex justify-center z-50 p-3">
+          <div className="self-center sm:w-1/4 mx-auto w-full bg-white rounded flex flex-row items-start p-0.5">
+            <p className="font-all text-sm font-medium p-2 sm:w-[90%] w-4/5">
+              Product upload successfull!
+            </p>
+            <p
+              onClick={() => setUploadSuccess(false)}
+              className="font-all text-xs font-semibold sm:w-[20%] bg-green-300 rounded shadow w-1/5 p-2 border-l text-center self-center border-stone-200"
+            >
+              OK!
+            </p>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {uploadError ? (
+        <div className="fixed bg-black/60 inset-0 flex justify-center z-50 p-3">
+          <div className="self-center sm:w-1/4 mx-auto w-full bg-white rounded flex flex-row items-start p-0.5">
+            <p className="font-all text-sm font-medium p-2 sm:w-[90%] w-4/5">
+              Failed to upload product!
+            </p>
+            <p
+              onClick={() => setUploadError(false)}
+              className="font-all text-xs font-semibold sm:w-[20%] bg-red-300 rounded shadow w-1/5 p-2 border-l text-center self-center border-stone-200"
+            >
+              OK!
+            </p>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="flex justify-start w-full">
         <p className="font-all text-lg sm:text-2xl font-medium text-start w-full">
           Your Product ({filteredItems.length})
@@ -264,7 +329,7 @@ export default function AdminProducts() {
       </div>
 
       {open && (
-        <div className="fixed flex justify-center w-full h-screen bg-black/50 z-50 inset-0 sm:py-5">
+        <div className="fixed flex justify-center w-full h-screen bg-black/50 z-40 inset-0 sm:py-5">
           <EditForm
             close={handleClose}
             show={showIt}
@@ -320,7 +385,6 @@ export default function AdminProducts() {
           </div>
         ) : (
           filteredItems.map((item: HeroDataType, index: number) => {
-            //console.log("Rendering item:", item.name, "ID:", item._id);
             return (
               <div
                 key={item._id || index}

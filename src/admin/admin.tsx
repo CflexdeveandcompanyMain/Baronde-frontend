@@ -160,7 +160,9 @@ const AdminDashboard = () => {
             <Menu onClick={() => setSd(!sd)} size={22} />
           </div>
         </div>
-        <div className="p-3 w-full relative">{Components[page]}</div>
+        <div className="p-3 w-full relative" id="toast-container">
+          {Components[page]}
+        </div>
       </section>
     </section>
   );

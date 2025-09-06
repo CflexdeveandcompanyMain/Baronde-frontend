@@ -39,13 +39,10 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
     },
     mutationKey: ["AdminEdit", data._id],
     onMutate: async (updatedItem) => {
-      // Cancel any outgoing refetches
       await queryClient.cancelQueries({ queryKey: ["products"] });
 
-      // Snapshot the previous value
       const previousProducts = queryClient.getQueryData(["products"]);
 
-      // Optimistically update the cache
       queryClient.setQueryData(
         ["products"],
         (old: HeroDataType[] | undefined) => {
@@ -60,13 +57,12 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
     },
     onSuccess: (result) => {
       console.log("Edit success:", result);
-      // Force refetch to ensure data consistency
+
       queryClient.invalidateQueries({
         queryKey: ["products"],
-        refetchType: "active", // Only refetch active queries
+        refetchType: "active",
       });
 
-      // Also invalidate any related queries that might be affected
       queryClient.invalidateQueries({
         predicate: (query) => {
           return (
@@ -99,13 +95,10 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
     },
     mutationKey: ["adminremove", data._id],
     onMutate: async () => {
-      // Cancel any outgoing refetches
       await queryClient.cancelQueries({ queryKey: ["products"] });
 
-      // Snapshot the previous value
       const previousProducts = queryClient.getQueryData(["products"]);
 
-      // Optimistically update the cache
       queryClient.setQueryData(
         ["products"],
         (old: HeroDataType[] | undefined) => {
@@ -117,13 +110,11 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
       return { previousProducts };
     },
     onSuccess: () => {
-      // Force refetch to ensure data consistency
       queryClient.invalidateQueries({
         queryKey: ["products"],
         refetchType: "active",
       });
 
-      // Also invalidate any related queries
       queryClient.invalidateQueries({
         predicate: (query) => {
           return (
@@ -162,7 +153,7 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
       description: data.description,
       price: data.price,
       brand: data.brand,
-      discount: data.discount, // Fixed: was hardcoded to 34000
+      discount: data.discount,
     });
     setIsEditing(false);
   };

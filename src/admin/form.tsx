@@ -1,3 +1,5 @@
+import { toastify } from "../utils/admin";
+
 const API_ENDPOINT = import.meta.env.VITE_API_BASE_URL;
 export const submitProduct = async ({
   eImages,
@@ -31,7 +33,6 @@ export const submitProduct = async ({
   console.log(obj);
   try {
     const token = localStorage.getItem("baron:admintoken") || "";
-    console.log(API_ENDPOINT, token);
     const response = await fetch(`${API_ENDPOINT}/image/v1/upload`, {
       method: "POST",
       headers: {
@@ -42,18 +43,17 @@ export const submitProduct = async ({
     });
 
     const result = await response.json();
-    console.log(result, token);
     if (response.ok) {
-      alert("Product uploaded successfully!");
       localStorage.removeItem("baron:img");
     } else {
       console.log(token);
-      alert(`Error: ${result.message || "Failed to upload product"}`);
+      console.log(`Error: ${result.message || "Failed to upload product"}`);
     }
   } catch (error) {
     console.error("Upload error:", error);
-    alert("Failed to upload product. Please try again.");
+    toastify("Failed to upload product. Please try again.", "danger");
+    console.log("Failed to upload product. Please try again.");
   } finally {
-    alert("Upload done!");
+    console.log("Upload done!");
   }
 };

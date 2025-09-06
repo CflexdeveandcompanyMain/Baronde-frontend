@@ -99,8 +99,9 @@ export default function HeroProductCard({ category }: { category: string }) {
 
   if (status === "success" && data) {
     let hs: any = {};
+
     data.forEach((item: any) => (hs[item.categories] = 1));
-    console.log(hs);
+
     let products: HeroDataType[] = data
       .filter((item: HeroDataType) => {
         let normalizedCategory = category
@@ -110,10 +111,10 @@ export default function HeroProductCard({ category }: { category: string }) {
         let normalizedItemCategory = item.categories
           .replaceAll(" ", "")
           .toLowerCase();
-        console.log(normalizedCategory, normalizedItemCategory);
         return normalizedCategory == normalizedItemCategory;
       })
       .slice(0, 4);
+
     if (products.length == 0)
       return (
         <div className="w-full flex justify-center">
