@@ -47,6 +47,7 @@ export const brand: string[] = [
   "Dbx",
   "Ariz sound",
   "Virgin sound",
+  "Pioneer",
 ];
 
 export const HeroObject = products.map((item) => ({

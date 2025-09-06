@@ -239,11 +239,12 @@ export default function MainPageNavbar() {
                 type={"button"}
                 className={`${
                   drop ? "flex" : "hidden"
-                } sm:min-w-[200px] bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
+                } sm:min-w-[200px] bg-white flex-col max-h-[400px] overflow-y-scroll absolute top-10 items-start border border-black/40 outline-none`}
               >
                 {brand.map((item, index) => {
                   return (
-                    <div
+                    <Link
+                      to={`/brand/${item.replaceAll(" ", "_")}`}
                       onClick={() => {
                         setBrand(item);
                         setTimeout(() => setdrop(!drop), 0);
@@ -252,7 +253,7 @@ export default function MainPageNavbar() {
                       key={index}
                     >
                       {item}
-                    </div>
+                    </Link>
                   );
                 })}
               </button>
