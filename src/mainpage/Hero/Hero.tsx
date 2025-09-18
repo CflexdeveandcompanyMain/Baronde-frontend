@@ -58,7 +58,7 @@ export function HeroIntro() {
 const divFn = (title: string, url: string) => {
   return (
     <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-      <p className="font-all font-semibold text-base sm:text-lg text-start w-full self-center">
+      <p className="font-all font-semibold text-[15px] sm:text-lg text-start w-full self-center">
         {title}
       </p>
       <div className="w-full flex justify-end">

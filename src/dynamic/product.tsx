@@ -96,13 +96,13 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           <p className="font-medium text-start font-all text-[13px] text-gray-600 w-full">
             {data.description.replaceAll("/", "||").substring(0, 80) + "..."}
           </p>
-          <div className="flex flex-row items-start sm:items-center w-full justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center w-full justify-between">
             <p className="text-[#eb720fee] text-lg text-start font-semibold font-all">
               {formatPrice(data.price - data.discount, "NGN")}
             </p>
             <p
               className={`${
-                data.discount ? "" : "hidden"
+                data.discount > 1 ? "flex" : "hidden"
               } text-black text-[11px] text-start font-medium font-all line-through`}
             >
               {formatPrice(data.price, "NGN")}

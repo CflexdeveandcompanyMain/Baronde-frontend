@@ -32,7 +32,7 @@ export default function MobileDropDown({
       <Link
         onClick={() => setMenu()}
         to={"/brand/all"}
-        className="font-all text-sm text-start font-medium w-full px-5"
+        className="font-all text-sm text-start font-medium w-full px-5 mt-5"
       >
         All Deals
       </Link>
