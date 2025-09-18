@@ -5,8 +5,12 @@ import { brand, products } from "../../raw-datas/rd1";
 import {
   AlignJustifyIcon,
   ChevronDownIcon,
+  LogOut,
+  Package,
   SearchIcon,
+  Settings,
   ShoppingCartIcon,
+  User,
   UserIcon,
 } from "lucide-react";
 
@@ -44,16 +48,17 @@ export default function MainPageNavbar() {
   return (
     <nav className="flex flex-col items-center w-full sticky top-0 z-50">
       <Marq />
-      <div className="flex flex-row items-center p-2 sm:px-7 justify-between bg-green-800 w-full">
+      <div className="flex flex-row items-center px-2 sm:px-7 justify-between bg-green-800 w-full">
         <BrandLogo img={bdm} color="white" />
         <MainPageSearchBar />
         <div className="flex flex-row items-end gap-6 w-3/5 sm:w-1/2 justify-end">
           {isVerified ? (
-            <div className="flex flex-col items-center relative cursor-pointer">
-              <div
-                className="hidden sm:flex flex-col items-center gap-1.5"
-                onClick={() => setAcctDrop(!acctdrop)}
-              >
+            <div
+              onMouseOver={() => setAcctDrop(true)}
+              onMouseLeave={() => setAcctDrop(false)}
+              className="flex flex-col items-center relative cursor-pointer py-4"
+            >
+              <div className="hidden sm:flex flex-col items-center gap-1.5">
                 <p className="font-all font-medium text-xs text-center text-white">
                   {name ?? "Anonymous"}
                 </p>
@@ -61,47 +66,58 @@ export default function MainPageNavbar() {
                   My account
                 </p>
               </div>
-              <button
-                ref={focusRef}
-                onMouseDown={(e) => {
-                  if (e.target === e.currentTarget) setAcctDrop(!acctdrop);
-                }}
-                type={"button"}
+              <div
                 className={`${
                   acctdrop ? "sm:flex" : "hidden"
-                } sm:min-w-[120px] bg-white p-2 hidden rounded-sm gap-2 flex-col absolute top-10 items-start border border-black/40 outline-none`}
+                } sm:min-w-[140px] bg-white p-2 hidden rounded gap-2 flex-col absolute top-17 items-start border border-stone-500 outline-none`}
               >
-                <Link
-                  to={"/profile"}
-                  className="text-sm text-start cursor-pointer"
-                >
-                  My profile
-                </Link>
-                <Link
-                  to={"/order"}
-                  className="text-sm text-start cursor-pointer"
-                >
-                  My orders
-                </Link>
-                <Link
-                  to={"/settings"}
-                  className="text-sm text-start cursor-pointer"
-                >
-                  settings
-                </Link>
-                <div
-                  className="text-sm text-start cursor-pointer"
-                  onClick={() => {
-                    sessionStorage.setItem(
-                      "baron:user",
-                      JSON.stringify({ name: "", email: "", isVerified: false })
-                    );
-                    navigate("/");
-                  }}
-                >
-                  Logout
+                <div className="flex flex-row items-center w-full gap-2">
+                  <User size={18} className="self-center text-blue-600" />
+                  <Link
+                    to={"/profile"}
+                    className="text-sm text-start font-all font-semibold self-center cursor-pointer"
+                  >
+                    My profile
+                  </Link>
                 </div>
-              </button>
+                <div className="flex flex-row items-center w-full gap-2">
+                  <Package size={18} className="self-center text-blue-600" />
+                  <Link
+                    to={"/order"}
+                    className="text-sm text-start font-all font-semibold self-center cursor-pointer"
+                  >
+                    My orders
+                  </Link>
+                </div>
+                <div className="flex flex-row items-center w-full gap-2">
+                  <Settings size={18} className="self-center text-blue-600" />
+                  <Link
+                    to={"/settings"}
+                    className="text-sm text-start font-all font-semibold self-center cursor-pointer"
+                  >
+                    Settings
+                  </Link>
+                </div>
+                <div className="flex flex-row items-center w-full gap-2">
+                  <LogOut size={18} className="self-center text-red-600" />
+                  <div
+                    className="text-sm text-start cursor-pointer font-all font-semibold"
+                    onClick={() => {
+                      sessionStorage.setItem(
+                        "baron:user",
+                        JSON.stringify({
+                          name: "",
+                          email: "",
+                          isVerified: false,
+                        })
+                      );
+                      navigate("/");
+                    }}
+                  >
+                    Logout
+                  </div>
+                </div>
+              </div>
             </div>
           ) : (
             <>
@@ -109,12 +125,12 @@ export default function MainPageNavbar() {
                 to={"/signup"}
                 className={`${
                   isVerified ? "hidden" : "flex"
-                } hidden sm:flex flex-col items-center gap-1.5`}
+                } hidden sm:flex flex-col items-center gap-0.5`}
               >
-                <p className="font-all font-medium text-xs text-center text-white">
-                  Login/SignUp
+                <p className="font-all font-normal text-xs text-center text-blue-500">
+                  Login/Signup
                 </p>
-                <p className="font-all font-medium text-xs text-center text-white">
+                <p className="font-all font-medium text-[13px] text-center text-white">
                   My account
                 </p>
               </Link>
@@ -190,7 +206,7 @@ export default function MainPageNavbar() {
               </button>
             </>
           </div>
-          <Link to={"/cart"} className="relative">
+          <Link to={"/cart"} className="relative self-center">
             <ShoppingCartIcon className="text-white cursor-pointer" />
             <div className="h-2 w-2 bg-[#BB2331] p-2 cursor-pointer flex justify-center rounded-full absolute -top-1 right-0">
               <p className="text-white text-[10px] font-medium text-center self-center">
@@ -207,23 +223,24 @@ export default function MainPageNavbar() {
       <div className="relative w-full sm:hidden flex bg-white">
         <MobileDropDown menu={menu} setMenu={Menoo} />
       </div>
-      <div className="w-full bg-white">
-        <section className="bg-white p-2 hidden sm:flex justify-center w-3/4 sm:w-[90%] md:w-[70%] mx-auto">
+      <div className="w-full bg-white  border-b border-stone-300">
+        <section className="bg-white hidden sm:flex justify-center w-3/4 sm:w-[90%] md:w-[70%] mx-auto">
           <ul className="flex flex-row items-center justify-between w-full">
             <div
               onClick={() => {
                 setBrand("other");
                 navigate("/brand/all");
               }}
-              className="font-all text-sm text-center font-medium list-none"
+              className="font-all text-sm text-center font-medium list-none py-4"
             >
               All Deals
             </div>
-            <div className="flex flex-col items-center relative">
-              <div
-                onClick={() => setdrop(!drop)}
-                className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
-              >
+            <div
+              onMouseOver={() => setdrop(true)}
+              onMouseLeave={() => setdrop(false)}
+              className="flex flex-col items-center relative py-4"
+            >
+              <div className="flex flex-row items-center gap-1.5 justify-center cursor-pointer">
                 <p className="font-all text-sm font-medium text-center">
                   Shop by Brand
                 </p>
@@ -234,12 +251,10 @@ export default function MainPageNavbar() {
                   size={12}
                 />
               </div>
-              <button
-                ref={focusRef}
-                type={"button"}
+              <div
                 className={`${
                   drop ? "flex" : "hidden"
-                } sm:min-w-[200px] bg-white flex-col max-h-[400px] overflow-y-scroll absolute top-10 items-start border border-black/40 outline-none`}
+                } sm:min-w-[200px] bg-white flex-col max-h-[400px] overflow-y-scroll absolute top-13 items-start border border-black/40 outline-none`}
               >
                 {brand.map((item, index) => {
                   return (
@@ -256,16 +271,14 @@ export default function MainPageNavbar() {
                     </Link>
                   );
                 })}
-              </button>
+              </div>
             </div>
-            <div className="flex flex-col items-center relative">
-              <div
-                onClick={() => {
-                  setdown(!down);
-                  setdrop(false);
-                }}
-                className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
-              >
+            <div
+              onMouseOver={() => setdown(true)}
+              onMouseLeave={() => setdown(false)}
+              className="flex flex-col items-center relative py-4"
+            >
+              <div className="flex flex-row items-center gap-1.5 justify-center cursor-pointer">
                 <p className="font-all text-sm font-medium text-center">
                   Product
                 </p>
@@ -276,13 +289,10 @@ export default function MainPageNavbar() {
                   size={12}
                 />
               </div>
-              <button
-                ref={focusRef}
-                onClick={() => console.log("BTN")}
-                type={"button"}
+              <div
                 className={`${
                   down ? "flex" : "hidden"
-                } sm:min-w-[200px] bg-white overflow-y-scroll max-h-[400px] duration-200 flex-col absolute top-10 items-start border border-black/40 outline-none z-30`}
+                } sm:min-w-[200px] bg-white overflow-y-scroll max-h-[400px] duration-200 flex-col absolute top-13 items-start border border-black/40 outline-none z-30`}
               >
                 {products.map((item, index) => {
                   return (
@@ -304,7 +314,7 @@ export default function MainPageNavbar() {
                     </Link>
                   );
                 })}
-              </button>
+              </div>
             </div>
             <div className="font-all text-sm text-center font-medium list-none">
               Service Center

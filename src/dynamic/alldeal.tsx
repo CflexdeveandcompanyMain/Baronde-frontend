@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
 import ProductAuthCard from "./product";
 import Footer from "../footer/footer";
+import BreadCrumb from "../utils/breadcrumb";
+import { ShopBy } from "./productpage";
 
 export default function AllDeals() {
   const { data, status } = useQuery({
@@ -27,23 +29,17 @@ export default function AllDeals() {
     const totalProducts = result?.length || 0;
     const startCount = totalProducts > 0 ? 1 : 0;
     const endCount = totalProducts;
+    const path = ["Home", ...window.location.pathname.split("/")];
 
     return (
       <>
         <MainPageNavbar />
-        <section className="w-full h-full py-3 bg-gray-200 flex flex-col z-10 items-center sm:gap-5 justify-start gap-4">
-          <div className="flex flex-col items-start w-full sm:gap-10 sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
-            <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
-              <p className="font-all font-semibold text-2xl text-center w-full text-green-600">
-                Shop From
-                <span className="text-[#E5A000] font-all"> The Best</span>
-              </p>
-              <p className="font-all text-sm text-center w-full">
-                Discover premium musical instruments and audio equipment at
-                Barondemusical, offering superior sound quality, durability, and
-                unmatched performance for musicians.
-              </p>
-            </div>
+        <section className="w-full h-full py-3 bg-white sm:bg-gray-200 flex flex-col z-10 items-center sm:gap-5 justify-start gap-4">
+          <div className="flex flex-row items-center w-full p-3">
+            {<BreadCrumb path={path} url="brand" />}
+          </div>
+          <div className="w-[98%] sm:w-3/4 mx-auto sm:mt-10 px-1">
+            <ShopBy />
           </div>
           <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
             <div className="flex flex-col items-start gap-2 w-full px-3">

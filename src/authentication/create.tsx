@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { bdm } from "../index";
-// import { type CredentialResponse } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
 import { getOTP } from "../utils/getFetch";
 import { useAuthStore } from "../store/user";
 import { EyeIcon, EyeOffIcon, LoaderCircleIcon } from "lucide-react";
 import ErrorMessage from "../utils/errorMessage";
-import BrandLogo from "../utils/brand";
 
 export default function UserCreateAccount() {
   let [viewPassword, setViewPassword] = useState<boolean>(false);
@@ -74,8 +71,7 @@ export default function UserCreateAccount() {
 
   return (
     <section className="w-full bg-white h-screen sm:bg-gray-200 flex justify-center">
-      <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
-        <BrandLogo img={bdm} color="black" />
+      <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto shadow-xl rounded-sm flex flex-col items-center gap-2 p-3">
         <p className="font-all font-semibold text-xl text-start w-full my-3">
           Create an Account
         </p>

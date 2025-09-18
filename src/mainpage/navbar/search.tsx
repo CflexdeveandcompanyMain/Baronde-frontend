@@ -9,12 +9,6 @@ export default function MainPageSearchBar() {
 
   let navigate = useNavigate();
 
-  const focusRef = (element: HTMLButtonElement) => {
-    if (element) {
-      element.focus();
-    }
-  };
-
   return (
     <div className={`hidden sm:flex flex-row items-center w-full`}>
       <input
@@ -22,25 +16,23 @@ export default function MainPageSearchBar() {
         onChange={(e) => setKeyword(e.target.value)}
         type={"text"}
         placeholder="Search"
-        className="font-all text-[13px] w-3/5 font-normal outline-none p-2 bg-white border border-black rounded-l"
+        className="font-all text-[13px] w-[70%] font-normal outline-none p-2 bg-white border border-stone-500 rounded-l"
       />
-      <div className="flex flex-col w-2/5 items-center p-2 py-2.5 border border-black border-l-0 bg-white relative">
-        <div
-          onClick={() => setdrop(!drop)}
-          className="flex flex-row items-center gap-1.5 justify-center cursor-pointer"
-        >
+      <div
+        onMouseOver={() => setdrop(true)}
+        onMouseLeave={() => setdrop(false)}
+        className="flex flex-col w-[30%] items-center p-2 py-2.5 border border-stone-500 border-l-0 bg-white relative"
+      >
+        <div className="flex flex-row items-center gap-1.5 justify-center cursor-pointer">
           <p className="font-all text-xs font-medium text-center">
             All categories
           </p>
           <ChevronDown className="duration-300" size={12} />
         </div>
         <button
-          ref={focusRef}
-          onBlur={() => setdrop(!drop)}
-          type={"button"}
           className={`${
             drop ? "flex" : "hidden"
-          } sm:min-w-[200px] max-h-[300px] overflow-y-scroll bg-white flex-col absolute top-10 items-start border border-black/40 outline-none`}
+          } sm:min-w-[200px] max-h-[300px] overflow-y-scroll bg-white flex-col absolute top-10 items-start border border-stone-500 outline-none`}
         >
           {products.map((item, index) => {
             return (
@@ -66,7 +58,7 @@ export default function MainPageSearchBar() {
             navigate("/search/" + keyword);
           }
         }}
-        className="flex justify-center bg-[#BB2331] rounded-r-sm p-[9px]"
+        className="flex justify-center bg-[#b42231] rounded-r-sm p-[9px]"
       >
         <Search size={20} className="text-white" />
       </div>

@@ -58,13 +58,15 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           setData(data);
           navigate(`/singleproduct/${data.name}-${data._id}`);
         }}
-        className="flex flex-col items-center justify-between w-auto min-h-full h-fit border border-stone-200 sm:min-w-[200px] p-2  bg-white"
+        className="flex flex-col items-center justify-between w-auto min-h-full h-fit border border-stone-200 sm:min-w-[200px]  bg-white"
       >
         <div className="flex flex-col items-center h-auto w-full relative">
-          <div className="relative w-full h-auto">
+          <div className="relative w-full h-auto p-1">
             <img
+              width={200}
+              height={200}
               src={data.images[0].url}
-              className="object-contain h-full w-full mx-auto bg-white max-h-[250px]"
+              className="object-contain h-full w-full mx-auto bg-white max-h-[220px]"
               alt="Content image"
             />
 
@@ -74,7 +76,11 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               </p>
             </div>
           </div>
-          <div className="flex justify-center bg-[#fdb204f3] p-1 shadow absolute top-1.5 left-1.5 ">
+          <div
+            className={`${
+              data.discount <= 0 ? "" : "flex"
+            } justify-center bg-[#fc5000] p-1 shadow absolute top-1.5 left-1.5`}
+          >
             <p
               className={`text-white font-all text-center text-xs font-semibold`}
             >
@@ -82,7 +88,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             </p>
           </div>
         </div>
-        <div className="flex flex-col items-center w-full gap-1.5 bg-slate-100/20 p-1.5">
+        <div className="flex flex-col items-center w-full gap-1.5 bg-slate-100/20 p-2">
           <p className={`text-start font-medium font-all text-sm w-full`}>
             {data.name}
           </p>
@@ -90,7 +96,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             {data.description.replaceAll("/", "||").substring(0, 120) + "..."}
           </p>
           <div className="flex flex-row items-start sm:items-center w-full justify-between">
-            <p className="text-[#fdb100] text-sm text-start font-medium font-all">
+            <p className="text-[#fc5000] text-lg text-start font-medium font-all">
               {formatPrice(data.price - data.discount, "NGN")}
             </p>
             <p
@@ -103,9 +109,9 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           </div>
           <div className="w-full flex justify-start gap-1">
             <p className="font-all text-xs font-medium self-center">Brand:</p>
-            <div className="bg-green-100 border flex justify-center self-center border-green-400 py-[1px] px-1 rounded-lg">
+            <div className="bg-green-100 border flex justify-center self-center border-green-400 py-[1px] px-1 rounded">
               <p
-                className={`text-start font-medium font-all self-center text-xs`}
+                className={`text-start font-semibold font-all self-center text-xs`}
               >
                 {data.brand}
               </p>
@@ -156,7 +162,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             <div
               className={`${
                 isSingleImage ? "hidden" : "flex"
-              } flex flex-col items-start gap-1 w-1/5 justify-start self-start`}
+              } flex flex-col items-start gap-1 w-1/4 justify-start self-start`}
             >
               {isSingleImage ? (
                 <></>
@@ -164,7 +170,11 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 data.images.map((item, index: number) => {
                   return (
                     <div key={index} onClick={() => setImage(item.url)}>
-                      <div className="relative w-full h-full">
+                      <div
+                        className={`relative w-full h-full rounded-md ${
+                          item.url == image ? "border-2 border-[#fc5000]" : ""
+                        }`}
+                      >
                         <img
                           src={item.url}
                           className="object-cover h-full w-full bg-white"
@@ -182,7 +192,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 })
               )}
             </div>
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full px-2">
               <img
                 src={image}
                 className="object-cover h-full w-full bg-white max-h-[300px]"
@@ -196,33 +206,35 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               </div>
             </div>
           </div>
-          <div className="w-full flex flex-col items-start justify-start self-stretch gap-3">
-            <div className="w-full sm:flex hidden justify-end pb-2">
-              <X
-                onClick={() => setView(!view)}
-                size={24}
-                className="self-end text-end justify-self-end cursor-pointer"
-              />
-            </div>
+          <div className="sm:w-4/5 w-full flex flex-col items-start justify-start self-stretch gap-3">
             <div className="flex flex-col items-start w-full gap-2 border-b border-stone-400 pb-4">
-              <p className="font-all sm:text-xl text-sm font-semibold text-start w-full">
-                {data.name}
-              </p>
+              <div className="flex flex-row items-center w-full justify-between">
+                <p className="font-all sm:text-xl text-sm font-semibold text-start w-full">
+                  {data.name}
+                </p>
+                <div className="w-full sm:flex hidden justify-end pb-2">
+                  <X
+                    onClick={() => setView(!view)}
+                    size={24}
+                    className="self-end text-end justify-self-end cursor-pointer"
+                  />
+                </div>
+              </div>
               <p className="font-all sm:text-base text-xs font-medium text-start w-full">
                 {data.description}
               </p>
             </div>
             <div className="flex flex-col items-start w-full gap-3">
-              <div className="flex flex-row items-center gap-7">
-                <p className="font-all text-sm sm:text-base text-gray-500 font-medium">
-                  Price
+              <div className="flex flex-row items-center gap-5">
+                <p className="font-all text-sm sm:text-[15px] font-semibold">
+                  Price:
                 </p>
-                <p className="font-all text-sm sm:text-base text-gray-500 font-medium">
+                <p className="font-all text-sm sm:text-lg text-[#fc5000] font-medium">
                   {formatPrice(data.price, "NGN")}
                 </p>
               </div>
               <div className="flex flex-row items-center w-full gap-3">
-                <p className="font-all text-sm sm:text-base text-gray-500 font-medium">
+                <p className="font-all text-sm sm:text-base font-semibold">
                   Quantity
                 </p>
                 <div className="flex items-center bg-white rounded border border-stone-200">
@@ -230,7 +242,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                     onClick={handleDecrement}
                     disabled={getProductQuantity(data._id) === 0}
                     className={
-                      "w-10 h-8 flex items-center border-r border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                      "w-11 h-9 flex items-center border-r border-stone-300 disabled:bg-stone-100 justify-center transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
                     }
                   >
                     <Minus className="text-gray-700" size={16} />
@@ -250,26 +262,26 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                     disabled={!isInCart(data._id)}
                     onClick={handleIncrement}
                     className={
-                      "w-10 h-8 flex items-center border-l border-stone-300 justify-center disabled:bg-gray-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                      "w-11 h-9 flex items-center border-l border-stone-300 justify-center disabled:bg-stone-100 transform transition-all duration-200 hover:scale-110 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed"
                     }
                   >
                     <Plus className="text-gray-700" size={16} />
                   </button>
                 </div>
               </div>
-              <div className="flex flex-row items-center w-full justify-between gap-4">
+              <div className="flex flex-row items-center w-full justify-between gap-2 sm:mt-5">
                 <button
                   disabled={blockToAdd}
                   onClick={() => addToCart(data)}
-                  className="w-full p-3 bg-amber-600 disabled:bg-gray-300"
+                  className="w-2/5 p-3 bg-[#fc5000] disabled:bg-gray-300"
                 >
-                  <p className="w-full text-center font-all font-medium text-xs sm:text-sm text-white">
+                  <p className="w-full text-center font-all font-medium text-xs sm:text-[13px]  text-white">
                     Add Cart
                   </p>
                 </button>
                 <div
                   onClick={() => setView(!view)}
-                  className="w-full p-3 bg-green-800 text-center font-all font-medium text-xs sm:text-sm text-white"
+                  className="w-3/5 p-3 bg-green-800 text-center font-all font-medium text-xs sm:text-[13px]  text-white"
                 >
                   Continue shopping
                 </div>

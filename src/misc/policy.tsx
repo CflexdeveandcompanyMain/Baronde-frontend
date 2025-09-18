@@ -146,11 +146,19 @@ export default function PrivatePolicy() {
           </div>
           <div className="flex flex-col items-center w-full">
             <p className="font-all sm:text-lg text-sm text-start w-full uppercase font-semibold">
-              section 11 - errors & omission
+              section 11 - user data protection & delivery cost
             </p>
             <p className="font-all text-[12.5px] text-start">
-              Occasionally, the site may contain inaccuracies. We reserve the
-              right to correct such errors and cancel orders affected by them.
+              We take the security and confidentiality of your personal data
+              seriously. All user data collected on this site is protected using
+              industry-standard security measures and will never be sold,
+              rented, or disclosed to third parties except as required by law or
+              to fulfill your order.
+              <br />
+              Delivery costs for purchased products will be clearly displayed at
+              checkout before you complete your order. These costs are subject
+              to change based on location, delivery method, or courier fees, but
+              you will always be informed of the final amount before payment.
             </p>
           </div>
           <div className="flex flex-col items-center w-full">

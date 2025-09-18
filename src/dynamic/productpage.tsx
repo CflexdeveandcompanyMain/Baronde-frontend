@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
 import { motion } from "framer-motion";
 import { useGlobalState } from "../store/globalstate";
+import BreadCrumb from "../utils/breadcrumb";
 
 export default function ProductPage() {
   const { data, status } = useQuery({
@@ -16,7 +17,7 @@ export default function ProductPage() {
   let { brand } = useGlobalState();
 
   let parameter = useParams();
-  let cat: string = parameter.category?.replaceAll(" ", "").toLowerCase() ?? "";
+  let cat: string = parameter.category?.toLowerCase().replaceAll(" ", "") ?? "";
 
   if (cat === "double+full_range_speaker") cat = "fullrangespeaker";
   if (cat === "piano+keyboard") cat = "piano";
@@ -41,11 +42,12 @@ export default function ProductPage() {
     const totalProducts = result?.length || 0;
     const startCount = totalProducts > 0 ? 1 : 0;
     const endCount = totalProducts;
+    const path = ["Home", ...window.location.pathname.split("/")];
 
     return (
       <>
         <MainPageNavbar />
-        <section className="w-full h-full pb-3 pt-0 bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
+        <section className="w-full h-full pb-3 pt-0 bg-white sm:bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
           <div className="flex flex-col items-start w-full sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
             <motion.div
               initial={{ scale: 0.4, opacity: 0.5 }}
@@ -72,6 +74,9 @@ export default function ProductPage() {
               <ShopBy />
             </div>
             <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
+              <div className="flex flex-row items-center w-full">
+                {<BreadCrumb path={path} url="product" />}
+              </div>
               <div className="flex flex-col items-start gap-2 w-full px-3">
                 <p className="font-all text-xs text-start w-full">
                   {totalProducts > 0
@@ -116,14 +121,29 @@ export function ShopBy() {
       style={{ width: "100%" }}
       className="flex flex-col items-center mx-auto self-center"
     >
-      <p className="font-all font-semibold text-2xl text-center w-full text-green-600">
-        Shop From
-        <span className="text-[#E5A000] font-all"> The Best</span>
+      <p className="font-all font-semibold text-xl text-start sm:text-center w-full text-[#677279]">
+        Shop the Best Deals and Discounts on Musical Instruments in Nigeria
       </p>
-      <p className="font-all text-sm text-center w-full">
-        Discover premium musical instruments and audio equipment at
-        Barondemusical, offering superior sound quality, durability, and
-        unmatched performance for musicians.
+      <p className="font-all text-[12px] text-left font-medium sm:text-center w-full mt-2">
+        Get extra value at BarondeMusical with our big deals and sales! Enjoy
+        top prices on a wide range of professional sound and musical gear. Save
+        big on{" "}
+        <span className="text-orange-500 underline"> amplifier racks</span>,
+        <span className="text-orange-500 underline"> power amps</span>,
+        <span className="text-orange-500 underline"> subs</span>,
+        <span className="text-orange-500 underline"> speakers</span>,
+        <span className="text-orange-500 underline"> stage monitors</span>,
+        <span className="text-orange-500 underline"> line arrays</span>,
+        <span className="text-orange-500 underline"> mixers</span>,
+        <span className="text-orange-500 underline"> DJ controllers</span>, and
+        <span className="text-orange-500 underline">
+          {" "}
+          public address systems
+        </span>
+        . We've also got amazing deals on drums, guitars, keyboards, wind
+        instruments, microphones, studio gear, and more! And because we’re
+        BarondeMusical, you know our deals mean trusted brands, quality
+        equipment, and reliable performance.
       </p>
     </motion.div>
   );

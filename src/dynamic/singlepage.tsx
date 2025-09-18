@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import { usePageData } from "../store/singlepage";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Minus, Plus } from "lucide-react";
 import { formatPrice } from "../utils/priceconverter";
 import { useCart } from "../utils/storage";
+import BreadCrumb from "../utils/breadcrumb";
 
 export default function SingleProductPage() {
   let [count, setcount] = useState(0);
@@ -39,17 +40,17 @@ export default function SingleProductPage() {
 
   let [Image, setImage] = useState(data.images[0].url);
   let isSingleImage = data.images.length === 1;
-  console.log(data);
+  console.log(data, window.location);
   const blockToAdd = isInCart(data._id);
-
-  useEffect(() => {
-    console.log(Image);
-  }, [Image]);
+  const path = ["Home", ...window.location.pathname.split("/")];
 
   return (
     <>
       <MainPageNavbar />
       <section className="w-full bg-white sm:bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4 py-5">
+        <div className="flex flex-row items-center md:w-3/4 w-[95%] mx-auto">
+          {<BreadCrumb path={path} url="singleproduct" />}
+        </div>
         <div className="flex flex-col items-start w-[95%] gap-2 sm:h-auto md:w-3/4 mx-auto mt-4 sm:mt-6">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
             <div className="flex flex-row items-center border border-stone-200 p-1 bg-white w-full rounded self-stretch gap-[2px]">
