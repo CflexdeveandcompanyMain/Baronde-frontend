@@ -66,7 +66,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               width={200}
               height={200}
               src={data.images[0].url}
-              className="object-cover min-w-[200px] w-full mx-auto h-full"
+              className="object-cover w-full mx-auto h-full"
               alt="Content image"
               loading="lazy"
             />
