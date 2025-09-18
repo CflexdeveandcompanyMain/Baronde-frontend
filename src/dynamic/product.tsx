@@ -61,12 +61,12 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
         className="flex flex-col items-center justify-between w-auto min-h-full h-fit border border-stone-200 sm:min-w-[200px]  bg-white"
       >
         <div className="flex flex-col items-center h-auto w-full relative">
-          <div className="relative w-full h-auto p-1">
+          <div className={`relative w-full p-1 h-[200px] max-h-[200px]`}>
             <img
               width={200}
               height={200}
               src={data.images[0].url}
-              className="object-contain h-full w-full mx-auto bg-white max-h-[220px]"
+              className="object-fit min-w-[200px] w-full mx-auto h-full"
               alt="Content image"
               loading="lazy"
             />
