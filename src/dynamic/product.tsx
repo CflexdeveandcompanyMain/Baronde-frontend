@@ -94,7 +94,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             {data.name}
           </p>
           <p className="font-medium text-start font-all text-[13px] text-gray-600 w-full">
-            {data.description.replaceAll("/", "||").substring(0, 120) + "..."}
+            {data.description.replaceAll("/", "||").substring(0, 80) + "..."}
           </p>
           <div className="flex flex-row items-start sm:items-center w-full justify-between">
             <p className="text-[#eb720fee] text-lg text-start font-semibold font-all">
