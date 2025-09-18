@@ -3,6 +3,7 @@ import { brand, products } from "../../raw-datas/rd1";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronDown, InboxIcon, PhoneCallIcon } from "lucide-react";
 import { useGlobalState } from "../../store/globalstate";
+import { fb, ig, wha, youtube } from "../..";
 
 export default function MobileDropDown({
   menu,
@@ -25,10 +26,17 @@ export default function MobileDropDown({
     <div
       className={`${
         menu ? "flex" : "hidden"
-      } flex-col items-center w-full gap-5 overflow-y-auto absolute h-screen z-30 top-0 bg-white p-5`}
+      } flex-col items-center w-full gap-5 overflow-y-auto absolute h-screen z-30 top-0 bg-white`}
     >
       <div className="mr-0 -mt-[1.6rem] justify-end self-end w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-white"></div>
-      <div className="flex flex-col items-center w-full gap-2">
+      <Link
+        onClick={() => setMenu()}
+        to={"/brand/all"}
+        className="font-all text-sm text-start font-medium w-full px-5"
+      >
+        All Deals
+      </Link>
+      <div className="flex flex-col items-center w-full gap-2 px-5">
         <div className="flex flex-row items-center justify-between w-full">
           <p className="font-all text-sm text-start font-medium">Products</p>
           <ChevronDown
@@ -53,7 +61,7 @@ export default function MobileDropDown({
                   item.replaceAll(" ", "_").replaceAll("/", "+").toLowerCase()
                 }
                 key={index}
-                className="font-all text-xs text-start hover:bg-gray-100 p-2 w-full rounded transition-colors"
+                className="font-all text-xs text-start hover:bg-gray-100 font-medium p-2 w-full rounded transition-colors"
               >
                 {item}
               </Link>
@@ -61,7 +69,7 @@ export default function MobileDropDown({
           })}
         </div>
       </div>
-      <div className="flex flex-col items-center w-full gap-2">
+      <div className="flex flex-col items-center w-full gap-2 px-5">
         <div className="flex flex-row items-center justify-between w-full">
           <p className="font-all text-sm text-start font-medium">
             Shop by Brands
@@ -89,7 +97,7 @@ export default function MobileDropDown({
                   navigate(`/brand/${item}`);
                 }}
                 key={index}
-                className="font-all text-xs text-start hover:bg-gray-100 p-2 w-full rounded transition-colors"
+                className="font-all text-xs text-start hover:bg-gray-100 p-2 w-full font-medium rounded transition-colors"
                 type="button"
               >
                 {item}
@@ -101,35 +109,82 @@ export default function MobileDropDown({
       <Link
         onClick={() => setMenu()}
         to={"/about"}
-        className="font-all text-sm text-start font-medium w-full"
+        className="font-all text-sm text-start font-medium w-full px-5"
       >
         About
       </Link>
-      <Link
-        onClick={() => setMenu()}
-        to={"/brand/all"}
-        className="font-all text-sm text-start font-medium w-full"
-      >
-        All Deals
-      </Link>
+
       <Link
         onClick={() => setMenu()}
         to={"/testimonial"}
-        className="font-all text-sm text-start font-medium w-full"
+        className="font-all text-sm text-start font-medium w-full px-5"
       >
         Testimonies
       </Link>
-      <div className="flex flex-row items-center gap-2 w-full">
+      <div className="h-[1px] w-full bg-stone-400"></div>
+      <p className="font-medium text-sm text-stone-600 uppercase font-all w-full text-start px-5 -mt-2">
+        need help?
+      </p>
+      <div className="flex flex-row items-center gap-2 w-full px-5 -mt-2">
         <PhoneCallIcon />
         <p className="font-all text-sm text-start font-medium">
           Call us 09138254838
         </p>
       </div>
-      <div className="flex flex-row items-center gap-2 w-full">
+      <div className="flex flex-row items-center gap-2 w-full px-5">
         <InboxIcon />
         <p className="font-all text-sm text-start font-medium">
-          Info@Barondemusical.com
+          info@Barondemusical.com
         </p>
+      </div>
+      <div className="h-[1px] w-full bg-stone-400"></div>
+      <div className="flex flex-col items-start gap-2 self-center sm:w-auto w-full px-5">
+        <p className="font-all text-sm text-stone-600 font-medium text-start uppercase">
+          Follow us
+        </p>
+        <div className="flex flex-col items-center gap-3">
+          <Link
+            to={
+              "https://web.facebook.com/people/Soundprincemusicalworld/61561311194823"
+            }
+            className="flex flex-row items-center w-full gap-3"
+          >
+            <div className="w-6 h-6 rounded-full bg-stone-700 p-[5px] flex justify-center">
+              <img src={fb} className="object-contain w-full" />
+            </div>
+            <p className="font-medium font-all text-sm">Facebook</p>
+          </Link>
+          <Link
+            to={"https://www.instagram.com/soundprincemusicalworld/"}
+            className="flex flex-row items-center w-full gap-3"
+          >
+            <div className="w-6 h-6 rounded-full bg-stone-700 p-[5px] flex justify-center">
+              <img src={ig} className="object-contain w-full" />
+            </div>
+            <p className="font-medium font-all text-sm">Instagram</p>
+          </Link>
+          <Link
+            to={"https://www.youtube.com/@SoundprinceMusicalworld"}
+            className="flex flex-row items-center w-full gap-3"
+          >
+            <div className="w-6 h-6 rounded-full bg-stone-700 p-[5px] flex justify-center">
+              <img src={youtube} className="object-contain w-full" />
+            </div>
+            <p className="font-medium font-all text-sm">Youtube</p>
+          </Link>
+
+          <Link
+            to={
+              "https://wa.me/2349138254838?text=`Hello!, I'm interested in your servce`"
+            }
+            className="flex flex-row items-center w-full gap-3"
+          >
+            <div className="w-6 h-6 rounded-full bg-stone-700 p-[5px] flex justify-center">
+              <img src={wha} className="object-contain w-full" />
+            </div>
+            <p className="font-medium font-all text-sm">Whatsapp</p>
+          </Link>
+        </div>
       </div>
     </div>
   );

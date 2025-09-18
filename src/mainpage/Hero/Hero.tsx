@@ -48,7 +48,7 @@ export function HeroIntro() {
       initial={{ scale: 0.4, opacity: 0.5, left: -20 }}
       whileInView={{ scale: 1, opacity: 1, right: -20 }}
       transition={{ duration: 0.8 }}
-      className="w-full flex flex-col items-center justify-center gap-3"
+      className="w-full flex flex-col items-center justify-center gap-3 px-3"
     >
       <ShopBy />
     </motion.section>

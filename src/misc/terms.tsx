@@ -3,6 +3,10 @@ import { MainPageNavbar } from "..";
 import Footer from "../footer/footer";
 
 export default function TermsOfService() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth", // or "auto"
+  });
   return (
     <>
       <MainPageNavbar />

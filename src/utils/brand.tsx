@@ -14,8 +14,8 @@ export default function BrandLogo({
     >
       <img src={img} className="w-9 h-9 rounded object-cover" />
       <div className="flex flex-col items-start">
-        <p className={`font-all font-semibold text-lg text-${color}`}>Baron</p>
-        <p className={`font-all text-[12px] text-start text-${color} -mt-2`}>
+        <p className={`font-p font-semibold text-lg text-${color}`}>Baron</p>
+        <p className={`font-p text-[12px] text-start text-${color} -mt-2`}>
           Demusical
         </p>
       </div>

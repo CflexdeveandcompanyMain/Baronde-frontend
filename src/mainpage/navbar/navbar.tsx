@@ -46,9 +46,9 @@ export default function MainPageNavbar() {
   const Menoo = () => setmenu(!menu);
 
   return (
-    <nav className="flex flex-col items-center w-full sticky top-0 z-50">
+    <nav className="flex flex-col items-center w-full z-50 sticky top-0 ">
       <Marq />
-      <div className="flex flex-row items-center px-2 sm:px-7 justify-between bg-green-800 w-full sm:p-auto py-4">
+      <div className="flex flex-row items-center px-2 sm:px-7 justify-between bg-green-800 w-full sm:p-auto py-2">
         <BrandLogo img={bdm} color="white" />
         <MainPageSearchBar />
         <div className="flex flex-row items-end gap-6 w-3/5 sm:w-1/2 justify-end">
@@ -56,7 +56,7 @@ export default function MainPageNavbar() {
             <div
               onMouseOver={() => setAcctDrop(true)}
               onMouseLeave={() => setAcctDrop(false)}
-              className="flex flex-col items-center relative cursor-pointer py-4"
+              className="flex flex-col items-center relative cursor-pointer py-2"
             >
               <div className="hidden sm:flex flex-col items-center gap-1.5">
                 <p className="font-all font-medium text-xs text-center text-white">
@@ -231,14 +231,14 @@ export default function MainPageNavbar() {
                 setBrand("other");
                 navigate("/brand/all");
               }}
-              className="font-all text-sm text-center font-medium list-none py-4"
+              className="font-all text-sm text-center font-medium list-none py-2"
             >
               All Deals
             </div>
             <div
               onMouseOver={() => setdrop(true)}
               onMouseLeave={() => setdrop(false)}
-              className="flex flex-col items-center relative py-4"
+              className="flex flex-col items-center relative py-2"
             >
               <div className="flex flex-row items-center gap-1.5 justify-center cursor-pointer">
                 <p className="font-all text-sm font-medium text-center">
@@ -276,7 +276,7 @@ export default function MainPageNavbar() {
             <div
               onMouseOver={() => setdown(true)}
               onMouseLeave={() => setdown(false)}
-              className="flex flex-col items-center relative py-4"
+              className="flex flex-col items-center relative py-2"
             >
               <div className="flex flex-row items-center gap-1.5 justify-center cursor-pointer">
                 <p className="font-all text-sm font-medium text-center">

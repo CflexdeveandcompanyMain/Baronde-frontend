@@ -21,20 +21,20 @@ export default function BreadCrumb({
       );
     if (item === path[path.length - 1])
       return (
-        <div key={index} className="flex flex-row items-center gap-1">
+        <div key={index} className="flex flex-row items-center gap-0.5">
           <ChevronRight size={15} />
           <Link
             key={index}
             to={`/${url}/${item}`}
             className="hover:text-orange-500 font-all text-xs font-medium"
           >
-            {item}
+            {item.replaceAll("_", " ")}
           </Link>
         </div>
       );
     return (
       item && (
-        <div key={index} className="flex flex-row items-center gap-1">
+        <div key={index} className="flex flex-row items-center gap-0.5">
           <ChevronRight size={15} />
           <p className="font-all text-xs font-medium">{item}</p>
         </div>

@@ -44,12 +44,17 @@ export default function ProductPage() {
     const startCount = totalProducts > 0 ? 1 : 0;
     const endCount = totalProducts;
 
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // or "auto"
+    });
+
     return (
       <>
         <MainPageNavbar />
         <section className="w-full h-full pb-3 pt-0 bg-white sm:bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
           <div className="flex flex-col items-start w-full sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
-            <div className="flex flex-row items-center w-full my-1.5">
+            <div className="flex flex-row items-center w-full my-1.5 px-2">
               {<BreadCrumb path={path} url="product" />}
             </div>
             <motion.div
@@ -103,7 +108,7 @@ export default function ProductPage() {
               <ShopBy />
             </div>
             <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
-              <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
+              <div className="w-full p-3 grid lg:grid-cols-4 grid-cols-2">
                 {result?.map((item: any, index: number) => {
                   return (
                     <div

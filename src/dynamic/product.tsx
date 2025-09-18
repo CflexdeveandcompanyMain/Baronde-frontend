@@ -68,6 +68,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
               src={data.images[0].url}
               className="object-contain h-full w-full mx-auto bg-white max-h-[220px]"
               alt="Content image"
+              loading="lazy"
             />
 
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -176,6 +177,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                         }`}
                       >
                         <img
+                          loading="lazy"
                           src={item.url}
                           className="object-cover h-full w-full bg-white"
                           alt="Content image"
@@ -194,6 +196,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
             </div>
             <div className="relative w-full h-full px-2">
               <img
+                loading="lazy"
                 src={image}
                 className="object-cover h-full w-full bg-white max-h-[300px]"
                 alt="Content image"
