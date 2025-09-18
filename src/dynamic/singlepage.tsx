@@ -43,6 +43,7 @@ export default function SingleProductPage() {
   console.log(data, window.location);
   const blockToAdd = isInCart(data._id);
   const path = ["Home", ...window.location.pathname.split("/")];
+  path[path.length - 1] = path[path.length - 1].split("%")[0];
 
   return (
     <>

@@ -48,7 +48,7 @@ export default function MainPageNavbar() {
   return (
     <nav className="flex flex-col items-center w-full sticky top-0 z-50">
       <Marq />
-      <div className="flex flex-row items-center px-2 sm:px-7 justify-between bg-green-800 w-full">
+      <div className="flex flex-row items-center px-2 sm:px-7 justify-between bg-green-800 w-full sm:p-auto py-4">
         <BrandLogo img={bdm} color="white" />
         <MainPageSearchBar />
         <div className="flex flex-row items-end gap-6 w-3/5 sm:w-1/2 justify-end">
@@ -264,7 +264,7 @@ export default function MainPageNavbar() {
                         setBrand(item);
                         setTimeout(() => setdrop(!drop), 0);
                       }}
-                      className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
+                      className="p-2 w-full cursor-pointer hover:bg-gray-200 font-medium text-start font-all text-sm"
                       key={index}
                     >
                       {item}
@@ -307,7 +307,7 @@ export default function MainPageNavbar() {
                           .replaceAll("/", "+")
                           .toLowerCase()
                       }
-                      className="p-2 w-full cursor-pointer hover:bg-gray-200 text-start font-all text-sm"
+                      className="p-2 w-full cursor-pointer hover:bg-gray-200 font-medium text-start font-all text-sm"
                       key={index}
                     >
                       {item}

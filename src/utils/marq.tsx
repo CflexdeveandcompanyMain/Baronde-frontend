@@ -1,6 +1,6 @@
 export default function Marq() {
   return (
-    <div className="w-full bg-yellow-600 backdrop-blur-lg p-0.5">
+    <div className="w-full bg-[#d3762aee] backdrop-blur-lg p-0.5">
       <div className="overflow-hidden">
         <div
           id="scrollingText"

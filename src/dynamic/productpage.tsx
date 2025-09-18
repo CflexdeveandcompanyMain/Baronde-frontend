@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import ProductAuthCard from "./product";
@@ -40,15 +40,18 @@ export default function ProductPage() {
     });
 
     const totalProducts = result?.length || 0;
+    const path = ["Home", ...window.location.pathname.split("/")];
     const startCount = totalProducts > 0 ? 1 : 0;
     const endCount = totalProducts;
-    const path = ["Home", ...window.location.pathname.split("/")];
 
     return (
       <>
         <MainPageNavbar />
         <section className="w-full h-full pb-3 pt-0 bg-white sm:bg-gray-200 flex flex-col items-center sm:gap-5 justify-start gap-4">
           <div className="flex flex-col items-start w-full sm:h-auto sm:w-[94%] mx-auto mt-4 sm:mt-6">
+            <div className="flex flex-row items-center w-full my-1.5">
+              {<BreadCrumb path={path} url="product" />}
+            </div>
             <motion.div
               initial={{ scale: 0.4, opacity: 0.5 }}
               whileInView={{ scale: 1, opacity: 1 }}
@@ -70,20 +73,36 @@ export default function ProductPage() {
               </div>
             </motion.div>
 
-            <div className="w-[90%] sm:w-3/4 mx-auto sm:mt-10">
-              <ShopBy />
-            </div>
-            <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
-              <div className="flex flex-row items-center w-full">
-                {<BreadCrumb path={path} url="product" />}
-              </div>
-              <div className="flex flex-col items-start gap-2 w-full px-3">
-                <p className="font-all text-xs text-start w-full">
+            <div className="flex flex-col items-start w-full justify-start gap-2 p-3 mt-5">
+              <p className="font-all font-semibold text-xl text-start w-full text-[#677279]">
+                {formatString(
+                  parameter.category
+                    ?.replaceAll("_", " ")
+                    .replaceAll("+", "/") ?? "Random"
+                )}
+              </p>
+              <div className="flex flex-col items-start gap-2 w-full my-1.5">
+                <p className="font-all sm:flex hidden text-sm text-start w-full font-medium">
                   {totalProducts > 0
-                    ? `showing ${startCount} - ${endCount} of ${totalProducts} products`
+                    ? `Showing ${startCount} - ${endCount} of ${totalProducts} ${
+                        totalProducts == 1 ? "product" : "products"
+                      }`
+                    : "No products found"}
+                </p>
+                <p className="font-all sm:hidden flex text-sm text-start w-full font-medium">
+                  {totalProducts > 0
+                    ? `${totalProducts} ${
+                        totalProducts == 1 ? "product" : "products"
+                      }`
                     : "No products found"}
                 </p>
               </div>
+            </div>
+
+            <div className="p-3 w-full sm:w-[94%] sm:mt-10">
+              <ShopBy />
+            </div>
+            <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
               <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
                 {result?.map((item: any, index: number) => {
                   return (
@@ -119,27 +138,72 @@ export function ShopBy() {
       whileInView={{ scale: 1, opacity: 1 }}
       transition={{ duration: 1 }}
       style={{ width: "100%" }}
-      className="flex flex-col items-center mx-auto self-center"
+      className="flex flex-col items-center mx-auto self-center w-full"
     >
-      <p className="font-all font-semibold text-xl text-start sm:text-center w-full text-[#677279]">
+      <p className="font-all font-semibold text-xl text-start w-full text-[#677279]">
         Shop the Best Deals and Discounts on Musical Instruments in Nigeria
       </p>
-      <p className="font-all text-[12px] text-left font-medium sm:text-center w-full mt-2">
+      <p className="font-all text-[13px] text-left font-medium w-full mt-2">
         Get extra value at BarondeMusical with our big deals and sales! Enjoy
         top prices on a wide range of professional sound and musical gear. Save
         big on{" "}
-        <span className="text-orange-500 underline"> amplifier racks</span>,
-        <span className="text-orange-500 underline"> power amps</span>,
-        <span className="text-orange-500 underline"> subs</span>,
-        <span className="text-orange-500 underline"> speakers</span>,
-        <span className="text-orange-500 underline"> stage monitors</span>,
-        <span className="text-orange-500 underline"> line arrays</span>,
-        <span className="text-orange-500 underline"> mixers</span>,
-        <span className="text-orange-500 underline"> DJ controllers</span>, and
-        <span className="text-orange-500 underline">
+        <Link
+          to={"/product/amplifier_rack"}
+          className="text-orange-500 underline"
+        >
           {" "}
-          public address systems
-        </span>
+          amplifier racks
+        </Link>
+        ,
+        <Link
+          to={"/product/power_amplifier"}
+          className="text-orange-500 underline"
+        >
+          {" "}
+          power amps
+        </Link>
+        ,
+        <Link to={"/product/double_sub"} className="text-orange-500 underline">
+          {" "}
+          subs
+        </Link>
+        ,
+        <Link
+          to={"/product/double+full_range_speaker"}
+          className="text-orange-500 underline"
+        >
+          {" "}
+          speakers
+        </Link>
+        ,
+        <Link
+          to={"/product/floor+stage_monitor"}
+          className="text-orange-500 underline"
+        >
+          {" "}
+          stage monitors
+        </Link>
+        ,
+        <Link to={"/product/line_array"} className="text-orange-500 underline">
+          {" "}
+          line arrays
+        </Link>
+        ,
+        <Link
+          to={"/product/mixer_amplifier"}
+          className="text-orange-500 underline"
+        >
+          {" "}
+          mixers
+        </Link>
+        , and{" "}
+        <Link
+          to={"/product/dj_controller"}
+          className="text-orange-500 underline"
+        >
+          {" "}
+          DJ controllers
+        </Link>
         . We've also got amazing deals on drums, guitars, keyboards, wind
         instruments, microphones, studio gear, and more! And because we’re
         BarondeMusical, you know our deals mean trusted brands, quality

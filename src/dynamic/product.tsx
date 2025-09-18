@@ -78,8 +78,8 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           </div>
           <div
             className={`${
-              data.discount <= 0 ? "" : "flex"
-            } justify-center bg-[#fc5000] p-1 shadow absolute top-1.5 left-1.5`}
+              data.discount <= 0 ? "hidden" : "flex"
+            } justify-center bg-[#eb720fee] p-1 shadow absolute top-1.5 left-1.5`}
           >
             <p
               className={`text-white font-all text-center text-xs font-semibold`}
@@ -92,11 +92,11 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
           <p className={`text-start font-medium font-all text-sm w-full`}>
             {data.name}
           </p>
-          <p className="font-normal text-start font-all text-[13px] text-gray-600 w-full">
+          <p className="font-medium text-start font-all text-[13px] text-gray-600 w-full">
             {data.description.replaceAll("/", "||").substring(0, 120) + "..."}
           </p>
           <div className="flex flex-row items-start sm:items-center w-full justify-between">
-            <p className="text-[#fc5000] text-lg text-start font-medium font-all">
+            <p className="text-[#eb720fee] text-lg text-start font-semibold font-all">
               {formatPrice(data.price - data.discount, "NGN")}
             </p>
             <p
@@ -172,7 +172,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                     <div key={index} onClick={() => setImage(item.url)}>
                       <div
                         className={`relative w-full h-full rounded-md ${
-                          item.url == image ? "border-2 border-[#fc5000]" : ""
+                          item.url == image ? "border-2 border-[#eb720fee]" : ""
                         }`}
                       >
                         <img
@@ -229,7 +229,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 <p className="font-all text-sm sm:text-[15px] font-semibold">
                   Price:
                 </p>
-                <p className="font-all text-sm sm:text-lg text-[#fc5000] font-medium">
+                <p className="font-all text-sm sm:text-lg text-[#eb720fee] font-medium">
                   {formatPrice(data.price, "NGN")}
                 </p>
               </div>
@@ -273,7 +273,7 @@ export default function ProductAuthCard({ data }: { data: HeroDataType }) {
                 <button
                   disabled={blockToAdd}
                   onClick={() => addToCart(data)}
-                  className="w-2/5 p-3 bg-[#fc5000] disabled:bg-gray-300"
+                  className="w-2/5 p-3 bg-[#eb720fee] disabled:bg-gray-300"
                 >
                   <p className="w-full text-center font-all font-medium text-xs sm:text-[13px]  text-white">
                     Add Cart

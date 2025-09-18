@@ -41,6 +41,8 @@ export default function HeroCarousel() {
         {imgcar.map((item, index) => (
           <div key={index} className="w-full h-full flex-shrink-0">
             <img
+              width={300}
+              height={400}
               src={item.url}
               alt={`Slide ${index + 1}`}
               className="object-cover w-full h-full"

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import HeroCarousel from "../../utils/carousel";
 import { HeroObject } from "../../raw-datas/rd1";
+import { ShopBy } from "../../dynamic/productpage";
 
 export default function MainPageHero() {
   return (
@@ -18,6 +19,8 @@ export default function MainPageHero() {
             className="flex flex-row items-center gap-3 cursor-pointer"
           >
             <img
+              width={15}
+              height={15}
               src={
                 "https://res.cloudinary.com/dmaag3pvx/image/upload/v1752576538/Amplifier/whatsap_rpuamp.png"
               }
@@ -47,17 +50,7 @@ export function HeroIntro() {
       transition={{ duration: 0.8 }}
       className="w-full flex flex-col items-center justify-center gap-3"
     >
-      <div className="flex flex-col items-center w-[90%] sm:w-3/4 mx-auto self-center">
-        <p className="font-all font-semibold text-2xl text-center w-full">
-          Featured <span className="text-[#E5A000] font-all">Products</span>
-        </p>
-        <p className="font-all text-sm text-center w-full">
-          Experience the perfect harmony of sound and craftsmanship at
-          Barondemusical — your destination for premium musical instruments and
-          audio gear. Discover unmatched quality, lasting durability, and
-          performance that inspires every note.
-        </p>
-      </div>
+      <ShopBy />
     </motion.section>
   );
 }
