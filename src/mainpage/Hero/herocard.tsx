@@ -97,6 +97,16 @@ export default function HeroProductCard({ category }: { category: string }) {
     );
   }
 
+  if (status == "error") {
+    return (
+      <div className="w-full flex justify-center p-2">
+        <p className="font-all text-base font-semibold text-stone-800 text-center w-full">
+          Sorry, something went wrong!
+        </p>
+      </div>
+    );
+  }
+
   if (status === "success" && data) {
     let hs: any = {};
 
@@ -125,11 +135,11 @@ export default function HeroProductCard({ category }: { category: string }) {
       );
 
     return (
-      <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:gap-2 gap-1">
+      <div className="w-full overflow-x-scroll flex flex-row md:grid grid-cols-4 sm:gap-2 gap-1">
         {products.map((item: HeroDataType, index: number) => (
           <div
             key={index}
-            className="min-w-auto flex-shrink-0 self-stretch h-auto"
+            className="flex-shrink-0 self-stretch h-auto md:min-w-auto md:max-w-auto min-w-[200px] max-w-[250px]"
           >
             <ProductAuthCard data={item} />
           </div>

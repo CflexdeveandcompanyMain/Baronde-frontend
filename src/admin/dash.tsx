@@ -11,6 +11,7 @@ import { useState, useEffect, useCallback } from "react";
 import { dateEE, formatPrice, removeDuplicate } from "../utils/priceconverter";
 import { useQuery } from "@tanstack/react-query";
 import { adminAnalytics } from "../utils/getFetch";
+import ErrorComp from "../utils/Wrong";
 
 let filterD = ["Paid", "Processing", "Shipped", "Delivered", "Cancelled"];
 
@@ -24,6 +25,10 @@ export default function AdminMain() {
     queryKey: ["getAnalytics"],
     queryFn: () => adminAnalytics(),
   });
+
+  if (status == "error") {
+    return <ErrorComp />;
+  }
 
   const getPageNumbers = () => {
     const pageNumbers = [];
@@ -149,7 +154,7 @@ export default function AdminMain() {
   }, [status]);
 
   useEffect(() => {
-    if (data) {
+    if (data && data.data) {
       const { usersWithOrders, successfulPayments, totalOrders, totalRevenue } =
         data.data;
       Info = usersWithOrders.filter((item: any) => item.orders.length > 0);

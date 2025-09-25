@@ -171,17 +171,16 @@ const AdminDashboard = () => {
 export default AdminDashboard;
 
 export const ProtectedRoute = ({ child }: { child: ReactNode }) => {
-  const role = localStorage.getItem("baron:role");
-
-  if (role) console.log(role);
+  const { role } = JSON.parse(sessionStorage.getItem("baron:user") || "{}");
+  let [isAdmin, setAdmin] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
-    if (role !== "admin") {
+    if (role == "admin") {
+      setAdmin(true);
+    } else {
       navigate("/");
-      return;
     }
   }, []);
 
-  return child;
+  return isAdmin && child;
 };

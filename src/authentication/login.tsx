@@ -32,22 +32,18 @@ export default function UserSignInInterface() {
         setTimeout(() => setMessage(""), 5000);
       } else {
         let { name, email, id, role } = result.user;
+        sessionStorage.setItem(
+          "baron:user",
+          JSON.stringify({ name, email, isVerified: true, id, role })
+        );
+
         if (role === "admin") {
           navigate("/admin");
           return;
         }
-
         setMessage("");
-
-        sessionStorage.setItem(
-          "baron:user",
-          JSON.stringify({ name, email, isVerified: true })
-        );
-
         setCredentials(name, email, "", id);
-
         verifyOtp();
-
         navigate("/");
       }
     } catch (err: any) {

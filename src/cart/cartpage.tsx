@@ -9,6 +9,7 @@ import CartCard from "./cartd";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
+import ErrorComp from "../utils/Wrong";
 
 export default function CartPage() {
   const cartData: any = useCart();
@@ -19,6 +20,10 @@ export default function CartPage() {
     queryKey: ["products"],
     queryFn: () => getProducts(),
   });
+
+  if (status == "error") {
+    return <ErrorComp />;
+  }
 
   useEffect(() => {
     if (products && cartData.cart.length > 0) {

@@ -8,6 +8,7 @@ import { getProducts } from "../utils/getFetch";
 import { motion } from "framer-motion";
 import { useGlobalState } from "../store/globalstate";
 import BreadCrumb from "../utils/breadcrumb";
+import ErrorComp from "../utils/Wrong";
 
 export default function ProductPage() {
   const { data, status } = useQuery({
@@ -28,6 +29,10 @@ export default function ProductPage() {
   if (cat === "drums") cat = "drum";
   if (cat === "guitars") cat = "guitar";
   if (cat === "mixer_amplifier") cat = "amplifier";
+
+  if (status == "error") {
+    return <ErrorComp />;
+  }
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
@@ -108,7 +113,7 @@ export default function ProductPage() {
               <ShopBy />
             </div>
             <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
-              <div className="w-full p-3 grid lg:grid-cols-4 grid-cols-2">
+              <div className="w-full p-1.5 sm:p-3 grid lg:grid-cols-4 grid-cols-2">
                 {result?.map((item: any, index: number) => {
                   return (
                     <div

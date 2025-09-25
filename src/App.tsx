@@ -25,6 +25,7 @@ import AllDeals from "./dynamic/alldeal";
 import CheckoutSuccess from "./checkout/onSuccess";
 import CheckoutFailure from "./checkout/onFailure";
 import Contact from "./mainpage/navbar/contact";
+import ErrorBoundary from "./utils/Error";
 
 const queryClient = new QueryClient();
 
@@ -32,37 +33,206 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/signup" element={<UserCreateAccount />} />
-        <Route path="/signin" element={<UserSignInInterface />} />
-        <Route path={"/forgot"} element={<ForgotPassword />} />
-        <Route path={"/code"} element={<VerifyCode />} />
-        <Route path={"/profile"} element={<UserProfile />} />
-        <Route path={"/settings"} element={<UserSetting />} />
-        <Route path={"/about"} element={<About />} />
-        <Route path={"/term"} element={<TermsOfService />} />
-        <Route path={"/policy"} element={<PrivatePolicy />} />
-        <Route path={"/shipping"} element={<ShippingPolicy />} />
-        <Route path={"/contact"} element={<Contact />} />
-        <Route path={"/order"} element={<UserOrderHistory />} />
-        <Route path={"/testimonial"} element={<Testimonial />} />
-        <Route path={"/cart"} element={<CartPage />} />
-        <Route path={"/forgetcode"} element={<ForgetCode />} />
-        <Route path={"/newpassword"} element={<NewPassword />} />
-        <Route path={"/product/:category"} element={<ProductPage />} />
+        <Route
+          path="/"
+          element={
+            <ErrorBoundary>
+              <MainPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <ErrorBoundary>
+              <UserCreateAccount />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/signin"
+          element={
+            <ErrorBoundary>
+              <UserSignInInterface />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/forgot"}
+          element={
+            <ErrorBoundary>
+              <ForgotPassword />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/code"}
+          element={
+            <ErrorBoundary>
+              <VerifyCode />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/profile"}
+          element={
+            <ErrorBoundary>
+              <UserProfile />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/settings"}
+          element={
+            <ErrorBoundary>
+              <UserSetting />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/about"}
+          element={
+            <ErrorBoundary>
+              <About />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/term"}
+          element={
+            <ErrorBoundary>
+              <TermsOfService />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/policy"}
+          element={
+            <ErrorBoundary>
+              <PrivatePolicy />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/shipping"}
+          element={
+            <ErrorBoundary>
+              <ShippingPolicy />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/contact"}
+          element={
+            <ErrorBoundary>
+              <Contact />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/order"}
+          element={
+            <ErrorBoundary>
+              <UserOrderHistory />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/testimonial"}
+          element={
+            <ErrorBoundary>
+              <Testimonial />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/cart"}
+          element={
+            <ErrorBoundary>
+              <CartPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/forgetcode"}
+          element={
+            <ErrorBoundary>
+              <ForgetCode />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/newpassword"}
+          element={
+            <ErrorBoundary>
+              <NewPassword />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/product/:category"}
+          element={
+            <ErrorBoundary>
+              <ProductPage />
+            </ErrorBoundary>
+          }
+        />
         <Route
           path={"/singleproduct/:category"}
-          element={<SingleProductPage />}
+          element={
+            <ErrorBoundary>
+              <SingleProductPage />
+            </ErrorBoundary>
+          }
         />
         <Route
           path={"/admin"}
-          element={<ProtectedRoute child={<AdminDashboard />} />}
+          element={
+            <ErrorBoundary>
+              <ProtectedRoute child={<AdminDashboard />} />
+            </ErrorBoundary>
+          }
         />
-        <Route path={"/search/:keyword"} element={<SearchPage />} />
-        <Route path={"/checkout"} element={<Checkout />} />
-        <Route path={"/brand/:brand"} element={<AllDeals />} />
-        <Route path={"/checkout/success"} element={<CheckoutSuccess />} />
-        <Route path={"/checkout/failure"} element={<CheckoutFailure />} />
+        <Route
+          path={"/search/:keyword"}
+          element={
+            <ErrorBoundary>
+              <SearchPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/checkout"}
+          element={
+            <ErrorBoundary>
+              <Checkout />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/brand/:brand"}
+          element={
+            <ErrorBoundary>
+              <AllDeals />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/checkout/success"}
+          element={
+            <ErrorBoundary>
+              <CheckoutSuccess />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path={"/checkout/failure"}
+          element={
+            <ErrorBoundary>
+              <CheckoutFailure />
+            </ErrorBoundary>
+          }
+        />
       </Routes>
     </QueryClientProvider>
   );

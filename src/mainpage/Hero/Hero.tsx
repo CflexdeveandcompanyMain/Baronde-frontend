@@ -58,10 +58,10 @@ export function HeroIntro() {
 const divFn = (title: string, url: string) => {
   return (
     <div className="flex flex-row justify-between items-center w-full mx-auto self-center">
-      <p className="font-all font-semibold text-[15px] sm:text-lg text-start w-full self-center">
+      <p className="font-all font-semibold text-[14px] sm:text-lg text-start w-full self-center">
         {title}
       </p>
-      <div className="w-full flex justify-end">
+      <div className="w-1/3 flex justify-end">
         <Link to={`/product/${url}`} className="w-auto">
           <p className="font-all text-xs text-red-600 font-semibold self-center underline w-full text-end">
             view all

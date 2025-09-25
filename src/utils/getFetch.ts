@@ -363,3 +363,16 @@ export async function updateOrderstateFn(
   const res = await response.json();
   return res;
 }
+
+export async function getUser(id: string) {
+  const token = localStorage.getItem("baron:token") ?? "";
+  const response = await fetch(`${API_ENDPOINT}/users/v1/getuser/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const res = await response.json();
+  return res;
+}

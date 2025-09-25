@@ -7,6 +7,7 @@ import ProductAuthCard from "./product";
 import Footer from "../footer/footer";
 import BreadCrumb from "../utils/breadcrumb";
 import { ShopBy } from "./productpage";
+import ErrorComp from "../utils/Wrong";
 
 export default function AllDeals() {
   const { data, status } = useQuery({
@@ -17,6 +18,11 @@ export default function AllDeals() {
 
   let parameter = useParams();
   let brand = parameter.brand?.toLowerCase();
+
+  if (status == "error") {
+    return <ErrorComp />;
+  }
+
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
       if (brand) {
@@ -52,7 +58,7 @@ export default function AllDeals() {
                   : "No products found"}
               </p>
             </div>
-            <div className="w-full p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+            <div className="w-full p-1.5 sm:p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
               {result?.map((item: any, index: number) => {
                 return (
                   <div
