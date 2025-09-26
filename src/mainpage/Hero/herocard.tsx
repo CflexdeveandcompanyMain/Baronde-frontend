@@ -139,11 +139,11 @@ export default function HeroProductCard({ category }: { category: string }) {
       );
 
     return (
-      <div className="w-full overflow-x-scroll flex flex-row md:grid grid-cols-4 sm:gap-2 gap-1">
+      <div className="w-full grid md:grid-cols-4 sm:grid-cols-3 grid-cols-1 sm:gap-2 gap-1">
         {products.map((item: HeroDataType, index: number) => (
           <div
             key={index}
-            className="flex-shrink-0 self-stretch h-auto md:min-w-auto md:max-w-auto min-w-[200px] max-w-[250px]"
+            className="flex-shrink-0 self-stretch h-auto min-w-auto max-w-auto"
           >
             <ProductAuthCard data={item} />
           </div>
