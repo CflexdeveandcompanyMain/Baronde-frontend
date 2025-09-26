@@ -1,11 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 import { bdm, frame3 } from "..";
-import { LogOut, Package, HomeIcon, Settings, Menu, Truck } from "lucide-react";
+import {
+  LogOut,
+  Package,
+  HomeIcon,
+  Settings,
+  Menu,
+  Truck,
+  User,
+} from "lucide-react";
 import { useEffect, useState, type JSX, type ReactNode } from "react";
 import AdminMain from "./dash";
 import AdminSettings from "./settings";
 import AdminProducts from "./products";
 import AdminUpdateStatus from "./status";
+import TestimonialAdmin from "./Testimonial";
 
 let sidebar = [
   {
@@ -24,6 +33,10 @@ let sidebar = [
     title: "Order status",
     icon: <Truck className="text-stone-50 group-hover:text-black" />,
   },
+  {
+    title: "Testimonial",
+    icon: <User className="text-stone-50 group-hover:text-black" />,
+  },
 ];
 const AdminDashboard = () => {
   let [page, setPage] = useState("dashboard");
@@ -36,6 +49,7 @@ const AdminDashboard = () => {
     settings: <AdminSettings />,
     products: <AdminProducts />,
     "order status": <AdminUpdateStatus />,
+    testimonial: <TestimonialAdmin />,
   };
 
   return (
@@ -76,13 +90,13 @@ const AdminDashboard = () => {
         </div>
         <div
           onClick={() => {
-            localStorage.setItem("baron:admintoken", "");
-            navigate("/");
+            localStorage.removeItem("baron:admintoken");
+            navigate("/signup");
           }}
-          className="flex flex-row items-center justify-center w-full gap-1"
+          className="flex flex-row items-center justify-center w-full gap-1 cursor-pointer"
         >
-          <LogOut className={"text-red-500"} size={16} />
-          <p className="font-all text-base font-medium text-center text-red-500">
+          <LogOut className={"text-red-700"} size={14} />
+          <p className="font-all text-sm font-medium text-center text-red-800">
             Log out
           </p>
         </div>
