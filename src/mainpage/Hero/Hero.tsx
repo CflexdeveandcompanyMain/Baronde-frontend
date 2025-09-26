@@ -78,7 +78,7 @@ function HeroSection(prop: { title: string; product: string }) {
   return (
     <section className="w-full flex flex-col items-center justify-center mt-2 gap-1 sm:gap-3">
       {divFn(title, product)}
-      <div className="w-full flex flex-row items-center gap-3">
+      <div className="w-full flex flex-col items-center gap-3">
         <HeroProductCard category={product} />
       </div>
     </section>

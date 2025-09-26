@@ -197,6 +197,9 @@ export default function AdminProducts() {
       case "Single/hanging speaker":
         setECategory("Single Speaker");
         break;
+      case "Amplifier rack":
+        setCat("AMP RACK");
+        break;
       case "Double/full range speaker":
         setECategory("Full Range Speaker");
         break;
@@ -413,7 +416,9 @@ export function SimpleSelect({
     <div className="w-full flex-col items-start flex gap-1 h-full p-1">
       <select
         value={currentValue}
-        onChange={(e) => setSelectedValue(e.target.value)}
+        onChange={(e) => {
+          setSelectedValue(e.target.value);
+        }}
         className="w-full p-1 border border-gray-300 rounded font-all text-[11px] sm:text-[13px] outline-none h-full"
       >
         {options.map((option: string, index: number) => (

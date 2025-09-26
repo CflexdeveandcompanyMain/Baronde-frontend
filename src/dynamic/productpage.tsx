@@ -26,9 +26,7 @@ export default function ProductPage() {
   if (cat === "floor+stage_monitor") cat = "floormonitor";
   if (cat === "power_surge+sequence") cat = "powersurge";
   if (cat === "amplifier_rack") cat = "amp_rack";
-  if (cat === "drums") cat = "drum";
   if (cat === "guitars") cat = "guitar";
-  if (cat === "mixer_amplifier") cat = "amplifier";
 
   if (status == "error") {
     return <ErrorComp />;
@@ -36,11 +34,17 @@ export default function ProductPage() {
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
+      const normalizedItemCategory = item.categories
+        .toLowerCase()
+        .replaceAll(" ", "");
       if (brand) {
-        return item.categories
-          .toLowerCase()
-          .replaceAll(" ", "")
-          .includes(cat.replaceAll("_", ""));
+        if (cat == "amp_rack") {
+          return normalizedItemCategory == "amprack";
+        } else
+          return item.categories
+            .toLowerCase()
+            .replaceAll(" ", "")
+            .includes(cat.replaceAll("_", ""));
       }
     });
 
@@ -51,7 +55,7 @@ export default function ProductPage() {
 
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // or "auto"
+      behavior: "smooth",
     });
 
     return (
