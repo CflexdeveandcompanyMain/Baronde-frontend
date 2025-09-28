@@ -106,14 +106,14 @@ export default function HeroProductCard({ category }: { category: string }) {
   }
 
   if (status === "success" && data) {
-    let hs: any = {};
+    // let hs: any = {};
 
-    data.forEach((item: any) =>
-      hs[item.categories] != undefined
-        ? (hs[item.categories] += 1)
-        : (hs[item.categories] = 1)
-    );
-    console.log(hs);
+    // data.forEach((item: any) =>
+    //   hs[item.categories] != undefined
+    //     ? (hs[item.categories] += 1)
+    //     : (hs[item.categories] = 1)
+    // );
+    // console.log(hs);
 
     let products: HeroDataType[] = data
       .filter((item: HeroDataType) => {

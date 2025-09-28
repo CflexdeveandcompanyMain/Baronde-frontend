@@ -4,16 +4,24 @@ import Footer from "../../footer/footer";
 import MainPageNavbar from "./navbar";
 import { getTestimonyUser } from "../../utils/getFetch";
 import { useEffect, useState, type ReactNode } from "react";
-import { Loader } from "lucide-react";
+import { ChevronDown, ChevronUp, Loader } from "lucide-react";
 import { formatUpdatedAt } from "../../utils/fetch";
 
 export default function Testimonial() {
   let [ele, setele] = useState<ReactNode>(<></>);
+  let [expandedCards, setExpandedCards] = useState<Record<number, boolean>>({});
 
   const { data, status } = useQuery({
     queryKey: ["fetch testimony"],
     queryFn: () => getTestimonyUser(),
   });
+
+  const toggleCard = (index: number) => {
+    setExpandedCards((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
 
   useEffect(() => {
     if (status == "pending")
@@ -29,6 +37,8 @@ export default function Testimonial() {
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {data.map((item: any, index: number) => {
               const { caption, image, updatedAt } = item;
+              const isExpanded = expandedCards[index] || false;
+
               return (
                 <div
                   className="w-full rounded-lg relative h-[315px] sm:h-[350px] overflow-hidden group cursor-pointer shadow-md"
@@ -44,7 +54,28 @@ export default function Testimonial() {
                     }}
                   />
 
-                  <div className="absolute inset-x-0 bottom-0 z-10 group-hover:inset-y-0 group-hover:top-0">
+                  <div
+                    onClick={() => toggleCard(index)}
+                    className="absolute z-30 w-6 h-6 backdrop-blur-sm rounded-full duration-75 flex justify-center shadow-lg bg-black/50 top-2 right-2"
+                  >
+                    {isExpanded ? (
+                      <ChevronDown
+                        size={18}
+                        className="text-white self-center text-center duration-200"
+                      />
+                    ) : (
+                      <ChevronUp
+                        size={18}
+                        className="text-white self-center text-center duration-200"
+                      />
+                    )}
+                  </div>
+
+                  <div
+                    className={`absolute inset-x-0 bottom-0 z-10 duration-300 ${
+                      isExpanded ? "inset-y-0 top-0" : ""
+                    } sm:group-hover:inset-y-0 sm:group-hover:top-0`}
+                  >
                     <div className="absolute inset-0 backdrop-blur-sm bg-black/20"></div>
 
                     <div className="relative p-4 text-white">
@@ -89,7 +120,7 @@ export default function Testimonial() {
         </div>
       );
     }
-  }, [status, data]);
+  }, [status, data, expandedCards]);
 
   return (
     <>
