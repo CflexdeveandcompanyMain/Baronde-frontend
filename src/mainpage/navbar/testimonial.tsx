@@ -5,7 +5,6 @@ import MainPageNavbar from "./navbar";
 import { getTestimonyUser } from "../../utils/getFetch";
 import { useEffect, useState, type ReactNode } from "react";
 import { Loader } from "lucide-react";
-import { star } from "../..";
 import { formatUpdatedAt } from "../../utils/fetch";
 
 export default function Testimonial() {
@@ -25,42 +24,45 @@ export default function Testimonial() {
       );
 
     if (status == "success" && data) {
-      console.log(data);
       if (data.length > 0) {
         setele(
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1.5">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {data.map((item: any, index: number) => {
               const { caption, image, updatedAt } = item;
               return (
                 <div
+                  className="w-full rounded-lg relative h-[315px] sm:h-[350px] overflow-hidden group cursor-pointer shadow-md"
                   key={index}
-                  className="w-full rounded shadow p-4 flex flex-col items-center bg-gradient-to-r from-stone-50 via-silver-300 to-slate-100"
                 >
-                  <div className="flex flex-row items-center w-full justify-between">
-                    <div className="flex flex-row items-center gap-1.5 w-2/3">
-                      <img
-                        src={image}
-                        className="w-6 h-6 rounded-full object-cover border border-green-600"
-                      />
-                      <p className="font-all text-xs font-medium text-stone-500">
-                        Customer
+                  <img
+                    src={image}
+                    alt="Testimonial background"
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    onError={(e) => {
+                      e.currentTarget.src =
+                        "https://via.placeholder.com/400x350/e5e7eb/6b7280?text=No+Image";
+                    }}
+                  />
+
+                  <div className="absolute inset-x-0 bottom-0 z-10 group-hover:inset-y-0 group-hover:top-0">
+                    <div className="absolute inset-0 backdrop-blur-sm bg-black/20"></div>
+
+                    <div className="relative p-4 text-white">
+                      <p
+                        id="caption"
+                        className="text-sm sm:text-base font-semibold group-hover:max-h-[295px] group-hover:overflow-y-scroll group-hover:text-xs leading-relaxed mb-3 line-clamp-3 group-hover:line-clamp-none"
+                      >
+                        {caption}
                       </p>
+                      <div className="flex justify-between items-center text-xs sm:text-sm opacity-90">
+                        <span className="font-semibold font-all text-sm">
+                          Customer
+                        </span>
+                        <span className="font-all text-xs font-semibold">
+                          {formatUpdatedAt(updatedAt)}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex flex-row items-end gap-1.5 w-1/3">
-                      <img src={star} className="w-2 h-2 object-cover" />
-                      <img src={star} className="w-2 h-2 object-cover" />
-                      <img src={star} className="w-2 h-2 object-cover" />
-                      <img src={star} className="w-2 h-2 object-cover" />
-                      <img src={star} className="w-2 h-2 object-cover" />
-                    </div>
-                  </div>
-                  <p className="font-all text-sm font-medium w-full my-2">
-                    {caption}
-                  </p>
-                  <div className="flex justify-end w-full my-1">
-                    <p className="text-xs font-medium font-all w-full text-end">
-                      {formatUpdatedAt(updatedAt)}
-                    </p>
                   </div>
                 </div>
               );
@@ -77,7 +79,17 @@ export default function Testimonial() {
         );
       }
     }
-  }, [status]);
+
+    if (status === "error") {
+      setele(
+        <div className="w-full flex justify-center">
+          <p className="font-all text-lg text-center w-full text-red-600">
+            Failed to load testimonials.
+          </p>
+        </div>
+      );
+    }
+  }, [status, data]);
 
   return (
     <>
@@ -107,7 +119,9 @@ export default function Testimonial() {
               <span className="text-emerald-600">Trust our customers</span>
             </p>
           </div>
-          <section className="w-full flex items-center">{ele}</section>
+          <section className="w-full flex items-center justify-center mt-6">
+            {ele}
+          </section>
         </div>
       </section>
       <Footer />

@@ -186,16 +186,16 @@ const TestimonialAdmin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 sm:p-4 p-1 w-full">
+    <div className="min-h-screen bg-gray-50 p-1 w-full">
       <div className="w-full flex flex-col items-center">
-        <div className="bg-white rounded border border-gray-200 p-3 mb-3 w-full">
+        <div className="bg-white rounded border border-gray-200 p-2 mb-3 w-full">
           <div className="flex justify-between items-center w-full">
             <h1 className="text-base sm:text-xl font-all font-bold text-gray-900">
               Testimonial Management
             </h1>
             <button
               onClick={() => openModal()}
-              className="bg-blue-600 hover:bg-blue-700 text-white p-1.5 sm:px-4 sm:py-2 rounded flex items-center gap-1 sm:gap-2 transition-colors"
+              className="bg-green-600 hover:bg-emerald-700 text-white p-1.5 sm:px-2 sm:py-2 rounded flex items-center gap-1 sm:gap-2 transition-colors"
             >
               <Plus className="w-3 sm:w-4 h-3 sm:h-4" />
               <span className="sm:text-base text-xs font-all">

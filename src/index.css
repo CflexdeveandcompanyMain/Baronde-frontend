@@ -7,13 +7,21 @@
   --font-all: "Barlow";
   --font-p: "Asap";
 }
-
-/* ::-webkit-scrollbar {
+/* 
+#caption::-webkit-scrollbar {
   width: 0;
 } */
 
 datalist {
-  scrollbar-width: 0;
+  scrollbar-width: none;
+}
+#caption {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge Legacy */
+}
+
+#caption::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
 
 html {

@@ -18,7 +18,7 @@ interface ImageData {
 
 export default function AdminProducts() {
   let [brand, setBrand] = useState("soundprince");
-  let [cat, setCat] = useState(products[0]);
+  let [cat, setCat] = useState("AMP Rack");
   let [ebrand, setEBrand] = useState("soundprince");
   let [ecategory, setECategory] = useState(products[0]);
   let [eamount, setEAmount] = useState(0);
@@ -39,6 +39,10 @@ export default function AdminProducts() {
   }, []);
 
   const { del } = useGlobalState();
+
+  useEffect(() => {
+    console.log(cat, brand);
+  }, [cat, brand]);
 
   useEffect(() => {
     const isValid =
@@ -377,7 +381,7 @@ export default function AdminProducts() {
         </div>
       </div>
 
-      <div className="w-full sm:p-3 grid md:grid-cols-2 grid-cols-1 gap-1 sm:gap-2">
+      <div className="w-full sm:p-3 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-1 sm:gap-2">
         {filteredItems.length === 0 ? (
           <div className="col-span-full flex justify-center py-8">
             <p className="text-gray-500 font-all">

@@ -184,9 +184,9 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
       initial={{ scale: 0.4, opacity: 0.5 }}
       whileInView={{ scale: 1, opacity: 1 }}
       transition={{ duration: 1 }}
-      className="flex flex-col items-center sm:shadow justify-between relative w-auto min-h-full border border-green-100 sm:min-w-[200px] p-2 bg-white"
+      className="flex flex-col items-center max-w-[230px] max-h-auto justify-between relative w-auto min-h-full border border-stone-200 sm:min-w-[200px] p-2 bg-white"
     >
-      <div className="flex flex-col items-center h-[50%] relative">
+      <div className="flex flex-col items-center h-[50%] relative w-full">
         <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">
           <p className="font-all font-bold text-lg text-[#E7FFC078] self-center text-center rotate-45">
             barondemusical
@@ -195,7 +195,7 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
         {data.images?.[0]?.url ? (
           <img
             src={data.images[0].url}
-            className="object-cover h-full w-full bg-white"
+            className="object-cover h-full w-full bg-white min-h-full max-h-[200px] rounded-md"
             alt={data.name}
           />
         ) : (
@@ -282,7 +282,11 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
               <p className="text-[#fdb100] text-sm text-start font-medium font-all">
                 {formatPrice(editedData.price - editedData.discount, "NGN")}
               </p>
-              <p className="text-black text-[10px] text-start font-medium font-all line-through">
+              <p
+                className={`${
+                  editedData.discount > 1 ? "flex" : "hidden"
+                } text-black text-[11px] text-start font-medium font-all line-through`}
+              >
                 {formatPrice(editedData.price, "NGN")}
               </p>
             </div>
