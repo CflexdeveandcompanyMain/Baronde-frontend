@@ -81,7 +81,11 @@ export default function Testimonial() {
                     <div className="relative p-4 text-white">
                       <p
                         id="caption"
-                        className="text-sm sm:text-base font-semibold group-hover:max-h-[295px] group-hover:overflow-y-scroll group-hover:text-xs leading-relaxed mb-3 line-clamp-3 group-hover:line-clamp-none"
+                        className={`${
+                          isExpanded
+                            ? "max-h-[295px] overflow-y-scroll text-xs line-clamp-none"
+                            : ""
+                        } text-sm sm:text-base font-semibold sm:group-hover:max-h-[295px] sm:group-hover:overflow-y-scroll sm:group-hover:text-xs leading-relaxed mb-3 line-clamp-3 sm:group-hover:line-clamp-none`}
                       >
                         {caption}
                       </p>
