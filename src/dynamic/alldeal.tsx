@@ -58,7 +58,7 @@ export default function AllDeals() {
                   : "No products found"}
               </p>
             </div>
-            <div className="w-full p-1.5 sm:p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+            <div className="w-full p-1.5 sm:p-3 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1">
               {result?.map((item: any, index: number) => {
                 return (
                   <div

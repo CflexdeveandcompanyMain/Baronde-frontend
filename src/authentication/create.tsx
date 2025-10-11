@@ -71,7 +71,7 @@ export default function UserCreateAccount() {
 
   return (
     <section className="w-full bg-white h-screen sm:bg-gray-200 flex justify-center">
-      <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto shadow-xl rounded-sm flex flex-col items-center gap-2 p-3">
+      <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 mx-auto sm:shadow-xl rounded-sm flex flex-col items-center gap-2 p-3">
         <p className="font-all font-semibold text-xl text-start w-full my-3">
           Create an Account
         </p>

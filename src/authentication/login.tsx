@@ -70,7 +70,7 @@ export default function UserSignInInterface() {
 
   return (
     <section className="w-full bg-white sm:bg-gray-200 h-screen flex justify-center">
-      <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 shadow-xl mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
+      <section className="w-full bg-white self-center sm:h-auto sm:w-1/2 sm:shadow-xl mx-auto rounded-sm flex flex-col items-center gap-2 p-3">
         <div className="flex flex-col items-start w-full justify-start p-2 my-3">
           <p className="font-all font-semibold text-xl text-start w-full">
             Welcome back

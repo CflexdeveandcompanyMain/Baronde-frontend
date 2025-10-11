@@ -184,7 +184,7 @@ export default function AdminCard({ data }: { data: HeroDataType }) {
       initial={{ scale: 0.4, opacity: 0.5 }}
       whileInView={{ scale: 1, opacity: 1 }}
       transition={{ duration: 1 }}
-      className="flex flex-col items-center max-w-[230px] max-h-auto justify-between relative w-auto min-h-full border border-stone-200 sm:min-w-[200px] p-2 bg-white"
+      className="flex flex-col items-center w-full sm:max-w-[230px] max-h-auto justify-between relative min-h-full border border-stone-200 sm:min-w-[200px] p-2 bg-white"
     >
       <div className="flex flex-col items-center h-[50%] relative w-full">
         <div className="absolute top-2 inset-x-0 flex justify-center w-full h-full">

@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import Footer from "../footer/footer";
 import MainPageNavbar from "../mainpage/navbar/navbar";
 import ProductAuthCard from "./product";
-import { type HeroDataType } from "../mainpage/Hero/data";
+import { filterExp, type HeroDataType } from "../mainpage/Hero/data";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../utils/getFetch";
 import { motion } from "framer-motion";
@@ -20,20 +20,13 @@ export default function ProductPage() {
   let parameter = useParams();
   let cat: string = parameter.category?.toLowerCase().replaceAll(" ", "") ?? "";
 
-  if (cat === "double+full_range_speaker") cat = "fullrangespeaker";
-  if (cat === "piano+keyboard") cat = "piano";
-  if (cat === "single+hanging_speaker") cat = "singlespeaker";
-  if (cat === "floor+stage_monitor") cat = "floormonitor";
-  if (cat === "power_surge+sequence") cat = "powersurge";
-  if (cat === "amplifier_rack") cat = "amp_rack";
-  if (cat === "guitars") cat = "guitar";
-
   if (status == "error") {
     return <ErrorComp />;
   }
 
   if (status == "success" && data) {
     let result = data.filter((item: HeroDataType) => {
+      cat = filterExp[cat] ?? cat;
       const normalizedItemCategory = item.categories
         .toLowerCase()
         .replaceAll(" ", "");
@@ -117,7 +110,7 @@ export default function ProductPage() {
               <ShopBy />
             </div>
             <section className="flex flex-col items-start w-full gap-1 sm:gap-3 mt-2">
-              <div className="w-full p-1.5 sm:p-3 grid lg:grid-cols-4 grid-cols-2">
+              <div className="w-full p-1.5 sm:p-3 grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1">
                 {result?.map((item: any, index: number) => {
                   return (
                     <div
