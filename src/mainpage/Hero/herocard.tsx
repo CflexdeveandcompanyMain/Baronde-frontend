@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ProductAuthCard from "../../dynamic/product";
 import { getProducts } from "../../utils/getFetch";
-import { type HeroDataType } from "./data";
+import { filterExp, type HeroDataType } from "./data";
 
 function ProductCardSkeleton() {
   return (
@@ -73,16 +73,6 @@ export default function HeroProductCard({ category }: { category: string }) {
     queryFn: () => getProducts(),
   });
 
-  if (category === "double+full_range_speaker") category = "fullrangespeaker";
-  if (category === "piano+keyboard") category = "piano";
-  if (category === "single+hanging_speaker") category = "singlespeaker";
-  if (category === "floor+stage_monitor") category = "floormonitor";
-  if (category === "power_surge+sequence") category = "powersurge";
-  if (category === "amplifier_rack") category = "amp_rack";
-  if (category === "guitars") category = "guitar";
-  if (category === "wired_mic") category = "wiredmicrophone";
-  if (category === "wireless_mic") category = "wirelessmicrophone";
-
   if (status === "pending") {
     return (
       <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:gap-2 gap-1">
@@ -117,6 +107,7 @@ export default function HeroProductCard({ category }: { category: string }) {
 
     let products: HeroDataType[] = data
       .filter((item: HeroDataType) => {
+        category = filterExp[category] ?? category;
         let normalizedCategory = category
           .replaceAll("_", "")
           .replaceAll("/", "")
