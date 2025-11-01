@@ -202,7 +202,7 @@ export default function AdminProducts() {
         setECategory("Single Speaker");
         break;
       case "Amplifier rack":
-        setCat("AMP RACK");
+        setECategory("AMP RACK");
         break;
       case "Double/full range speaker":
         setECategory("Full Range Speaker");
@@ -334,6 +334,17 @@ export default function AdminProducts() {
           </button>
         </div>
       </div>
+      {/* 
+      {cancel && (
+        <div className="fixed flex justify-center w-full h-screen bg-black/60 z-40 inset-0 sm:py-5">
+          <div className="flex flex-col items-start min-h-[100px] max-h-[130px] bg-white rounded-2xl">
+            <div className="py-2 border-b border-stone-400 w-full"></div>
+            <div className="w-full p-2 text-start flex justify-start">
+              <p className="font-asap font-medium text-xs sm:text-sm">Are you sure you want to </p>
+            </div>
+          </div>
+        </div>
+      )} */}
 
       {open && (
         <div className="fixed flex justify-center w-full h-screen bg-black/50 z-40 inset-0 sm:py-5">
@@ -419,7 +430,7 @@ export function SimpleSelect({
   return (
     <div className="w-full flex-col items-start flex gap-1 h-full p-1">
       <select
-        value={currentValue}
+        value={currentValue == "Amplifier rack" ? "AMP RACK" : currentValue}
         onChange={(e) => {
           setSelectedValue(e.target.value);
         }}
