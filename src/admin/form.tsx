@@ -30,7 +30,6 @@ export const submitProduct = async ({
     keyword: ekeyword,
     discount: ediscount,
   };
-  console.log(obj);
   try {
     const token = localStorage.getItem("baron:admintoken") || "";
     const response = await fetch(`${API_ENDPOINT}/image/v1/upload`, {
