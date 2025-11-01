@@ -98,10 +98,8 @@ export default function HeroProductCard({ category }: { category: string }) {
   if (status === "success" && data) {
     // let hs: any = {};
 
-    // data.forEach((item: any) =>
-    //   hs[item.categories] != undefined
-    //     ? (hs[item.categories] += 1)
-    //     : (hs[item.categories] = 1)
+    // data.forEach(
+    //   (item: any) => (hs[item.categories] = (hs[item.categories] || 0) + 1)
     // );
     // console.log(hs);
 
@@ -115,8 +113,8 @@ export default function HeroProductCard({ category }: { category: string }) {
         let normalizedItemCategory = item.categories
           .replaceAll(" ", "")
           .toLowerCase();
-        if (category == "amp_rack") {
-          return normalizedItemCategory == "amprack";
+        if (category == "amplifier_rack") {
+          return normalizedItemCategory == "amplifierrack";
         } else return normalizedCategory == normalizedItemCategory;
       })
       .slice(0, 4);

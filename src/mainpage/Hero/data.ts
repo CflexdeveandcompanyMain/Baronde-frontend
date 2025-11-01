@@ -21,7 +21,7 @@ export let filterExp: filter = {
   "single+hanging_speaker": "singlespeaker",
   "floor+stage_monitor": "floormonitor",
   "power_surge+sequence": "powersurge",
-  "amplifier_rack": "amp_rack",
+  "amplifier_rack": "amplifierrack",
   "wired_mic": "wiredmicrophone",
   "wireless_mic": "wirelessmicrophone",
   "Power amplifier": "Power amplifier",

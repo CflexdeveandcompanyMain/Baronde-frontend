@@ -39,6 +39,7 @@ export default function EditForm({
   onImagesChange: (images: ImageData[]) => void;
   currentImages: ImageData[];
 }) {
+  console.log();
   return (
     <section className="flex flex-col items-center sm:w-3/4 w-full sm:h-auto h-full bg-white p-2 sm:p-5 overflow-y-scroll">
       <div onClick={close} className="flex justify-end w-full cursor-pointer">

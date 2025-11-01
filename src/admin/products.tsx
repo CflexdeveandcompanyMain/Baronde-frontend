@@ -18,7 +18,7 @@ interface ImageData {
 
 export default function AdminProducts() {
   let [brand, setBrand] = useState("soundprince");
-  let [cat, setCat] = useState("AMP Rack");
+  let [cat, setCat] = useState("Amplifier rack");
   let [ebrand, setEBrand] = useState("soundprince");
   let [ecategory, setECategory] = useState(products[0]);
   let [eamount, setEAmount] = useState(0);
@@ -170,9 +170,6 @@ export default function AdminProducts() {
       case "Single/hanging speaker":
         setCat("Single Speaker");
         break;
-      case "Amplifier rack":
-        setCat("AMP RACK");
-        break;
       case "Double/full range speaker":
         setCat("Full Range Speaker");
         break;
@@ -200,9 +197,6 @@ export default function AdminProducts() {
     switch (val) {
       case "Single/hanging speaker":
         setECategory("Single Speaker");
-        break;
-      case "Amplifier rack":
-        setECategory("AMP RACK");
         break;
       case "Double/full range speaker":
         setECategory("Full Range Speaker");
@@ -430,7 +424,7 @@ export function SimpleSelect({
   return (
     <div className="w-full flex-col items-start flex gap-1 h-full p-1">
       <select
-        value={currentValue == "Amplifier rack" ? "AMP RACK" : currentValue}
+        value={currentValue}
         onChange={(e) => {
           setSelectedValue(e.target.value);
         }}

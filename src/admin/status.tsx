@@ -11,12 +11,7 @@ export default function AdminUpdateStatus() {
   });
 
   useEffect(() => {
-    console.log(new Date().toISOString());
-  }, []);
-
-  useEffect(() => {
     if (status === "success" && data) {
-      console.log(data);
       const { usersWithOrders } = data.data;
       const filteredUsers = usersWithOrders.filter(
         (item: any) => item.orders.length > 0
@@ -203,7 +198,7 @@ function OrderComponent({
     mutationFn: () =>
       updateOrderstateFn(id, ordstatus, new Date(delivery).toISOString()),
     onSuccess: (data) => {
-      console.log("Status updated successfully", data);
+      console.log(JSON.stringify(data).substring(0, 10));
       queryClient.invalidateQueries({
         queryKey: ["getAnalytics"],
         exact: true,
@@ -252,9 +247,7 @@ function OrderComponent({
     setDelivery(newDate);
   };
 
-  useEffect(() => {
-    console.log("Delivery state updated:", delivery);
-  }, [delivery]);
+  useEffect(() => {}, [delivery]);
 
   return (
     <div className="w-full bg-white rounded-xl shadow-sm border border-gray-100 p-2 sm:p-4 hover:shadow-md transition-shadow duration-200">
